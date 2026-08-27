@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W9-RECEIPT-001",
+  "phase": "phase-7",
+  "wave": {
+    "lanes": 5,
+    "lanes_verified": 5,
+    "callbacks_pending": 0,
+    "output_files_verified": 22,
+    "complete_pair_gap_preserved": 1430,
+    "pending_lanes": [],
+    "blocked_lanes": [
+      "P7-RIGHTS-EVAL-READINESS"
+    ],
+    "overall_completion_claim": false
+  },
+  "status": "receipt_verified_with_blocker_unpromoted_parent_goal_active",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "target": {
+    "industries": 17,
+    "dimensions": 10,
+    "complete_pairs": 1700,
+    "dimension_records": 17000,
+    "repositories_per_industry": 100
+  },
+  "baseline_preserved": {
+    "merged_observed_slots": 17000,
+    "distinct_repository_urls": 216,
+    "industry_repository_pairs": 3346,
+    "complete_pairs": 270,
+    "partial_pairs": 3076,
+    "complete_pair_gap": 1430,
+    "platform_register_records": 117,
+    "feature_taxonomy": "68_stated_vs_144_enumerated_unresolved"
+  },
+  "wave_9_delta": {
+    "corpus_new_partial_pairs": 170,
+    "corpus_identity_edges": 170,
+    "corpus_selected_pairs_per_industry": 10,
+    "corpus_prior_queue_exclusion_union": 1200,
+    "corpus_prior_identities_excluded": 2516,
+    "corpus_selected_identity_overlap": 0,
+    "corpus_dimension_count_distribution": {
+      "3": 16,
+      "4": 100,
+      "5": 54
+    },
+    "dimension_pairs": 170,
+    "dimension_ledger_rows": 1700,
+    "dimension_source_receipts": 1700,
+    "dimension_rows_per_dimension": 170,
+    "dimension_inherited_repository_specific": 718,
+    "dimension_unknown_blocked": 982,
+    "feature_evidence_round": 5,
+    "feature_surfaces": 118,
+    "feature_ranked_surfaces": 117,
+    "feature_explicit_gap_surfaces": [
+      "PS-118"
+    ],
+    "feature_keys": 8,
+    "feature_ranked_rows": 936,
+    "feature_gap_rows": 8,
+    "feature_evidence_rows": 944,
+    "feature_unique_round_aware_identities": 944,
+    "feature_taxonomy_stated_keys": 68,
+    "feature_taxonomy_enumerated_keys": 144,
+    "feature_taxonomy_denominator": null,
+    "industry_join_rows": 794,
+    "industry_emitting_industries": 15,
+    "industry_coverage_industries": 17,
+    "industry_buckets": 85,
+    "industry_selected": 475,
+    "industry_held_or_unknown": 312,
+    "industry_rejected": 7,
+    "industry_underfilled_buckets": 53,
+    "industry_quota_reached_buckets": 32,
+    "industry_target_attempts": 1700,
+    "industry_unique_recorded_public_urls": 1629,
+    "industry_queries": 85,
+    "industry_http_attempts": 94,
+    "industry_raw_returned_rows": 806,
+    "industry_rate_limit_events": 9,
+    "industry_prior_identity_overlap": 0,
+    "rights_rows_emitted": 0,
+    "repository_evaluation_rows": 0,
+    "surface_evaluation_rows": 0,
+    "rights_missing_repository_records": 100,
+    "rights_missing_surface_records": 20,
+    "rights_missing_repository_range": "GCP-701..GCP-800",
+    "rights_missing_surface_range": "148..167"
+  },
+  "dispatch": {
+    "receipt": "wave-9-dispatch-receipt.json",
+    "sha256": "cd3d2ba4340a9bfa8d66826310db7d2b42f5654a2e8ef00f06ee0ea06ea99273",
+    "pre_stamp_sha256": "57ee12b2f161cb0b7816c31dbf206814b1a36159cf7197ee2dfdd96dd6cb791a",
+    "transition": "metadata_only_pre_stamp_to_final_dispatch_hash",
+    "prior_verified_wave": 8
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W9",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selection_rows": 170,
+        "identity_edges": 170,
+        "industries": 17,
+        "selected_pairs_per_industry": 10,
+        "prior_exclusion_union": 1200,
+        "prior_identity_pairs_excluded": 2516,
+        "prior_identity_overlap_selected": 0,
+        "complete_pairs_preserved": 270,
+        "partial_pairs_preserved": 3076,
+        "complete_pair_gap_preserved": 1430
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "selection-ledger-wave-9.jsonl": "f9947d84786f3e9654b287bcd69b1ae3ad827883c19434417311dce7372a0af2",
+        "identity-edges-wave-9.jsonl": "8bb624a6e47072c97751e5be522ef9650a967d558a492e9c7460655338fd0897",
+        "corpus-integrity-wave-9-report.md": "8650c621ad2483901305ce993036e650d9a35ee05af685dd489e8d87b7bdcf37",
+        "lane-state.json": "70070e27699248b89d922e6154d95428ec7e697cbf8c868acf60bb7cb1dac02d",
+        "post-write-smoke.py": "e20ad660042e7009c52178fadd2ed61c9e20faf4ca332971324224ff4058f90d"
+      }
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W9",
+      "status": "completed",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selected_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "ledger_rows": 1700,
+        "source_receipts": 1700,
+        "dimensions": 10,
+        "rows_per_dimension": 170,
+        "exact_pair_dimension_keys": 1700,
+        "excluded_prior_queue_ids": 1200,
+        "inherited_repository_specific": 718,
+        "unknown_blocked": 982
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "dimension-evidence-ledger.jsonl": "dbe1480b17deaa24f62b8f52927f459d1252b9f12d8922fac7ec049bb5f40640",
+        "source-receipts.jsonl": "043d5e2dbac5ed051cc93ebb5600bfce6282eb464605bdfdeb372d4afdd1e5e0",
+        "dimension-depth-report.md": "11ee5e109c362996b4c45c9f04f674c0a1270add538ca4c53c1db43bc6106ad7",
+        "lane-state.json": "7546c3a9aa41e6ab9f50983991bb7ba46cfde119cf6a6099e34bad331d0308d6",
+        "smoke-dimension-evidence-wave-9.mjs": "9f797ed83486a18b2b44fa191aa7a42fed20f291c90551ff5b7662ce46b317b2"
+      }
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W9",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "evidence_round": 5,
+        "surfaces": 118,
+        "ranked_surfaces": 117,
+        "explicit_gap_surfaces": [
+          "PS-118"
+        ],
+        "feature_keys": 8,
+        "ranked_rows": 936,
+        "gap_rows": 8,
+        "feature_evidence_rows": 944,
+        "unique_round_aware_identities": 944,
+        "padding": false,
+        "taxonomy_stated_keys": 68,
+        "taxonomy_enumerated_keys": 144,
+        "taxonomy_denominator": null
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "competitor-feature-evidence.jsonl": "8b8bb8e50cb43ebf09bb8bfe91099674709f4102a383e6ccf89662a03867a288",
+        "feature-census-report.md": "134311c14239ee5113fbc95990b60f8f0064deaafb155590af3668bf620b85af",
+        "lane-state.json": "3dc4e29c215037e5e45ce1d1b22548168c10524c1e9740860f682e040af30ba7"
+      }
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W9",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "join_records": 794,
+        "unique_canonical_identities": 794,
+        "coverage_industries": 17,
+        "emitting_industries": 15,
+        "buckets": 85,
+        "selected_defensible_metadata_joins": 475,
+        "held_or_unknown": 312,
+        "rejected": 7,
+        "underfilled_buckets": 53,
+        "quota_reached_buckets": 32,
+        "unique_recorded_public_urls": 1629,
+        "target_attempts": 1700,
+        "queries": 85,
+        "http_attempts": 94,
+        "raw_returned_rows": 806,
+        "rate_limit_events": 9,
+        "prior_wave_identity_overlap": 0,
+        "duplicate_records": 0,
+        "no_padding": true
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "industry-repository-joins.jsonl": "525f5d7fda5752592ed043bf44c531cbc189585ec061853c6e793fb29a83e288",
+        "underfilled-bucket-ledger.jsonl": "435644c14fc536e07cf56e10a4047703635334dbad7b64a40c1cacfdfc9034c7",
+        "industry-coverage-report.md": "757a95b7254923f978f35db6e9af117c91fe223634a6fe2f589236baf35b8e27",
+        "lane-state.json": "c418e751e35c2e94324972dbc029458d4c73aff8fa42c95a103f751e206f2cf5"
+      }
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W9",
+      "status": "blocked",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "rights_provenance_rows": 0,
+        "rights_provenance_rows_requested": 100,
+        "repository_evaluation_rows": 0,
+        "repository_evaluation_rows_requested": 100,
+        "competitor_surface_evaluation_rows": 0,
+        "competitor_surface_evaluation_rows_max": 20,
+        "evaluation_total_rows": 0,
+        "evaluation_total_rows_max": 120,
+        "missing_repository_records": 100,
+        "missing_surface_records": 20,
+        "gcp_rank_requested_range": "701..800",
+        "surface_id_requested_range": "148..167",
+        "immutable_versions_captured": 0,
+        "model_runs": 0,
+        "runtime_runs": 0,
+        "benchmark_runs": 0,
+        "scans": 0,
+        "admitted_blocks": 0
+      },
+      "smoke": "PASS_WITH_EXPLICIT_BLOCKER",
+      "blockers": [
+        "immutable candidate ledger ends at GCP-500; GCP-701..GCP-800 are absent",
+        "immutable platform register ends at existing_surface 67; surface IDs 148..167 are absent",
+        "rights, SBOM, evaluation, runtime, economics, and client-legal gates remain unexecuted or unknown"
+      ],
+      "artifact_hashes": {
+        "rights-provenance-ledger.jsonl": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+        "evaluation-readiness-ledger.jsonl": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+        "missing-source-reconciliation.json": "df30b96bfb73ea192fa0c69b063e0f614a5960a24407e5e668a73de3e9bd3b56",
+        "rights-eval-report.md": "16f6a2770c700f70b6d2c09f63485ed661b383d1b27a948a5dd42efcdc69b10a",
+        "lane-state.json": "683cba664413d0b67f514b123ff0d76d00b5464453511ccdea29e806a5cd9211"
+      }
+    }
+  ],
+  "verification": {
+    "status": "PASS",
+    "coordinator_smoke": "W9_COORDINATOR_SMOKE_PASS",
+    "canonical_verifier": "PASS: verify-phase7.py PREPROMOTION checks=49 pending_lanes=0",
+    "parent_git_diff_check": "PASS",
+    "lane_callbacks": "PASS: 5 of 5 sent_and_verified",
+    "output_file_count": "PASS: 22",
+    "boundary": "PASS: research_only; UNEXECUTED; NOT_ADMITTED; admitted_blocks=0; implementation=false; parent-active",
+    "promotion": "UNPROMOTED; no overall Phase-7 completion claim"
+  },
+  "blockers": [
+    "1,430 complete industry-repository pairs remain; W9 selected partial pairs and preserved the gap",
+    "The 17,000-slot matrix still has only 270 complete pairs; the 1,700-pair complete-repository invariant is not satisfied",
+    "Competitor feature taxonomy remains 68 stated versus 144 enumerated with no accepted denominator",
+    "Rights/evaluation W9 is blocked because immutable GCP-701..800 and existing_surface 148..167 identities are absent",
+    "Rights, SBOM, capability, evaluation, security, runtime, rollback, economics, and client/legal gates remain unexecuted or unknown",
+    "Industry discovery retains 53 underfilled buckets and does not pad or infer demand from public metadata",
+    "W9 dimension depth contains inherited context and explicit unknown/blocked states; it is not runtime or capability proof"
+  ],
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "source_execution": false,
+    "clone_or_copy": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false
+  }
+}

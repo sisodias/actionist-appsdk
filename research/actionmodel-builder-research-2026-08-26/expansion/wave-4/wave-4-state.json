@@ -1,0 +1,119 @@
+{
+  "wave": "matrix-wave-4-industry-dimension-deepening",
+  "status": "floor_verified_parent_goal_active",
+  "verified_at": "2026-08-26T19:00:00+07:00",
+  "floor_verified": true,
+  "next_wave": "matrix-wave-5-industry-dimension-deepening",
+  "mode": "research_only",
+  "parent": {
+    "target_slots": 17000,
+    "observed_before": 3400,
+    "observations_per_cell_before": 20,
+    "new_observations_required": 1700,
+    "observations_per_cell_after": 30,
+    "combined_observed_required": 5100,
+    "remaining_parent_slots_after_wave": 11900,
+    "observation_indices": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+    "parent_goal_status": "active"
+  },
+  "inputs": {
+    "wave_3_state": "../wave-3/wave-3-state.json",
+    "parent_matrix": "../outputs/repo-matrix-observations.jsonl",
+    "wave_2_matrix": "../wave-2/outputs/repo-matrix-wave-2.jsonl",
+    "wave_3_matrix": "../wave-3/outputs/repo-matrix-wave-3.jsonl",
+    "immutable_baseline": true,
+    "implementation_authorized": false
+  },
+  "lanes": {
+    "RCH-GITHUB-W4": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "outputs": [
+        "outputs/github-wave-4.jsonl",
+        "outputs/github-wave-4-report.md",
+        "outputs/repo-matrix-wave-4.jsonl"
+      ],
+      "delta_observations": 1700,
+      "observation_indices": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+      "cells": 170,
+      "parent_reserved_slots": 1700,
+      "combined_observed": 5100,
+      "combined_observations_per_cell": 30,
+      "remaining_parent_slots": 11900,
+      "unique_delta_repositories": 149,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-COMPANIES-W4": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/company-dossiers-wave-4.md",
+      "product_surfaces": 67,
+      "refresh_rows": 67,
+      "normalized_rows": 67,
+      "direct_urls": 144,
+      "lifecycle_gates": ["Databutton-to-Riff", "MultiOn-to-AGI", "Relay-shutdown", "Ona-Gitpod"],
+      "prior_hashes_preserved": true,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-PUBLIC-W4": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/public-signals-wave-4.md",
+      "baseline_unique_urls": 110,
+      "wave_3_unique_urls": 34,
+      "new_unique_source_ids": 34,
+      "new_slots": 136,
+      "combined_slots": 408,
+      "industries": 17,
+      "signal_types": 8,
+      "status_counts": {
+        "observed": 84,
+        "needs_direct_review": 51,
+        "unobserved": 1,
+        "blocked": 0
+      },
+      "wave_2_wave_3_wave_4_url_overlap": 0,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-STANDARDS-W4": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/standards-applicability-wave-4.md",
+      "exact_cells": 170,
+      "dimensions": 10,
+      "synthetic_probe_designs": 10,
+      "source_urls": 58,
+      "source_urls_http_200_or_206": 56,
+      "source_urls_access_limited": 2,
+      "source_urls_404": 0,
+      "baseline_lines": 566,
+      "baseline_sha256": "22b4024b5163c77eca40597bda43802aca6d9e69f41e827465494ad90f8dbc3f",
+      "execution_receipts": 0,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-NICHE-W4": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/niche-matrix-join-wave-4.md",
+      "exact_cells": 170,
+      "combined_observed_required": 5100,
+      "combined_observed": 5100,
+      "combined_observations_per_cell": 30,
+      "remaining_parent_slots": 11900,
+      "dependency_status": {
+        "RCH-GITHUB-W4": "complete",
+        "RCH-COMPANIES-W4": "complete",
+        "RCH-PUBLIC-W4": "complete",
+        "RCH-STANDARDS-W4": "complete"
+      },
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    }
+  },
+  "implementation_authorized": false,
+  "parent_goal_status": "active"
+}

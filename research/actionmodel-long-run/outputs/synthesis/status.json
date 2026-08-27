@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "run_id": "actionmodel-long-run-2026-08-26",
+  "lane": "AM-SYNTHESIS",
+  "state": "active",
+  "updated_at": "2026-08-26T08:56:00+07:00",
+  "latest_checkpoint": "research/actionmodel-long-run/outputs/synthesis/checkpoint-006.md",
+  "current": "research/actionmodel-long-run/outputs/synthesis/CURRENT.md",
+  "queue": "research/actionmodel-long-run/outputs/synthesis/queue.md",
+  "decision_ledger": "research/actionmodel-long-run/outputs/synthesis/decision-ledger.md",
+  "peer_review": {
+    "AM-PLATFORMS": {"verdict": "PARTIAL", "checkpoint": "research/actionmodel-long-run/outputs/platforms/checkpoint-008.md", "latest_available": "research/actionmodel-long-run/outputs/platforms/checkpoint-008.md", "path_status": "verified", "reason": "Latest adversarial comparison supports separate build, authority/operation, and evidence/registry planes; no Actionist implementation, authenticated/live capability, or Block Contract admission is evidenced, and peer tracker counts need reconciliation."},
+    "AM-CORPUS": {"verdict": "PARTIAL", "checkpoint": "research/actionmodel-long-run/outputs/corpus/checkpoint-001.md", "candidate_packets": ["research/actionmodel-long-run/outputs/corpus/candidate-horizon-ui-shadcn-nextjs-boilerplate.md", "research/actionmodel-long-run/outputs/corpus/candidate-ixartz-next-js-boilerplate.md", "research/actionmodel-long-run/outputs/corpus/candidate-themesberg-flowbite-react-admin-dashboard.md"], "reason": "Counts, paths, pinned commits, licenses, and schema shape reproduce; execution/admission receipts are absent."},
+    "AM-VERTICALS": {"verdict": "PARTIAL", "checkpoint": "research/actionmodel-long-run/outputs/verticals/checkpoint-001.md", "artifacts": ["research/actionmodel-long-run/outputs/verticals/catalogue.json", "research/actionmodel-long-run/outputs/verticals/atoms-001.json", "research/actionmodel-long-run/outputs/verticals/crosswalk-batch-001.json", "research/actionmodel-long-run/outputs/verticals/pilot-offers-001.json"], "open_gap": "crosswalk coverage metadata declares 40 use cases/23 ideas/26 remaining, while independent unique-ID counts and vertical status resolve to 39/24/27"}
+  },
+  "peer_verdict_counts": {"PASS": 0, "PARTIAL": 3, "REJECT": 0, "OPEN": 0},
+  "decision_ledger_counts": {"PASS": 0, "PARTIAL": 4, "REJECT": 0, "OPEN": 1},
+  "blockers": [
+    "AM-VERTICALS crosswalk coverage metadata is inconsistent: use-case/idea coverage must remain 39/24 with 27 remaining until its source JSON is repaired.",
+    "Horizon has no isolated build, browser smoke, screenshot, owner, rollback, dependency/asset scan, or executed adaptation receipts.",
+    "NocoBase license/edition/distribution boundary remains unresolved; no live platform session or Actionist implementation is evidenced.",
+    "Image-to-token-to-registry composition has no local admitted candidate or implementation receipt; P-010 remains an open admission experiment.",
+    "AM-PLATFORMS CURRENT.md and status.json disagree on blocked-dossier and held-claim counts; retain the one-blocker posture from its structured status and latest checkpoint until reconciled."
+  ],
+  "open_questions": [
+    "Which evidence is strong enough to authorize a real Block Contract pilot?",
+    "Which exact workflow atom should lead each of the three pilot archetypes?",
+    "Which proposed platform buy capability is first-party documented and reproducible?",
+    "Which vertical catalogue edges are genuinely documented detail routes rather than catalogue demand labels?",
+    "Which of the three inferred pilot archetypes should receive direct-source review first?"
+  ],
+  "next_queue_item": "Retain the vertical 39/24/27 correction until AM-VERTICALS repairs its metadata, then run the cross-lane contradiction pass; keep P-010/P-014 and pilot authorization open."
+}

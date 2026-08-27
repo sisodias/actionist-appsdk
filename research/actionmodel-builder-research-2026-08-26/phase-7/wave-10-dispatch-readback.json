@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W10-DISPATCH-READBACK-001",
+  "phase": "phase-7",
+  "wave": 10,
+  "status": "sent_and_verified",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "dispatch_contract": {
+    "path": "wave-10-dispatch-receipt.json",
+    "sha256": "e3c44562d20809cb1a00b1b22aec5acc434ebcf8ff5516a154a545b5fe8aa0fc",
+    "hash_locked_before_prompts": true,
+    "prior_verified_wave": 9
+  },
+  "herdr": {
+    "session": "herdr-2",
+    "workspace_id": "w659eea5cf6e7c5",
+    "workspace_label": "ACTIONMODEL-BUILDER-RESEARCH-20260826",
+    "lane_count": 5,
+    "prompts_submitted": 5,
+    "readback_after_two_seconds": true,
+    "agent_status_after_readback": "working",
+    "duplicate_workers_started": 0,
+    "pane_ids": {
+      "P7-CORPUS-INTEGRITY": "w659eea5cf6e7c5-1",
+      "P7-DIMENSION-EVIDENCE": "w659eea5cf6e7c5-2",
+      "P7-COMPETITOR-FEATURES": "w659eea5cf6e7c5-3",
+      "P7-INDUSTRY-JOINS": "w659eea5cf6e7c5-4",
+      "P7-RIGHTS-EVAL-READINESS": "w659eea5cf6e7c5-5"
+    },
+    "submission_protocol": "each pane was freshly resolved by label, pane run was issued, two-second visible readback showed the W10 brief, and no duplicate lane was started"
+  },
+  "lane_contracts": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W10",
+      "output_directory": "lanes/01-corpus-integrity/outputs/wave-10",
+      "prior_exclusion_union": 1370,
+      "new_partial_pairs": 170
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W10",
+      "output_directory": "lanes/02-dimension-evidence/outputs/wave-10",
+      "selected_pairs": 170,
+      "dimensions": 10,
+      "ledger_rows": 1700,
+      "source_receipts": 1700
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W10",
+      "output_directory": "lanes/03-competitor-features/outputs/wave-10",
+      "evidence_round": 6,
+      "surfaces": 118,
+      "feature_keys": 8,
+      "evidence_rows": 944
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W10",
+      "output_directory": "lanes/04-industry-joins/outputs/wave-10",
+      "industries": 17,
+      "buckets": 85,
+      "target_attempts": 1700,
+      "github_search_page": 9
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W10",
+      "output_directory": "lanes/05-rights-eval-readiness/outputs/wave-10",
+      "gcp_range": "801..900",
+      "surface_id_range": "168..187",
+      "immutable_only": true,
+      "no_padding": true
+    }
+  ],
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "source_execution": false,
+    "clone_or_copy": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false
+  }
+}

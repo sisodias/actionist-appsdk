@@ -1,0 +1,48 @@
+{
+  "parent_goal_status": "active",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "boundaries": [
+    "no client data",
+    "no vendor login",
+    "no clone/copy/execute/build/deploy/benchmark/license scan/SBOM/admission"
+  ],
+  "denominator": {
+    "blocked_cells": 40,
+    "canonical_features": 144,
+    "cells": 16992,
+    "populated_cells": 16992,
+    "surfaces": 118,
+    "unknown_cells": 16844
+  },
+  "dispositions": {
+    "blocked": 40,
+    "direct": 84,
+    "inferred": 24,
+    "unknown": 16844
+  },
+  "evidence_quality": {
+    "E/D": 880,
+    "E/D+E/U": 8,
+    "E/U": 48,
+    "I/U": 8,
+    "none": 16048
+  },
+  "execution_status": "UNEXECUTED",
+  "implementation_authorized": false,
+  "lane_id": "P9-L02-COMPETITOR-TAXONOMY-CLOSURE",
+  "observed_date": "2026-08-27",
+  "promotion_allowed": false,
+  "research_only": true,
+  "source_evidence": "phase-7/lanes/03-competitor-features/outputs/wave-*/competitor-feature-evidence.jsonl",
+  "source_feature_dictionary": "phase-7/lanes/03-competitor-features/outputs/feature-dictionary.jsonl",
+  "source_register": "phase-7/lanes/03-competitor-features/outputs/product-surface-universe.jsonl",
+  "status": "complete_with_blockers",
+  "taxonomy_conflict": {
+    "canonical": 144,
+    "enumerated": 144,
+    "silent_drops": 0,
+    "stated": 68,
+    "term_level_mapping": "unresolved"
+  }
+}

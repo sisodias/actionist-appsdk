@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W11-READBACK-001",
+  "phase": "phase-7",
+  "wave": 11,
+  "observed_at": "2026-08-27",
+  "status": "cancelled_by_user_before_convergence",
+  "dispatch_receipt": "wave-11-dispatch-receipt.json",
+  "dispatch_receipt_sha256": "27408df2090c9a0dc290f2981749d56b7df6b344eac7d22905b8768802ffee90",
+  "herdr_session": "herdr-2",
+  "workspace_id": "w659e02f80e5bb1",
+  "workspace_label": "CENA",
+  "tabs_created": 5,
+  "tabs_closed": 5,
+  "prompt_submission": {
+    "lanes_requested": 5,
+    "lanes_submitted": 1,
+    "submitted_lanes": [
+      "P7-CORPUS-INTEGRITY-W11"
+    ],
+    "unsubmitted_lanes": [
+      "P7-DIMENSION-EVIDENCE-W11",
+      "P7-COMPETITOR-FEATURES-W11",
+      "P7-INDUSTRY-JOINS-W11",
+      "P7-RIGHTS-EVAL-W11"
+    ],
+    "submitted_prompt_reached_worker": true,
+    "worker_progress": "repository inspection only; no W11 lane artifact was produced"
+  },
+  "outputs": {
+    "wave_11_lane_artifacts": 0,
+    "coordinator_files": [
+      "wave-11-dispatch-receipt.json",
+      "wave-11-dispatch-receipt.md",
+      "wave-11-dispatch-readback.json",
+      "wave-11-coordinator-receipt.json",
+      "wave-11-coordinator-receipt.md"
+    ],
+    "prior_waves_preserved": true
+  },
+  "state_after_cancellation": {
+    "path": "phase-7-state.json",
+    "sha256": "3eec0e1bb5a86c53c7bc3252fac7a5c31f5096ae713261aa3d3c285f5cd183c5",
+    "active_wave": 10,
+    "last_verified_coordinator_receipt": "wave-10-coordinator-receipt.json",
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "complete_pair_gap": 1430
+  },
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "overall_completion_claim": false
+  },
+  "verification": {
+    "status": "PASS",
+    "prompt_and_cleanup_readback": "PASS",
+    "wave_11_artifact_absence_check": "PASS",
+    "prior_wave_preservation": "PASS",
+    "central_state_restored_to_w10": "PASS",
+    "parent_git_diff_check": "PASS",
+    "promotion": "UNPROMOTED"
+  }
+}

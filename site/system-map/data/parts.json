@@ -1,0 +1,920 @@
+[
+  {
+    "id": "P01",
+    "group": "Demand",
+    "status": "partial",
+    "title": "Client intelligence and discovery",
+    "thesis": "Begin with everything Actionist already knows, enrich it with bounded public business context, then ask only the questions needed to identify valuable workflows.",
+    "owns": [
+      "Known client/account context",
+      "Business links and bounded site reconnaissance",
+      "Stakeholders, systems of record and constraints",
+      "Conversation history and unresolved discovery questions"
+    ],
+    "known": [
+      "Actionist can pre-populate client context before chat",
+      "A generic “what app do you want?” prompt wastes known information",
+      "The useful target is a painful workflow and measurable outcome, not a feature wishlist"
+    ],
+    "open": [
+      "Which Actionist client fields are canonical?",
+      "What may be scraped automatically?",
+      "How do we distinguish stated wants from observed workflow pain?",
+      "What confidence threshold triggers a follow-up question?"
+    ],
+    "inputs": [
+      "Actionist account profile",
+      "Client URLs",
+      "Conversation",
+      "Existing tools"
+    ],
+    "outputs": [
+      "ClientContext",
+      "DiscoveryGapList",
+      "CandidateOutcomes"
+    ],
+    "deps": [
+      "P02",
+      "P03",
+      "P11"
+    ],
+    "agent": "Map Actionist client context, define the discovery schema, question-selection policy and confidence model.",
+    "slug": "client-intelligence-and-discovery",
+    "page": "parts/p01/",
+    "resources": [
+      {
+        "label": "Industry atom specifications",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/industry-atom-specifications.md"
+      },
+      {
+        "label": "Actionist solutions sweep specification",
+        "path": "research/actionist-solutions-sweep-spec-2026-08-26.md"
+      },
+      {
+        "label": "Public signals Wave 11",
+        "path": "research/actionmodel-builder-research-2026-08-26/expansion/wave-11/outputs/public-signals-wave-11.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P01-client-intelligence-and-discovery/"
+  },
+  {
+    "id": "P02",
+    "group": "Demand",
+    "status": "partial",
+    "title": "Outcome and product specification",
+    "thesis": "Translate business conversation into a small, testable ProductSpec before selecting repositories or UI.",
+    "owns": [
+      "Buyer and painful job",
+      "Workflow steps and actors",
+      "Entities, actions and failure states",
+      "Acceptance tests and non-goals"
+    ],
+    "known": [
+      "17 industries, 12 teams, 66 use cases, 72 ideas and 12 atoms are already catalogued",
+      "Requirements must remain implementation-independent",
+      "One valuable workflow is a better starting unit than an entire industry"
+    ],
+    "open": [
+      "What is the minimum ProductSpec?",
+      "How should assumptions and confidence be represented?",
+      "When should a prototype answer a question instead of more chat?"
+    ],
+    "inputs": [
+      "ClientContext",
+      "Industry model",
+      "Conversation"
+    ],
+    "outputs": [
+      "OutcomeSpec",
+      "ProductSpec",
+      "AcceptanceFixtures"
+    ],
+    "deps": [
+      "P01",
+      "P03",
+      "P09",
+      "P12"
+    ],
+    "agent": "Design the canonical outcome/product schema and prove it against five target workflows.",
+    "slug": "outcome-and-product-specification",
+    "page": "parts/p02/",
+    "resources": [
+      {
+        "label": "First-principles framework",
+        "path": "research/actionmodel-builder-research-2026-08-26/outputs/first-principles-framework.md"
+      },
+      {
+        "label": "Synthetic pilot specification",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-3/outputs/synthetic-pilot-specification.md"
+      },
+      {
+        "label": "AutoSaaS method",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/framework/autosaas-method.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P02-outcome-and-product-specification/"
+  },
+  {
+    "id": "P03",
+    "group": "Supply",
+    "status": "partial",
+    "title": "Curated capability shelf",
+    "thesis": "Hand-curate the first high-value software capabilities—Notion-like notes, Airtable-like data, calendar, CRM, support, files, approvals—before trying to automate the whole internet.",
+    "owns": [
+      "Top-100 candidate shortlist",
+      "Capability-level descriptions",
+      "Quality and adaptation scoring",
+      "Recommended reuse shape and supported archetypes"
+    ],
+    "known": [
+      "500 OSS candidates and 118 commercial builder surfaces are already registered",
+      "Stars and metadata do not establish adaptation quality",
+      "SISOCRM proves that engines, product surfaces and infrastructure need different ownership choices"
+    ],
+    "open": [
+      "Which top 100 capabilities recur across the 17 industries?",
+      "What does quality mean per capability kind?",
+      "Should Notion/Airtable-like systems remain services, embedded modules or transplants?",
+      "How many complete systems versus small blocks belong in v1?"
+    ],
+    "inputs": [
+      "ProductSpec demand",
+      "GitHub corpus",
+      "Local estate",
+      "Platform dossiers"
+    ],
+    "outputs": [
+      "CuratedCapability",
+      "CapabilityMap",
+      "ReuseDecision"
+    ],
+    "deps": [
+      "P02",
+      "P04",
+      "P12"
+    ],
+    "agent": "Create a human-reviewed top-100 shelf ranked by client value, product quality, seam clarity and measured adaptation cost.",
+    "slug": "curated-capability-shelf",
+    "page": "parts/p03/",
+    "resources": [
+      {
+        "label": "GitHub candidate priority",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-3/outputs/github-candidate-priority.md"
+      },
+      {
+        "label": "GitHub expansion report",
+        "path": "research/actionmodel-builder-research-2026-08-26/expansion/outputs/github-expansion-report.md"
+      },
+      {
+        "label": "Niche → atom → block join",
+        "path": "research/actionmodel-builder-research-2026-08-26/expansion/outputs/niche-atom-block-join.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P03-curated-capability-shelf/"
+  },
+  {
+    "id": "P04",
+    "group": "Foundry",
+    "status": "open",
+    "title": "Autonomous repo-to-block foundry",
+    "thesis": "Automate source understanding, boundary extraction and adaptation evidence while keeping semantic reuse-shape decisions explicit and reviewable.",
+    "owns": [
+      "Source identity and architecture map",
+      "Capability boundary detection",
+      "Dependency closure",
+      "Adaptation recipe and packaging",
+      "Generated contracts and qualification evidence"
+    ],
+    "known": [
+      "Phase 8 defined source shapes, stages and 23 negative paths",
+      "Full automation is the wrong target: shape choice and semantic adaptation need judgment",
+      "A repository can yield several blocks or no block"
+    ],
+    "open": [
+      "What can AST/runtime probes establish autonomously?",
+      "How do we detect hidden auth, settings and migration ownership?",
+      "What diff/adaptation budget predicts a bad candidate?",
+      "How is an upstream update replayed safely?"
+    ],
+    "inputs": [
+      "Repository",
+      "Target host contract",
+      "Desired capability"
+    ],
+    "outputs": [
+      "PackagedAsset",
+      "CapabilityContract",
+      "AdaptationRecipe",
+      "QualificationDossier"
+    ],
+    "deps": [
+      "P03",
+      "P09",
+      "P10",
+      "P11",
+      "P14"
+    ],
+    "agent": "Build the reusable conversion protocol and three worked traces: intact service, transplanted subsystem and extracted package.",
+    "slug": "autonomous-repo-to-block-foundry",
+    "page": "parts/p04/",
+    "resources": [
+      {
+        "label": "Repo-to-block pipeline",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/04-repo-to-block-mechanics/outputs/repo-to-block-pipeline.md"
+      },
+      {
+        "label": "Universal Block Framework",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/01-universal-block-framework/outputs/universal-block-framework.md"
+      },
+      {
+        "label": "Block Contract v1",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/block-contract-v1.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P04-autonomous-repo-to-block-foundry/"
+  },
+  {
+    "id": "P05",
+    "group": "Experience",
+    "status": "partial",
+    "title": "Living UI component layer",
+    "thesis": "Maintain a continuously refreshed, visually browsable component corpus where people and agents can find structural necessities and contextual inspiration.",
+    "owns": [
+      "Component ingestion and refresh",
+      "Dedupe and source linkage",
+      "Visual previews and interaction states",
+      "Taxonomy, tags and semantic use cases",
+      "Gallery search, comparison and selection"
+    ],
+    "known": [
+      "Two complementary 21st-derived stores join to 8,515 identities",
+      "3,506 legacy entries are source-bearing while much of the newer harvest is preview/bundle oriented",
+      "Components range from universal necessities—navigation, forms, feedback—to contextual patterns"
+    ],
+    "open": [
+      "What is the canonical component taxonomy?",
+      "How are near-duplicates clustered visually and structurally?",
+      "Which components are required for every archetype?",
+      "How are new 21st.dev releases discovered and re-indexed?",
+      "What metadata helps a client visually choose without understanding component names?"
+    ],
+    "inputs": [
+      "21st stores",
+      "New component feeds",
+      "Screenshots",
+      "Source metadata"
+    ],
+    "outputs": [
+      "ComponentRecord",
+      "PreviewSet",
+      "CategoryGraph",
+      "Selection"
+    ],
+    "deps": [
+      "P06",
+      "P07",
+      "P08",
+      "P12"
+    ],
+    "agent": "Design the component ingestion, taxonomy, dedupe, preview and visual-selection system; test it on navigation, hero, footer, table and form families.",
+    "slug": "living-ui-component-layer",
+    "page": "parts/p05/",
+    "resources": [
+      {
+        "label": "Local corpus join",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/02-local-corpus-join/outputs/local-corpus-join-report.md"
+      },
+      {
+        "label": "21st corpus audit",
+        "path": "research/21st-corpus-audit-2026-08-27.md"
+      },
+      {
+        "label": "UI component-library requirements",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/process/10-ui-component-library-requirements.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P05-living-ui-component-layer/"
+  },
+  {
+    "id": "P06",
+    "group": "Experience",
+    "status": "partial",
+    "title": "Design taste and preference learner",
+    "thesis": "Learn a client’s visual preferences through a minimal sequence of high-information comparisons, separate from choosing individual components.",
+    "owns": [
+      "Preference axes and stimulus generation",
+      "A/B or multi-choice experiment policy",
+      "Outside option and re-roll behavior",
+      "Client design DNA and confidence",
+      "Preference update over time"
+    ],
+    "known": [
+      "Prior research proposed contrast, radius, shadow, border, typography, density and chroma as mechanical knobs",
+      "Sequential galleries and Bradley–Terry/Luce models are relevant",
+      "Forced choices without “none” pollute the preference model"
+    ],
+    "open": [
+      "Is the mathematical minimum 7, 14 or another number of choices?",
+      "Which axes are independent?",
+      "Should choices use whole screens or controlled fragments?",
+      "How does preference confidence change by component context?"
+    ],
+    "inputs": [
+      "Design stimuli",
+      "Client choices",
+      "Brand constraints"
+    ],
+    "outputs": [
+      "TasteProfile",
+      "PreferenceConfidence",
+      "DesignDNA"
+    ],
+    "deps": [
+      "P05",
+      "P07",
+      "P08"
+    ],
+    "agent": "Design and evaluate the active-learning experiment, including stopping rules and a reproducible DesignDNA output.",
+    "slug": "design-taste-and-preference-learner",
+    "page": "parts/p06/",
+    "resources": [
+      {
+        "label": "UI pick-to-spec research",
+        "path": "research/ui-pick-to-spec-2026-08-27.md"
+      },
+      {
+        "label": "Token-pack science",
+        "path": "research/token-pack-science-2026-08-27.md"
+      },
+      {
+        "label": "Taste picker demo",
+        "path": "https://actionist-taste.pages.dev/"
+      }
+    ],
+    "workstream_root": "research/workstreams/P06-design-taste-and-preference-learner/"
+  },
+  {
+    "id": "P07",
+    "group": "Experience",
+    "status": "open",
+    "title": "Token and theme harmonizer",
+    "thesis": "Preserve the quality of each imported capability while translating its visual assumptions into one semantic Actionist/client token system.",
+    "owns": [
+      "Token extraction",
+      "Primitive-to-semantic mapping",
+      "Scoped CSS/theme bridges",
+      "State coverage across light/dark/hover/focus/error",
+      "Visual coherence checks"
+    ],
+    "known": [
+      "Blocks should consume semantic tokens rather than hard-coded brand values",
+      "Existing Teable work shows format conversion and scoped bridges are safer than blind aliasing",
+      "Taste profile and component selection are inputs, not the same artifact"
+    ],
+    "open": [
+      "How much donor visual identity should remain?",
+      "Can token mapping be inferred reliably?",
+      "How are unmapped bespoke CSS and canvas surfaces handled?",
+      "What score means two blocks look coherent?"
+    ],
+    "inputs": [
+      "TasteProfile",
+      "Donor styles",
+      "Component tokens",
+      "Brand assets"
+    ],
+    "outputs": [
+      "ThemeContract",
+      "TokenMap",
+      "ScopedThemeBridge",
+      "VisualReceipts"
+    ],
+    "deps": [
+      "P05",
+      "P06",
+      "P08",
+      "P13"
+    ],
+    "agent": "Define the semantic token contract and prove harmonization across three visually different imported surfaces.",
+    "slug": "token-and-theme-harmonizer",
+    "page": "parts/p07/",
+    "resources": [
+      {
+        "label": "Universal Block Framework visual contract",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/01-universal-block-framework/outputs/universal-block-framework.md"
+      },
+      {
+        "label": "Token-pack science",
+        "path": "research/token-pack-science-2026-08-27.md"
+      },
+      {
+        "label": "SISOCRM Teable absorption brief",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/TEABLE-ABSORPTION-BRIEF.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P07-token-and-theme-harmonizer/"
+  },
+  {
+    "id": "P08",
+    "group": "Experience",
+    "status": "partial",
+    "title": "Archetypes, shells and layouts",
+    "thesis": "Reuse application-level workflow skeletons without forcing every product into one five-area dashboard.",
+    "owns": [
+      "Case, portal, CRM, scheduling, finance, support and operations archetypes",
+      "Navigation and page topology",
+      "Required component slots",
+      "Industry variation points",
+      "Responsive shell behavior"
+    ],
+    "known": [
+      "Ten B2B archetypes have been identified",
+      "Case/workflow and portal demand are strong while clean template supply is thin",
+      "Generic admin/dashboard templates are abundant but weakly differentiated",
+      "The inherited five-area ISSO shell is only a hypothesis"
+    ],
+    "open": [
+      "Which archetypes cover 80% of the first 17 industries?",
+      "What is universal shell infrastructure versus archetype-specific UX?",
+      "Which side-nav variations should clients choose visually?",
+      "How does the shell absorb donor navigation?"
+    ],
+    "inputs": [
+      "ProductSpec",
+      "TasteProfile",
+      "Component selections",
+      "Capability surfaces"
+    ],
+    "outputs": [
+      "ArchetypeTemplate",
+      "NavigationPlan",
+      "PageTopology"
+    ],
+    "deps": [
+      "P02",
+      "P05",
+      "P06",
+      "P07",
+      "P12"
+    ],
+    "agent": "Define the first archetype contracts and visual shell variants; start with case/workflow and client portal.",
+    "slug": "archetypes-shells-and-layouts",
+    "page": "parts/p08/",
+    "resources": [
+      {
+        "label": "B2B template shelf",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/03-b2b-template-shelf/outputs/b2b-template-shelf-report.md"
+      },
+      {
+        "label": "AutoSaaS source and shell strategy",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/framework/source-graph-template-strategy.md"
+      },
+      {
+        "label": "Industry atom specifications",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/industry-atom-specifications.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P08-archetypes-shells-and-layouts/"
+  },
+  {
+    "id": "P09",
+    "group": "Host",
+    "status": "open",
+    "title": "Data and state plane",
+    "thesis": "Standardize typed data capabilities and ownership—not one database implementation inside every block.",
+    "owns": [
+      "State classification and source of truth",
+      "Typed data ports",
+      "Schema and migration ownership",
+      "Events/read models/files/search",
+      "Data binding and rollback"
+    ],
+    "known": [
+      "Postgres is a strong default for new owned transactional B2B data",
+      "Mature donor services should often retain native stores",
+      "One owner per table and migration is the strongest local rule",
+      "Cross-service views can use Actionist-owned event/read models"
+    ],
+    "open": [
+      "What operations must v1 data ports support?",
+      "One DB, schemas, service stores or hybrid per client?",
+      "How are dual writes prevented?",
+      "What migration/rollback contract belongs in an assembled release?"
+    ],
+    "inputs": [
+      "Product entities",
+      "Capability requirements",
+      "Existing client systems"
+    ],
+    "outputs": [
+      "DataResourceContract",
+      "SchemaOwnerMap",
+      "Adapters",
+      "ReadModels"
+    ],
+    "deps": [
+      "P02",
+      "P04",
+      "P10",
+      "P12",
+      "P14"
+    ],
+    "agent": "Run a workload-driven data-plane bake-off across owned Postgres, donor API, event read model and local state.",
+    "slug": "data-and-state-plane",
+    "page": "parts/p09/",
+    "resources": [
+      {
+        "label": "SISOCRM ownership and data-layer decisions",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+      },
+      {
+        "label": "Reusable-block framework report",
+        "path": "research/packs/source-files/reusable-block-framework-report.md"
+      },
+      {
+        "label": "Block Contract data model",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/block-contract-v1.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P09-data-and-state-plane/"
+  },
+  {
+    "id": "P10",
+    "group": "Host",
+    "status": "open",
+    "title": "Identity, settings and navigation host",
+    "thesis": "Give every capability one Actionist identity, tenant, settings hierarchy and navigation surface while removing duplicate donor onboarding and account chrome.",
+    "owns": [
+      "Host session and tenant contract",
+      "Settings scopes and mounting",
+      "Navigation registry",
+      "Onboarding ownership",
+      "Branding and account surfaces",
+      "Permission and audit context"
+    ],
+    "known": [
+      "Donor apps commonly bring their own auth, signup, settings and navigation",
+      "Replacing logos is trivial; replacing ownership boundaries is not",
+      "SISOCRM has partial host-session and route-mount precedents"
+    ],
+    "open": [
+      "What is Actionist’s canonical host contract?",
+      "Can settings/navigation be declarative?",
+      "Which donor routes must be unreachable?",
+      "How are capability permissions represented consistently?"
+    ],
+    "inputs": [
+      "Actionist session",
+      "Tenant",
+      "Capability host requirements"
+    ],
+    "outputs": [
+      "HostIdentity",
+      "SettingsRegistry",
+      "NavigationRegistry",
+      "AuthorityContext"
+    ],
+    "deps": [
+      "P01",
+      "P04",
+      "P09",
+      "P11",
+      "P13"
+    ],
+    "agent": "Define the host absorption contract and measure the real branding/auth/onboarding/settings/navigation delta on one mature donor.",
+    "slug": "identity-settings-and-navigation-host",
+    "page": "parts/p10/",
+    "resources": [
+      {
+        "label": "Teable absorption brief",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/TEABLE-ABSORPTION-BRIEF.md"
+      },
+      {
+        "label": "Builder architecture",
+        "path": "architecture/feature-matrix/ARCHITECTURE.md"
+      },
+      {
+        "label": "Lovable teardown",
+        "path": "research/lovable-teardown-2026-08-26.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P10-identity-settings-and-navigation-host/"
+  },
+  {
+    "id": "P11",
+    "group": "Host",
+    "status": "partial",
+    "title": "Connector and external-action plane",
+    "thesis": "Reuse broad provider catalogues and OAuth/action mechanics while Actionist owns tenant-scoped connections, authority and side-effect receipts.",
+    "owns": [
+      "Provider/action/trigger catalogue",
+      "OAuth and credential setup",
+      "Tenant connection store",
+      "Retries, idempotency and rate limits",
+      "Approval and action receipts"
+    ],
+    "known": [
+      "OpenConnector: 1,445 providers and 15,156 generated actions",
+      "Activepieces: mature pieces and connect-account UI",
+      "Nango and Jentic add provider/spec breadth",
+      "OpenConnector global connection storage failed tenancy requirements"
+    ],
+    "open": [
+      "Canonical provider/action schema?",
+      "Which popular providers need scripted setup?",
+      "How does browser operation fit?",
+      "What is the authority/approval model for side effects?"
+    ],
+    "inputs": [
+      "Provider definitions",
+      "Tenant authority",
+      "Secrets"
+    ],
+    "outputs": [
+      "ConnectorContract",
+      "Connection",
+      "ActionReceipt"
+    ],
+    "deps": [
+      "P01",
+      "P02",
+      "P10",
+      "P12",
+      "P14"
+    ],
+    "agent": "Separate catalogue, OAuth engine, connection storage and action runtime; prove one tenant-safe connector flow.",
+    "slug": "connector-and-external-action-plane",
+    "page": "parts/p11/",
+    "resources": [
+      {
+        "label": "Connector research summary",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/external-opus-inputs/connectors/connector-research-summary.md"
+      },
+      {
+        "label": "OpenConnector spike",
+        "path": "research/openconnector-spike-2026-08-27.md"
+      },
+      {
+        "label": "Connectors report",
+        "path": "research/connectors-licensing-2026-08-27.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P11-connector-and-external-action-plane/"
+  },
+  {
+    "id": "P12",
+    "group": "Assembly",
+    "status": "partial",
+    "title": "Deterministic composition planner",
+    "thesis": "Retrieve candidates, eliminate incompatible sets mechanically, then let AI choose among feasible plans and write only bounded glue.",
+    "owns": [
+      "Demand-to-capability retrieval",
+      "Port/dependency/namespace compatibility",
+      "Packaging and runtime resolution",
+      "Assembly graph and glue budget",
+      "UNDERDETERMINED questions"
+    ],
+    "known": [
+      "Phase 8 selected plan-then-fill over monolithic generation",
+      "A model-free solver and 26 fixtures were designed",
+      "Blocks can be fitted without AI once contracts and bindings are explicit"
+    ],
+    "open": [
+      "What is the optimization objective?",
+      "When should a whole service beat several blocks?",
+      "Which fields are necessary for deterministic compatibility?",
+      "How should optional recommendations be presented to the client?"
+    ],
+    "inputs": [
+      "ProductSpec",
+      "Capability shelf",
+      "Archetype",
+      "Host contracts",
+      "Taste profile"
+    ],
+    "outputs": [
+      "AssemblyPlan",
+      "CompatibilityProof",
+      "ClarifyingQuestions"
+    ],
+    "deps": [
+      "P02",
+      "P03",
+      "P05",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P13",
+      "P14"
+    ],
+    "agent": "Implement the model-free solver against synthetic service/module/package records and positive/negative fixtures.",
+    "slug": "deterministic-composition-planner",
+    "page": "parts/p12/",
+    "resources": [
+      {
+        "label": "Composition agent architecture",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/05-composition-agent-evals/outputs/composition-agent-architecture.md"
+      },
+      {
+        "label": "Composition eval suite",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/05-composition-agent-evals/outputs/composition-eval-suite.json"
+      },
+      {
+        "label": "Synthetic pilot plan",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/05-composition-agent-evals/outputs/synthetic-pilot-plan.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P12-deterministic-composition-planner/"
+  },
+  {
+    "id": "P13",
+    "group": "Assembly",
+    "status": "open",
+    "title": "Preview, editor and change loop",
+    "thesis": "Clients need to alter the assembled product through conversation and direct visual controls without dissolving the composition back into arbitrary generated code.",
+    "owns": [
+      "Live preview",
+      "Chat and direct-manipulation edits",
+      "Module add/remove/replace",
+      "Text/content and layout changes",
+      "Change plan, diff and undo"
+    ],
+    "known": [
+      "The client should be able to pick side-nav/component variants and revise them in chat",
+      "Bounded edits against known assets are safer than free generation",
+      "Taste selection should happen before expensive code loops where possible"
+    ],
+    "open": [
+      "Which edits are parameter changes versus code changes?",
+      "How does the editor preserve block upgradeability?",
+      "What is the undo/version model?",
+      "How are unsupported requests explained?"
+    ],
+    "inputs": [
+      "AssemblyPlan",
+      "Running preview",
+      "Client instructions"
+    ],
+    "outputs": [
+      "ChangePlan",
+      "UpdatedBindings",
+      "BoundedDiff",
+      "Version"
+    ],
+    "deps": [
+      "P05",
+      "P07",
+      "P08",
+      "P10",
+      "P12",
+      "P14"
+    ],
+    "agent": "Define the editable surface and change taxonomy; prototype replace/add/remove/theme/text operations without arbitrary repo edits.",
+    "slug": "preview-editor-and-change-loop",
+    "page": "parts/p13/",
+    "resources": [
+      {
+        "label": "Platform deep dives",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/platform-deepdives.md"
+      },
+      {
+        "label": "Builder ecosystem report",
+        "path": "research/packs/source-files/builder-ecosystem-report.md"
+      },
+      {
+        "label": "UI pack gallery UX",
+        "path": "research/ui-pack-gallery-ux-2026-08-27.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P13-preview-editor-and-change-loop/"
+  },
+  {
+    "id": "P14",
+    "group": "Runtime",
+    "status": "open",
+    "title": "Runtime, verification and release",
+    "thesis": "Run heterogeneous capabilities in explicit profiles, verify the complete workflow, and release an exact recoverable composition.",
+    "owns": [
+      "Package/microfrontend/service/worker runtime profiles",
+      "Preview isolation",
+      "Build, contract, visual and workflow tests",
+      "Deployment and subdomains",
+      "Version pinning, recovery and rollback"
+    ],
+    "known": [
+      "A passing build is not client workflow proof",
+      "Different reuse shapes need different runtimes",
+      "Existing work defined receipt families and negative paths but admitted zero production blocks"
+    ],
+    "open": [
+      "Which runtime profiles are v1?",
+      "What sandbox/deploy infrastructure should be rented?",
+      "How are failures attributed per capability?",
+      "Can blocks upgrade independently?"
+    ],
+    "inputs": [
+      "AssemblyPlan",
+      "Packaged assets",
+      "Host bindings",
+      "Acceptance fixtures"
+    ],
+    "outputs": [
+      "QualificationDossier",
+      "ReleaseManifest",
+      "Deployment",
+      "RollbackPlan"
+    ],
+    "deps": [
+      "P04",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P15"
+    ],
+    "agent": "Define runtime profiles and prove one clean preview→workflow verification→release→rollback cycle.",
+    "slug": "runtime-verification-and-release",
+    "page": "parts/p14/",
+    "resources": [
+      {
+        "label": "Evaluation and admission plan",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/evaluation-and-admission-plan.md"
+      },
+      {
+        "label": "Pilot receipt runbook",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-4/outputs/pilot-receipt-runbook.md"
+      },
+      {
+        "label": "Builder architecture",
+        "path": "architecture/feature-matrix/ARCHITECTURE.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P14-runtime-verification-and-release/"
+  },
+  {
+    "id": "P15",
+    "group": "Learning",
+    "status": "open",
+    "title": "Continuous corpus and production learning",
+    "thesis": "Every new component, repository, conversion and production outcome should improve the shelf, taxonomy, recipes and future recommendations.",
+    "owns": [
+      "Component/repo refresh schedules",
+      "Observed adaptation cost",
+      "Production quality and incident signals",
+      "Asset/archetype reranking",
+      "Recipe and contract evolution"
+    ],
+    "known": [
+      "AutoSaaS already describes a procedural learning loop",
+      "Current corpus ranking is mostly metadata rather than production evidence",
+      "The remembered 1.3M/850k/80k corpus still lacks a current authoritative path"
+    ],
+    "open": [
+      "What production signals change ranking?",
+      "How often are component and repo sources refreshed?",
+      "How do we avoid taxonomy drift?",
+      "When is an asset deprecated or replaced?"
+    ],
+    "inputs": [
+      "New source feeds",
+      "Conversion receipts",
+      "Build metrics",
+      "Client outcomes",
+      "Incidents"
+    ],
+    "outputs": [
+      "Updated rankings",
+      "New recipes",
+      "Deprecations",
+      "Research priorities"
+    ],
+    "deps": [
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P12",
+      "P14"
+    ],
+    "agent": "Define the evidence flywheel and ranking model using adaptation effort, workflow success, runtime burden and production history.",
+    "slug": "continuous-corpus-and-production-learning",
+    "page": "parts/p15/",
+    "resources": [
+      {
+        "label": "AutoSaaS method",
+        "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/framework/autosaas-method.md"
+      },
+      {
+        "label": "Decision ledger",
+        "path": "research/actionmodel-builder-research-2026-08-26/phase-3/outputs/decision-ledger.md"
+      },
+      {
+        "label": "Master synthesis",
+        "path": "knowledge/00-MASTER-SYNTHESIS.md"
+      }
+    ],
+    "workstream_root": "research/workstreams/P15-continuous-corpus-and-production-learning/"
+  }
+]

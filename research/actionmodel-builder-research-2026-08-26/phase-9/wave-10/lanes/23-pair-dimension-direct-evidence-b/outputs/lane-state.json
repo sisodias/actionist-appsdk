@@ -1,0 +1,42 @@
+{
+  "lane": "P9-L23",
+  "status": "complete",
+  "canonical_state": {
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "parent": "active",
+    "promotion_allowed": false,
+    "research_only": true,
+    "client_data": false,
+    "vendor_login": false,
+    "clone": false,
+    "source_copy": false,
+    "source_execution": false,
+    "install": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false,
+    "sbom": false
+  },
+  "counts": {
+    "assignments": 80,
+    "dimensions": 10,
+    "evidence_rows": 800,
+    "receipt_rows": 800,
+    "direct": 379,
+    "inferred": 0,
+    "unknown": 421,
+    "blocked": 0,
+    "l22_overlap": 0,
+    "movement_vs_l20": 379
+  },
+  "outputs": [
+    "pair-dimension-evidence.jsonl",
+    "source-receipts.jsonl",
+    "pair-dimension-report.md",
+    "lane-state.json",
+    "no-bytecode-verifier.sh"
+  ]
+}

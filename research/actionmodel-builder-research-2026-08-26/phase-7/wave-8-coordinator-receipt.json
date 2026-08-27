@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W8-RECEIPT-001",
+  "phase": "phase-7",
+  "wave": {
+    "lanes": 5,
+    "lanes_verified": 5,
+    "callbacks_pending": 0,
+    "output_files_verified": 22,
+    "complete_pair_gap_preserved": 1430,
+    "pending_lanes": [],
+    "blocked_lanes": [
+      "P7-RIGHTS-EVAL-READINESS"
+    ],
+    "overall_completion_claim": false
+  },
+  "status": "receipt_verified_with_blocker_unpromoted_parent_goal_active",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "target": {
+    "industries": 17,
+    "dimensions": 10,
+    "complete_pairs": 1700,
+    "dimension_records": 17000,
+    "repositories_per_industry": 100
+  },
+  "baseline_preserved": {
+    "merged_observed_slots": 17000,
+    "distinct_repository_urls": 216,
+    "industry_repository_pairs": 3346,
+    "complete_pairs": 270,
+    "partial_pairs": 3076,
+    "complete_pair_gap": 1430,
+    "platform_register_records": 117,
+    "feature_taxonomy": "68_stated_vs_144_enumerated_unresolved"
+  },
+  "wave_8_delta": {
+    "corpus_new_partial_pairs": 170,
+    "corpus_identity_edges": 170,
+    "corpus_selected_pairs_per_industry": 10,
+    "corpus_prior_queue_exclusion_union": 1030,
+    "corpus_prior_identities_excluded": 2346,
+    "corpus_selected_identity_overlap": 0,
+    "corpus_dimension_count_distribution": {
+      "4": 8,
+      "5": 143,
+      "6": 19
+    },
+    "dimension_pairs": 170,
+    "dimension_ledger_rows": 1700,
+    "dimension_source_receipts": 1700,
+    "dimension_rows_per_dimension": 170,
+    "dimension_inherited_repository_specific": 861,
+    "dimension_unknown_blocked": 839,
+    "feature_evidence_round": 4,
+    "feature_surfaces": 118,
+    "feature_ranked_surfaces": 117,
+    "feature_explicit_gap_surfaces": [
+      "PS-118"
+    ],
+    "feature_keys": 8,
+    "feature_evidence_rows": 944,
+    "feature_unique_round_aware_identities": 944,
+    "feature_taxonomy_stated_keys": 68,
+    "feature_taxonomy_enumerated_keys": 144,
+    "industry_join_rows": 829,
+    "industry_emitting_industries": 16,
+    "industry_coverage_industries": 17,
+    "industry_buckets": 85,
+    "industry_selected": 468,
+    "industry_held_or_unknown": 354,
+    "industry_rejected": 7,
+    "industry_underfilled_buckets": 50,
+    "industry_quota_reached_buckets": 35,
+    "industry_target_attempts": 1700,
+    "industry_recorded_public_urls": 1700,
+    "industry_queries": 85,
+    "industry_http_attempts": 93,
+    "industry_raw_returned_rows": 835,
+    "industry_rate_limit_events": 8,
+    "industry_prior_identity_overlap": 0,
+    "rights_rows_emitted": 0,
+    "repository_evaluation_rows": 0,
+    "surface_evaluation_rows": 0,
+    "rights_missing_repository_records": 100,
+    "rights_missing_surface_records": 20,
+    "rights_missing_repository_range": "GCP-601..GCP-700",
+    "rights_missing_surface_range": "128..147"
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W8",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selection_rows": 170,
+        "identity_edges": 170,
+        "industries": 17,
+        "selected_pairs_per_industry": 10,
+        "prior_exclusion_union": 1030,
+        "prior_identity_pairs_excluded": 2346,
+        "prior_identity_overlap_selected": 0,
+        "dimension_count_distribution": {
+          "4": 8,
+          "5": 143,
+          "6": 19
+        },
+        "complete_pairs_preserved": 270,
+        "partial_pairs_preserved": 3076,
+        "complete_pair_gap_preserved": 1430
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "selection-ledger-wave-8.jsonl": "d3e5c41dd902d248d5974bcce168f1617095038921281215325d548400986aca",
+        "identity-edges-wave-8.jsonl": "93594f1f739e4ecffd04fd8960eba65f68a629a035cbe430642b87fa105d6819",
+        "corpus-integrity-wave-8-report.md": "b0e3cef984bda98b300bdb155d79c13fd8bd5ed2be9d6e3dd820132a46086ba7",
+        "lane-state.json": "bd333bd005aec9b5a471889219325f33dcdd5763868a2b93255ab64d9bb34e6f",
+        "post-write-smoke.py": "fbc98b31e50626510448d49df35d96c3a1d65e5a9a6447ec624370f6c2e5b0dd"
+      }
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W8",
+      "status": "completed",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selected_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "ledger_rows": 1700,
+        "source_receipts": 1700,
+        "dimensions": 10,
+        "rows_per_dimension": 170,
+        "exact_pair_dimension_keys": 1700,
+        "excluded_prior_queue_ids": 1030,
+        "inherited_repository_specific": 861,
+        "unknown_blocked": 839
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "dimension-evidence-ledger.jsonl": "844852ed7fc7b8d9fc792738cec663d3b808c591c1fe36e7c81290d555ddc22f",
+        "source-receipts.jsonl": "f4cac43cc4c432a11193c2b62c5842cef63d032cbd645f4b1ee78260059b25ee",
+        "dimension-depth-report.md": "09507934b271d71070bda269f6516ea9b18fad89a3b421ac37b12f8de5622c5c",
+        "lane-state.json": "a60494bf93d2b74a1834f8f434d5b4759b80ddb629d5def182bbf4a5f0b8acd5",
+        "smoke-dimension-evidence-wave-8.mjs": "d734798d00c3a492815fbc803738e334e57b162a24eed51a8f52a7217ebcf432"
+      }
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W8",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "evidence_round": 4,
+        "surfaces": 118,
+        "ranked_surfaces": 117,
+        "explicit_gap_surfaces": [
+          "PS-118"
+        ],
+        "feature_keys": 8,
+        "ranked_rows": 936,
+        "gap_rows": 8,
+        "feature_evidence_rows": 944,
+        "unique_round_aware_identities": 944,
+        "padding": false,
+        "taxonomy_stated_keys": 68,
+        "taxonomy_enumerated_keys": 144,
+        "taxonomy_denominator": null
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "competitor-feature-evidence.jsonl": "876d1cb5d4c574ec20b54e3683d02b3401854b5c3dbfde28950a76c93f975389",
+        "feature-census-report.md": "dfed042846cf92bcd33c7a074f82260b1c0cd2837e710d0d906f4ac571f7c3a3",
+        "lane-state.json": "050652c920d1d61e063f4c72a2c558de6a29efb15b0642f09c6027825ba09142"
+      }
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W8",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "join_records": 829,
+        "unique_canonical_identities": 829,
+        "coverage_industries": 17,
+        "emitting_industries": 16,
+        "buckets": 85,
+        "selected_defensible_metadata_joins": 468,
+        "held_or_unknown": 354,
+        "rejected": 7,
+        "underfilled_buckets": 50,
+        "quota_reached_buckets": 35,
+        "recorded_public_metadata_urls": 1700,
+        "target_attempts": 1700,
+        "page7_query_count": 85,
+        "http_attempts": 93,
+        "raw_returned_rows": 835,
+        "rate_limit_events": 8,
+        "prior_wave_identity_overlap": 0,
+        "duplicate_records": 0,
+        "no_padding": true
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "industry-repository-joins.jsonl": "b41081d5660570933c81fc1d55a6a8384c71105bf0438a10e25bee27d93f1a8f",
+        "underfilled-bucket-ledger.jsonl": "cbeb27c84ae6d36cc8ead811b20826834002bac68b7bc6f5becd29e22727ad17",
+        "industry-coverage-report.md": "60b52ba4149a002ab7d5331e78dff7bca572cfec1bddab1fe2fbb47df4c725c1",
+        "lane-state.json": "44a9dde9cfbe398778758675bd83c01651cb35fb8dd8a2116f5e05b57746f4fc"
+      }
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W8",
+      "status": "blocked",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "rights_provenance_rows": 0,
+        "rights_provenance_rows_requested": 100,
+        "repository_evaluation_rows": 0,
+        "repository_evaluation_rows_requested": 100,
+        "competitor_surface_evaluation_rows": 0,
+        "competitor_surface_evaluation_rows_max": 20,
+        "evaluation_total_rows": 0,
+        "evaluation_total_rows_max": 120,
+        "missing_repository_records": 100,
+        "missing_surface_records": 20,
+        "gcp_rank_requested_range": "601..700",
+        "surface_id_requested_range": "128..147",
+        "immutable_versions_captured": 0,
+        "model_runs": 0,
+        "runtime_runs": 0,
+        "benchmark_runs": 0,
+        "scans": 0,
+        "admitted_blocks": 0
+      },
+      "smoke": "PASS_WITH_EXPLICIT_BLOCKER",
+      "blocker": "immutable candidate ledger ends at GCP-500 and platform register existing_surface IDs end at 67; no substitutions or padding",
+      "artifact_hashes": {
+        "rights-provenance-ledger.jsonl": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+        "evaluation-readiness-ledger.jsonl": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+        "missing-source-reconciliation.json": "19d0565d04026449a727dfe21bb75df148eaeff182e87465c0a230e7f46663dc",
+        "rights-eval-report.md": "d8056ca6c357a454fcce7152267738047611c4aabb3348a8701d6417c37ccf64",
+        "lane-state.json": "9ba719070591d54609dff7b5017cf8047370eb5b339aebbf9aa35a511ff1ef36"
+      }
+    }
+  ],
+  "artifact_files": [
+    {"path": "lanes/01-corpus-integrity/outputs/wave-8/selection-ledger-wave-8.jsonl", "sha256": "d3e5c41dd902d248d5974bcce168f1617095038921281215325d548400986aca"},
+    {"path": "lanes/01-corpus-integrity/outputs/wave-8/identity-edges-wave-8.jsonl", "sha256": "93594f1f739e4ecffd04fd8960eba65f68a629a035cbe430642b87fa105d6819"},
+    {"path": "lanes/01-corpus-integrity/outputs/wave-8/corpus-integrity-wave-8-report.md", "sha256": "b0e3cef984bda98b300bdb155d79c13fd8bd5ed2be9d6e3dd820132a46086ba7"},
+    {"path": "lanes/01-corpus-integrity/outputs/wave-8/lane-state.json", "sha256": "bd333bd005aec9b5a471889219325f33dcdd5763868a2b93255ab64d9bb34e6f"},
+    {"path": "lanes/01-corpus-integrity/outputs/wave-8/post-write-smoke.py", "sha256": "fbc98b31e50626510448d49df35d96c3a1d65e5a9a6447ec624370f6c2e5b0dd"},
+    {"path": "lanes/02-dimension-evidence/outputs/wave-8/dimension-evidence-ledger.jsonl", "sha256": "844852ed7fc7b8d9fc792738cec663d3b808c591c1fe36e7c81290d555ddc22f"},
+    {"path": "lanes/02-dimension-evidence/outputs/wave-8/source-receipts.jsonl", "sha256": "f4cac43cc4c432a11193c2b62c5842cef63d032cbd645f4b1ee78260059b25ee"},
+    {"path": "lanes/02-dimension-evidence/outputs/wave-8/dimension-depth-report.md", "sha256": "09507934b271d71070bda269f6516ea9b18fad89a3b421ac37b12f8de5622c5c"},
+    {"path": "lanes/02-dimension-evidence/outputs/wave-8/lane-state.json", "sha256": "a60494bf93d2b74a1834f8f434d5b4759b80ddb629d5def182bbf4a5f0b8acd5"},
+    {"path": "lanes/02-dimension-evidence/outputs/wave-8/smoke-dimension-evidence-wave-8.mjs", "sha256": "d734798d00c3a492815fbc803738e334e57b162a24eed51a8f52a7217ebcf432"},
+    {"path": "lanes/03-competitor-features/outputs/wave-8/competitor-feature-evidence.jsonl", "sha256": "876d1cb5d4c574ec20b54e3683d02b3401854b5c3dbfde28950a76c93f975389"},
+    {"path": "lanes/03-competitor-features/outputs/wave-8/feature-census-report.md", "sha256": "dfed042846cf92bcd33c7a074f82260b1c0cd2837e710d0d906f4ac571f7c3a3"},
+    {"path": "lanes/03-competitor-features/outputs/wave-8/lane-state.json", "sha256": "050652c920d1d61e063f4c72a2c558de6a29efb15b0642f09c6027825ba09142"},
+    {"path": "lanes/04-industry-joins/outputs/wave-8/industry-repository-joins.jsonl", "sha256": "b41081d5660570933c81fc1d55a6a8384c71105bf0438a10e25bee27d93f1a8f"},
+    {"path": "lanes/04-industry-joins/outputs/wave-8/underfilled-bucket-ledger.jsonl", "sha256": "cbeb27c84ae6d36cc8ead811b20826834002bac68b7bc6f5becd29e22727ad17"},
+    {"path": "lanes/04-industry-joins/outputs/wave-8/industry-coverage-report.md", "sha256": "60b52ba4149a002ab7d5331e78dff7bca572cfec1bddab1fe2fbb47df4c725c1"},
+    {"path": "lanes/04-industry-joins/outputs/wave-8/lane-state.json", "sha256": "44a9dde9cfbe398778758675bd83c01651cb35fb8dd8a2116f5e05b57746f4fc"},
+    {"path": "lanes/05-rights-eval-readiness/outputs/wave-8/rights-provenance-ledger.jsonl", "sha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"},
+    {"path": "lanes/05-rights-eval-readiness/outputs/wave-8/evaluation-readiness-ledger.jsonl", "sha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"},
+    {"path": "lanes/05-rights-eval-readiness/outputs/wave-8/missing-source-reconciliation.json", "sha256": "19d0565d04026449a727dfe21bb75df148eaeff182e87465c0a230e7f46663dc"},
+    {"path": "lanes/05-rights-eval-readiness/outputs/wave-8/rights-eval-report.md", "sha256": "d8056ca6c357a454fcce7152267738047611c4aabb3348a8701d6417c37ccf64"},
+    {"path": "lanes/05-rights-eval-readiness/outputs/wave-8/lane-state.json", "sha256": "9ba719070591d54609dff7b5017cf8047370eb5b339aebbf9aa35a511ff1ef36"}
+  ],
+  "promotion_blockers": [
+    "1,430 complete industry-repository pairs remain; W8 selected partial pairs and did not promote any pair",
+    "The 17,000-slot matrix still has only 270 complete pairs; the 1,700-pair complete-repository invariant is not satisfied",
+    "Competitor feature taxonomy remains 68 stated versus 144 enumerated with no accepted denominator",
+    "W8 rights/evaluation is blocked: immutable candidates stop at GCP-500 and immutable existing-surface IDs stop at 67; requested GCP-601..700 and surface IDs 128..147 are absent",
+    "Rights, SBOM, capability, evaluation, security, runtime, rollback, economics, and client/legal gates remain unexecuted or unknown",
+    "Industry discovery retains 50 underfilled buckets and does not pad or infer demand from public metadata",
+    "W8 dimension depth contains inherited context and explicit unknown/blocked states; it is not fresh runtime or capability proof"
+  ],
+  "independent_verification": {
+    "corpus": "COORDINATOR_W8_INDEPENDENT_SHAPE_PASS rows=170 edges=170 pairs=170 industries=17 per_industry=10 exclusions=1030 prior_identity_overlap=0 complete=270 partial=3076 gap=1430 boundary=PASS",
+    "dimensions": "COORDINATOR_W8_INDEPENDENT_SHAPE_PASS pairs=170 industries=17 ledger=1700 receipts=1700 dimensions=10 per_dimension=170 unique_pair_dimension=1700 excluded_prior=1030 inherited=861 unknown_blocked=839 boundary=PASS",
+    "features": "COORDINATOR_W8_INDEPENDENT_SHAPE_PASS rows=944 surfaces=118 ranked=117 gap=PS-118 keys=8 round=4 unique_round_aware=944 taxonomy=68-vs-144 boundary=PASS",
+    "industry": "COORDINATOR_W8_INDEPENDENT_SHAPE_PASS joins=829 unique=829 coverage_industries=17 emitting_industries=16 buckets=85 selected=468 hold=354 reject=7 underfilled=50 quota_reached=35 recorded_urls=1700 queries=85 attempts=93 rate_events=8 prior_overlap=0 boundary=PASS",
+    "rights_eval": "COORDINATOR_W8_INDEPENDENT_SHAPE_PASS rights=0 repo_eval=0 surface_eval=0 missing_repository_records=100 GCP=601-700 missing_surface_records=20 ids=128-147 blocked=PASS boundary=PASS",
+    "coordinator_post_write_smoke": "W8_COORDINATOR_POST_WRITE_SMOKE_PASS receipt=verified lanes=5 callbacks=0 output_files=22 hashes=22 gap=1430 blocker=rights_missing_upstream_ids boundary=PASS overall_completion_claim=false"
+  },
+  "hash_resolution": {
+    "dimension_depth_report": {
+      "earlier_callback_report_sha256": "525379fc16f707691536e4b2697f87eb186a0ff4f5b2902877f06c292cfa2837",
+      "post_callback_on_disk_report_sha256": "09507934b271d71070bda269f6516ea9b18fad89a3b421ac37b12f8de5622c5c",
+      "lane_state_report_sha256": "09507934b271d71070bda269f6516ea9b18fad89a3b421ac37b12f8de5622c5c",
+      "resolution": "Coordinator uses the current post-smoke on-disk bytes; lane-state registry and on-disk hash agree."
+    }
+  },
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "implementation_authorized": false,
+    "admitted_blocks": 0,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false,
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "source_execution": false,
+    "clone_or_copy": false,
+    "build": false,
+    "deployment": false,
+    "benchmark": false,
+    "scan": false,
+    "external_write": false
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W4-RECEIPT-001",
+  "phase": "phase-7",
+  "wave": 4,
+  "status": "receipt_verified_with_blocker_unpromoted",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "target": {
+    "industries": 17,
+    "dimensions": 10,
+    "complete_pairs": 1700,
+    "dimension_records": 17000
+  },
+  "baseline_preserved": {
+    "complete_pairs": 270,
+    "partial_pairs": 3076,
+    "complete_pair_gap": 1430,
+    "merged_observed_slots": 17000,
+    "distinct_repository_urls": 216,
+    "platform_register_records": 117,
+    "feature_taxonomy": "68_stated_vs_144_enumerated_unresolved"
+  },
+  "wave": {
+    "lanes": 5,
+    "lanes_verified": 5,
+    "callbacks_pending": 0,
+    "output_files_verified": 21,
+    "complete_pair_gap_preserved": 1430,
+    "pending_lanes": [],
+    "blocked_lanes": ["P7-RIGHTS-EVAL-READINESS"],
+    "overall_completion_claim": false
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W4",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selection_ledger_rows": 170,
+        "identity_edges": 170,
+        "industries": 17,
+        "selected_partial_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "wave1_t1_excluded_queue_ids": 10,
+        "wave2_dimension_excluded_queue_ids": 170,
+        "wave3_dimension_excluded_queue_ids": 170,
+        "prior_exclusion_union": 350,
+        "complete_pairs_preserved": 270,
+        "partial_pairs_preserved": 3076,
+        "complete_pair_gap_preserved": 1430,
+        "prior_wave2_corpus_overlap_flagged": 93,
+        "prior_wave3_corpus_overlap": 0
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "selection-ledger-wave-4.jsonl": "9f40e1c832b992c58d305e297db5adadcb935466f73487d8d3883a737f8e27ef",
+        "identity-edges-wave-4.jsonl": "d594280fd1fcb51e6e3366aac770c5a754531139bb0e1b8093535f588d5cb749",
+        "corpus-integrity-wave-4-report.md": "a52a39d6272aae234386498d2d7eace04b0f1f4b90c9b8db8a0d95a1c4f5e708",
+        "lane-state.json": "d4a897e9c56c877a2e6025d325a1fde766165ef1f167ffcb44d2acfb18dce70f"
+      }
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W4",
+      "status": "completed",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selected_pairs": 170,
+        "ledger_rows": 1700,
+        "source_receipts": 1700,
+        "dimensions": 10,
+        "rows_per_dimension": 170,
+        "unknown_blocked_rows": 359,
+        "excluded_prior_queue_ids": 350
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "dimension-evidence-ledger.jsonl": "94ecd0db408e8c356f89b8ff942839d834a39bcddf90af9d8bf018e5b1dbd38e",
+        "source-receipts.jsonl": "d306980f104678319221efeddb859b929a60c98b1fe1350de4481deeee1ee142",
+        "lane-state.json": "4a487a2baa4233c4b7291a1b597f9b01f5f292bb3d8a7b3758c810f1165c49ca"
+      }
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W4",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "surfaces": 24,
+        "rank_start": 23,
+        "rank_end": 46,
+        "feature_keys": 8,
+        "feature_evidence_rows": 192,
+        "unique_surface_feature_pairs": 192
+      },
+      "taxonomy": {
+        "stated_keys": 68,
+        "enumerated_keys": 144,
+        "accepted_denominator": null,
+        "status": "unresolved"
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "competitor-feature-evidence.jsonl": "126c5fc8222e598cfbead9bb24d3811b3596802f2db628dade8369649b6f9726",
+        "feature-census-report.md": "df73e91a78e13615605cbe48fe2bfccea1152d4695ea1d4c86e2f534d5606ae5",
+        "lane-state.json": "556ce2144427fd6a0649eb977f937a8eb73b689427b05cf5a84641be70e184d1"
+      }
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W4",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "join_records": 931,
+        "unique_canonical_identities": 931,
+        "industries": 17,
+        "buckets": 85,
+        "selected_defensible_metadata_joins": 602,
+        "held_or_unknown": 317,
+        "rejected": 12,
+        "underfilled_buckets": 52,
+        "quota_reached_buckets": 33,
+        "unique_recorded_public_urls": 1913,
+        "rate_limit_events": 8,
+        "wave1_wave2_wave3_identity_overlap": 0,
+        "wave4_duplicate_records": 0
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "industry-repository-joins.jsonl": "ddcd9f7b6eb1780da1d11a67a85ddf552a17cd73bffdb41e4086cd45be1cc211",
+        "underfilled-bucket-ledger.jsonl": "8d30b1cab48cde7f547e0793e583ce51c53a160d3359c5cddb5f0dfcbfe726cd",
+        "industry-coverage-report.md": "38d8aef50aaaaf1962b81f2c3d640545b189886e18823701da20af3168c39d62",
+        "lane-state.json": "afa155044ac2540822b0af607c0e53ac72a9af59ff531046777bd48b46fb19eb"
+      }
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W4",
+      "status": "blocked",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "rights_provenance_rows": 100,
+        "gcp_rank_start": 201,
+        "gcp_rank_end": 300,
+        "repository_evaluation_rows": 100,
+        "competitor_surface_evaluation_rows": 17,
+        "competitor_surface_rows_requested": 20,
+        "evaluation_total_rows": 117,
+        "evaluation_total_rows_requested": 120,
+        "surface_id_start": 51,
+        "surface_id_end": 67,
+        "missing_surface_ids": [68, 69, 70],
+        "immutable_versions_captured": 0,
+        "model_runs": 0,
+        "scans": 0,
+        "admitted_blocks": 0
+      },
+      "smoke": "PASS",
+      "blocker": "immutable register surface IDs 68-70 absent; only 17 of 20 requested surface evaluation rows are verifiable",
+      "artifact_hashes": {
+        "rights-provenance-ledger.jsonl": "d8f47d7baa217f8863fcb2dd12e980722b33834af046d5c4bfa65ed87ef02d7d",
+        "evaluation-readiness-ledger.jsonl": "13f44688d5f25cd610ebf4cf5b3b554c0347f5dd569030e279f63e2514ce344e",
+        "rights-eval-report.md": "4afba7e0fde9329da527b8ca7ca8f064bc0ae534a07d6166244d43b9250c6c44",
+        "lane-state.json": "2797e52f036103c678f184224d23d48f3873ac5ac3d55c65e7c076f375d8a603"
+      }
+    }
+  ],
+  "promotion_blockers": [
+    "1430 complete industry-repository pairs remain",
+    "competitor feature taxonomy remains 68 stated versus 144 enumerated with no accepted denominator",
+    "Wave-4 rights/evaluation is blocked because immutable register surface IDs 68-70 are absent; only 17 of 20 requested surface rows are verifiable",
+    "rights, SBOM, capability, evaluation, security, runtime, rollback, economics, and client-legal gates remain unexecuted or unknown"
+  ],
+  "independent_verification": {
+    "all_five_lane_states": "PASS",
+    "callback_readbacks": "PASS",
+    "jsonl_identity_and_count_recomputation": "PASS",
+    "boundary_recomputation": "PASS",
+    "wave4_industry_join_overlap": "PASS_ZERO_OVERLAP_W1_W2_W3",
+    "phase7_coordinator_prepromotion_verifier": "PASS_CHECKS_49_PENDING_LANES_0",
+    "phase7_promotion": "NOT_RUN_BY_DESIGN"
+  },
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "implementation_authorized": false,
+    "admitted_blocks": 0,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false
+  }
+}

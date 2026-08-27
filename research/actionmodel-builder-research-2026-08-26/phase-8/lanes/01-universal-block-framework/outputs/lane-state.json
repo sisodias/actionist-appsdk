@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "lane": "P8-UNIVERSAL-BLOCK-FRAMEWORK",
+  "phase": 8,
+  "status": "done",
+  "observed_at": "2026-08-27",
+  "owned_output_dir": "phase-8/lanes/01-universal-block-framework/outputs",
+  "research_only": true,
+  "implementation_authorized": false,
+  "admission_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "client_data_used": false,
+  "private_data_used": false,
+  "source_copied": false,
+  "license_scan_run": false,
+  "production_deployment_claimed": false,
+  "shared_phase_state_promotion": false,
+  "parent_goal_status": "active",
+  "promotion_allowed": false,
+  "artifacts": [
+    {
+      "path": "universal-block-framework.md",
+      "bytes": 41468,
+      "lines": 635,
+      "digest": "sha256:8eb6af3c10e94f90a24eefaadc9f375dc920e8f0fde8043c15fe860d29a72d5d",
+      "contains": [
+        "lifecycle_state_machine",
+        "block_kinds",
+        "packaging_modes",
+        "ports",
+        "identity_versioning",
+        "provenance_rights",
+        "dependency_closure",
+        "data_tenancy",
+        "visual_token_contract",
+        "runtime_sandbox",
+        "maintenance_economics",
+        "rollback",
+        "owner_authority",
+        "evidence_ladder",
+        "rejection_and_reference_only_paths",
+        "cross_system_mapping",
+        "contradictions",
+        "falsifiers"
+      ]
+    },
+    {
+      "path": "universal-block-contract-delta.json",
+      "bytes": 26732,
+      "digest": "sha256:24f4310a6da1fcc3b0de5e3646748239e3797889ffa255c1da1c13670fcc36f8",
+      "additions": 8,
+      "evidence_families": 9,
+      "invariants": 10,
+      "lifecycle_states": 15,
+      "transitions": 14,
+      "contradictions": 7,
+      "falsifiers": 8,
+      "blocking_defects": 2
+    },
+    {
+      "path": "lane-state.json",
+      "bytes": 4957,
+      "digest": null,
+      "note": "this file"
+    }
+  ],
+  "deliverables_required_by_dispatch": {
+    "universal-block-framework.md": "written",
+    "universal-block-contract-delta.json": "written",
+    "lane-state.json": "written"
+  },
+  "coverage_of_dispatch_checklist": {
+    "lifecycle_state_machine": "section 5",
+    "block_kinds": "section 3.1",
+    "ports": "sections 4 (F4), 6",
+    "identity_versioning": "section 4 (F1), 9.1",
+    "provenance_rights": "section 4 (F2), 9.7",
+    "dependency_closure": "section 4 (F3), 9.2",
+    "data_tenancy": "section 4 (F5)",
+    "visual_token_contract": "section 4 (F6), 9.4",
+    "runtime_sandbox": "section 4 (F7), 9.5",
+    "maintenance_economics": "section 4 (F8)",
+    "rollback": "section 4 (F9), 5",
+    "owner_authority": "section 4 (F9), 9.5",
+    "evidence_ladder": "section 10",
+    "rejection_and_reference_only_paths": "sections 5, 8",
+    "exact_mapping_to_existing_artifacts": "section 9",
+    "contradictions": "section 12",
+    "falsifiers": "section 13"
+  },
+  "systems_mapped": [
+    "block_contract_v1",
+    "design_v0",
+    "autosaas_harvest",
+    "siso_ui_base",
+    "sisocrm",
+    "great_library",
+    "industry_taxonomy_17"
+  ],
+  "duplication_avoided": [
+    "connector_opus",
+    "lovable_clone_opus",
+    "template_gap_opus"
+  ],
+  "no_duplication_note": "This lane performed no connector search, no builder-repo clone classification, and no template-shelf search. Template/corpus/mechanics/composition work belongs to lanes 02-05.",
+  "first_party_urls_retrieved": [
+    "https://modelcontextprotocol.io/specification/2025-11-25/basic",
+    "https://modelcontextprotocol.io/specification/versioning",
+    "https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/",
+    "https://spdx.dev/use/specifications/"
+  ],
+  "blocking_defects_found": [
+    {
+      "id": "X-1",
+      "summary": "v1 id regex hardcodes major version 1; no 2.x block id can validate."
+    },
+    {
+      "id": "X-2",
+      "summary": "v0 'requires' dependency edge dropped in v1; composition has no dependency graph."
+    }
+  ],
+  "most_consequential_open_question": "X-7 - AGPL intact-donor practice vs GPL/AGPL reference-only harvest policy; reconciled only if packaging_mode is accepted as distinct from code reuse. Legal confirmation absent.",
+  "smoke": {
+    "status": "PASS",
+    "checks_passed": 78,
+    "checks_failed": 0,
+    "families": [
+      "structural",
+      "parse",
+      "boundary",
+      "counts",
+      "cross_artifact_consistency",
+      "link_integrity",
+      "ground_truth_reverification",
+      "path_resolution",
+      "ownership_boundary"
+    ],
+    "note": "Ground-truth re-verification re-read live v1 schema, Great Library common schema, siso-ui-base rubric, SISOCRM manifest, and the industry spec, and confirmed every quoted enum/weight/count matches source. An initial run asserted sibling lanes were empty; that assertion was wrong (they wrote their own artifacts concurrently) and was corrected to verify only that no lane-01 artifact appears outside the owned directory."
+  },
+  "boundary_verification": {
+    "files_written_by_this_lane": [
+      "universal-block-framework.md",
+      "universal-block-contract-delta.json",
+      "lane-state.json"
+    ],
+    "files_written_outside_owned_dir": 0,
+    "sibling_lane_files_modified": 0
+  },
+  "unresolved": [
+    "X-1",
+    "X-2",
+    "X-3",
+    "X-4",
+    "X-5",
+    "X-6",
+    "X-7"
+  ],
+  "callback_target": "CENA",
+  "callback_status": "pending_at_write_time"
+}

@@ -1,0 +1,426 @@
+<title>Action Model Dossier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#FAF8F2; --ink:#191C17; --ink-soft:#4A4E44; --line:#DDD8C9;
+  --olive:#5A6B3C; --olive-soft:#EEF0E2;
+  --signal:#D96C2C; --signal-soft:#F9E9DC;
+  --verify:#3E7A4E; --verify-soft:#E4EFE4;
+  --claim:#8A6D1F; --claim-soft:#F4ECD4;
+  --card:#FFFFFF; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#191C14; --ink:#EDEBE0; --ink-soft:#A8AC9C; --line:#3A3E30;
+    --olive:#A9BC7E; --olive-soft:#252A1C;
+    --signal:#E8935B; --signal-soft:#33251A;
+    --verify:#7FB98B; --verify-soft:#1E2C20;
+    --claim:#D4B45E; --claim-soft:#2E2817;
+    --card:#20241A;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#191C14; --ink:#EDEBE0; --ink-soft:#A8AC9C; --line:#3A3E30;
+  --olive:#A9BC7E; --olive-soft:#252A1C;
+  --signal:#E8935B; --signal-soft:#33251A;
+  --verify:#7FB98B; --verify-soft:#1E2C20;
+  --claim:#D4B45E; --claim-soft:#2E2817;
+  --card:#20241A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 17px/1.65 'Source Serif 4',Georgia,serif;}
+a{color:var(--olive);text-underline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px}
+@media(max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}nav.toc{display:none}}
+header.hero{border-bottom:3px solid var(--ink);padding:56px 24px 28px;margin-bottom:40px}
+.hero-inner{max-width:1200px;margin:0 auto}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--signal)}
+h1{font:900 clamp(40px,6vw,72px)/1.02 Archivo,system-ui,sans-serif;margin:14px 0 10px;letter-spacing:-.02em;text-wrap:balance}
+.hero p.lede{max-width:66ch;font-size:19px;color:var(--ink-soft);margin:0 0 22px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px}
+.hm{font:500 12px/1 var(--mono);border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--ink-soft);background:var(--card)}
+nav.toc{position:sticky;top:24px;align-self:start;font:500 13px/1.5 var(--mono)}
+nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--ink);border-left-color:var(--signal)}
+nav.toc .g{font-weight:600;color:var(--olive);text-transform:uppercase;letter-spacing:.12em;font-size:11px;margin:18px 0 4px;padding-left:12px}
+main{min-width:0;padding-bottom:96px}
+section{margin:0 0 56px;scroll-margin-top:24px}
+h2{font:900 30px/1.1 Archivo,system-ui,sans-serif;letter-spacing:-.015em;margin:0 0 6px;text-wrap:balance}
+h3{font:700 19px/1.25 Archivo,system-ui,sans-serif;margin:28px 0 8px}
+.kicker{font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+p{max-width:70ch}
+section>p:first-of-type{margin-top:10px}
+.chip{display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.08em;padding:4px 8px;border-radius:4px;vertical-align:2px;margin-left:6px}
+.c-ver{background:var(--verify-soft);color:var(--verify)}
+.c-claim{background:var(--claim-soft);color:var(--claim)}
+.c-inf{background:var(--olive-soft);color:var(--olive)}
+.c-gap{background:var(--signal-soft);color:var(--signal)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:16px 0}
+.card h3{margin-top:0}
+blockquote{margin:14px 0;padding:12px 18px;border-left:3px solid var(--signal);background:var(--card);font-style:italic;color:var(--ink-soft);max-width:66ch}
+blockquote .src{display:block;margin-top:6px;font:500 11px/1 var(--mono);font-style:normal;color:var(--signal)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+.tw{overflow-x:auto}
+th{font:600 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--olive);border-bottom:2px solid var(--ink);padding:8px 10px 6px}
+td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top}
+td:first-child{font-weight:600}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+ul{padding-left:22px;max-width:70ch}li{margin:5px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.pipeline{font:500 13px/1.9 var(--mono);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;overflow-x:auto;white-space:pre;color:var(--ink-soft)}
+.big{font:900 34px/1 Archivo,sans-serif;color:var(--olive)}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat .l{font:600 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.stat .v{font:900 24px/1.15 Archivo,sans-serif;margin-top:4px}
+.stat .s{font:400 12.5px/1.4 'Source Serif 4',serif;color:var(--ink-soft);margin-top:3px}
+.flag{border-left:4px solid var(--signal);background:var(--signal-soft);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;max-width:72ch}
+.flag .t{font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:6px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font:400 13px/1.6 var(--mono);color:var(--ink-soft)}
+</style>
+
+<header class="hero"><div class="hero-inner">
+  <div class="eyebrow">SISO · Client Intelligence · Internal — do not share</div>
+  <h1>Action Model Dossier</h1>
+  <p class="lede">Everything researched on Cena (Sina Yamani), Action Model, Actionist, and the builder project — receipts attached, confidence labeled. Compiled 25–26 Aug 2026 from the WhatsApp history, nine research lanes, and live GitHub reconnaissance.</p>
+  <div class="hero-meta">
+    <span class="hm">11 research lanes complete</span><span class="hm">chat: Sep 2024 → Aug 2026</span><span class="hm">status: pre-call</span><span class="hm">home: SISO_Agency/clients/actionmodel</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <div class="g">The Client</div>
+  <a href="#exec">Executive read</a>
+  <a href="#sina">Who Sina is</a>
+  <a href="#wants">What he wants</a>
+  <a href="#money">Money &amp; token</a>
+  <a href="#community">Community &amp; growth</a>
+  <div class="g">The Product</div>
+  <a href="#actionist">Actionist teardown</a>
+  <a href="#market">Market position</a>
+  <div class="g">The Build</div>
+  <a href="#principles">Three principles</a>
+  <a href="#evidence">Research verdicts</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#recon">GitHub recon</a>
+  <div class="g">The Deal</div>
+  <a href="#gaps">Gaps &amp; phase-0</a>
+  <a href="#lovable">Lovable verdict</a>
+  <a href="#call">Call agenda</a>
+</nav>
+
+<main>
+
+<section id="exec">
+  <div class="kicker">Executive read</div>
+  <h2>The one-screen version</h2>
+  <div class="statrow">
+    <div class="stat"><div class="l">The ask</div><div class="v">Lovable, inside Actionist</div><div class="s">prompt → clarify → confirm → build, on cheap models</div></div>
+    <div class="stat"><div class="l">Standing offer</div><div class="v">"I'll pay you"</div><div class="s">9 Jul &amp; 29 Jul 2026 — no number ever named</div></div>
+    <div class="stat"><div class="l">Their distribution</div><div class="v">400–500k</div><div class="s">claimed community; 80–90k verified extension installs</div></div>
+    <div class="stat"><div class="l">Our moat</div><div class="v">Composition</div><div class="s">every lane exists in OSS; nobody chains them. Plus the corpus.</div></div>
+  </div>
+  <p>This is an 18-month peer relationship converting into a paid build. Sina watched Shaan ship infra (bifrost, CMUX, agent teams, the GitHub corpus), independently converged on the same architecture thesis — assembly over generation — and made a standing offer. The call is scoping and pricing, not convincing. The architecture is now research-backed: fourteen sourced design decisions, three genuinely open lanes where nothing mature exists in OSS (image→design-tokens, requirements elicitation, the eval harness), and a precise explanation of why their previous attempt (Cloudflare vibesdk) failed that clears his dev and positions ours.</p>
+  <div class="flag"><div class="t">Posture</div>Trusted peer delivering, never agency pitching. Demo beats deck — he distrusts benchmarks and buzzwords, and converted on seeing the corpus numbers. Anything sent to him circulates to his whole team same-day.</div>
+</section>
+
+<section id="sina">
+  <div class="kicker">The client</div>
+  <h2>Who Sina is</h2>
+  <p>"Cena Colada" on WhatsApp = <strong>Sina Yamani</strong>, founder/CEO of Action Model. London-based, Cayman-positioned ecosystem.</p>
+  <ul>
+    <li><strong>One corporate shell since 2015, renamed three times</strong> <span class="chip c-ver">VERIFIED</span> — FLYTASK LIMITED (Companies House 09845469) was REP LIFE LTD (2015–20), then YOELLO LIMITED (2020–Nov 2025). Still active, SIC 62090.</li>
+    <li><strong>Prior products all still alive:</strong> ListLearner (B2B book-summaries; Android app "List AI", £5/mo, updated Feb 2026, LISTL LTD) and PelloSEO ("24,000+ professionals" — self-claim) <span class="chip c-claim">CLAIM</span>.</li>
+    <li><strong>Zero public founder footprint</strong> <span class="chip c-ver">VERIFIED</span> — no LinkedIn trail, interviews, press, or disclosed funding for any venture. Not negative; just dark.</li>
+    <li><strong>Operator pattern</strong> <span class="chip c-inf">INFERENCE</span> — serial launcher/pivoter; packages products around distribution loops; keeps every old asset running. Action Model adds Web3 incentives to the same ship-and-distribute style.</li>
+  </ul>
+  <h3>How he decides (from two years of chat)</h3>
+  <ul>
+    <li><strong>Distribution-first:</strong> every idea routes through "we have 400k users."</li>
+    <li><strong>Demo-convinced, hype-allergic:</strong> "landing page is all buzz words" · "benchmarks just ain't accurate, they rig their models."</li>
+    <li><strong>Cheap-and-simple bias:</strong> stayed on OpenClaw because "it does the job"; "I don't like installing things." The builder must dock into <em>their</em> stack.</li>
+    <li><strong>Deal-fluent and fast:</strong> trades markets, buys/sells handles, moves on crypto rails; expect quick numeric negotiation. (Note: the $1k→$600 handle price in the chat was a third-party seller's cut relayed as a favor to Shaan — not Cena negotiating.)</li>
+    <li><strong>Blame routing:</strong> half-blamed his dev for the vibesdk failure. Bounded phases with demoable exits protect both sides.</li>
+  </ul>
+  <h3>Team (self-published, about-page)</h3>
+  <p><strong>Poorya Araghy — Technical Lead</strong> (the integration counterpart; likely "the dev" of the vibesdk story). <strong>Parsa Yamani — Automation Engineer</strong> (family; Shaan's warm channel). ~15–20 named staff across engineering, QA, product, growth. Advisor wall claims Arbitrum, VeChain, Polkadot, ICP, ASI, NEAR, Polygon, Uniswap associations <span class="chip c-claim">CLAIM</span>.</p>
+</section>
+
+<section id="wants">
+  <div class="kicker">Primary evidence — WhatsApp export</div>
+  <h2>What he wants: five versions, never reconciled</h2>
+  <p>The ask evolved across the chat. Two of the versions are <em>different products</em> — he has never picked one. That's call question #1.</p>
+  <div class="card"><h3>V1 · 17 May — the SaaS factory</h3>
+    <blockquote>"Lets say you wanted to clone a SaaS… less than 1 week… its not 1. Its hundreds. …I have a marketing strategy… one of the missing pieces is having many different SaaS products."<span class="src">his engagement shape: 1 SaaS + specs/NFRs from him → repeatable framework from us → dev team scales it, devs as QA</span></blockquote></div>
+  <div class="card"><h3>V2 · 23 Jun — Lovable inside the platform</h3>
+    <blockquote>"We basically want lovable inside of our platform. We want user to say 'I need a marketing dashboard that does XYZ', agent asks some more questions, confirms it with the user, and then it goes off and builds it."<span class="src">after their vibesdk attempt failed — "it was pretty shit apparently. but im not 100% sure i trust that dev"</span></blockquote></div>
+  <div class="card"><h3>V3 · 26 Jun, 4am — the scaffold insight (his, unprompted)</h3>
+    <blockquote>"There is no way they're building anything… They've built all the scaffolds… you could do [it] by scraping all of GitHub… they probably find a nice base template, and it grabs all these components and pieces it together."<span class="src">independently converged on Shaan's architecture — alignment on the how predates agreement on the what</span></blockquote></div>
+  <div class="card"><h3>V4 · 9 Jul — commitment + the constraint</h3>
+    <blockquote>"Not easy bro. If you can build it working and flexible, I'll pay you for it." — and asked what models it must run on: <strong>"Minimax"</strong><span class="src">corroborated 6 Jun: wanted to buy 50 MiniMax accounts and load-balance users across them — cheap per-user inference is a platform unit-economics assumption</span></blockquote></div>
+  <div class="card"><h3>V5 · 29 Jul — the standing offer</h3>
+    <blockquote>"You wanna be paid or what… Actionist.ai — Come tell me if you want to build for something serious."<span class="src">reiterated 24 Aug: "You been top of the list for a minute"</span></blockquote></div>
+  <h3>Stated vs assumed</h3>
+  <div class="tw"><table>
+    <tr><th>He has stated</th><th>Never stated — ask, don't assume</th></tr>
+    <tr><td>Prompt → clarify → confirm → autonomous build</td><td>Budget (proxies only: £10–20k/service + rev-split thinking, Jan 2025)</td></tr>
+    <tr><td>MiniMax-class models, hard constraint</td><td>Who the builder's user is (end-users? internal? partners?)</td></tr>
+    <tr><td>"Working and flexible" over polished</td><td>Hosting/tenancy of generated apps</td></tr>
+    <tr><td>OSS reuse expected ("probably 10 open source repos already")</td><td>IP ownership of framework and library</td></tr>
+    <tr><td>~1-week-per-app cycle time</td><td>Whether $LAM marketplace wraps generated apps</td></tr>
+  </table></div>
+</section>
+
+<section id="money">
+  <div class="kicker">Commercial reality</div>
+  <h2>Money &amp; token</h2>
+  <div class="statrow">
+    <div class="stat"><div class="l">$LAM token</div><div class="v">Not live</div><div class="s">CryptoRank: $0.00, isTraded:false, no TGE date <span class="chip c-ver">VERIFIED</span></div></div>
+    <div class="stat"><div class="l">Disclosed funding</div><div class="v">None found</div><div class="s">"$100M+ raised" docs line = advisors' prior projects, not Action Model</div></div>
+    <div class="stat"><div class="l">Real revenue</div><div class="v">Actionist SaaS</div><div class="s">$55 / $155 /mo on Stripe + reseller program</div></div>
+    <div class="stat"><div class="l">Payroll signal</div><div class="v">~15–20 staff</div><div class="s">money exists; capacity unevidenced</div></div>
+  </div>
+  <p>"Dealing with market open" (25 Aug) is therefore almost certainly general trading, not a live $LAM market.</p>
+  <div class="flag"><div class="t">Contract posture</div>Fiat, milestone-based, from a named legal entity, paid phase-1 — never big-bang pricing against an unverified treasury. And the IP battleground is known in advance: their own $100/hour apply-page terms state <em>workflows remain Action Model property</em>. The corpus and scaffold library stay Shaan's; they license outputs.</div>
+  <h3>Trust surface</h3>
+  <ul>
+    <li>Chrome listing: 4.9/5, 399 ratings, 80k users, v0.32.0 updated 25 Aug — active shipping, "good record" <span class="chip c-ver">VERIFIED</span>. But review mirror shows a same-day burst of generic five-stars (25 May) while referral/quest programs pay for growth — provenance unproven either way <span class="chip c-claim">CAUTION</span>.</li>
+    <li>Extension declares "user activity" + "website content" data handling while marketing says personal data isn't collected — diligence point, not wrongdoing.</li>
+    <li>No scam allegations, enforcement actions, or hack reports found. Absence ≠ exoneration.</li>
+  </ul>
+</section>
+
+<section id="community">
+  <div class="kicker">Community · token · comparables</div>
+  <h2>Community &amp; growth</h2>
+  <h3>Tokenomics as published <span class="chip c-claim">CLAIM</span></h3>
+  <ul>
+    <li>1B total $LAM supply; <strong>350M (35%) allocated to community contributors</strong>, points converting to tokens at TGE proportional to total community points (airdrop aggregator listings).</li>
+    <li>Epoch multiplier system: founding members 5×, Epoch 1 2×, decreasing monthly through Epoch 12 — currently Epoch 2 at 1.9×. Early access gated by a 1300+ Ethos Network score (confirms the Ethos partnership from company messaging).</li>
+    <li>One promoter lists token launch + airdrop distribution as <strong>Q2 2026 — already passed with no TGE</strong>, consistent with our finding that $LAM is not live. Slippage worth noting quietly.</li>
+  </ul>
+  <h3>Sentiment surface <span class="chip c-inf">ASSESSED</span></h3>
+  <p>The visible discussion layer is almost entirely <strong>promotional</strong>: airdrop aggregators (airdrops.io, airdrop.io, airdropalert.com) and incentivized X promoters. No independent critical reviews, no Reddit threads, and no scam allegations surfaced — but also no neutral verification of anything. The community is an airdrop-farming community until proven otherwise; multi-tier referrals (5–25%) are standard for both legitimate growth and farming schemes. This matches the review-burst caution from the Chrome-store analysis.</p>
+  <h3>The comparable that matters: Grass <span class="chip c-ver">VERIFIED</span></h3>
+  <p>Grass is the closest precedent — browser extension, contribute-to-earn, points→TGE, "data layer for AI" narrative (bandwidth where Action Model does GUI actions). Its arc is the base-rate for $LAM:</p>
+  <div class="statrow">
+    <div class="stat"><div class="l">TGE rally</div><div class="v">$3.89 ATH</div><div class="s">~$2.9B FDV at peak — headline DePIN success</div></div>
+    <div class="stat"><div class="l">Since</div><div class="v">−90%</div><div class="s">~$0.36, ~$237M mcap, rank ~#156</div></div>
+    <div class="stat"><div class="l">Community now</div><div class="v">Souring</div><div class="s">Season-2 tiny USDC payouts → node-operator frustration</div></div>
+    <div class="stat"><div class="l">Funding</div><div class="v">$4.5M</div><div class="s">Polychain-led seed — Grass HAD disclosed VC backing; Action Model has none found</div></div>
+  </div>
+  <p><strong>Read for us:</strong> even the category's success story is −90% from peak with a disillusioned contributor base. Action Model's community energy is real but token-contingent — the durable asset is Actionist SaaS revenue and the (claimed) training dataset, not the airdrop community. This strengthens the fiat-milestone contract posture and the case that the builder should stand on SaaS economics, not $LAM economics.</p>
+  <h3>Growth-claim plausibility — installs are moving the wrong way <span class="chip c-ver">VERIFIED</span></h3>
+  <div class="statrow">
+    <div class="stat"><div class="l">May 2026</div><div class="v">100,000</div><div class="s">installs at v0.30.0 (snapshot)</div></div>
+    <div class="stat"><div class="l">Aug 2026</div><div class="v">80,000</div><div class="s">installs at v0.32.0 (live listing)</div></div>
+    <div class="stat"><div class="l">Trajectory</div><div class="v">≈ −20%</div><div class="s">across a Chrome rounding bucket — net uninstalls, not noise</div></div>
+    <div class="stat"><div class="l">Ratings</div><div class="v">393 → 399</div><div class="s">flat over 3 months</div></div>
+  </div>
+  <p>The verified metric declines while the marketing number climbs toward "500k+" — which only reconciles as cumulative signups/waitlists across extension + Actionist + ActionFi including referral-farmed duplicates (a 3-level program pays 5–25% for exactly that). Founder-sourced figures escalate inconsistently (40k → 75k-in-72h → 250k+ → 500k). Treat <strong>~80k, flat-to-down</strong> as the honest anchor; the gap to claim is ~6×.</p>
+  <p>Review receipts sharpened: <strong>24 of ~50 sampled Chrome reviews posted on one day</strong> (25 May 2026), one is a bare referral solicitation; genuine negatives are mild (slow point tallying, unclear progress). And the zero-organic-community finding is now checked: no Reddit threads, no Bitcointalk, no payout complaints anywhere — for a claimed half-million community, the absence of criticism is itself the signal. CryptoRank watchlists: 30.</p>
+  <h3>Token disclosure gap <span class="chip c-gap">GAP</span></h3>
+  <p>Only the 35% community bucket is published. <strong>The other 65% of allocation, all vesting schedules, and all unlock cliffs are undisclosed.</strong> The $0.01-vs-$0.10 per-action inconsistency (10× on the core revenue variable) still stands in the docs. Comparables beyond Grass: OpenLedger −92%, Sapien −85% from peaks; the best-funded peer (Gradient: $10M from Pantera/Multicoin/HSG, 1.6M nodes) highlights Action Model's zero disclosed funding.</p>
+  <h3>The deeper moat risk — synthetic data <span class="chip c-inf">RESEARCH</span></h3>
+  <p>The crowd-data thesis has a technical counter: PC Agent-E achieved a <strong>141% relative improvement from just 312 human trajectories</strong> plus synthetic augmentation (arXiv 2505.13909), and ByteDance's UI-TARS-2 trains GUI agents via RL without supervised human data at all. If 312 curated demos beat 80,000 passive browsers, the training-data moat thins badly. Buyer-side: Scribe hit $100M ARR on workflow capture with no token; OpenAI and Anthropic bundle computer-use free with subscriptions. <strong>Fold-line for us: the durable asset is Actionist SaaS + the builder — the token/community layer is fragile marketing. Price and structure the engagement accordingly.</strong></p>
+</section>
+
+<section id="actionist">
+  <div class="kicker">Product teardown</div>
+  <h2>Actionist: what's actually there</h2>
+  <div class="tw"><table>
+    <tr><th>Layer</th><th>Finding</th><th>Evidence</th></tr>
+    <tr><td>Stack</td><td>Next.js/React on Vercel behind Cloudflare; Clerk auth; api.actionmodel.com Google-fronted (403 public); marketing site is separate (Framer)</td><td>headers, RSC payloads, subdomain probes <span class="chip c-ver">VERIFIED</span></td></tr>
+    <tr><td>Product</td><td>AI-employee orchestration: Skills/Memory/Apps/Schedules/Agents/Channels/Cloud/Reactions; Projects = goal → phased plan → approval queue; 878-app catalog</td><td>actionist.ai pages <span class="chip c-ver">VERIFIED</span></td></tr>
+    <tr><td>Cloud</td><td>BrowserBase-powered cloud browser (Pro, $5/10h); docs' VPC story ($149–199 dedicated VMs) contradicts live pricing</td><td>pricing page vs docs <span class="chip c-ver">VERIFIED</span></td></tr>
+    <tr><td>Workflow editor</td><td>n8n-like per docs: nodes, if/loops/parallel, LLM/document/database tools, REST/GraphQL/MCP, Ask-Human checkpoints — live-UI parity unverifiable without login</td><td>docs <span class="chip c-claim">CLAIM</span></td></tr>
+    <tr><td>API surface</td><td><strong>No public contract:</strong> sdk.actionmodel.com DNS dead; openapi.json 404; no GitHub org. Newer docs surface learn.actionist.ai references OpenAPI/Partner SDK</td><td>probes <span class="chip c-gap">GAP</span></td></tr>
+    <tr><td>Models</td><td>Proprietary-LAM marketing; no BYOK/provider docs anywhere. MiniMax constraint is private knowledge; their model routing looks unsolved</td><td>docs absence <span class="chip c-inf">INFERENCE</span></td></tr>
+  </table></div>
+  <h3>Where the builder docks</h3>
+  <ul>
+    <li><strong>Projects as intake</strong> — goal→plan→phases→approval maps 1:1 onto prompt→clarify→confirm→build. Extending a pattern his users already know.</li>
+    <li>Workflow custom tool / MCP node ("generate app" → artifact/repo/deploy handles).</li>
+    <li>App Store/Marketplace as the distribution shelf for generated apps (publish APIs not public — start internal).</li>
+    <li>Cloud runtime + credentials vault as the acceptance-test rig.</li>
+  </ul>
+  <p>Calibration: docs trail the live product by 12–18 months everywhere (extension docs still carry Q1 2025 targets; "private beta" language against a live pricing page). Trust the live product and the call, never their docs.</p>
+</section>
+
+<section id="market">
+  <div class="kicker">Two markets, one wedge</div>
+  <h2>Market position</h2>
+  <h3>Market 1 — app builders (what the builder competes with) <span class="chip c-ver">VERIFIED</span></h3>
+  <div class="statrow">
+    <div class="stat"><div class="l">Lovable</div><div class="v">$500M ARR</div><div class="s">$13.2B valuation; 1M new projects/wk; 80% non-technical builders; 146 staff</div></div>
+    <div class="stat"><div class="l">Bolt.new</div><div class="v">$40M ARR</div><div class="s">in 5 months; 5M users; ~40% gross margins on token pricing</div></div>
+    <div class="stat"><div class="l">Category</div><div class="v">$4.7B</div><div class="s">~40%/yr growth; Lovable+Cursor+Replit+Vercel &gt; $48B combined value</div></div>
+    <div class="stat"><div class="l">Price norm</div><div class="v">$25–50/mo</div><div class="s">+ usage credits — maps cleanly onto Actionist's $55/$155 tiers</div></div>
+  </div>
+  <p>Two reads. <strong>For Cena:</strong> the category is enormous, growing 40%/yr, and 80% of Lovable's builders are non-technical — his exact user base. The prize is real. <strong>For us:</strong> Lovable at $500M ARR and 146 engineers is not beatable head-on — which is precisely why "Lovable inside a distribution-owning platform, on cheap models, with a marketplace" is the only sane strategy. Don't compete with Lovable; make Actionist's users never need it.</p>
+  <h3>Market 2 — AI-employee platforms (where Actionist sits) <span class="chip c-ver">VERIFIED</span></h3>
+  <div class="tw"><table>
+    <tr><th>Player</th><th>Pricing</th><th>Note</th></tr>
+    <tr><td>Lindy</td><td class="num">$49.99–199.99/mo + usage</td><td>400k+ professionals claimed; $50M raised (Menlo/Coatue); added cloud-browser Computer Use (Autopilot) Aug 2025</td></tr>
+    <tr><td>Relevance AI</td><td class="num">~$19–199/mo, actions+credits</td><td>multi-agent GTM workforce; enterprise-leaning</td></tr>
+    <tr><td>Gumloop</td><td class="num">~$97/mo</td><td>$70M+ raised incl. $50M Benchmark Series B (Mar 2026)</td></tr>
+    <tr><td>Sintra / Marblism</td><td class="num">$15–44/mo</td><td>pre-built "AI employee" packs — the budget end</td></tr>
+    <tr><td>Artisan</td><td class="num">$2–5k/mo</td><td>enterprise outbound — the ceiling</td></tr>
+    <tr><td><strong>Actionist</strong></td><td class="num">$55–155/mo</td><td>mid-pack price; differentiators: computer-use depth, marketplace, crypto community, 878-app catalog</td></tr>
+  </table></div>
+  <p>The whole category converged on the "hire an AI employee" metaphor, and funded competitors (Lindy's Autopilot) are already adding computer-use — Actionist's original edge erodes. Deeper-lane update: Dust ($40M Series B, 3,000 orgs, zero 2025 churn) and Zapier Agents (~$50/mo add-on) round out the field; Lindy pivoted to a consumer AI-assistant posture and killed its free plan over inference costs.</p>
+  <h3>The combo already shipped — Manus <span class="chip c-ver">VERIFIED</span></h3>
+  <div class="statrow">
+    <div class="stat"><div class="l">Manus ARR</div><div class="v">$100M+</div><div class="s">Dec 2025; 22M monthly visits Feb 2026</div></div>
+    <div class="stat"><div class="l">Architecture</div><div class="v">Same</div><div class="s">general agent in a cloud VM — structurally Actionist Cloud VPC</div></div>
+    <div class="stat"><div class="l">Builder</div><div class="v">1 prompt</div><div class="s">full-stack apps w/ backend+DB+auth since v1.5 (Oct '25); mobile in v1.6</div></div>
+    <div class="stat"><div class="l">Exit signal</div><div class="v">~$2B</div><div class="s">Meta acquisition agreed; blocked by China's state planner Apr 2026</div></div>
+  </div>
+  <p><strong>The agent+builder combo is not a future risk — Manus is the reference implementation, 12+ months ahead, at $100M ARR.</strong> Convergence is arriving from every direction: Replit Agent 3 builds other agents (Replit now ~$525M ARR targeting $1B); Lovable shipped subagents and ChatGPT/Claude surfacing; Airtable's Omni conversational builder is GA on all tiers free; Zapier bundles Interfaces free in every plan. Counter-signal: OpenAI is winding down AgentKit's no-code builder (gone 30 Nov 2026) — the giants aren't unbeatable here. And Base44's $80M sale to Wix six months post-launch is the realistic outcome for a good-but-undifferentiated builder.</p>
+  <div class="flag"><div class="t">Strategic reframe — the real wedge</div>Position the builder as <strong>"build the tool AND the agent that operates software with no API"</strong> — not as a Lovable competitor. Lovable and Manus generate apps that call APIs; Actionist's GUI automation reaches the long tail of legacy/API-less SMB software no builder can touch. That is the one part of the combo Lovable cannot ship in a quarter. Benchmark against Manus, not Lovable.</div>
+  <h3>Pricing reconciliation <span class="chip c-inf">RECONCILED</span></h3>
+  <p>Two price sheets coexist: actionist.ai/pricing (fetched live: Basic $55 / Pro $155 SaaS seats on Stripe) and docs cloud-vpc ($149–199 Starter / $499 Professional <em>per dedicated agent VM</em>, with a 10% discount for paying in $LAM). Consistent with the documented docs-lag; ask which is current on the call. The fiat→$LAM auto-conversion mechanism is token buy-pressure engineering, not customer benefit — a procurement-diligence liability worth knowing about before any co-selling.</p>
+  <h3>Sharpest risks <span class="chip c-inf">INFERENCE</span></h3>
+  <ul>
+    <li><strong>Manus is present-tense, not 12-month</strong> — same architecture, proven, funded.</li>
+    <li>Free bundling (Zapier Interfaces, Airtable Omni) means app-building alone can't anchor premium pricing — the no-API wedge has to carry the story.</li>
+    <li>Crypto→SaaS conversion has <strong>no precedent anywhere</strong>: successful airdrops retain 20–35% of claimants at 90 days doing free on-chain activity — not $155/mo subscriptions. Two unrelated funnels, not a pipeline. (Freemium base rates: ~8% median, 15–20% AI-native top end.)</li>
+    <li>Token-denominated marketplace claims ($47k/mo top creators, $LAM-only, no fiat rate, urgency copy) would not survive procurement diligence.</li>
+    <li>Actionist's model routing is unsolved (no BYOK docs; the 50×-MiniMax idea) — the builder inherits their inference economics.</li>
+    <li>Team bandwidth: ~20 people shipping daily across three products; the builder must not depend on their engineering attention.</li>
+  </ul>
+</section>
+
+<section id="principles">
+  <div class="kicker">Shaan's design principles · 26 Aug</div>
+  <h2>The three principles</h2>
+  <div class="grid2">
+    <div class="card"><h3>P1 · Interstitial retrieval</h3><p>A nice UI costs millions of tokens from scratch — but if the code exists on GitHub, it's just integration. Query the corpus <em>between build steps</em>, not once upfront. The corpus grows daily.</p></div>
+    <div class="card"><h3>P2 · Image-gen design front-end</h3><p>Before any code: generate page concepts, moodboards, design-token candidates as images. Client reacts in seconds per round — "feeling vibes and feels." Only approved directions become code.</p></div>
+    <div class="card"><h3>P3 · Guide agent, chat → voice</h3><p>A conversational agent you can message or literally talk to walks the user through the whole build: elicits, presents, narrates, collects approvals. Easiest interface for non-technical users.</p></div>
+  </div>
+  <p><strong>Ordering:</strong> design decides <em>what</em>, retrieval supplies <em>how</em> — so image rounds precede retrieval, with one twist: the design round is seeded with directions the component library can actually honor. Image-gen proposes, corpus disposes. The guide isn't a fourth step; it's the spine the other two hang off.</p>
+</section>
+
+<section id="evidence">
+  <div class="kicker">Research verdicts · all three lanes complete</div>
+  <h2>Do the principles survive the evidence?</h2>
+  <div class="card"><h3>P1 — survives, with two corrections <span class="chip c-ver">RESEARCHED</span></h3>
+  <ul>
+    <li><strong>Gate it, don't always fire it.</strong> Iterative retrieve↔generate beats one-shot (RepoCoder, EMNLP'23, +10%), but always-on retrieval hurts — a "will retrieval help here?" self-check gets up to 70% inference speedup with no accuracy loss (Repoformer, ICML'24).</li>
+    <li><strong>Never search "similar code."</strong> Naive similar-code injection dropped Pass@1 from 36.5 → 19.6 in a controlled study. Search APIs, contracts, and intent after task decomposition (+20%).</li>
+    <li>Hierarchical granularity (repo→file→AST-block→line), AST-aware ~2–2.5k-char chunks, top-5 evidence packs, hard context budget (median true evidence span: 27 lines).</li>
+    <li>Hybrid index, RRF-fused: lexical/symbol + embeddings + AST/graph + metadata. No single retriever dominates; Sourcegraph moved <em>off</em> embeddings at &gt;100k-repo scale.</li>
+    <li><strong>License gate is mandatory:</strong> unlicensed = default copyright = not harvestable; GPL/AGPL reject-by-default; ScanCode over retrieved files and the assembled tree, SPDX output as CI gate.</li>
+  </ul></div>
+  <div class="card"><h3>P2 — works; tokens become the contract <span class="chip c-ver">RESEARCHED</span></h3>
+  <ul>
+    <li><strong>Breadth rounds are seconds-and-cents</strong> on fast image models (a 6–10 candidate round ≈ $0.20–0.35, sub-2s generation with palette control, seeds, style-references). Slow high-fidelity models (GPT-Image-class, ~40s/img) run async for text-heavy hero assets — never in the sync loop. <em>Per Shaan 26 Aug: default to GPT/free-tier gens; the matrix is an optimization, not a dependency.</em></li>
+    <li><strong>Clients approve tokens, not pixels.</strong> Vision→IR extracts {color, typography, spacing, radius, shadow, layout} JSON with confidence, quantized to allowed scales — because pixels underdetermine fonts/spacing and even frontier models can't do pixel-perfect (Design2Code).</li>
+    <li>Registry-constrained code output trades a little fidelity for reliability — and is exactly what makes cheap-model implementation viable. Sell "your approved direction, faithfully instantiated within the registry."</li>
+    <li><strong>Image→design-tokens has zero OSS implementations.</strong> Most novel piece of the pipeline.</li>
+  </ul></div>
+  <div class="card"><h3>P3 — chat-first, voice as a layer <span class="chip c-ver">RESEARCHED</span></h3>
+  <ul>
+    <li>Precedent: Wix killed its forced questionnaire (Nov 2024). Design = fast default + opt-in "interview me" depth. Never a rigid interview.</li>
+    <li><strong>Elicitation is an open moat:</strong> best current models elicit under a third of implicit requirements (ReqElicitGym) — but guided questioning demonstrably works (GPT-4o follow-ups ≥ human quality). Nothing mature exists in OSS.</li>
+    <li>UX law: voice narrates <em>deltas only</em>; screen owns the artifact, diff, and one Approve/Revise control. Approvals are structured state. Silence ≠ approval.</li>
+    <li>Stack: WebRTC either way. OpenAI Realtime = shortest path; LiveKit = extensibility path (Shaan sent Cena livekit in Mar '26; ~$0.10 hosting per 10-min session).</li>
+  </ul></div>
+  <p><strong>Three lanes independently reported "no public benchmark exists"</strong> for their area — the eval harness (golden prompts + validator gates defining "good app" mechanically) is novel IP.</p>
+</section>
+
+<section id="architecture">
+  <div class="kicker">Synthesis · BUILDER-DESIGN.md</div>
+  <h2>The architecture</h2>
+<div class="pipeline">GUIDE AGENT — persistent spine: elicit · present · narrate · approve
+  1 SPEC      free chat over structured schema → BuildSession JSON     [gate 1]
+  2 DESIGN    image breadth rounds → client picks → vision→IR
+              token contract {color·type·spacing·radius·shadow·layout} [gate 2]
+  3 ASSEMBLE  vetted scaffold archetype (manifest: routes·data·tests)
+              per feature: conditional retrieval → API/intent query
+              bundles → hybrid search, top-5 evidence → cheap-model
+              adaptation within scaffold interfaces → abstain if gates fail
+  4 VALIDATE  scancode → deps → typecheck/build → unit → browser smoke
+              → screenshot-diff vs approved mockup; repair cap 2–4
+  5 PREVIEW   guide presents delta → Approve / Revise → ship           [gate 3]</div>
+  <h3>Why vibesdk failed them (and ours won't)</h3>
+  <p>Cloudflare's own hosted instance reproduces the killer bug: backend apps green in sandbox break in production (issue #313); one-click deploys fail on entitlement coupling even on paid plans (#162); setup demands Workers-for-Platforms + cert manager + wildcard domains. Structural, not his dev. Our design makes deployment a separately-tested subsystem — decision #13 of fourteen, each traced to evidence in <span style="font-family:var(--mono);font-size:14px">architecture/BUILDER-DESIGN.md</span>.</p>
+  <h3>Model routing under the MiniMax constraint</h3>
+  <p>Cheap models: elicitation follow-ups, query bundles, bounded adaptation, capped repair, narration — viable <em>because</em> the action space is structured (the literature shows weak models gain most from constrained edits). Rare budgeted frontier calls: archetype selection on ambiguous specs, design→code compilation, escalated repairs. This is also v0's production pattern (frontier for big gens, cheap model for narrow edits, dedicated AutoFix model) — the existence proof.</p>
+</section>
+
+<section id="recon">
+  <div class="kicker">Live gh API · 26 Aug</div>
+  <h2>GitHub recon: the parts exist, the composition doesn't</h2>
+  <div class="tw"><table>
+    <tr><th>Lane</th><th>Best finds</th><th>Verdict</th></tr>
+    <tr><td>Image→code</td><td>abi/screenshot-to-code <span class="num">⭐74k</span> MIT, active; FigmaToCode is GPL (reference only)</td><td>liftable base exists</td></tr>
+    <tr><td>Scaffolds</td><td>boxyhq/saas-starter-kit <span class="num">⭐4.9k</span> Apache-2.0; ultimate-backend <span class="num">⭐2.9k</span> MIT; refine (sent to Cena in May)</td><td>Cena's "10 repos" instinct confirmed</td></tr>
+    <tr><td>Lovable clones</td><td>beam-cloud/lovable-clone (BAML+FastMCP — MCP-native like Actionist); codecapsule (E2B+templates)</td><td>study; most unlicensed = no lifting</td></tr>
+    <tr><td>License gate</td><td>scancode-toolkit <span class="num">⭐2.6k</span> — industry standard</td><td>solved</td></tr>
+    <tr><td>Voice</td><td>Pipecat, LiveKit-based frameworks, Apache-licensed</td><td>solved</td></tr>
+    <tr><td>Image→design-tokens</td><td><strong>zero repos</strong></td><td><span class="chip c-gap">OPEN FIELD</span></td></tr>
+    <tr><td>Requirements elicitation</td><td>two ⭐0 repos</td><td><span class="chip c-gap">OPEN FIELD</span></td></tr>
+  </table></div>
+  <p>Differentiation claim checked three independent ways and held: every component exists polished per-lane; nobody has composed assembly-first + image-gen-fronted + guided into one builder. The moat is the composition, the vetted library, and the corpus.</p>
+</section>
+
+<section id="gaps">
+  <div class="kicker">Honesty section</div>
+  <h2>Gaps &amp; phase-0 dependencies</h2>
+  <ul>
+    <li><strong>The corpus is unverified.</strong> Receipted figure: ~850k repos scraped, ~80k categorized (25 Jun chat). The DB lives on the Mini — unreachable over Tailscale on 25 Aug; needs the WARP route. The category index serves scoping; P1 retrieval needs a second layer (license partition → Tree-sitter/AST symbols → dedupe → embeddings on the clean subset). Size this before promising it.</li>
+    <li><strong>The backend half.</strong> Image-gen + assembly solves frontend; auth/schema/migrations/billing is where cheap models are most dangerous and where vibesdk actually died. Scaffold manifests own the backend contract; retrieval fills features, never foundations.</li>
+    <li><strong>Hosting/tenancy of generated apps</strong> — never discussed with Cena. Hundreds of apps need previews, deploys, domains, data isolation.</li>
+    <li><strong>Scope pick:</strong> internal factory (V1) vs user-facing builder (V2) — one for phase 1.</li>
+    <li><strong>Eval harness:</strong> golden prompts + gates agreed with Cena so "good app" is mechanical, not vibes.</li>
+  </ul>
+  <h3>Suggested phase-1 (bounded, demoable — his own 17 May structure)</h3>
+  <p>One vertical — his own example: a marketing dashboard. Chat guide → spec → one design round → assembly from one archetype + ~50 curated components → validated preview. Success = prompt → approved design → working app in a single session, on MiniMax-class models, with the full artifact trail. Corpus-wide retrieval, voice, marketplace listing, factory scale-out: phase 2+.</p>
+</section>
+
+<section id="lovable">
+  <div class="kicker">Post-call lane · 26 Aug</div>
+  <h2>Lovable: hard vs commodity — the verdict</h2>
+  <p>Cena's belief that replicating Lovable is near-impossible is <strong>right about the general product and wrong about his scoped case.</strong> Lovable's hard problems are problems of generality; his constraints (known DBs, one design system, platform subdomains, dashboard-shaped apps) delete them.</p>
+  <div class="statrow">
+    <div class="stat"><div class="l">The tell</div><div class="v">They quit</div><div class="s">Lovable built its own sandbox fleet, then abandoned it and bought Modal — the $6.6B company rents this layer</div></div>
+    <div class="stat"><div class="l">Scoped build</div><div class="v">Weeks–months</div><div class="s">chat → constrained codegen → preview iframe → git versions → subdomain publish, on rented sandboxes</div></div>
+    <div class="stat"><div class="l">Security bonus</div><div class="v">Risk removed</div><div class="s">Lovable's worst liability — LLM-authored RLS on public Postgres — vanishes when the platform owns schema+policies</div></div>
+    <div class="stat"><div class="l">Buy option</div><div class="v">v0 Platform API</div><div class="s">GA, white-label supported; schema seeding via chats.init(); test quotas + Vercel-only deploys first</div></div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Genuinely hard in Lovable (months–years)</th><th>Commodity for the scoped clone (days–weeks)</th></tr>
+    <tr><td>Sandbox fleet at planetary scale (they gave up → Modal)</td><td>Rent E2B/Modal/Daytona per-second</td></tr>
+    <tr><td>LLM load-balancing at billions of tokens/min, cache-preserving</td><td>Single provider + retry + stable prompt prefix</td></tr>
+    <tr><td>Codegen for any app in any domain</td><td>Codegen against one schema, one design system, one app shape</td></tr>
+    <tr><td>~100 OAuth connectors with per-user credential isolation</td><td>Zero — the platform already owns the database</td></tr>
+    <tr><td>Multi-region managed Postgres/auth/storage/cron as a product</td><td>Scoped views onto the platform DB they already run</td></tr>
+    <tr><td>Unified build+run+AI credit metering (their #1 user complaint)</td><td>Flat per-seat pricing, or none</td></tr>
+    <tr><td>8M users / 1M projects-a-week multi-tenancy</td><td>Hundreds of tenants on infra they already operate</td></tr>
+    <tr><td>Visual-edits DOM→source mapping; SEO/SSR program</td><td>Skippable in v1 / irrelevant for dashboards</td></tr>
+  </table></div>
+  <p>Also relevant from the teardown: Lovable offers <strong>no white-label or API path at all</strong> (branded autosubmit URL only), so "license Lovable" is off the table — while their pricing pain (build and run credits unified into one draining balance; users billed for the model's own mistakes, 60–150 credits burned on AI-introduced bugs) is exactly the complaint a flat-priced scoped builder undercuts. Full report: <span style="font-family:var(--mono);font-size:14px">research/lovable-teardown-2026-08-26.md</span>; block framework: <span style="font-family:var(--mono);font-size:14px">architecture/BLOCK-FRAMEWORK.md</span>.</p>
+</section>
+
+<section id="call">
+  <div class="kicker">The 20 minutes</div>
+  <h2>Call agenda</h2>
+  <ul>
+    <li><strong>1 · Scope:</strong> factory or feature? Pick one for phase 1. (He's described both; never reconciled.)</li>
+    <li><strong>2 · Phase-1 shape:</strong> propose the bounded vertical above — it's his own structure from 17 May, returned to him.</li>
+    <li><strong>3 · Commercials:</strong> he's offered payment twice, never a number; he thinks in £10–20k + rev-share ranges. Decide the floor beforehand. Fiat, milestones, named entity. IP: corpus/library stays ours, outputs licensed.</li>
+    <li><strong>4 · Phase-0 dependencies, named:</strong> API access + canonical contract walkthrough with Poorya (public SDK is dead); hosting/tenancy decision; inference budget per build.</li>
+    <li><strong>5 · The vibesdk moment:</strong> clear his dev with the receipts — structural Cloudflare coupling, sandbox-green ≠ production-green — then land the differentiator: deployment as a tested subsystem.</li>
+    <li><strong>6 · The positioning gift:</strong> pitch the builder as "apps that operate software with no API" — the one angle Manus ($100M ARR, same architecture, already shipping one-prompt app-gen) and Lovable can't copy in a quarter. It's also the frame that makes his LAM/GUI-automation story load-bearing instead of decorative.</li>
+  </ul>
+  <div class="flag"><div class="t">One more thing</div>The DocSend deck link from Aug 2025 now 403s — ask him to re-share. And a CapSolver-style key Shaan shared in-chat on 18 Aug sits in the export plaintext: treat as burned, rotate if live.</div>
+</section>
+
+<footer>SISO client intelligence · compiled 25–26 Aug 2026 · sources: WhatsApp export (Sep 2024–Aug 2026), 11 research lanes, live gh API recon, market/community web sweeps · full receipts in SISO_Agency/clients/actionmodel/ · internal only — do not share or forward</footer>
+
+</main>
+</div>

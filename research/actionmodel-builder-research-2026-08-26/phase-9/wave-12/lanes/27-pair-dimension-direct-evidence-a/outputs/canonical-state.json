@@ -1,0 +1,18 @@
+{
+  "lane": "P9-L27",
+  "status": "complete",
+  "research_only": true,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "parent_status": "active",
+  "promotion_allowed": false,
+  "selection": "first 83 resolved assignments in input order",
+  "dimensions": ["demand_atom_fit", "workflow_behavior", "ui_assembly", "data_model", "integration_surface", "agent_authority", "runtime_deployment", "verification_eval", "provenance_rights", "economics_maintenance"],
+  "evidence_rows": 830,
+  "receipt_rows": 830,
+  "dispositions": {"direct": 676, "inference": 0, "unknown": 84, "blocked": 70},
+  "all_ten_direct_pairs": 24,
+  "boundary_prohibitions": ["client_data", "vendor_login", "clone", "source_copy", "source_execution", "install", "build", "deploy", "benchmark", "scan", "SBOM_execution", "admission", "promotion"],
+  "input": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/Actionist-AppSDK/SISO/research/actionmodel-builder-research-2026-08-26/phase-9/wave-9/lanes/19-target-identity-backfill/outputs/target-identity-assignments.jsonl"
+}

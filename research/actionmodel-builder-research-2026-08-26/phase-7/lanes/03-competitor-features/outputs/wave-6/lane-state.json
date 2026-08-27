@@ -1,0 +1,173 @@
+{
+  "schema_version": "phase7.competitor_features.wave6_lane_state.v1",
+  "lane_id": "P7-COMPETITOR-FEATURES-W6",
+  "wave": "wave-6",
+  "status": "complete",
+  "tasks_completed": 6,
+  "scope": "All 118 immutable product surfaces, evidence round 2, crossed with eight established feature keys",
+  "output_directory": "outputs/wave-6",
+  "outputs": {
+    "competitor_feature_evidence": "outputs/wave-6/competitor-feature-evidence.jsonl",
+    "feature_census_report": "outputs/wave-6/feature-census-report.md",
+    "lane_state": "outputs/wave-6/lane-state.json"
+  },
+  "selection": {
+    "ranked_surface_count": 117,
+    "rank_range": "1..117",
+    "explicit_gap_surfaces": [
+      "PS-118"
+    ],
+    "surface_count": 118,
+    "feature_key_count": 8,
+    "evidence_round": 2,
+    "feature_keys": [
+      "auth.consent_and_approval",
+      "deploy.mobile_distribution",
+      "economics.success_cost",
+      "exit.source_export",
+      "lifecycle.continuity_contract",
+      "recovery.source_rollback",
+      "security.tenant_isolation",
+      "ui.asset_ownership"
+    ],
+    "ranked_rows": 936,
+    "gap_rows": 8,
+    "evidence_rows": 944,
+    "unique_identity_definition": "surface_identity x feature_key x evidence_round",
+    "round_aware_disjointness": true,
+    "prior_exclusion_waves": [
+      "wave-1",
+      "wave-2",
+      "wave-3",
+      "wave-4",
+      "wave-5"
+    ],
+    "no_padding": true
+  },
+  "preservation": {
+    "wave1_universe_surface_records": 118,
+    "wave1_dictionary_provisional_keys": 144,
+    "taxonomy_verdict": "taxonomy_count_conflict",
+    "accepted_denominator": null,
+    "wave1_hashes_sha256": {
+      "product-surface-universe.jsonl": "0293f29f194f9e2424e5635d22ada476beea897f2343a470b5d2a897326b48d6",
+      "feature-dictionary.jsonl": "e6654a5e00f291f9d6fa50b302838359614dff956f65d3342b2b71aaa7ff0161",
+      "competitor-feature-evidence.jsonl": "4de26ea9f3075b690e695ab75ca6d4939f0a8f1fde854c231361941723b47633",
+      "feature-census-report.md": "b8a35e215ada4823f74fea0dc342137cdb29f06cc2bb02a3b60658e3ab213f7d",
+      "lane-state.json": "c427f18c93c045e1a2fea1d9f57229b552cc02d6a8dc3a7c2702a593c96d2b6b"
+    },
+    "wave2_hashes_sha256": {
+      "competitor-feature-evidence.jsonl": "429b12fdf38126a20981dab446637feb8211848c9aa151795ea6d6acd1c40dd3",
+      "feature-census-report.md": "b59ee3b7a21d5087927a33b7b17c10abf7cae8f7bfc2b29e9d03531b2cdb1697",
+      "lane-state.json": "73ebd48e29c4d339dccdc929b192a65d17c26391393edb1e16c0fabcbf0ffc94"
+    },
+    "wave3_hashes_sha256": {
+      "competitor-feature-evidence.jsonl": "b833341c6df0e542361462a2459b844b4a91ea82defbc9f0c8e2b7372251551b",
+      "feature-census-report.md": "2abffd69e976d6100eead05616101f125558c2ec8eced1b1231e17af18f3721d",
+      "lane-state.json": "d8d478a1008dc2aa102a7145cc777453088b58235a9a026962078837092e1f1c"
+    },
+    "wave4_hashes_sha256": {
+      "competitor-feature-evidence.jsonl": "126c5fc8222e598cfbead9bb24d3811b3596802f2db628dade8369649b6f9726",
+      "feature-census-report.md": "df73e91a78e13615605cbe48fe2bfccea1152d4695ea1d4c86e2f534d5606ae5",
+      "lane-state.json": "556ce2144427fd6a0649eb977f937a8eb73b689427b05cf5a84641be70e184d1"
+    },
+    "wave5_hashes_sha256": {
+      "competitor-feature-evidence.jsonl": "04384df3534cb6d7bf198491be5bb9ba27cd0a840f483222ea97f6a47bb613fc",
+      "feature-census-report.md": "bc8818e1b28810032cb293b67449df9044e64ea287edfa54e451eb81fe61e07e",
+      "lane-state.json": "9137a5db83c35ea689d90178742a6d40ba96bd5ac5879261ea83292517435bcd"
+    }
+  },
+  "evidence_tranche": {
+    "surface_count": 118,
+    "feature_key_count": 8,
+    "evidence_round": 2,
+    "row_count": 944,
+    "unique_round_aware_identities": 944,
+    "ranked_row_count": 936,
+    "gap_row_count": 8,
+    "feature_status_counts": {
+      "unknown": 800,
+      "partially_observed": 100,
+      "gated": 40,
+      "legacy": 4
+    },
+    "evidence_class_counts": {
+      "E/D": 880,
+      "E/U": 48,
+      "E/D+E/U": 8,
+      "I/U": 8
+    },
+    "prior_wave_context_counts": {
+      "wave-1": 192,
+      "wave-2": 192,
+      "wave-3": 192,
+      "wave-4": 192,
+      "wave-5": 176
+    },
+    "capability_proof_status": "not_established_for_all_rows",
+    "round2_status": "no_new_source_read_inherited_context_only"
+  },
+  "taxonomy": {
+    "stated_key_count": 68,
+    "enumerated_key_count": 144,
+    "mapping_status": "unresolved",
+    "verdict": "taxonomy_count_conflict",
+    "accepted_denominator": null,
+    "denominator_used": null
+  },
+  "input_hashes": {
+    "wave6_dispatch_receipt_sha256": "6db9bb2ddb4c7e50687d76c6ba0ba2b666c7bdc64c71c54c4fc4e1d1778bdfd6",
+    "phase7_program_sha256": "bde02720f1b169c190607403632a6b8b8f783142f659f779869f54396228d2d0",
+    "phase7_state_sha256_at_lane_read": "8732f0a13245ff7bf5a720fb8213c5beab60eebe254bc4ed847e279b4ea7120c",
+    "wave5_coordinator_receipt_sha256": "b716572c9dea9577b300d28678aa10db96e415d9883df9a2591595dda62aa5c6",
+    "platform_register_sha256": "13213b409c1d66a0c105a39d6046f98c6c4dbd581b15aa93dfee17d909cecc1c",
+    "product_surface_universe_sha256": "0293f29f194f9e2424e5635d22ada476beea897f2343a470b5d2a897326b48d6",
+    "feature_dictionary_sha256": "e6654a5e00f291f9d6fa50b302838359614dff956f65d3342b2b71aaa7ff0161"
+  },
+  "artifact_hashes_sha256": {
+    "competitor-feature-evidence.jsonl": "c0580897e5d94ee60d846bf48ffdcf428dc3ca1db9eb1db8c795f0969d99d06d",
+    "feature-census-report.md": "0af25295067687f0b55a3b122e5ea22c77eeedf6c72d1d8547516a3ba9bbca25"
+  },
+  "verification": {
+    "jsonl_parse": "PASS",
+    "exact_surface_coverage": "PASS_118",
+    "exact_cross_product": "PASS_118_X_8_X_ROUND_2_944",
+    "rank_coverage": "PASS_1_117_PLUS_PS_118_GAP",
+    "round_aware_disjointness": "PASS_W1_W5",
+    "universe_identity_parity": "PASS",
+    "source_date_url_parity": "PASS_INHERITED_CONTEXT",
+    "claim_capability_separation": "PASS",
+    "access_limits_and_unknowns": "PASS",
+    "rights_provenance_sbom": "PASS_UNKNOWN_EXPLICIT",
+    "taxonomy": "PASS_68_VS_144_UNRESOLVED_DENOMINATOR_NONE",
+    "report_relative_links": "PASS",
+    "git_diff_check": "PASS_NO_WHITESPACE_ERRORS",
+    "boundary": "PASS_UNEXECUTED_NOT_ADMITTED",
+    "network_probe": false,
+    "execution_or_admission_probe": false
+  },
+  "research_only": true,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "implementation_authorized": false,
+  "parent_goal_status": "active",
+  "shared_phase_state_promoted": false,
+  "callback_status": "sent_and_verified",
+  "callback": {
+    "session": "herdr-2",
+    "coordinator_pane": "w659e02f80e5bb1-1",
+    "fresh_resolution": "PASS",
+    "content_identity_verified": "PASS",
+    "pane_run": "queued_then_submitted_after_enter_only_retry",
+    "sleep_seconds": 2,
+    "readback": "PASS; receipt rendered in coordinator recent-unwrapped transcript",
+    "overall_phase_completion_claimed": false
+  },
+  "blockers": [
+    "Taxonomy remains 68 stated versus 144 enumerated; mapping is unresolved and denominator is NONE.",
+    "Capability proof is not established because W6 performs no login, runtime, execution, benchmark, scan, or admission action.",
+    "PS-118 FlutterFlow remains an explicit gap with no first-class register row and no first-party URL in the named local inputs.",
+    "Rights, provenance, SBOM, support, OEM, lifecycle, authority, tenant, export, rollback, mobile, and economics fields remain unknown or gated where inherited.",
+    "Evidence round 2 is an inherited-context refresh; no new source read was performed."
+  ]
+}

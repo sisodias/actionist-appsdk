@@ -1,0 +1,41 @@
+{
+  "lane_id": "P9-L11-COMPETITOR-DIRECT-EVIDENCE",
+  "status": "complete_with_blockers",
+  "observed_date": "2026-08-27",
+  "parent_goal_status": "active",
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "promotion_allowed": false,
+  "research_only": true,
+  "denominator": {
+    "surfaces": 28,
+    "surface_range": "PS-091..PS-118",
+    "canonical_features": 144,
+    "cells": 4032,
+    "populated_cells": 4032,
+    "silent_drops": 0,
+    "duplicate_cells": 0
+  },
+  "dispositions": {
+    "direct": 0,
+    "unknown": 4032,
+    "inferred": 0,
+    "blocked": 0,
+    "not_applicable": 0
+  },
+  "delta_vs_l02": {
+    "prior_direct": 10,
+    "prior_inferred": 14,
+    "prior_unknown": 4003,
+    "downgraded_to_unknown": 24
+  },
+  "source_evidence": "phase-9/wave-5/lanes/11-competitor-direct-evidence/outputs/source-receipts.jsonl",
+  "no_bytecode_verifier": "verify-no-bytecode.py",
+  "boundaries": [
+    "no client data",
+    "no vendor login",
+    "no clone/copy/execution/build/deploy/benchmark/license scan/SBOM/admission"
+  ]
+}

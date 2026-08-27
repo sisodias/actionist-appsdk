@@ -1,0 +1,208 @@
+{
+  "schema_version": "phase7.competitor_features.wave10_lane_state.v1",
+  "lane_id": "P7-COMPETITOR-FEATURES-W10",
+  "wave": "wave-10",
+  "status": "complete",
+  "tasks_completed": 6,
+  "scope": "All 118 immutable product surfaces, evidence round 6, crossed with eight established feature keys",
+  "output_directory": "outputs/wave-10",
+  "outputs": {
+    "competitor_feature_evidence": "outputs/wave-10/competitor-feature-evidence.jsonl",
+    "feature_census_report": "outputs/wave-10/feature-census-report.md",
+    "lane_state": "outputs/wave-10/lane-state.json"
+  },
+  "selection": {
+    "ranked_surface_count": 117,
+    "rank_range": "1..117",
+    "explicit_gap_surfaces": [
+      "PS-118"
+    ],
+    "surface_count": 118,
+    "feature_key_count": 8,
+    "evidence_round": 6,
+    "feature_keys": [
+      "auth.consent_and_approval",
+      "deploy.mobile_distribution",
+      "economics.success_cost",
+      "exit.source_export",
+      "lifecycle.continuity_contract",
+      "recovery.source_rollback",
+      "security.tenant_isolation",
+      "ui.asset_ownership"
+    ],
+    "ranked_rows": 936,
+    "gap_rows": 8,
+    "evidence_rows": 944,
+    "unique_identity_definition": "surface_identity x feature_key x evidence_round",
+    "round_aware_disjointness": true,
+    "prior_exclusion_waves": [
+      "wave-1",
+      "wave-2",
+      "wave-3",
+      "wave-4",
+      "wave-5",
+      "wave-6",
+      "wave-7",
+      "wave-8",
+      "wave-9"
+    ],
+    "no_padding": true
+  },
+  "preservation": {
+    "wave1_universe_surface_records": 118,
+    "wave1_dictionary_provisional_keys": 144,
+    "taxonomy_verdict": "taxonomy_count_conflict",
+    "accepted_denominator": null,
+    "prior_wave_hashes_sha256": {
+      "wave1": {
+        "evidence": "4de26ea9f3075b690e695ab75ca6d4939f0a8f1fde854c231361941723b47633",
+        "report": "b8a35e215ada4823f74fea0dc342137cdb29f06cc2bb02a3b60658e3ab213f7d",
+        "lane_state": "c427f18c93c045e1a2fea1d9f57229b552cc02d6a8dc3a7c2702a593c96d2b6b",
+        "rows": 192
+      },
+      "wave2": {
+        "evidence": "429b12fdf38126a20981dab446637feb8211848c9aa151795ea6d6acd1c40dd3",
+        "report": "b59ee3b7a21d5087927a33b7b17c10abf7cae8f7bfc2b29e9d03531b2cdb1697",
+        "lane_state": "73ebd48e29c4d339dccdc929b192a65d17c26391393edb1e16c0fabcbf0ffc94",
+        "rows": 192
+      },
+      "wave3": {
+        "evidence": "b833341c6df0e542361462a2459b844b4a91ea82defbc9f0c8e2b7372251551b",
+        "report": "2abffd69e976d6100eead05616101f125558c2ec8eced1b1231e17af18f3721d",
+        "lane_state": "d8d478a1008dc2aa102a7145cc777453088b58235a9a026962078837092e1f1c",
+        "rows": 192
+      },
+      "wave4": {
+        "evidence": "126c5fc8222e598cfbead9bb24d3811b3596802f2db628dade8369649b6f9726",
+        "report": "df73e91a78e13615605cbe48fe2bfccea1152d4695ea1d4c86e2f534d5606ae5",
+        "lane_state": "556ce2144427fd6a0649eb977f937a8eb73b689427b05cf5a84641be70e184d1",
+        "rows": 192
+      },
+      "wave5": {
+        "evidence": "04384df3534cb6d7bf198491be5bb9ba27cd0a840f483222ea97f6a47bb613fc",
+        "report": "bc8818e1b28810032cb293b67449df9044e64ea287edfa54e451eb81fe61e07e",
+        "lane_state": "9137a5db83c35ea689d90178742a6d40ba96bd5ac5879261ea83292517435bcd",
+        "rows": 176
+      },
+      "wave6": {
+        "evidence": "c0580897e5d94ee60d846bf48ffdcf428dc3ca1db9eb1db8c795f0969d99d06d",
+        "report": "0af25295067687f0b55a3b122e5ea22c77eeedf6c72d1d8547516a3ba9bbca25",
+        "lane_state": "d07c7d507a13bf0d32404e504dbc98d88546ce813d11fa856502dc5060e0473b",
+        "rows": 944
+      },
+      "wave7": {
+        "evidence": "175c70bd5fb32b70f5bad8f390a39a2ed04ecf8139624406b6ed2f1365545ce8",
+        "report": "e78ed62dd2c67e10c2e2cc133a0145ae049d6e6e2a4705a2a6b171c27759d87e",
+        "lane_state": "ff1c222a809363383607c272b0a2ffe6e9c806842db5229a21496a8226026c83",
+        "rows": 944
+      },
+      "wave8": {
+        "evidence": "876d1cb5d4c574ec20b54e3683d02b3401854b5c3dbfde28950a76c93f975389",
+        "report": "dfed042846cf92bcd33c7a074f82260b1c0cd2837e710d0d906f4ac571f7c3a3",
+        "lane_state": "050652c920d1d61e063f4c72a2c558de6a29efb15b0642f09c6027825ba09142",
+        "rows": 944
+      },
+      "wave9": {
+        "evidence": "8b8bb8e50cb43ebf09bb8bfe91099674709f4102a383e6ccf89662a03867a288",
+        "report": "134311c14239ee5113fbc95990b60f8f0064deaafb155590af3668bf620b85af",
+        "lane_state": "3dc4e29c215037e5e45ce1d1b22548168c10524c1e9740860f682e040af30ba7",
+        "rows": 944
+      }
+    }
+  },
+  "evidence_tranche": {
+    "surface_count": 118,
+    "feature_key_count": 8,
+    "evidence_round": 6,
+    "row_count": 944,
+    "unique_round_aware_identities": 944,
+    "ranked_row_count": 936,
+    "gap_row_count": 8,
+    "feature_status_counts": {
+      "gated": 40,
+      "legacy": 4,
+      "partially_observed": 100,
+      "unknown": 800
+    },
+    "evidence_class_counts": {
+      "E/D": 880,
+      "E/D+E/U": 8,
+      "E/U": 48,
+      "I/U": 8
+    },
+    "prior_wave_context_counts": {
+      "wave-9": 944
+    },
+    "capability_proof_status": "not_established_for_all_rows",
+    "round6_status": "no_new_source_read_inherited_round5_context_only"
+  },
+  "taxonomy": {
+    "stated_key_count": 68,
+    "enumerated_key_count": 144,
+    "mapping_status": "unresolved",
+    "verdict": "taxonomy_count_conflict",
+    "accepted_denominator": null,
+    "denominator_used": null
+  },
+  "input_hashes": {
+    "wave10_dispatch_receipt_sha256": "e3c44562d20809cb1a00b1b22aec5acc434ebcf8ff5516a154a545b5fe8aa0fc",
+    "phase7_program_sha256": "bde02720f1b169c190607403632a6b8b8f783142f659f779869f54396228d2d0",
+    "phase7_state_sha256_at_lane_read": "b86e318cdf80a2c5aa0f3ffcb9721f4582100057638dd2c0742c645bda09caa0",
+    "wave9_coordinator_receipt_sha256": "51ba33c9a1ee5cab12b1a70867ec83233a5af8c6bc009b893e4b1f65fa912c49",
+    "wave9_dispatch_receipt_sha256": "cd3d2ba4340a9bfa8d66826310db7d2b42f5654a2e8ef00f06ee0ea06ea99273",
+    "platform_register_sha256": "13213b409c1d66a0c105a39d6046f98c6c4dbd581b15aa93dfee17d909cecc1c",
+    "product_surface_universe_sha256": "0293f29f194f9e2424e5635d22ada476beea897f2343a470b5d2a897326b48d6",
+    "feature_dictionary_sha256": "e6654a5e00f291f9d6fa50b302838359614dff956f65d3342b2b71aaa7ff0161",
+    "wave9_evidence_sha256": "8b8bb8e50cb43ebf09bb8bfe91099674709f4102a383e6ccf89662a03867a288"
+  },
+  "artifact_hashes_sha256": {
+    "competitor-feature-evidence.jsonl": "cf4abc569369f5929902a36c029ed2dfa6eac66301a41bd72e9633bb3eba547d",
+    "feature-census-report.md": "7c86c2f5a14c4a35f791013905a21c750b1755f947b53a605142eeab781bad20"
+  },
+  "verification": {
+    "jsonl_parse": "PASS",
+    "exact_surface_coverage": "PASS_118",
+    "exact_cross_product": "PASS_118_X_8_X_ROUND_6_944",
+    "rank_coverage": "PASS_1_117_PLUS_PS_118_GAP",
+    "round_aware_disjointness": "PASS_W1_W9",
+    "w9_predecessor_parity": "PASS_944",
+    "universe_identity_parity": "PASS",
+    "source_date_url_parity": "PASS_INHERITED_CONTEXT",
+    "claim_capability_separation": "PASS",
+    "access_limits_and_unknowns": "PASS",
+    "rights_provenance_sbom": "PASS_UNKNOWN_EXPLICIT",
+    "taxonomy": "PASS_68_VS_144_UNRESOLVED_DENOMINATOR_NONE",
+    "report_relative_links": "PASS",
+    "git_diff_check": "PASS_NO_WHITESPACE_ERRORS",
+    "boundary": "PASS_UNEXECUTED_NOT_ADMITTED",
+    "network_probe": false,
+    "execution_or_admission_probe": false
+  },
+  "research_only": true,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "implementation_authorized": false,
+  "parent_goal_status": "active",
+  "shared_phase_state_promoted": false,
+  "callback_status": "sent_and_verified",
+  "callback": {
+    "session": "herdr-2",
+    "workspace_id": "w659eea5cf6e7c5",
+    "coordinator_pane": "w659e02f80e5bb1-1",
+    "fresh_resolution": "PASS",
+    "content_identity_verified": "PASS",
+    "pane_run": "submitted_on_first_run",
+    "sleep_seconds": 2,
+    "readback": "PASS; receipt rendered in coordinator recent transcript",
+    "enter_retry": false,
+    "overall_phase_completion_claimed": false
+  },
+  "blockers": [
+    "Taxonomy remains 68 stated versus 144 enumerated; mapping is unresolved and denominator is NONE.",
+    "Capability proof is not established; round 6 performs no login, runtime, execution, benchmark, scan, or admission action.",
+    "PS-118 FlutterFlow remains an explicit gap with no first-party URL in the named inputs.",
+    "Rights, provenance, SBOM, support, OEM, lifecycle, authority, tenant, export, rollback, mobile, and economics fields remain unknown or gated where inherited.",
+    "Evidence round 6 is an inherited-context refresh; no new source read was performed."
+  ]
+}

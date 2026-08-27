@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "phase": 8,
+  "name": "universal-block-foundry-research-sprint",
+  "status": "research_complete_unpromoted",
+  "phase_verified": true,
+  "parent_goal_status": "active",
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "lanes": {
+    "P8-UNIVERSAL-BLOCK-FRAMEWORK": {"status": "complete_verified", "output_dir": "lanes/01-universal-block-framework/outputs"},
+    "P8-LOCAL-CORPUS-JOIN": {"status": "complete_verified", "output_dir": "lanes/02-local-corpus-join/outputs"},
+    "P8-B2B-TEMPLATE-SHELF": {"status": "complete_verified", "output_dir": "lanes/03-b2b-template-shelf/outputs"},
+    "P8-REPO-TO-BLOCK-MECHANICS": {"status": "complete_verified", "output_dir": "lanes/04-repo-to-block-mechanics/outputs"},
+    "P8-COMPOSITION-AGENT-EVALS": {"status": "complete_verified", "output_dir": "lanes/05-composition-agent-evals/outputs"}
+  },
+  "existing_parallel_opus": {
+    "connectors": "research_and_spike_complete_unpromoted",
+    "lovable_clones": "durable_packet_working",
+    "templates_gap_audit": "complete_verified",
+    "ui_unprompted": "excluded"
+  },
+  "blockers": [],
+  "promotion_allowed": false
+}

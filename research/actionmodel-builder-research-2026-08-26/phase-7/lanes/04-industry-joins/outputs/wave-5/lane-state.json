@@ -1,0 +1,222 @@
+{
+  "artifact_id": "P7-INDUSTRY-JOINS-W5-STATE-001",
+  "blockers": [
+    "Coverage gaps are retained: underfilled bucket cells are not padded.",
+    "Rights, SBOM, capability, runtime, and admission remain unknown/unexecuted."
+  ],
+  "boundaries": {
+    "admission": false,
+    "admission_status": "NOT_ADMITTED",
+    "benchmark": false,
+    "build": false,
+    "client_data": false,
+    "clone": false,
+    "deploy": false,
+    "execution_status": "UNEXECUTED",
+    "implementation": false,
+    "no_login": true,
+    "private_data": false,
+    "research_only": true,
+    "scan": false,
+    "shared_phase7_promotion": false,
+    "source_copy": false,
+    "source_execution": false
+  },
+  "callback": {
+    "coordinator_pane": "w659e02f80e5bb1-1",
+    "content_identity_verified": "PASS",
+    "fresh_resolution": "PASS",
+    "required": "fresh herdr-2 CENA pane resolution, <=6-line receipt, 2-second readback, Enter-only retry if queued",
+    "pane_run": "herdr pane run; queued observed; submitted before a valid Enter-only retry was required",
+    "readback": "PASS; callback rendered in coordinator pane",
+    "sleep_seconds": 2,
+    "message_status": "DONE lane receipt delivered",
+    "overall_phase_completion_claimed": false,
+    "status": "sent_and_verified"
+  },
+  "counts": {
+    "buckets": 85,
+    "held_or_unknown": 348,
+    "industries": 17,
+    "join_records": 883,
+    "quota_reached_buckets": 31,
+    "rejected": 11,
+    "selected_defensible_metadata_joins": 524,
+    "target_attempts": 1700,
+    "underfilled_buckets": 54,
+    "unique_canonical_identities": 883,
+    "unique_recorded_public_urls": 1812,
+    "wave1_wave2_wave3_wave4_identity_overlap": 0,
+    "wave5_duplicate_records": 0
+  },
+  "coverage": {
+    "accounting_firms": {
+      "attempts": 99,
+      "held": 47,
+      "rejected": 3,
+      "selected": 49,
+      "underfilled_buckets": 1
+    },
+    "construction": {
+      "attempts": 76,
+      "held": 30,
+      "rejected": 1,
+      "selected": 45,
+      "underfilled_buckets": 4
+    },
+    "course_creators": {
+      "attempts": 80,
+      "held": 19,
+      "rejected": 2,
+      "selected": 59,
+      "underfilled_buckets": 1
+    },
+    "ecommerce": {
+      "attempts": 79,
+      "held": 25,
+      "rejected": 3,
+      "selected": 51,
+      "underfilled_buckets": 2
+    },
+    "education_training": {
+      "attempts": 77,
+      "held": 32,
+      "rejected": 0,
+      "selected": 45,
+      "underfilled_buckets": 3
+    },
+    "healthcare_medical_practices": {
+      "attempts": 80,
+      "held": 20,
+      "rejected": 2,
+      "selected": 58,
+      "underfilled_buckets": 1
+    },
+    "hospitality": {
+      "attempts": 79,
+      "held": 20,
+      "rejected": 0,
+      "selected": 59,
+      "underfilled_buckets": 2
+    },
+    "insurance_agencies": {
+      "attempts": 38,
+      "held": 19,
+      "rejected": 0,
+      "selected": 19,
+      "underfilled_buckets": 5
+    },
+    "it_services_msps": {
+      "attempts": 40,
+      "held": 26,
+      "rejected": 0,
+      "selected": 14,
+      "underfilled_buckets": 3
+    },
+    "law_firms": {
+      "attempts": 55,
+      "held": 6,
+      "rejected": 0,
+      "selected": 49,
+      "underfilled_buckets": 4
+    },
+    "logistics_freight": {
+      "attempts": 20,
+      "held": 18,
+      "rejected": 0,
+      "selected": 2,
+      "underfilled_buckets": 4
+    },
+    "marketing_social_media_agencies": {
+      "attempts": 20,
+      "held": 8,
+      "rejected": 0,
+      "selected": 12,
+      "underfilled_buckets": 4
+    },
+    "mortgage_brokers": {
+      "attempts": 4,
+      "held": 1,
+      "rejected": 0,
+      "selected": 3,
+      "underfilled_buckets": 5
+    },
+    "property_management": {
+      "attempts": 37,
+      "held": 20,
+      "rejected": 0,
+      "selected": 17,
+      "underfilled_buckets": 4
+    },
+    "real_estate": {
+      "attempts": 40,
+      "held": 8,
+      "rejected": 0,
+      "selected": 32,
+      "underfilled_buckets": 3
+    },
+    "recruiting_staffing": {
+      "attempts": 39,
+      "held": 38,
+      "rejected": 0,
+      "selected": 1,
+      "underfilled_buckets": 4
+    },
+    "saas": {
+      "attempts": 20,
+      "held": 11,
+      "rejected": 0,
+      "selected": 9,
+      "underfilled_buckets": 4
+    }
+  },
+  "discovery": {
+    "method": "unauthenticated GitHub Search API repository metadata",
+    "page": 4,
+    "prior_unique_union": 3720,
+    "queries": 85,
+    "query_attempts": 93,
+    "rate_limit_events": 8,
+    "rate_limit_status": "captured_per_query; 8 reset events preserved",
+    "raw_returned_rows": 900,
+    "readmes_fetched": false,
+    "repo_pages_fetched": false,
+    "source_code_inspected": false,
+    "unique_emitted_rows": 883,
+    "wave1_exclusion_identity_count": 745,
+    "wave2_exclusion_identity_count": 1248,
+    "wave3_exclusion_identity_count": 1056,
+    "wave4_exclusion_identity_count": 931
+  },
+  "lane_id": "P7-INDUSTRY-JOINS-W5",
+  "observed_at": "2026-08-27",
+  "outputs": {
+    "joins": "industry-repository-joins.jsonl",
+    "report": "industry-coverage-report.md",
+    "state": "lane-state.json",
+    "underfilled": "underfilled-bucket-ledger.jsonl"
+  },
+  "parent_goal_status": "active",
+  "record_type": "lane_state_wave5",
+  "schema_version": 1,
+  "source_provenance": {
+    "auth_used": false,
+    "dispatch_receipt_sha256": "f8b096b12f6b58a39fa58cc2ee6e614d585d5ef4da9a298fa826e903f09e6478",
+    "new_public_requests_performed": true,
+    "query_date_rate_limit_preserved": true,
+    "wave1_packet_sha256": "4978b719ccc2a529459c0ae337958abc4da4cb4709e96db338ec28e115a3539f",
+    "wave2_packet_sha256": "647e9686133590f68051ccfaf8db4030bf774e246acf96724562b75be05255c0",
+    "wave3_packet_sha256": "0c45aee4157d67e36eb1d3b68403b7c901ae9a1067a748f0133a098edec038eb",
+    "wave4_packet_sha256": "ddcd9f7b6eb1780da1d11a67a85ddf552a17cd73bffdb41e4086cd45be1cc211"
+  },
+  "status": "complete",
+  "verification": {
+    "bucket_coverage_underfill_no_padding": "PASS",
+    "callback_status": "sent_and_verified",
+    "git_diff_check": "PASS",
+    "jsonl_schema_count_identity": "PASS",
+    "markdown_link_smoke": "PASS",
+    "rights_source_boundary": "PASS",
+    "wave1_wave2_wave3_wave4_overlap": "PASS"
+  }
+}

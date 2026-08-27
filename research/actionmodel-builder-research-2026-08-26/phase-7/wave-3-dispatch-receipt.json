@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W3-DISPATCH-001",
+  "wave": 3,
+  "status": "dispatched_parent_goal_active",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "implementation_authorized": false,
+  "admitted_blocks": 0,
+  "dispatch": {
+    "session": "herdr-2",
+    "workspace": "w659eea5cf6e7c5",
+    "pane_count": 5,
+    "callbacks_pending": 5,
+    "output_root": "lanes/*/outputs/wave-3",
+    "disjoint_from": ["wave-1", "wave-2", "phases-2-6"]
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W3",
+      "pane_id": "w659eea5cf6e7c5-1",
+      "scope": "next 10 remaining partial queue pairs per industry; exclude Wave-1 T1 and Wave-2 dimension selections",
+      "target": {"industries": 17, "pairs": 170, "complete_gap_preserved": 1430}
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W3",
+      "pane_id": "w659eea5cf6e7c5-2",
+      "scope": "10 repository-specific dimensions and matching receipts for the 170 new pairs",
+      "target": {"pairs": 170, "dimensions": 10, "ledger_rows": 1700, "source_receipts": 1700}
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W3",
+      "pane_id": "w659eea5cf6e7c5-3",
+      "scope": "Phase-6 platform-depth ranks 47..70 against 8 priority feature keys",
+      "target": {"surfaces": 24, "feature_keys": 8, "evidence_rows": 192, "taxonomy_denominator": "NONE"}
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W3",
+      "pane_id": "w659eea5cf6e7c5-4",
+      "scope": "page-2 unauthenticated public GitHub metadata discovery across all 85 industry buckets; no padding",
+      "target": {"industries": 17, "buckets": 85, "maximum_attempts": 1700, "wave1_wave2_overlap": 0}
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W3",
+      "pane_id": "w659eea5cf6e7c5-5",
+      "scope": "GCP-101..GCP-200 and existing_surface IDs 31..50",
+      "target": {"rights_rows": 100, "repository_evaluation_rows": 100, "surface_evaluation_rows": 20}
+    }
+  ],
+  "acceptance": {
+    "artifact_schema_required": true,
+    "exact_coverage_counters_required": true,
+    "evidence_quality_and_falsifiers_required": true,
+    "independent_verification_required": true,
+    "callback_status_required": "sent_and_verified",
+    "overall_completion_claim": false,
+    "promotion": "NOT_PERFORMED"
+  },
+  "boundaries": {
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "clone_or_copy": false,
+    "source_execution": false,
+    "implementation": false,
+    "build": false,
+    "deployment": false,
+    "benchmark": false,
+    "scan": false,
+    "external_write": false,
+    "admission": false
+  }
+}

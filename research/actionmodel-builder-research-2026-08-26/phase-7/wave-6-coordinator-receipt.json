@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W6-RECEIPT-001",
+  "phase": "phase-7",
+  "wave": {
+    "lanes": 5,
+    "lanes_verified": 5,
+    "callbacks_pending": 0,
+    "output_files_verified": 22,
+    "complete_pair_gap_preserved": 1430,
+    "pending_lanes": [],
+    "blocked_lanes": [
+      "P7-RIGHTS-EVAL-READINESS"
+    ],
+    "overall_completion_claim": false
+  },
+  "status": "receipt_verified_with_blocker_unpromoted_parent_goal_active",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "target": {
+    "industries": 17,
+    "dimensions": 10,
+    "complete_pairs": 1700,
+    "dimension_records": 17000,
+    "repositories_per_industry": 100
+  },
+  "baseline_preserved": {
+    "merged_observed_slots": 17000,
+    "distinct_repository_urls": 216,
+    "industry_repository_pairs": 3346,
+    "complete_pairs": 270,
+    "partial_pairs": 3076,
+    "complete_pair_gap": 1430,
+    "platform_register_records": 117,
+    "feature_taxonomy": "68_stated_vs_144_enumerated_unresolved"
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W6",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selection_ledger_rows": 170,
+        "identity_edges": 170,
+        "industries": 17,
+        "selected_partial_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "wave1_t1_excluded_queue_ids": 10,
+        "wave2_dimension_excluded_queue_ids": 170,
+        "wave3_dimension_excluded_queue_ids": 170,
+        "wave4_dimension_excluded_queue_ids": 170,
+        "wave5_dimension_excluded_queue_ids": 170,
+        "prior_exclusion_union": 690,
+        "prior_identity_pairs_excluded": 2006,
+        "prior_identity_overlap_selected": 0,
+        "dimension_count_distribution": {
+          "6": 51,
+          "7": 119
+        },
+        "complete_pairs_preserved": 270,
+        "partial_pairs_preserved": 3076,
+        "complete_pair_gap_preserved": 1430
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "selection-ledger-wave-6.jsonl": "33607c207680617032921c65267259400d2af6ea817b6685bb83f4b04f2497fc",
+        "identity-edges-wave-6.jsonl": "e3553e906ad56f3fee82a5c654d25b9ca7e860995e2cb21d9a1393aa64a55e68",
+        "corpus-integrity-wave-6-report.md": "2318e2eb66d5ac5ccdd4869a42ef530683ba0393d2e9b92c06c5adde54bf462c",
+        "lane-state.json": "d1e0e836263d1d9becb7ee5daa75e3c02b1f6a3b17c67c2aa00a90c20bca067b",
+        "post-write-smoke.py": "6265158c17d827972d281a507e8b195825cffd969016a06ea37e701bb7d66afc"
+      }
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W6",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selected_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "ledger_rows": 1700,
+        "source_receipts": 1700,
+        "dimensions": 10,
+        "rows_per_dimension": 170,
+        "unknown_blocked_rows": 561,
+        "excluded_prior_queue_ids": 690,
+        "source_access_fresh_public_evidence": false,
+        "inherited_context_present": true
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "dimension-evidence-ledger.jsonl": "f33e088d368cea3a981e371ea0a6279cb50d3236cc264835671d1dbd787876b5",
+        "source-receipts.jsonl": "35de330068bb4ea312073817c8e66390cbd1c6715398ead4c9dae8ad9ff577e4",
+        "dimension-depth-report.md": "3f85bcce67bf6f9a7d4717e70ba2f8ffff5a281b96bb39483893096807641315",
+        "lane-state.json": "ab82b76d1b5bc52ea65bb444fcbe3778ee972ee74db3cd152f2028d6b3493b09",
+        "smoke-dimension-evidence-wave-6.mjs": "fe0e3c50d1d27694ee036043902ec56f149135afe8d8cda1468bfa97f6c5f386"
+      }
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W6",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "evidence_round": 2,
+        "surfaces": 118,
+        "ranked_surfaces": 117,
+        "explicit_gap_surfaces": [
+          "PS-118"
+        ],
+        "gap_rows": 8,
+        "ranked_rows": 936,
+        "feature_evidence_rows": 944,
+        "feature_keys": 8,
+        "unique_round_aware_identities": 944,
+        "padding": false,
+        "evidence_status_counts": {
+          "unknown": 800,
+          "partially_observed": 100,
+          "gated": 40,
+          "legacy": 4
+        },
+        "evidence_class_counts": {
+          "E/D": 880,
+          "E/D+E/U": 8,
+          "E/U": 48,
+          "I/U": 8
+        }
+      },
+      "taxonomy": {
+        "stated_keys": 68,
+        "enumerated_keys": 144,
+        "accepted_denominator": null,
+        "status": "unresolved"
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "competitor-feature-evidence.jsonl": "c0580897e5d94ee60d846bf48ffdcf428dc3ca1db9eb1db8c795f0969d99d06d",
+        "feature-census-report.md": "0af25295067687f0b55a3b122e5ea22c77eeedf6c72d1d8547516a3ba9bbca25",
+        "lane-state.json": "d07c7d507a13bf0d32404e504dbc98d88546ce813d11fa856502dc5060e0473b"
+      }
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W6",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "join_records": 838,
+        "unique_canonical_identities": 838,
+        "industries": 17,
+        "buckets": 85,
+        "selected_defensible_metadata_joins": 486,
+        "held_or_unknown": 341,
+        "rejected": 11,
+        "underfilled_buckets": 52,
+        "quota_reached_buckets": 33,
+        "recorded_public_metadata_urls": 1720,
+        "target_attempts": 1700,
+        "page5_query_count": 85,
+        "http_attempts": 101,
+        "rate_limit_events": 16,
+        "prior_wave_identity_overlap": 0,
+        "duplicate_records": 0
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "industry-repository-joins.jsonl": "51475dfd425d0e8ecb5e5aed6273f1b43f96378df7b28d6f81d6bbad462a2e9b",
+        "underfilled-bucket-ledger.jsonl": "f9bd36d1c44ec70eb79ff7c4a0d799cc7a71c6f805f504bf50801dd681e91bb7",
+        "industry-coverage-report.md": "fddca9f35de23c4586abaf82a0bc30d0efa5d160b7708a956e749a91bb69280f",
+        "lane-state.json": "3168f862a7fed6c4c0d38b0aaa7788f88deef89a22ec9f866dd775eabda01f80"
+      }
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W6",
+      "status": "blocked",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "rights_provenance_rows": 100,
+        "gcp_rank_range": "401..500",
+        "repository_evaluation_rows": 100,
+        "competitor_surface_evaluation_rows": 0,
+        "competitor_surface_rows_requested": 20,
+        "evaluation_total_rows": 100,
+        "evaluation_total_rows_requested": 120,
+        "surface_id_requested_range": "88..107",
+        "missing_surface_ids": [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107],
+        "missing_surface_records": 20,
+        "immutable_versions_captured": 0,
+        "model_runs": 0,
+        "scans": 0,
+        "admitted_blocks": 0,
+        "report_links": 18
+      },
+      "smoke": "PASS_WITH_EXPLICIT_BLOCKER",
+      "blocker": "immutable register surface IDs 88-107 are absent; 0 of 20 requested surface evaluation rows are verifiable",
+      "artifact_hashes": {
+        "rights-provenance-ledger.jsonl": "46c981de5dba485df99d82a2d83490739c811e5b65d0385eff28cbe9babc6ea0",
+        "evaluation-readiness-ledger.jsonl": "03beed6769983e4c682d4d1135840c79de401d64b779c8ab40be5d2a3eebdae8",
+        "missing-surface-reconciliation.json": "bb31df016cbfbf430e3ae6d112ac96e96327a1b7a6e1c4eba864c3c23d32861b",
+        "rights-eval-report.md": "efb5041474c148a5d628eb4b277768b618125983032be102e6aa45a3bd32cf3a",
+        "lane-state.json": "d35cd674014d62774b55c612066eb40424f08715ff7790ed3f07bb53b41ab249"
+      }
+    }
+  ],
+  "promotion_blockers": [
+    "1,430 complete industry-repository pairs remain",
+    "competitor feature taxonomy remains 68 stated versus 144 enumerated with no accepted denominator",
+    "W6 rights/evaluation is blocked because immutable register surface IDs 88-107 are absent; 0 of 20 requested surface rows are verifiable",
+    "rights, SBOM, capability, evaluation, security, runtime, rollback, economics, and client-legal gates remain unexecuted or unknown",
+    "research evidence is not an implementation, build, deployment, benchmark, scan, admission, or client-data claim"
+  ],
+  "independent_verification": {
+    "corpus": "CORPUS_W6_INDEPENDENT_PASS selections=170 edges=170 industries=17 per_industry=10 excluded_queue_union=690 prior_identity_excluded=2006 selected_overlap=0 complete_guard=PASS gap=1430 callback=sent_and_verified boundary=PASS",
+    "dimensions": "DIMENSION_W6_INDEPENDENT_PASS pairs=170 ledger=1700 receipts=1700 dimensions=10 per_dimension=170 unknown_blocked=561 excluded_prior=690 corpus_parity=PASS callback=sent_and_verified boundary=PASS hashes=2",
+    "features": "FEATURES_W6_INDEPENDENT_PASS rows=944 surfaces=118 ranked=117 gap=PS-118 keys=8 round=2 prior_round_overlap=0 taxonomy=68-vs-144 boundary=PASS callback=sent_and_verified hashes=2",
+    "industry": "INDUSTRY_W6_INDEPENDENT_PASS joins=838 unique=838 buckets=85 industries=17 selected=486 hold=341 reject=11 underfilled=52 quota_reached=33 prior_overlap=0 urls=1720 attempts=101 rate_events=16 callback=sent_and_verified boundary=PASS",
+    "rights_eval": "RIGHTS_W6_INDEPENDENT_PASS rights=100 gcp=401-500 repo_eval=100 surface_eval=0 missing_surface_records=20 ids=88-107 blocked=PASS callback=sent_and_verified boundary=PASS hashes=4",
+    "coordinator_post_write_smoke": "W6_COORDINATOR_POST_WRITE_SMOKE_PASS receipt=verified lanes=5 callbacks=0 output_files=22 hashes=22 gap=1430 blocked_lane=rights_surface_ids_88_107 boundary=PASS bytecode_cache=ABSENT"
+  },
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "implementation_authorized": false,
+    "admitted_blocks": 0,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false,
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "source_execution": false,
+    "clone_or_copy": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false
+  }
+}

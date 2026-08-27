@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connector room: which OSS catalogues we can legally host, how a connection actually works end-to-end, and the build order for an Actionist connectors section.">
+  <title>Connector Room · Actionist Research OS</title>
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="stylesheet" href="pack.css">
+  <style>
+    .flow { display:grid; gap:10px; margin-top:14px; }
+    @media (min-width:900px){ .flow { grid-template-columns:repeat(5,1fr); } }
+    .flow-step { background:var(--night-2,#101512); color:#e7ece6; border-radius:10px; padding:14px 15px; position:relative; }
+    .flow-step .n { font-family:var(--mono-2,monospace); font-size:11px; letter-spacing:.09em; color:#b9ed70; display:block; margin-bottom:7px; }
+    .flow-step strong { display:block; font-size:14px; margin-bottom:5px; }
+    .flow-step span.d { font-size:12.5px; line-height:1.5; color:#a8b3a6; }
+    .term { background:#0d100e; color:#d6dbd3; border-radius:10px; padding:14px 16px; overflow-x:auto;
+            font-family:var(--mono-2,monospace); font-size:12.3px; line-height:1.7; margin-top:12px; white-space:pre; }
+    .term .c { color:#6f7d70; }
+    .term .g { color:#b9ed70; font-weight:700; }
+    .term .r { color:#e9827a; font-weight:700; }
+    .term .y { color:#f2a069; }
+    .lic-no { color:#c0392b; font-weight:600; }
+    .lic-ok { color:#3f7d2f; font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="pack-shell">
+    <aside class="pack-sidebar">
+      <div class="pack-brand"><div class="pack-mark">A/</div><div><strong>Actionist</strong><span>Research OS</span></div></div>
+      <div><div class="pack-side-label">Resource rooms</div><nav class="pack-nav">
+        <a href="../../index.html">Overview</a><a href="platform-map.html">Platform map</a><a href="oss-corpus.html">OSS corpus</a><a href="vertical-model.html">Vertical model</a><a href="action-model-synthesis.html">AM synthesis</a><a href="builder-ecosystem.html">Builder ecosystem</a><a href="reusable-blocks.html">Reusable blocks</a><a href="saas-catalogue.html">SaaS catalogue</a><a class="active" href="connectors.html">Connectors</a><a href="research-synthesis.html">Cross-pack synthesis</a>
+      </nav></div>
+      <div class="pack-sidebar-note"><strong>AM / connectors</strong><p>Lovable ships ~100 connectors as a moat. Four OSS catalogues hold more than that legally — and most of the famous names are licensed so we cannot host them. This room carries the licence evidence, the mechanics, and the build order.</p></div>
+    </aside>
+
+    <main class="pack-main">
+      <header class="pack-topbar">
+        <div class="pack-crumbs">Action Model / Resource rooms / <b>connectors</b></div>
+        <div class="pack-top-actions"><span class="pack-chip">27 Aug 2026</span><span class="pack-chip green">spike verified</span></div>
+      </header>
+
+      <div class="pack-content">
+
+        <section class="pack-hero" data-verify="hero">
+          <div class="pack-kicker">AM-CONNECTORS / detailed resource room</div>
+          <h1>We don't have to build a hundred connectors. We have to choose which catalogue we're allowed to host.</h1>
+          <p>The connector problem was scored <b>ZERO</b> in the 26 Aug Lovable teardown on the reasoning that "the platform already owns the DB". That is true of Actionist's own Postgres and false of everything a client dashboard wants to touch. This room corrects that, and answers the real question: can we import a catalogue instead of hand-writing integrations? <b>Yes</b> — with a licensing trap in front of it that would have cost real money.</p>
+          <div class="pack-metrics">
+            <div class="pack-metric"><strong class="green-text">4,140</strong><span>CC0 API specs (jentic)</span></div>
+            <div class="pack-metric"><strong class="green-text">1,445</strong><span>providers, runs today (OpenConnector)</span></div>
+            <div class="pack-metric"><strong class="orange-text">103</strong><span>OAuth2 of those 1,445</span></div>
+            <div class="pack-metric"><strong class="red-text">5</strong><span>headline repos we may NOT host</span></div>
+          </div>
+        </section>
+
+        <section class="pack-section" id="mechanics" data-verify="mechanics">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">01 / Mechanics</div><h2>How a connector actually works</h2></div>
+            <p>Verified by running OpenConnector locally, not read from docs</p>
+          </div>
+          <p class="pack-statement">A "connector" is three separable things that vendors sell as one: <b>a catalogue entry</b> (declarative facts about an API), <b>a credential vault</b> (encrypted per-user tokens plus refresh), and <b>an execution proxy</b> (an authenticated call). Once you see them apart, most of the build shrinks — and it becomes obvious which parts we can take and which we must own.</p>
+
+          <div class="flow">
+            <div class="flow-step"><span class="n">01 CATALOGUE</span><strong>Declarative facts</strong><span class="d">Auth URL, token URL, scopes, pagination style. Pure data — no code. This is what we import instead of writing.</span></div>
+            <div class="flow-step"><span class="n">02 CONSENT</span><strong>User clicks connect</strong><span class="d">We build an authorize URL from the catalogue entry and redirect. The user approves scopes at the vendor.</span></div>
+            <div class="flow-step"><span class="n">03 EXCHANGE</span><strong>Code → token</strong><span class="d">Vendor redirects back with a code; server swaps it for access + refresh tokens using our client secret.</span></div>
+            <div class="flow-step"><span class="n">04 VAULT</span><strong>Encrypt &amp; store</strong><span class="d">AES-GCM at rest, keyed per tenant. Refresh early under a lock. <b>This layer is ours.</b></span></div>
+            <div class="flow-step"><span class="n">05 EXECUTE</span><strong>Authenticated call</strong><span class="d">Decrypt at call time, inject the header, proxy to the vendor. The generated app never sees a token.</span></div>
+          </div>
+
+          <div class="pack-callout" style="margin-top:16px"><strong>The load-bearing insight:</strong> steps 1–3 and 5 are commodity — they are the same shape for every vendor and are already written, tested, and permissively licensed in open source. Step 4 is the only part that must be ours, because it is where multi-tenancy lives, and no OSS gateway we found does multi-tenancy. That is not a gap in the research; it is the actual work item.</div>
+
+          <p class="pack-statement" style="margin-top:18px">A catalogue entry is genuinely just data. This is Slack, from OpenConnector's <span class="pack-id">src/providers/slack/definition.ts</span> — every fact needed to render a connect button and complete a handshake:</p>
+          <div class="term"><span class="c">// nothing here is bespoke code — it is a typed record</span>
+service: <span class="g">"slack"</span>          authTypes: [<span class="g">"oauth2"</span>]
+auth: [{
+  authorizationUrl: <span class="y">"https://slack.com/oauth/v2_user/authorize"</span>
+  tokenUrl:         <span class="y">"https://slack.com/api/oauth.v2.user.access"</span>
+  refreshTokenUrl:  <span class="y">"https://slack.com/api/oauth.v2.access"</span>
+  scopeSeparator:   <span class="g">","</span>
+  tokenEndpointAuthMethod: <span class="g">"client_secret_post"</span>
+}]</div>
+          <p class="pack-statement" style="margin-top:14px">Multiply that by 1,445 and you have the catalogue. The fiddly fields — <span class="pack-id">refreshTokenUrl</span>, <span class="pack-id">tokenEndpointAuthMethod</span>, <span class="pack-id">scopeSeparator</span> — are exactly the per-vendor details that are painful to rediscover by hand and are the real reason importing beats writing.</p>
+        </section>
+
+        <section class="pack-section" id="licensing" data-verify="licensing">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">02 / Licensing</div><h2>The map that decides everything</h2></div>
+            <p>Licence bodies read, not SPDX badges trusted</p>
+          </div>
+          <p class="pack-statement">GitHub reports most of these as <b>"Other"</b>, which hides the clause that matters. Elastic License 2.0 says you <b>"may not provide the software to third parties as a hosted or managed service"</b>. Actionist is precisely that. So the two biggest, best-designed catalogues in the space are study-only — not a grey area.</p>
+          <div class="pack-table-wrap"><table class="pack-table">
+            <thead><tr><th>Repo</th><th>Real licence</th><th>Catalogue</th><th>Hostable for clients?</th></tr></thead>
+            <tbody>
+              <tr><td><strong>jentic/jentic-public-apis</strong></td><td class="lic-ok">CC0-1.0 (public domain)</td><td>4,140 vendors, OpenAPI</td><td><span class="pack-status green">ADOPT — long tail</span></td></tr>
+              <tr><td><strong>oomol-lab/open-connector</strong></td><td class="lic-ok">Apache-2.0</td><td>1,445 providers, 15,156 actions</td><td><span class="pack-status green">ADOPT — engine</span></td></tr>
+              <tr><td><strong>activepieces/activepieces</strong></td><td class="lic-ok">MIT outside <code>ee/</code></td><td>761 pieces</td><td><span class="pack-status green">ADOPT — UI + catalogue API</span></td></tr>
+              <tr><td>nextauthjs/next-auth</td><td class="lic-ok">ISC</td><td>106 OAuth provider configs</td><td><span class="pack-status green">yes</span></td></tr>
+              <tr><td>meltano/hub</td><td class="lic-ok">Apache-2.0</td><td>1,815 Singer connectors</td><td><span class="pack-status green">yes</span></td></tr>
+              <tr><td>TensorBlock/awesome-mcp-servers</td><td class="lic-ok">MIT</td><td>7,729 entries</td><td><span class="pack-status orange">index only — 7,279 auth unknown</span></td></tr>
+              <tr><td>NangoHQ/nango</td><td class="lic-no">Elastic v2</td><td>982 providers</td><td><span class="pack-status red">BLOCKED — hosting clause</span></td></tr>
+              <tr><td>airbytehq/airbyte</td><td class="lic-no">Elastic v2</td><td>—</td><td><span class="pack-status red">BLOCKED</span></td></tr>
+              <tr><td>PipedreamHQ/pipedream</td><td class="lic-no">Source Available v1.0</td><td>3,398 components</td><td><span class="pack-status red">BLOCKED</span></td></tr>
+              <tr><td>n8n-io/n8n</td><td class="lic-no">Sustainable Use</td><td>—</td><td><span class="pack-status red">BLOCKED for embedding</span></td></tr>
+              <tr><td>ComposioHQ/composio</td><td class="lic-no">MIT — <b>SDK only</b></td><td><b>0 in repo</b></td><td><span class="pack-status red">TRAP — see below</span></td></tr>
+              <tr><td>panoratech/Panora</td><td class="lic-no">AGPL-3.0</td><td>119 services</td><td><span class="pack-status red">BLOCKED</span></td></tr>
+              <tr><td>langgenius/dify (core)</td><td class="lic-no">Modified Apache</td><td>—</td><td><span class="pack-status red">BLOCKED — bars multi-tenant</span></td></tr>
+              <tr><td>langgenius/dify-plugins</td><td class="lic-no">NONE — no grant</td><td>574 dirs</td><td><span class="pack-status red">BLOCKED</span></td></tr>
+            </tbody>
+          </table></div>
+
+          <div class="pack-grid-2" style="margin-top:16px">
+            <div class="pack-card">
+              <div class="pack-kicker">Trap 01</div>
+              <h3>The MIT badge that buys nothing</h3>
+              <p>Composio: 29,895 stars, MIT, "1000+ toolkits" in the description. The repo has <b>no toolkit directory at all</b> — <span class="pack-id">ts/packages/</span> holds <code>core</code>, <code>cli</code>, <code>providers</code>, and nothing else. The MIT covers an SDK; the toolkits sit behind a paid hosted API.</p>
+              <p><b>Rule this gives us:</b> an MIT badge says nothing about whether the valuable asset is in the repo. <code>ls</code> the directory before scoring a candidate.</p>
+            </div>
+            <div class="pack-card">
+              <div class="pack-kicker">Trap 02</div>
+              <h3>The clause GitHub doesn't show</h3>
+              <p>Nango and Airbyte both report SPDX <code>NOASSERTION</code>. Read the body and it is Elastic v2, forbidding hosted/managed service provision. Dify goes further — clause 1a: <i>"you may not use the Dify source code to operate a multi-tenant environment."</i></p>
+              <p><b>Rule:</b> read the LICENSE body for every NOASSERTION. Nango stays valuable as a <i>schema teacher</i> — best-designed provider format in the space — just never shipped.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="pack-section" id="spike" data-verify="spike">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">03 / Spike receipts</div><h2>It runs. Here is the terminal output.</h2></div>
+            <p>OpenConnector, natively on Node 22 — no Docker needed</p>
+          </div>
+          <p class="pack-statement">Research that stops at reading source is a guess. The gateway was cloned, booted with encryption and admin auth on from the first run, given a real credential, and driven end-to-end.</p>
+
+          <div class="term"><span class="c">$ npm install    # catalogue builds from repo source, no network</span>
+Generated registry.generated.ts (<span class="g">1445 providers</span>).
+Generated <span class="g">1445 apps and 15156 actions</span>.
+added 423 packages in 11s</div>
+
+          <div class="term"><span class="c">$ PUT /api/connections/github   {"apiKey":"github_pat_FAKE…"}</span>
+{"error":{"code":<span class="r">"credential_verification_failed"</span>,
+          "message":"Bad credentials"}}
+<span class="c">// it verifies against the live vendor before storing. nothing persisted.</span></div>
+
+          <div class="term"><span class="c">$ sqlite3 data/connect.sqlite "select value from connections"</span>
+<span class="y">enc:v1:</span>yKlgIeTrsGiVqp04._7lhXgjkh1fY7DUD…
+  encrypted-prefix:       <span class="g">True</span>
+  contains 'gho_'/'ghp_':  <span class="g">False</span></div>
+
+          <div class="term"><span class="c">$ POST /v1/actions/github.get_current_user</span>
+success: <span class="g">True</span>    login: sisodias    id: 80409709
+<span class="c">// stored encrypted → decrypted at execute → real authenticated API call</span></div>
+
+          <div class="term"><span class="c">$ POST /api/oauth/authorizations  {"service":"googledrive"}</span>
+https://accounts.google.com/o/oauth2/v2/auth
+  ?<span class="y">access_type=offline</span>&amp;<span class="y">prompt=consent</span>
+  &amp;client_id=…&amp;redirect_uri=…%2Foauth%2Fcallback
+  &amp;response_type=code&amp;state=fe2ba4bc-…&amp;scope=…%2Fauth%2Fdrive
+<span class="c">// exactly the URL a "Connect Google Drive" button emits</span></div>
+
+          <div class="pack-callout" style="margin-top:14px"><strong>Not completed:</strong> the OAuth callback needs a real Google Cloud OAuth app, which is a credential to be created deliberately rather than incidentally. Everything up to the user-consent redirect is proven.</div>
+        </section>
+
+        <section class="pack-section" id="blocker" data-verify="blocker">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">04 / The blocker</div><h2>No OSS gateway does multi-tenancy</h2></div>
+            <p>Demonstrated, not inferred from schema</p>
+          </div>
+          <p class="pack-statement">Two connections were created — <span class="pack-id">github/tenant-a</span> and <span class="pack-id">github/tenant-b</span> — then listed with a single admin token. <b>All 23 connections came back in one flat list.</b></p>
+          <div class="term"><span class="c">migrations/postgresql/0010_runtime.sql</span>
+create table connections (
+  service          text not null,
+  connection_name  text not null,
+  value            text not null,
+  <span class="r">primary key (service, connection_name)</span>   <span class="c">← no tenant column</span>
+);
+create table oauth_client_configs (
+  <span class="r">service text primary key</span>                    <span class="c">← ONE OAuth app per service, globally</span>
+);</div>
+          <p class="pack-statement" style="margin-top:14px">Two further findings from source: <span class="pack-id">createSecretCodec</span> silently returns a <b>plaintext</b> codec when the encryption key is unset, and <span class="pack-id">keySalt</span> is a hardcoded constant — so there is one global key, with no per-tenant derivation to configure. It does not exist.</p>
+          <div class="pack-callout"><strong>Consequence:</strong> OpenConnector is a single-operator personal gateway; Actionist is a multi-tenant platform. Adopt the <b>catalogue and the OAuth engine</b>, write our own <b>connection store</b>. That layer was always going to be ours — this makes it explicit rather than a surprise in week three.</div>
+        </section>
+
+        <section class="pack-section" id="ui" data-verify="ui">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">05 / The UI</div><h2>The connect-account interface already exists, MIT, on our stack</h2></div>
+            <p>Three keyword searches returned nothing; a directory listing found it</p>
+          </div>
+          <p class="pack-statement">Activepieces ships the whole connect-account surface at <span class="pack-id">packages/web/src/app/connections/</span> — MIT, and built on React + shadcn/ui + react-hook-form + i18next, which is our builder's own stack. It already covers the matrix we would otherwise discover the hard way.</p>
+          <div class="pack-table-wrap"><table class="pack-table">
+            <thead><tr><th>Component</th><th>What it handles</th></tr></thead>
+            <tbody>
+              <tr><td><code>new-connection-dialog.tsx</code></td><td>The "add a connection" entry point</td></tr>
+              <tr><td><code>oauth2-connection-settings.tsx</code></td><td>OAuth2 flow, scope multi-select</td></tr>
+              <tr><td><code>oidc-connection-settings.tsx</code></td><td>OIDC variant</td></tr>
+              <tr><td><code>secret-text-connection-settings.tsx</code></td><td>API-key paste field — <b>the 90% case</b></td></tr>
+              <tr><td><code>custom-auth-connection-settings.tsx</code></td><td>Per-vendor bespoke fields</td></tr>
+              <tr><td><code>reconnect-button-dialog.tsx</code></td><td>Re-auth when a token expires</td></tr>
+              <tr><td><code>replace-connections-dialog.tsx</code></td><td>Swap a connection across flows</td></tr>
+            </tbody>
+          </table></div>
+          <p class="pack-statement" style="margin-top:14px">Nango's <span class="pack-id">SimplifiedJSONSchema</span> is the pattern that removes per-connector frontend work entirely: 434 providers ship a constrained schema with field ordering, conditional visibility (<code>visible_when</code>), and per-value warnings — enough to <b>render every connector's setup form from data</b>, with no bespoke React per vendor. Read the shape; populate it ourselves.</p>
+        </section>
+
+        <section class="pack-section" id="order" data-verify="order">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">06 / Build order</div><h2>Cheapest real value first</h2></div>
+            <p>Proposal — not started</p>
+          </div>
+          <p class="pack-statement">One number inverts the obvious plan. <b>API-key auth outnumbers OAuth roughly 2:1 in every catalogue independently</b> — OpenConnector 1,302 vs 103; Activepieces 374 vs 96; Nango 323 vs 425. Three separately-built catalogues agreeing means it reflects the SaaS world, not one vendor's bias.</p>
+          <div class="pack-timeline">
+            <div class="pack-timeline-item"><strong>1 · Ship the API-key path</strong><p>A form field and an encrypted write. No callback URLs, no per-vendor app registration, no refresh logic — and it unlocks ~90% of every catalogue.</p></div>
+            <div class="pack-timeline-item"><strong>2 · Import the catalogue over HTTP</strong><p><code>cloud.activepieces.com/api/v1/pieces</code> serves all 761 pieces as unauthenticated JSON with full auth specs. A ~20-line script, not the AST extractor originally scoped.</p></div>
+            <div class="pack-timeline-item"><strong>3 · Write the tenancy layer</strong><p>Tenant column, per-tenant key derivation, mapping from Actionist users onto connection IDs. The real work item this research uncovered.</p></div>
+            <div class="pack-timeline-item"><strong>4 · Then OAuth2, one vendor at a time</strong><p>Marquee connectors are disproportionately fiddly: 17 of Nango's 36 <code>popular</code> providers need custom scripts (47%) vs 9% catalogue-wide. The last twenty cost more than the first five hundred.</p></div>
+            <div class="pack-timeline-item"><strong>5 · Keep jentic as the long tail</strong><p>CC0, so nothing to track. When a client needs an API the gateway lacks, the spec is almost certainly already among the 4,140.</p></div>
+          </div>
+          <div class="pack-callout" style="margin-top:14px"><strong>Open before any client-facing UI ships:</strong> provider <b>icon licensing</b> is UNVERIFIED. OpenConnector's NOTICE disclaims trademark ownership; shipping Gmail/Stripe/Slack logos in a connector picker is a per-brand terms question. Cheap to check, embarrassing to discover late.</div>
+        </section>
+
+        <section class="pack-section" id="sources" data-verify="sources">
+          <div class="pack-section-head">
+            <div><div class="pack-kicker">07 / Source shelf</div><h2>Underlying evidence</h2></div>
+            <p>Full working files, local</p>
+          </div>
+          <div class="source-buttons">
+            <a class="pack-button" href="../connectors-licensing-2026-08-27.md">connectors-licensing-2026-08-27.md</a>
+            <a class="pack-button" href="../openconnector-spike-2026-08-27.md">openconnector-spike-2026-08-27.md</a>
+            <a class="pack-button" href="../lovable-teardown-2026-08-26.md">lovable-teardown-2026-08-26.md (corrected)</a>
+          </div>
+          <p class="pack-statement" style="margin-top:14px">Method note worth keeping: the teardown's confident <b>ZERO</b> for connectors was reasoned from first principles with no search behind it, and the 389-repo sweep had no connector lane to contradict it. A confident zero in a buy-vs-build table deserves one search before it ships.</p>
+        </section>
+
+        <footer class="pack-footer"><span>Actionist Research OS / AM-CONNECTORS / spike verified 27 Aug 2026</span><span><a href="../../index.html">Back to overview</a> · <a href="#mechanics">Back to top ↑</a></span></footer>
+      </div>
+    </main>
+  </div>
+  <script src="pack.js"></script>
+</body>
+</html>

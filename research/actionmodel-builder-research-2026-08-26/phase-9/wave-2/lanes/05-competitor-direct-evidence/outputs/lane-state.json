@@ -1,0 +1,81 @@
+{
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "blockers": [
+    "feature-specific direct evidence unavailable for most cells",
+    "L02 direct labels without retained feature-specific match downgraded to unknown"
+  ],
+  "deltas": {
+    "blocked": 0,
+    "direct": -27,
+    "inferred": 0,
+    "unknown": 27
+  },
+  "denominator": {
+    "canonical_features": 144,
+    "cells": 4320,
+    "populated_cells": 4320,
+    "silent_drops": 0,
+    "surfaces": 30
+  },
+  "dispositions_l02": {
+    "blocked": 5,
+    "direct": 28,
+    "inferred": 3,
+    "unknown": 4284
+  },
+  "dispositions_l05": {
+    "blocked": 5,
+    "direct": 1,
+    "inferred": 3,
+    "unknown": 4311
+  },
+  "execution_status": "UNEXECUTED",
+  "implementation_authorized": false,
+  "lane_id": "P9-L05-COMPETITOR-DIRECT-EVIDENCE",
+  "parent_goal_status": "active",
+  "promotion_allowed": false,
+  "research_only": true,
+  "schema_version": "p9.lane_state.v1",
+  "selection": {
+    "rank_max": 30,
+    "rank_min": 1,
+    "surface_refs": [
+      "PS-001",
+      "PS-002",
+      "PS-003",
+      "PS-004",
+      "PS-005",
+      "PS-006",
+      "PS-007",
+      "PS-008",
+      "PS-009",
+      "PS-010",
+      "PS-011",
+      "PS-012",
+      "PS-013",
+      "PS-014",
+      "PS-015",
+      "PS-016",
+      "PS-017",
+      "PS-018",
+      "PS-019",
+      "PS-020",
+      "PS-021",
+      "PS-022",
+      "PS-023",
+      "PS-024",
+      "PS-025",
+      "PS-026",
+      "PS-027",
+      "PS-028",
+      "PS-029",
+      "PS-030"
+    ]
+  },
+  "smoke": {
+    "no_bytecode": "PASS",
+    "result": "PASS: 4320 rows; 4320 unique cells; direct claims have URL/date/text"
+  },
+  "status": "complete_with_blockers"
+}

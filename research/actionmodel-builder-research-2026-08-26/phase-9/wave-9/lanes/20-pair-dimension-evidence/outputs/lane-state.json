@@ -1,0 +1,45 @@
+{
+  "admission_status": "NOT_ADMITTED",
+  "admitted": 0,
+  "admitted_blocks": 0,
+  "assignment_rows": 170,
+  "benchmark": false,
+  "build": false,
+  "client_data": false,
+  "clone": false,
+  "deploy": false,
+  "dimensions": [
+    "demand_atom_fit",
+    "workflow_behavior",
+    "ui_assembly",
+    "data_model",
+    "integration_surface",
+    "agent_authority",
+    "runtime_deployment",
+    "verification_eval",
+    "provenance_rights",
+    "economics_maintenance"
+  ],
+  "evidence_class_counts": {
+    "unknown": 1600
+  },
+  "execution_status": "UNEXECUTED",
+  "expected_evidence_records": 1600,
+  "expected_source_receipts": 1600,
+  "implementation_authorized": false,
+  "lane_id": "P9-L20",
+  "license_scan": false,
+  "no_padding": true,
+  "parent_goal_status": "active",
+  "promotion": false,
+  "promotion_allowed": false,
+  "research_only": true,
+  "resolved_rows": 160,
+  "sbom": false,
+  "source_execution": false,
+  "source_receipt_class_counts": {
+    "unknown": 1600
+  },
+  "unresolved_rows": 10,
+  "vendor_login": false
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "phase": 9,
+  "name": "evidence-closure-and-depth",
+  "status": "wave_6_complete_unpromoted",
+  "active_wave": 12,
+  "parent_goal_status": "active",
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "promotion_allowed": false,
+  "objective_counters": {
+    "attributable_luna_tokens_target": 100000000,
+    "phase9_attributable_luna_tokens": 38937562,
+    "goal_system_tokens_observed": 12531787,
+    "token_ledger": "luna-token-summary.json",
+    "industries": 17,
+    "repositories_per_industry": 100,
+    "dimensions_per_repository": 10,
+    "complete_pairs_target": 1700,
+    "complete_pairs_observed": 270,
+    "complete_pair_gap": 1430,
+    "dimension_records_target": 17000,
+    "competitor_surfaces_observed": 118,
+    "feature_terms_stated": 68,
+    "feature_terms_enumerated": 144,
+    "local_component_union": 8515,
+    "wave_2_identity_backfill_resolved": 166,
+    "wave_2_strict_stage0_candidates": 76,
+    "wave_2_competitor_direct_cells": 1,
+    "competitor_strict_census_cells": 16992,
+    "competitor_strict_direct_cells": 3,
+    "competitor_strict_unknown_cells": 16981,
+    "competitor_deep_dossiers_complete": 70,
+    "identity_tranche_positions_researched": 850,
+    "identity_tranche_resolved_repositories": 818,
+    "l17_dimension_records_with_direct_evidence": 840,
+    "l17_dimension_records_unknown": 700,
+    "l17_dimension_records_blocked": 60,
+    "l17_pairs_all_ten_dimensions_direct": 3
+  },
+  "lanes": {
+    "P9-L01-PAIR-COMPLETION-FORENSICS": {"status": "complete_verified", "agent_id": "01a0413c-05ff-78e1-8fed-24a0d34b9865", "output_dir": "lanes/01-pair-completion-forensics/outputs", "result": {"target_pairs":1700,"complete":270,"deficit":1430,"direct_evidence_rows":0,"later_wave_target_identity_overlap":0}},
+    "P9-L02-COMPETITOR-TAXONOMY-CLOSURE": {"status": "complete_verified", "agent_id": "01a0413c-068b-74d2-89ad-b56a9024ee2f", "output_dir": "lanes/02-competitor-taxonomy-closure/outputs", "result": {"surfaces":118,"canonical_features":144,"cells":16992,"direct":84,"inferred":24,"unknown":16844,"blocked":40}},
+    "P9-L03-LOCAL-CORPUS-BLOCK-JOIN": {"status": "complete_verified", "agent_id": "01a0413c-071a-7af3-9d32-cf6acb09b8b6", "output_dir": "lanes/03-local-corpus-block-join/outputs", "result": {"component_union":8515,"source_bearing":3506,"bundle_or_metadata_only":5009,"strict_stage_0":0,"strict_admission":0,"mini_corpus":"UNKNOWN"}}
+  },
+  "wave_2_lanes": {
+    "P9-L04-TARGET-IDENTITY-BACKFILL": {"status":"complete_verified","agent_id":"01a04146-4cf2-79c0-988f-955ce7aaa4b6","output_dir":"wave-2/lanes/04-target-identity-backfill/outputs","target_positions":170,"result":{"resolved_immutable_identities":166,"unresolved":4,"within_industry_duplicates":0,"cross_industry_reused_urls":1,"padding":0}},
+    "P9-L05-COMPETITOR-DIRECT-EVIDENCE": {"status":"complete_verified","agent_id":"01a04146-4d6b-70c0-b7ca-9cb06ceda927","output_dir":"wave-2/lanes/05-competitor-direct-evidence/outputs","target_cells":4320,"result":{"direct":1,"inferred":3,"unknown":4311,"blocked":5,"downgraded_from_prior_direct":27}},
+    "P9-L06-LOCAL-STAGE0-IDENTITY": {"status":"complete_verified","agent_id":"01a04146-4dd0-7440-a679-88b105d90892","output_dir":"wave-2/lanes/06-local-stage0-identity/outputs","input_rows":87,"result":{"unique_repositories":76,"strict_stage0":76,"unresolved":0,"rights_cleared":0,"admitted":0}}
+  },
+  "wave_3_lanes": {
+    "P9-L07-PAIR-DIMENSION-DEPTH": {"status":"complete_verified","agent_id":"01a04150-0c7c-7241-a05e-a29fdbefeefe","output_dir":"wave-3/lanes/07-pair-dimension-depth/outputs","target_cells":1660,"result":{"direct":683,"unknown":977,"pairs_complete_all_ten":0,"unresolved_positions_excluded":4}},
+    "P9-L08-COMPETITOR-DIRECT-EVIDENCE": {"status":"complete_verified","agent_id":"01a04150-0cd7-7c93-9aab-8dcd3a824778","output_dir":"wave-3/lanes/08-competitor-direct-evidence/outputs","target_cells":4320,"result":{"direct":2,"unknown":4318,"downgraded_prior_non_unknown":52}},
+    "P9-L09-LOCAL-STAGE2-STAGE3": {"status":"complete_verified","agent_id":"01a04150-0d32-77b2-800b-31a2a5cdcf3e","output_dir":"wave-3/lanes/09-local-stage2-stage3/outputs","target_candidates":76,"result":{"shape_unknown":76,"dependency_closure_incomplete":76,"stage2_complete":0,"stage3_complete":0}}
+  },
+  "wave_4_lanes": {
+    "P9-L10-COMPETITOR-DIRECT-EVIDENCE": {"status":"complete_verified","agent_id":"01a0415d-2cc3-7942-931f-69cd4e82a359","output_dir":"wave-4/lanes/10-competitor-direct-evidence/outputs","target_cells":4320,"result":{"direct":0,"unknown":4320,"downgraded_prior_non_unknown":29}}
+  },
+  "wave_5_lanes": {
+    "P9-L11-COMPETITOR-DIRECT-EVIDENCE": {"status":"complete_verified","agent_id":"01a0416c-daf9-7b41-b96c-1b4839692acb","prior_agent_id":"01a04160-e0ee-71b1-8aad-607c2834458f","output_dir":"wave-5/lanes/11-competitor-direct-evidence/outputs","target_cells":4032,"result":{"direct":0,"unknown":4032,"downgraded_prior_non_unknown":24}}
+  },
+  "wave_6_lanes": {
+    "P9-L12-TARGET-IDENTITY-BACKFILL": {"status":"complete_verified","agent_id":"01a04171-a43c-76f2-84ac-f5b56783775a","output_dir":"wave-6/lanes/12-target-identity-backfill/outputs","target_positions":170,"result":{"resolved":166,"unresolved":4,"overlap_l04":0,"within_industry_duplicates":0}},
+    "P9-L13-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a04171-a542-78b3-b894-224df3ff25b8","output_dir":"wave-6/lanes/13-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":25,"source_records":10}},
+    "P9-L14-STAGE2-STAGE3-RETRY": {"status":"complete_verified","agent_id":"01a04171-a61f-74f0-aea9-b20f0a7b8f59","output_dir":"wave-6/lanes/14-stage2-stage3-retry/outputs","target_candidates":76,"result":{"shape_classified":0,"shape_unknown":76,"closure_complete":0,"closure_incomplete":76}}
+  },
+  "wave_7_lanes": {
+    "P9-L15-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a04178-2418-7772-abb0-2ba8f289931f","output_dir":"wave-7/lanes/15-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":26,"source_records":10,"blocked_surfaces":0,"unknown_boundary_surfaces":10}}
+  },
+  "wave_8_lanes": {
+    "P9-L16-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a0417b-b788-7741-b313-71832098e263","output_dir":"wave-8/lanes/16-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":25,"source_records":10,"blocked_surfaces":0,"unknown_boundary_surfaces":10}},
+    "P9-L17-TARGET-IDENTITY-BACKFILL": {"status":"complete_verified","agent_id":"01a0417b-b804-7931-a5eb-9ce486a1f4ba","output_dir":"wave-8/lanes/17-target-identity-backfill/outputs","target_positions":170,"result":{"resolved":160,"unresolved":10,"identity_edges":160,"source_receipts":170,"overlap_l04":0,"overlap_l12":0,"prior_url_overlap":0,"within_industry_duplicates":0}}
+  },
+  "wave_9_lanes": {
+    "P9-L18-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a04188-3ca2-76c2-8b6b-6890ea9b7b53","output_dir":"wave-9/lanes/18-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":25,"source_records":10}},
+    "P9-L19-TARGET-IDENTITY-BACKFILL": {"status":"complete_verified","agent_id":"01a04188-3e9e-79c0-b463-8b54fc4c1674","output_dir":"wave-9/lanes/19-target-identity-backfill/outputs","target_positions":170,"result":{"resolved":165,"unresolved":5,"identity_edges":165,"source_receipts":170,"overlap_l04":0,"overlap_l12":0,"overlap_l17":0,"prior_url_overlap":0,"within_industry_duplicates":0}},
+    "P9-L20-PAIR-DIMENSION-EVIDENCE": {"status":"complete_verified","agent_id":"01a04188-4009-7f22-985d-3572a56f7285","output_dir":"wave-9/lanes/20-pair-dimension-evidence/outputs","target_pairs":160,"target_dimension_records":1600,"result":{"pairs":160,"dimensions":10,"evidence_records":1600,"source_receipts":1600,"direct":0,"inferred":0,"blocked":0,"unknown":1600}}
+  },
+  "wave_10_lanes": {
+    "P9-L21-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a04190-807e-7b32-9002-cedd04f8ff43","output_dir":"wave-10/lanes/21-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":25,"source_records":10}},
+    "P9-L22-PAIR-DIMENSION-DIRECT-EVIDENCE-A": {"status":"complete_verified","agent_id":"01a04190-819a-7131-8e56-7c1716927f98","output_dir":"wave-10/lanes/22-pair-dimension-direct-evidence-a/outputs","target_pairs":80,"target_dimension_records":800,"result":{"pairs":80,"dimensions":10,"evidence_records":800,"source_receipts":800,"direct":461,"inferred":0,"unknown":279,"blocked":60}},
+    "P9-L23-PAIR-DIMENSION-DIRECT-EVIDENCE-B": {"status":"complete_verified","agent_id":"01a04192-6004-74b2-bc7d-01825763465b","output_dir":"wave-10/lanes/23-pair-dimension-direct-evidence-b/outputs","target_pairs":80,"target_dimension_records":800,"result":{"pairs":80,"dimensions":10,"evidence_records":800,"source_receipts":800,"direct":379,"inferred":0,"unknown":421,"blocked":0,"overlap_l22":0}}
+  },
+  "wave_11_lanes": {
+    "P9-L24-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a04197-cc3d-7983-8180-99997d993065","output_dir":"wave-11/lanes/24-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":26,"source_records":10}},
+    "P9-L25-TARGET-IDENTITY-BACKFILL": {"status":"complete_verified","agent_id":"01a04197-ccbe-7cb3-8359-18dbc8b45ead","output_dir":"wave-11/lanes/25-target-identity-backfill/outputs","target_positions":170,"result":{"resolved":161,"unresolved":9,"identity_edges":161,"source_receipts":170,"prior_pair_overlap":0,"prior_url_overlap":0,"within_industry_duplicates":0}}
+  },
+  "wave_12_lanes": {
+    "P9-L26-COMPETITOR-DEEP-DOSSIERS": {"status":"complete_verified","agent_id":"01a041a1-8420-7dd3-a231-2f2526331b7f","output_dir":"wave-12/lanes/26-competitor-deep-dossiers/outputs","target_surfaces":10,"result":{"dossiers":10,"feature_claims":29,"source_records":10}},
+    "P9-L27-PAIR-DIMENSION-DIRECT-EVIDENCE-A": {"status":"complete_verified","agent_id":"01a041a1-8532-7341-a818-90729e3b544f","output_dir":"wave-12/lanes/27-pair-dimension-direct-evidence-a/outputs","target_pairs":83,"target_dimension_records":830,"result":{"pairs":83,"dimensions":10,"evidence_records":830,"source_receipts":830,"direct":676,"inferred":0,"unknown":84,"blocked":70,"all_ten_direct_pairs":24}},
+    "P9-L28-PAIR-DIMENSION-DIRECT-EVIDENCE-B": {"status":"stopped_user_requested","agent_id":"01a041a1-8667-7641-a673-34d6f0dde223","output_dir":"wave-12/lanes/28-pair-dimension-direct-evidence-b/outputs","target_pairs":82,"target_dimension_records":820,"result":{"accepted":false,"reason":"user_requested_research_pause"}}
+  },
+  "blockers": [
+    "disk_headroom_constrained",
+    "mini_corpus_path_unresolved",
+    "competitor_feature_mapping_68_to_144_unresolved",
+    "16844_competitor_feature_cells_unknown",
+    "1430_complete_pair_gap",
+    "authoritative_270_pairs_have_zero_direct_evidence_rows",
+    "phase7_dimension_waves_have_zero_target_identity_overlap",
+    "local_corpus_has_zero_strict_stage0_or_admission_ready_assets"
+  ]
+}

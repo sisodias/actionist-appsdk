@@ -1,0 +1,193 @@
+{
+  "phase": "p1-depth-and-evidence-coverage",
+  "status": "phase_verified_parent_goal_active",
+  "verified_at": "2026-08-27T01:06:42+07:00",
+  "phase_verified": true,
+  "next_phase": "phase-6-explicit-authorization-and-client-validation-prep",
+  "mode": "research_only",
+  "predecessor": {
+    "phase": "source-depth-and-pilot-readiness",
+    "phase_verified": true,
+    "artifacts": 8,
+    "lanes": 5,
+    "source": "../phase-4/phase-4-state.json"
+  },
+  "inputs": {
+    "phase_4_program": "../phase-4/PHASE-4-PROGRAM.md",
+    "phase_4_state": "../phase-4/phase-4-state.json",
+    "platform_depth_triage": "../phase-3/outputs/platform-depth-triage.jsonl",
+    "github_candidate_priority": "../phase-3/outputs/github-candidate-priority.jsonl",
+    "standards_baseline": "../outputs/standards-and-science.md",
+    "standards_expansion": "../expansion/outputs/standards-expansion.md",
+    "standards_latest_wave": "../expansion/wave-11/outputs/standards-applicability-wave-11.md",
+    "industry_specs": "../phase-2/outputs/industry-atom-specifications.md",
+    "public_signals_expansion": "../outputs/public-signals-expansion.md",
+    "public_signals_latest_wave": "../expansion/wave-11/outputs/public-signals-wave-11.md",
+    "implementation_authorized": false
+  },
+  "lanes": {
+    "RCH-PLATFORM-P1-A": {
+      "status": "complete",
+      "tasks_completed": 6,
+      "scope": "platform-depth ranks 15-34",
+      "output": "outputs/platform-p1-evidence-a.md",
+      "register": "outputs/platform-p1-evidence-a.jsonl",
+      "records": 20,
+      "unique_source_urls": 20,
+      "evidence_class_counts": {
+        "E/D": 20
+      },
+      "observation_date": "2026-08-27",
+      "source_probe": "20/20 HTTP 200 after redirects",
+      "report_sha256": "536f2f61a2b3630a2e3ef6f7abcee30bedbb5dc78afb2dfdefcd539409ba7e77",
+      "register_sha256": "71999ed84cec6ab52f3888ffe5891ff59261bcdb2f22a4157375f63c21ebd5ce",
+      "verification": {
+        "structural": "PASS",
+        "jsonl": "PASS",
+        "identity_parity": "PASS: 20/20 Phase-3 identities and exact URL lists",
+        "source_links": "PASS: 20/20 HTTP 200 after redirects",
+        "boundaries": "PASS",
+        "git_diff_check": "PASS",
+        "callback_readback": "PASS"
+      },
+      "callback_status": "received_and_verified",
+      "research_only": true,
+      "execution_status": "UNEXECUTED",
+      "admission_status": "NOT_ADMITTED",
+      "implementation_authorized": false,
+      "parent_goal_status": "active"
+    },
+    "RCH-PLATFORM-P1-B": {
+      "status": "completed",
+      "tasks_completed": 12,
+      "scope": "platform-depth ranks 35-54",
+      "output": "outputs/platform-p1-evidence-b.md",
+      "register": "outputs/platform-p1-evidence-b.jsonl",
+      "rank_start": 35,
+      "rank_end": 54,
+      "record_count": 20,
+      "source_url_count": 20,
+      "input_triage_records": 117,
+      "schema_smoke": "pass",
+      "jsonl_smoke": "pass",
+      "source_link_smoke": "pass",
+      "boundary_smoke": "pass",
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-GITHUB-NEXT50-RIGHTS": {
+      "status": "complete",
+      "tasks_completed": 8,
+      "scope": "deterministic GCP-051 through GCP-100 rights receipts",
+      "output": "outputs/github-next50-rights-receipts.md",
+      "register": "outputs/github-next50-rights-receipts.jsonl",
+      "records": 50,
+      "rank_range": "51-100",
+      "priority_ids": "GCP-051..GCP-100",
+      "unique_identity_keys": 50,
+      "disposition_counts": {
+        "candidate": 36,
+        "hold": 14
+      },
+      "evidence_class_counts": {
+        "first_party_readme_and_top_level_metadata": 40,
+        "first_party_top_level_metadata_only": 10
+      },
+      "license_state_counts": {
+        "declared_permissive": 49,
+        "copyleft_or_reciprocal": 1
+      },
+      "spdx_or_noassertion_count": 50,
+      "rights_cleared": 0,
+      "capability_evidence_established": false,
+      "sbom_scans": 0,
+      "url_reachability_checks": 0,
+      "source_code_inspected": 0,
+      "report_sha256": "f23475116fb38c156f9dde58db814e0d5809471809c614ebb08d4daae0182e01",
+      "register_sha256": "9b77612a14144fa9a1cf8e266df725524c9e8ca2715ed27a292086acc9a5feed",
+      "verification": {
+        "jsonl_schema": "PASS: 50 normalized receipts",
+        "count_rank_identity": "PASS: GCP-051..GCP-100; 50 unique identities",
+        "rights_boundary": "PASS: rights uncleared; reference-only; no source copy",
+        "markdown": "PASS: 50 rows x 15 fields",
+        "links": "PASS: 5/5 report-relative links resolve",
+        "git_diff_check": "PASS",
+        "callback_readback": "PASS: fresh CENA pane run/readback verified"
+      },
+      "callback_status": "sent_and_verified",
+      "research_only": true,
+      "execution_status": "UNEXECUTED",
+      "admission_status": "NOT_ADMITTED",
+      "implementation_authorized": false,
+      "parent_goal_status": "active"
+    },
+    "RCH-STANDARDS-APPLICABILITY-CLOSURE": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "scope": "170-cell standards-to-contract applicability closure",
+      "output": "outputs/standards-applicability-closure.md",
+      "register": "outputs/standards-applicability-closure.jsonl",
+      "cells": 170,
+      "industries": 17,
+      "dimensions": 10,
+      "sources": 70,
+      "readiness_state": "readiness_unexecuted",
+      "execution_status": "UNEXECUTED",
+      "admission_status": "NOT_ADMITTED",
+      "implementation": false,
+      "admitted_blocks": 0,
+      "verification": {
+        "jsonl_schema_count_unique_cell": "PASS",
+        "source_link_boundary": "PASS",
+        "markdown_accounting": "PASS",
+        "git_diff_check": "PASS",
+        "callback": "verified_delivery"
+      },
+      "parent_goal_status": "active"
+    },
+    "RCH-INDUSTRY-SIGNAL-DEPTH": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "scope": "17-industry public signal evidence depth",
+      "output": "outputs/industry-signal-depth.md",
+      "industry_profiles": 17,
+      "normalized_sections": 17,
+      "latest_wave": "W11",
+      "latest_wave_slots": 136,
+      "latest_wave_source_identities": 34,
+      "latest_wave_status": {
+        "observed": 68,
+        "needs_direct_review": 56,
+        "unobserved": 8,
+        "blocked": 4
+      },
+      "verified_links": 42,
+      "evidence_classes": ["E", "D", "I", "U"],
+      "callback_status": "sent_and_verified",
+      "verification": {
+        "coverage": "PASS",
+        "source_links": "PASS",
+        "evidence_classes": "PASS",
+        "boundary": "PASS",
+        "git_diff": "PASS",
+        "callback": "sent_and_verified"
+      },
+      "parent_goal_status": "active"
+    }
+  },
+  "coordinator_verification": {
+    "status": "PASS",
+    "verifier": "verify-phase5.py",
+    "lanes_verified": 5,
+    "output_files_verified": 9,
+    "records_verified": "20+20+50+170+17",
+    "research_boundary_verified": true,
+    "local_links_verified": true,
+    "predecessor_verified": true
+  },
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "parent_goal_status": "active"
+}

@@ -1,0 +1,200 @@
+{
+  "parent_goal_status": "active",
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "promotion_allowed": false,
+  "blockers": [
+    "1430_complete_pair_gap",
+    "later_dimension_waves_are_outside_target_identity_set",
+    "rights_and_runtime_are_out_of_scope_and_unresolved"
+  ],
+  "boundary": {
+    "admission": false,
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "benchmark": false,
+    "build": false,
+    "client_data": false,
+    "clone_or_copy": false,
+    "deployment": false,
+    "execution_status": "UNEXECUTED",
+    "implementation_authorized": false,
+    "parent_goal_status": "active",
+    "promotion_allowed": false,
+    "research_only": true,
+    "scan": false,
+    "source_execution": false,
+    "vendor_login": false
+  },
+  "counts": {
+    "complete": 270,
+    "deficit": 1430,
+    "duplicate": 0,
+    "gap_reasons": 1430,
+    "partial": 0,
+    "target_pairs": 1700
+  },
+  "dimension_order": [
+    "demand_atom_fit",
+    "workflow_behavior",
+    "data_model",
+    "integration_surface",
+    "ui_assembly",
+    "agent_authority",
+    "verification_eval",
+    "provenance_rights",
+    "runtime_deployment",
+    "economics_maintenance"
+  ],
+  "input_sha256": {
+    "phase-7/PHASE-7-PROGRAM.md": "bde02720f1b169c190607403632a6b8b8f783142f659f779869f54396228d2d0",
+    "phase-7/lanes/01-corpus-integrity/outputs/lane-state.json": "6f0efeaff93b25e242b0bba7ec6fe97857a9c78c8f0c6baac6f467a0499ad3b3",
+    "phase-7/lanes/01-corpus-integrity/outputs/repository-selection-ledger.jsonl": "136c61ae8974f5462860d74e775c4af3eff82021fa25dd9acd70b93df230183c",
+    "phase-7/lanes/02-dimension-evidence/outputs/dimension-evidence-ledger.jsonl": "35e6d9956d5689f2afc2758dad000ed6683844133023309babe41b12549861f8",
+    "phase-7/lanes/02-dimension-evidence/outputs/lane-state.json": "e1a7682ec512c095f11b712a7c353f94a3879978f4f5e3499f6bb53b0c94b6d2",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-10/dimension-evidence-ledger.jsonl": "02c562a02ca56ce26d1204420fa0843a10335dfbf5ef9a5e104ccf08c3fe400e",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-2/dimension-evidence-ledger.jsonl": "c49de3b0d7b696df539983562f70a2b83b5c2cf778e37124b1c84b9cc971e676",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-3/dimension-evidence-ledger.jsonl": "d8a988a944693260d58ff395e481d9bda98165b272565a5e7cd062b044aaf288",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-4/dimension-evidence-ledger.jsonl": "94ecd0db408e8c356f89b8ff942839d834a39bcddf90af9d8bf018e5b1dbd38e",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-5/dimension-evidence-ledger.jsonl": "53a199afb8411b1811c0852bd1c2914d9eb51cf6fc8ec8403295c81c4cb9bb7a",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-6/dimension-evidence-ledger.jsonl": "f33e088d368cea3a981e371ea0a6279cb50d3236cc264835671d1dbd787876b5",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-7/dimension-evidence-ledger.jsonl": "0f27199a02990c544263aa995350c40d64e10d4e727807429f2d3a322eb6b079",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-8/dimension-evidence-ledger.jsonl": "844852ed7fc7b8d9fc792738cec663d3b808c591c1fe36e7c81290d555ddc22f",
+    "phase-7/lanes/02-dimension-evidence/outputs/wave-9/dimension-evidence-ledger.jsonl": "dbe1480b17deaa24f62b8f52927f459d1252b9f12d8922fac7ec049bb5f40640",
+    "phase-7/phase-7-state.json": "3eec0e1bb5a86c53c7bc3252fac7a5c31f5096ae713261aa3d3c285f5cd183c5"
+  },
+  "lane_id": "P9-L01-PAIR-COMPLETION-FORENSICS",
+  "observed_date": "2026-08-27",
+  "output_sha256": {
+    "gap-reason-register.jsonl": "c75ae370ca225d7b45e3ab1e3d103b8fac6ae490da17a56744acca135fc63270",
+    "pair-completion-forensics.md": "c119b1708d3dee0dbd0b345a84ff3237853e7765d3f66e8848e73674a8828c37",
+    "pair-completion-ledger.jsonl": "a1b130ee5b3b0e6d3eac06e6af78baa95f024e7a8ccd4a22e9a17bd25b781b49"
+  },
+  "schema_version": 1,
+  "status": "complete",
+  "wave_accounting": [
+    {
+      "closure_effects": [
+        null
+      ],
+      "dimensions_per_pair": [
+        1
+      ],
+      "distinct_pairs": 10,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/dimension-evidence-ledger.jsonl",
+      "rows": 10,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "recorded_for_wave_2_only_queue_and_master_counters_unchanged"
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-2/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "recorded_for_wave_3_only_queue_and_master_counters_unchanged"
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-3/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "recorded_for_wave_4_only_queue_and_master_counters_unchanged"
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-4/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "recorded_for_wave_5_only_queue_and_master_counters_unchanged"
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-5/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "recorded_for_wave_6_only_queue_and_master_counters_unchanged"
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-6/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "No closure effect; inherited context is not fresh proof and this row does not promote the partial pair."
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-7/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "No closure effect; inherited context is not fresh proof and this row does not promote the partial pair."
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-8/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "No closure effect; inherited context is not fresh proof and this row does not promote the partial pair."
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-9/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    },
+    {
+      "closure_effects": [
+        "No closure effect; inherited context is not fresh proof and this row does not promote the partial pair."
+      ],
+      "dimensions_per_pair": [
+        10
+      ],
+      "distinct_pairs": 170,
+      "path": "phase-7/lanes/02-dimension-evidence/outputs/wave-10/dimension-evidence-ledger.jsonl",
+      "rows": 1700,
+      "target_identity_overlap": 0
+    }
+  ]
+}

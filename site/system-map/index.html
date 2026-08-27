@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive first-principles map of the Actionist software assembly system: components, taste, blocks, composition, client discovery, runtime and learning.">
+  <meta property="og:title" content="Actionist System Map">
+  <meta property="og:description" content="Explore the moving parts behind a semi-custom software assembly system.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Actionist System Map</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080a0d;
+      --panel: #11151a;
+      --panel-2: #171c23;
+      --panel-3: #1c222b;
+      --line: #2a323d;
+      --line-bright: #3c4654;
+      --text: #f2f4f7;
+      --muted: #9ca7b5;
+      --orange: #ff9d42;
+      --orange-soft: rgba(255,157,66,.13);
+      --blue: #74a9ff;
+      --green: #73d99a;
+      --purple: #bd91ff;
+      --yellow: #f7ce68;
+      --red: #ff7e82;
+      --max: 1480px;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 78% -10%, rgba(255,157,66,.12), transparent 34rem),
+        radial-gradient(circle at -8% 24%, rgba(116,169,255,.07), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; }
+    a { color: var(--orange); }
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(8,10,13,.86); backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner {
+      max-width: var(--max); margin: auto; padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.02em; }
+    .brand span { color: var(--orange); }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .status { color: var(--muted); font-size: 12px; }
+    .button {
+      border: 1px solid var(--line-bright); border-radius: 9px; background: var(--panel-2);
+      padding: 8px 12px; cursor: pointer; transition: .16s ease;
+    }
+    .button:hover { border-color: var(--orange); transform: translateY(-1px); }
+    .button.primary { border-color: var(--orange); background: var(--orange); color: #12100d; font-weight: 760; }
+    .shell { max-width: var(--max); margin: auto; padding: 0 24px 80px; }
+    .hero { padding: 64px 0 34px; }
+    .eyebrow {
+      display: inline-flex; color: #ffc37f; background: var(--orange-soft);
+      border: 1px solid rgba(255,157,66,.35); border-radius: 999px;
+      padding: 5px 10px; font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase;
+    }
+    h1 { margin: 18px 0 14px; font-size: clamp(42px, 6.4vw, 86px); line-height: .98; letter-spacing: -.058em; max-width: 1100px; }
+    .lede { color: #c0c7d1; font-size: clamp(17px, 2vw, 21px); max-width: 990px; margin: 0; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; align-items: end; }
+    .hero-note {
+      border: 1px solid rgba(255,157,66,.25); border-radius: var(--radius); padding: 18px;
+      background: linear-gradient(145deg, rgba(255,157,66,.10), rgba(17,21,26,.72)); color: #dce1e8;
+    }
+    .hero-note strong { color: #ffc37f; }
+    .metrics { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; margin: 32px 0 4px; }
+    .metric { border: 1px solid var(--line); border-radius: 11px; background: rgba(17,21,26,.84); padding: 14px 15px; }
+    .metric b { display: block; font-size: 24px; color: var(--orange); letter-spacing: -.03em; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    section { padding: 42px 0 4px; scroll-margin-top: 72px; }
+    h2 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 48px); letter-spacing: -.04em; line-height: 1.08; }
+    h3 { letter-spacing: -.02em; }
+    .sub { color: var(--muted); max-width: 920px; margin: 0 0 22px; }
+    .principle {
+      border-left: 3px solid var(--green); background: rgba(115,217,154,.07);
+      padding: 14px 18px; margin: 20px 0; border-radius: 0 10px 10px 0;
+    }
+    .flow {
+      display: grid; grid-template-columns: repeat(9, minmax(128px,1fr)); gap: 8px; overflow-x: auto;
+      padding: 4px 0 14px;
+    }
+    .flow-step {
+      min-height: 112px; border: 1px solid var(--line); border-radius: 11px; padding: 13px;
+      background: linear-gradient(145deg, var(--panel-2), var(--panel)); position: relative;
+    }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -9px; top: 44%; color: var(--orange); z-index: 2; }
+    .flow-step b { display: block; margin: 4px 0 5px; font-size: 14px; }
+    .flow-step span { color: var(--muted); font-size: 11px; }
+    .num { color: var(--orange); font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px; align-items: start; }
+    .sidebar {
+      position: sticky; top: 72px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: rgba(17,21,26,.94); overflow: hidden;
+    }
+    .search-wrap { padding: 12px; border-bottom: 1px solid var(--line); }
+    .search {
+      width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #0d1014;
+      color: var(--text); padding: 9px 10px; outline: none;
+    }
+    .search:focus { border-color: var(--orange); }
+    .filters { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    .filter {
+      border: 1px solid var(--line); background: transparent; color: var(--muted);
+      border-radius: 999px; padding: 4px 8px; font-size: 11px; cursor: pointer;
+    }
+    .filter.active { color: #111; background: var(--orange); border-color: var(--orange); }
+    .domain-list { max-height: calc(100vh - 222px); overflow: auto; padding: 7px; }
+    .domain-button {
+      width: 100%; display: grid; grid-template-columns: 27px 1fr auto; gap: 8px; align-items: center;
+      border: 1px solid transparent; border-radius: 9px; background: transparent; padding: 9px 8px;
+      text-align: left; cursor: pointer; color: #d8dee7;
+    }
+    .domain-button:hover { background: var(--panel-2); }
+    .domain-button.active { border-color: rgba(255,157,66,.45); background: var(--orange-soft); }
+    .domain-id { color: var(--orange); font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .domain-title { font-size: 12px; font-weight: 680; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .detail {
+      border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17,21,26,.88);
+      min-height: 680px; overflow: hidden;
+    }
+    .detail-head { padding: 25px 27px 22px; border-bottom: 1px solid var(--line); background: linear-gradient(145deg, rgba(28,34,43,.96), rgba(17,21,26,.96)); }
+    .detail-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .chip { border: 1px solid var(--line-bright); border-radius: 999px; padding: 4px 8px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+    .chip.partial { border-color: rgba(247,206,104,.35); color: var(--yellow); }
+    .chip.open { border-color: rgba(255,126,130,.35); color: var(--red); }
+    .chip.defined { border-color: rgba(115,217,154,.35); color: var(--green); }
+    .detail h3 { margin: 10px 0 8px; font-size: clamp(28px, 4vw, 44px); }
+    .thesis { color: #cbd2dc; font-size: 17px; max-width: 920px; }
+    .detail-body { padding: 24px 27px 30px; }
+    .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .panel { border: 1px solid var(--line); border-radius: 11px; padding: 16px; background: var(--panel-2); }
+    .panel h4 { margin: 0 0 9px; font-size: 12px; text-transform: uppercase; letter-spacing: .09em; color: var(--blue); }
+    .panel ul { margin: 0; padding-left: 18px; }
+    .panel li { margin: 5px 0; color: #c5ccd6; }
+    .panel.wide { grid-column: 1 / -1; }
+    .dependency-list { display: flex; gap: 7px; flex-wrap: wrap; }
+    .dependency {
+      border: 1px solid var(--line-bright); background: #10141a; border-radius: 8px; padding: 6px 8px;
+      font-size: 11px; cursor: pointer; color: #cbd4df;
+    }
+    .dependency:hover { border-color: var(--orange); color: var(--orange); }
+    .notes {
+      margin-top: 14px; padding: 17px; border: 1px solid rgba(255,157,66,.28); border-radius: 11px;
+      background: rgba(255,157,66,.055);
+    }
+    .notes-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .notes label { font-weight: 760; }
+    .saved { color: var(--green); font-size: 11px; opacity: 0; transition: opacity .2s; }
+    .saved.show { opacity: 1; }
+    textarea {
+      width: 100%; min-height: 130px; resize: vertical; color: var(--text); background: #0c0f13;
+      border: 1px solid var(--line); border-radius: 9px; padding: 11px; outline: none;
+    }
+    textarea:focus { border-color: var(--orange); }
+    .definition-grid, .decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+    .definition { border: 1px solid var(--line); border-radius: 11px; background: var(--panel); padding: 17px; }
+    .definition h3 { margin: 0 0 7px; font-size: 17px; }
+    .definition p { margin: 0; color: var(--muted); }
+    .decision-card { border: 1px solid var(--line); border-radius: 11px; padding: 17px; background: var(--panel); }
+    .decision-card .state { color: var(--green); font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .decision-card.open .state { color: var(--yellow); }
+    .decision-card h3 { margin: 6px 0; font-size: 17px; }
+    .decision-card p { color: var(--muted); margin: 0; }
+    .footer { margin-top: 70px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 20px; }
+    .empty { padding: 30px; color: var(--muted); }
+    @media (max-width: 1050px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-note { max-width: 700px; }
+      .metrics { grid-template-columns: repeat(3, 1fr); }
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .domain-list { max-height: 300px; }
+    }
+    @media (max-width: 720px) {
+      .shell { padding-left: 15px; padding-right: 15px; }
+      .topbar-inner { padding-left: 15px; padding-right: 15px; }
+      .status { display: none; }
+      .metrics, .definition-grid, .decision-grid, .detail-grid { grid-template-columns: 1fr; }
+      .panel.wide { grid-column: auto; }
+      .detail-head, .detail-body { padding-left: 17px; padding-right: 17px; }
+      h1 { font-size: 45px; }
+      .button.hide-mobile { display: none; }
+      .footer { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="trader-theme.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span>Actionist</span> System Map</div>
+      <div class="top-actions">
+        <span class="status">First-principles working model · 27 Aug 2026</span>
+        <a class="button hide-mobile" href="task-graph/">Task graph</a>
+        <button class="button hide-mobile" id="copyNotes">Copy my notes</button>
+        <button class="button primary" id="downloadNotes">Export notes</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Editable architecture conversation</span>
+          <h1>Understand every moving part before we build the machine.</h1>
+          <p class="lede">This map breaks Actionist into separable systems: visual components, taste learning, curated software capabilities, autonomous repo conversion, client discovery, deterministic assembly, host services, editing, verification and continuous learning.</p>
+        </div>
+        <aside class="hero-note"><strong>The central bet:</strong> mature code supplies most of the product; Actionist standardizes the seams. AI interprets, recommends and adapts. Deterministic contracts fit the pieces together.</aside>
+      </div>
+      <div class="metrics">
+        <div class="metric"><b>15</b><span>moving parts mapped</span></div>
+        <div class="metric"><b>8,515</b><span>joined UI identities</span></div>
+        <div class="metric"><b>500</b><span>prioritized OSS candidates</span></div>
+        <div class="metric"><b>118</b><span>builder product surfaces</span></div>
+        <div class="metric"><b>17</b><span>target industry models</span></div>
+      </div>
+    </section>
+
+    <section id="flow">
+      <h2>The end-to-end loop</h2>
+      <p class="sub">The client experiences one conversation. Underneath, several independent systems exchange typed outputs.</p>
+      <div class="flow">
+        <div class="flow-step"><span class="num">01</span><b>Know client</b><span>Existing Actionist context + public business signals</span></div>
+        <div class="flow-step"><span class="num">02</span><b>Discover outcome</b><span>Conversation becomes a bounded ProductSpec</span></div>
+        <div class="flow-step"><span class="num">03</span><b>Recommend capabilities</b><span>Notion-like notes? Calendar? CRM? Portal?</span></div>
+        <div class="flow-step"><span class="num">04</span><b>Choose experience</b><span>Archetype, layout, components and taste profile</span></div>
+        <div class="flow-step"><span class="num">05</span><b>Solve composition</b><span>Compatible blocks fitted without model improvisation</span></div>
+        <div class="flow-step"><span class="num">06</span><b>Bind host</b><span>Data, identity, settings, connectors and runtime</span></div>
+        <div class="flow-step"><span class="num">07</span><b>Normalize design</b><span>Semantic tokens make independent pieces coherent</span></div>
+        <div class="flow-step"><span class="num">08</span><b>Preview and edit</b><span>Client changes wording, layout, modules and behavior</span></div>
+        <div class="flow-step"><span class="num">09</span><b>Verify and learn</b><span>Ship, observe, rerank assets and improve recipes</span></div>
+      </div>
+      <div class="principle"><strong>Composition is not code generation.</strong> The planner selects compatible capabilities and bindings; deterministic tooling installs and joins them; AI writes only the remaining semantic adaptation and glue.</div>
+    </section>
+
+    <section id="map">
+      <h2>The moving parts</h2>
+      <p class="sub">Select a part to inspect what it owns, what research already tells us, what remains unresolved, and what a dedicated agent lane would work on. Notes are stored only in this browser.</p>
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="search-wrap"><input class="search" id="search" type="search" placeholder="Search parts or questions…" aria-label="Search moving parts"></div>
+          <div class="filters" id="filters"></div>
+          <div class="domain-list" id="domainList"></div>
+        </aside>
+        <article class="detail" id="detail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section id="definitions">
+      <h2>Words that must stay distinct</h2>
+      <p class="sub">Most architecture confusion came from using “block,” “repo,” “component” and “template” interchangeably.</p>
+      <div class="definition-grid">
+        <article class="definition"><h3>Repository</h3><p>A source container. It may contain one product, many capabilities, patterns, infrastructure and assumptions.</p></article>
+        <article class="definition"><h3>UI component</h3><p>A visual/interaction primitive such as a sidebar, hero, footer, table, card, picker or form state.</p></article>
+        <article class="definition"><h3>Capability block</h3><p>A bounded outcome-bearing function with declared inputs, outputs, state expectations and host requirements.</p></article>
+        <article class="definition"><h3>Packaging profile</h3><p>How a capability is delivered: service, module, transplant, package, adapter, generated pattern or custom delta.</p></article>
+        <article class="definition"><h3>Archetype</h3><p>An app-level workflow skeleton such as case management, client portal, CRM, scheduling or finance operations.</p></article>
+        <article class="definition"><h3>Assembly plan</h3><p>The exact compatible capabilities, bindings, components, routes, data resources and glue required for one app.</p></article>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <h2>Current decisions and live bets</h2>
+      <div class="decision-grid">
+        <article class="decision-card"><span class="state">DECIDED</span><h3>Components ≠ taste</h3><p>The gallery supplies visual pieces and inspiration. The preference learner discovers the client's design DNA.</p></article>
+        <article class="decision-card"><span class="state">DECIDED</span><h3>Repos ≠ blocks</h3><p>A repository must be understood and assigned a reuse shape before it enters the reusable shelf.</p></article>
+        <article class="decision-card"><span class="state">DECIDED</span><h3>Postgres ≠ universal interface</h3><p>Use typed data capabilities; keep Postgres as the default for new transactional state we own.</p></article>
+        <article class="decision-card"><span class="state">DECIDED</span><h3>Solver before model</h3><p>Compatibility, dependency and authority elimination should be deterministic before AI chooses alternatives.</p></article>
+        <article class="decision-card open"><span class="state">LIVE BET</span><h3>Hand-curated top 100</h3><p>A deliberately chosen first shelf may teach us more than another million metadata records.</p></article>
+        <article class="decision-card open"><span class="state">LIVE BET</span><h3>Case/portal pilot</h3><p>Demand appears stronger and reusable supply thinner than for generic dashboards, making it a better test.</p></article>
+      </div>
+    </section>
+
+    <footer class="footer"><span>Actionist first-principles system map</span><span>Your notes stay in local browser storage until you export or copy them.</span></footer>
+  </main>
+
+  <script>
+    const parts = [
+      {
+        id: 'P01', group: 'Demand', status: 'partial', title: 'Client intelligence and discovery',
+        thesis: 'Begin with everything Actionist already knows, enrich it with bounded public business context, then ask only the questions needed to identify valuable workflows.',
+        owns: ['Known client/account context', 'Business links and bounded site reconnaissance', 'Stakeholders, systems of record and constraints', 'Conversation history and unresolved discovery questions'],
+        known: ['Actionist can pre-populate client context before chat', 'A generic “what app do you want?” prompt wastes known information', 'The useful target is a painful workflow and measurable outcome, not a feature wishlist'],
+        open: ['Which Actionist client fields are canonical?', 'What may be scraped automatically?', 'How do we distinguish stated wants from observed workflow pain?', 'What confidence threshold triggers a follow-up question?'],
+        inputs: ['Actionist account profile', 'Client URLs', 'Conversation', 'Existing tools'],
+        outputs: ['ClientContext', 'DiscoveryGapList', 'CandidateOutcomes'],
+        deps: ['P02','P03','P11'],
+        agent: 'Map Actionist client context, define the discovery schema, question-selection policy and confidence model.'
+      },
+      {
+        id: 'P02', group: 'Demand', status: 'partial', title: 'Outcome and product specification',
+        thesis: 'Translate business conversation into a small, testable ProductSpec before selecting repositories or UI.',
+        owns: ['Buyer and painful job', 'Workflow steps and actors', 'Entities, actions and failure states', 'Acceptance tests and non-goals'],
+        known: ['17 industries, 12 teams, 66 use cases, 72 ideas and 12 atoms are already catalogued', 'Requirements must remain implementation-independent', 'One valuable workflow is a better starting unit than an entire industry'],
+        open: ['What is the minimum ProductSpec?', 'How should assumptions and confidence be represented?', 'When should a prototype answer a question instead of more chat?'],
+        inputs: ['ClientContext', 'Industry model', 'Conversation'],
+        outputs: ['OutcomeSpec', 'ProductSpec', 'AcceptanceFixtures'],
+        deps: ['P01','P03','P09','P12'],
+        agent: 'Design the canonical outcome/product schema and prove it against five target workflows.'
+      },
+      {
+        id: 'P03', group: 'Supply', status: 'partial', title: 'Curated capability shelf',
+        thesis: 'Hand-curate the first high-value software capabilities—Notion-like notes, Airtable-like data, calendar, CRM, support, files, approvals—before trying to automate the whole internet.',
+        owns: ['Top-100 candidate shortlist', 'Capability-level descriptions', 'Quality and adaptation scoring', 'Recommended reuse shape and supported archetypes'],
+        known: ['500 OSS candidates and 118 commercial builder surfaces are already registered', 'Stars and metadata do not establish adaptation quality', 'SISOCRM proves that engines, product surfaces and infrastructure need different ownership choices'],
+        open: ['Which top 100 capabilities recur across the 17 industries?', 'What does quality mean per capability kind?', 'Should Notion/Airtable-like systems remain services, embedded modules or transplants?', 'How many complete systems versus small blocks belong in v1?'],
+        inputs: ['ProductSpec demand', 'GitHub corpus', 'Local estate', 'Platform dossiers'],
+        outputs: ['CuratedCapability', 'CapabilityMap', 'ReuseDecision'],
+        deps: ['P02','P04','P12'],
+        agent: 'Create a human-reviewed top-100 shelf ranked by client value, product quality, seam clarity and measured adaptation cost.'
+      },
+      {
+        id: 'P04', group: 'Foundry', status: 'open', title: 'Autonomous repo-to-block foundry',
+        thesis: 'Automate source understanding, boundary extraction and adaptation evidence while keeping semantic reuse-shape decisions explicit and reviewable.',
+        owns: ['Source identity and architecture map', 'Capability boundary detection', 'Dependency closure', 'Adaptation recipe and packaging', 'Generated contracts and qualification evidence'],
+        known: ['Phase 8 defined source shapes, stages and 23 negative paths', 'Full automation is the wrong target: shape choice and semantic adaptation need judgment', 'A repository can yield several blocks or no block'],
+        open: ['What can AST/runtime probes establish autonomously?', 'How do we detect hidden auth, settings and migration ownership?', 'What diff/adaptation budget predicts a bad candidate?', 'How is an upstream update replayed safely?'],
+        inputs: ['Repository', 'Target host contract', 'Desired capability'],
+        outputs: ['PackagedAsset', 'CapabilityContract', 'AdaptationRecipe', 'QualificationDossier'],
+        deps: ['P03','P09','P10','P11','P14'],
+        agent: 'Build the reusable conversion protocol and three worked traces: intact service, transplanted subsystem and extracted package.'
+      },
+      {
+        id: 'P05', group: 'Experience', status: 'partial', title: 'Living UI component layer',
+        thesis: 'Maintain a continuously refreshed, visually browsable component corpus where people and agents can find structural necessities and contextual inspiration.',
+        owns: ['Component ingestion and refresh', 'Dedupe and source linkage', 'Visual previews and interaction states', 'Taxonomy, tags and semantic use cases', 'Gallery search, comparison and selection'],
+        known: ['Two complementary 21st-derived stores join to 8,515 identities', '3,506 legacy entries are source-bearing while much of the newer harvest is preview/bundle oriented', 'Components range from universal necessities—navigation, forms, feedback—to contextual patterns'],
+        open: ['What is the canonical component taxonomy?', 'How are near-duplicates clustered visually and structurally?', 'Which components are required for every archetype?', 'How are new 21st.dev releases discovered and re-indexed?', 'What metadata helps a client visually choose without understanding component names?'],
+        inputs: ['21st stores', 'New component feeds', 'Screenshots', 'Source metadata'],
+        outputs: ['ComponentRecord', 'PreviewSet', 'CategoryGraph', 'Selection'],
+        deps: ['P06','P07','P08','P12'],
+        agent: 'Design the component ingestion, taxonomy, dedupe, preview and visual-selection system; test it on navigation, hero, footer, table and form families.'
+      },
+      {
+        id: 'P06', group: 'Experience', status: 'partial', title: 'Design taste and preference learner',
+        thesis: 'Learn a client’s visual preferences through a minimal sequence of high-information comparisons, separate from choosing individual components.',
+        owns: ['Preference axes and stimulus generation', 'A/B or multi-choice experiment policy', 'Outside option and re-roll behavior', 'Client design DNA and confidence', 'Preference update over time'],
+        known: ['Prior research proposed contrast, radius, shadow, border, typography, density and chroma as mechanical knobs', 'Sequential galleries and Bradley–Terry/Luce models are relevant', 'Forced choices without “none” pollute the preference model'],
+        open: ['Is the mathematical minimum 7, 14 or another number of choices?', 'Which axes are independent?', 'Should choices use whole screens or controlled fragments?', 'How does preference confidence change by component context?'],
+        inputs: ['Design stimuli', 'Client choices', 'Brand constraints'],
+        outputs: ['TasteProfile', 'PreferenceConfidence', 'DesignDNA'],
+        deps: ['P05','P07','P08'],
+        agent: 'Design and evaluate the active-learning experiment, including stopping rules and a reproducible DesignDNA output.'
+      },
+      {
+        id: 'P07', group: 'Experience', status: 'open', title: 'Token and theme harmonizer',
+        thesis: 'Preserve the quality of each imported capability while translating its visual assumptions into one semantic Actionist/client token system.',
+        owns: ['Token extraction', 'Primitive-to-semantic mapping', 'Scoped CSS/theme bridges', 'State coverage across light/dark/hover/focus/error', 'Visual coherence checks'],
+        known: ['Blocks should consume semantic tokens rather than hard-coded brand values', 'Existing Teable work shows format conversion and scoped bridges are safer than blind aliasing', 'Taste profile and component selection are inputs, not the same artifact'],
+        open: ['How much donor visual identity should remain?', 'Can token mapping be inferred reliably?', 'How are unmapped bespoke CSS and canvas surfaces handled?', 'What score means two blocks look coherent?'],
+        inputs: ['TasteProfile', 'Donor styles', 'Component tokens', 'Brand assets'],
+        outputs: ['ThemeContract', 'TokenMap', 'ScopedThemeBridge', 'VisualReceipts'],
+        deps: ['P05','P06','P08','P13'],
+        agent: 'Define the semantic token contract and prove harmonization across three visually different imported surfaces.'
+      },
+      {
+        id: 'P08', group: 'Experience', status: 'partial', title: 'Archetypes, shells and layouts',
+        thesis: 'Reuse application-level workflow skeletons without forcing every product into one five-area dashboard.',
+        owns: ['Case, portal, CRM, scheduling, finance, support and operations archetypes', 'Navigation and page topology', 'Required component slots', 'Industry variation points', 'Responsive shell behavior'],
+        known: ['Ten B2B archetypes have been identified', 'Case/workflow and portal demand are strong while clean template supply is thin', 'Generic admin/dashboard templates are abundant but weakly differentiated', 'The inherited five-area ISSO shell is only a hypothesis'],
+        open: ['Which archetypes cover 80% of the first 17 industries?', 'What is universal shell infrastructure versus archetype-specific UX?', 'Which side-nav variations should clients choose visually?', 'How does the shell absorb donor navigation?'],
+        inputs: ['ProductSpec', 'TasteProfile', 'Component selections', 'Capability surfaces'],
+        outputs: ['ArchetypeTemplate', 'NavigationPlan', 'PageTopology'],
+        deps: ['P02','P05','P06','P07','P12'],
+        agent: 'Define the first archetype contracts and visual shell variants; start with case/workflow and client portal.'
+      },
+      {
+        id: 'P09', group: 'Host', status: 'open', title: 'Data and state plane',
+        thesis: 'Standardize typed data capabilities and ownership—not one database implementation inside every block.',
+        owns: ['State classification and source of truth', 'Typed data ports', 'Schema and migration ownership', 'Events/read models/files/search', 'Data binding and rollback'],
+        known: ['Postgres is a strong default for new owned transactional B2B data', 'Mature donor services should often retain native stores', 'One owner per table and migration is the strongest local rule', 'Cross-service views can use Actionist-owned event/read models'],
+        open: ['What operations must v1 data ports support?', 'One DB, schemas, service stores or hybrid per client?', 'How are dual writes prevented?', 'What migration/rollback contract belongs in an assembled release?'],
+        inputs: ['Product entities', 'Capability requirements', 'Existing client systems'],
+        outputs: ['DataResourceContract', 'SchemaOwnerMap', 'Adapters', 'ReadModels'],
+        deps: ['P02','P04','P10','P12','P14'],
+        agent: 'Run a workload-driven data-plane bake-off across owned Postgres, donor API, event read model and local state.'
+      },
+      {
+        id: 'P10', group: 'Host', status: 'open', title: 'Identity, settings and navigation host',
+        thesis: 'Give every capability one Actionist identity, tenant, settings hierarchy and navigation surface while removing duplicate donor onboarding and account chrome.',
+        owns: ['Host session and tenant contract', 'Settings scopes and mounting', 'Navigation registry', 'Onboarding ownership', 'Branding and account surfaces', 'Permission and audit context'],
+        known: ['Donor apps commonly bring their own auth, signup, settings and navigation', 'Replacing logos is trivial; replacing ownership boundaries is not', 'SISOCRM has partial host-session and route-mount precedents'],
+        open: ['What is Actionist’s canonical host contract?', 'Can settings/navigation be declarative?', 'Which donor routes must be unreachable?', 'How are capability permissions represented consistently?'],
+        inputs: ['Actionist session', 'Tenant', 'Capability host requirements'],
+        outputs: ['HostIdentity', 'SettingsRegistry', 'NavigationRegistry', 'AuthorityContext'],
+        deps: ['P01','P04','P09','P11','P13'],
+        agent: 'Define the host absorption contract and measure the real branding/auth/onboarding/settings/navigation delta on one mature donor.'
+      },
+      {
+        id: 'P11', group: 'Host', status: 'partial', title: 'Connector and external-action plane',
+        thesis: 'Reuse broad provider catalogues and OAuth/action mechanics while Actionist owns tenant-scoped connections, authority and side-effect receipts.',
+        owns: ['Provider/action/trigger catalogue', 'OAuth and credential setup', 'Tenant connection store', 'Retries, idempotency and rate limits', 'Approval and action receipts'],
+        known: ['OpenConnector: 1,445 providers and 15,156 generated actions', 'Activepieces: mature pieces and connect-account UI', 'Nango and Jentic add provider/spec breadth', 'OpenConnector global connection storage failed tenancy requirements'],
+        open: ['Canonical provider/action schema?', 'Which popular providers need scripted setup?', 'How does browser operation fit?', 'What is the authority/approval model for side effects?'],
+        inputs: ['Provider definitions', 'Tenant authority', 'Secrets'],
+        outputs: ['ConnectorContract', 'Connection', 'ActionReceipt'],
+        deps: ['P01','P02','P10','P12','P14'],
+        agent: 'Separate catalogue, OAuth engine, connection storage and action runtime; prove one tenant-safe connector flow.'
+      },
+      {
+        id: 'P12', group: 'Assembly', status: 'partial', title: 'Deterministic composition planner',
+        thesis: 'Retrieve candidates, eliminate incompatible sets mechanically, then let AI choose among feasible plans and write only bounded glue.',
+        owns: ['Demand-to-capability retrieval', 'Port/dependency/namespace compatibility', 'Packaging and runtime resolution', 'Assembly graph and glue budget', 'UNDERDETERMINED questions'],
+        known: ['Phase 8 selected plan-then-fill over monolithic generation', 'A model-free solver and 26 fixtures were designed', 'Blocks can be fitted without AI once contracts and bindings are explicit'],
+        open: ['What is the optimization objective?', 'When should a whole service beat several blocks?', 'Which fields are necessary for deterministic compatibility?', 'How should optional recommendations be presented to the client?'],
+        inputs: ['ProductSpec', 'Capability shelf', 'Archetype', 'Host contracts', 'Taste profile'],
+        outputs: ['AssemblyPlan', 'CompatibilityProof', 'ClarifyingQuestions'],
+        deps: ['P02','P03','P05','P08','P09','P10','P11','P13','P14'],
+        agent: 'Implement the model-free solver against synthetic service/module/package records and positive/negative fixtures.'
+      },
+      {
+        id: 'P13', group: 'Assembly', status: 'open', title: 'Preview, editor and change loop',
+        thesis: 'Clients need to alter the assembled product through conversation and direct visual controls without dissolving the composition back into arbitrary generated code.',
+        owns: ['Live preview', 'Chat and direct-manipulation edits', 'Module add/remove/replace', 'Text/content and layout changes', 'Change plan, diff and undo'],
+        known: ['The client should be able to pick side-nav/component variants and revise them in chat', 'Bounded edits against known assets are safer than free generation', 'Taste selection should happen before expensive code loops where possible'],
+        open: ['Which edits are parameter changes versus code changes?', 'How does the editor preserve block upgradeability?', 'What is the undo/version model?', 'How are unsupported requests explained?'],
+        inputs: ['AssemblyPlan', 'Running preview', 'Client instructions'],
+        outputs: ['ChangePlan', 'UpdatedBindings', 'BoundedDiff', 'Version'],
+        deps: ['P05','P07','P08','P10','P12','P14'],
+        agent: 'Define the editable surface and change taxonomy; prototype replace/add/remove/theme/text operations without arbitrary repo edits.'
+      },
+      {
+        id: 'P14', group: 'Runtime', status: 'open', title: 'Runtime, verification and release',
+        thesis: 'Run heterogeneous capabilities in explicit profiles, verify the complete workflow, and release an exact recoverable composition.',
+        owns: ['Package/microfrontend/service/worker runtime profiles', 'Preview isolation', 'Build, contract, visual and workflow tests', 'Deployment and subdomains', 'Version pinning, recovery and rollback'],
+        known: ['A passing build is not client workflow proof', 'Different reuse shapes need different runtimes', 'Existing work defined receipt families and negative paths but admitted zero production blocks'],
+        open: ['Which runtime profiles are v1?', 'What sandbox/deploy infrastructure should be rented?', 'How are failures attributed per capability?', 'Can blocks upgrade independently?'],
+        inputs: ['AssemblyPlan', 'Packaged assets', 'Host bindings', 'Acceptance fixtures'],
+        outputs: ['QualificationDossier', 'ReleaseManifest', 'Deployment', 'RollbackPlan'],
+        deps: ['P04','P09','P10','P11','P12','P13','P15'],
+        agent: 'Define runtime profiles and prove one clean preview→workflow verification→release→rollback cycle.'
+      },
+      {
+        id: 'P15', group: 'Learning', status: 'open', title: 'Continuous corpus and production learning',
+        thesis: 'Every new component, repository, conversion and production outcome should improve the shelf, taxonomy, recipes and future recommendations.',
+        owns: ['Component/repo refresh schedules', 'Observed adaptation cost', 'Production quality and incident signals', 'Asset/archetype reranking', 'Recipe and contract evolution'],
+        known: ['AutoSaaS already describes a procedural learning loop', 'Current corpus ranking is mostly metadata rather than production evidence', 'The remembered 1.3M/850k/80k corpus still lacks a current authoritative path'],
+        open: ['What production signals change ranking?', 'How often are component and repo sources refreshed?', 'How do we avoid taxonomy drift?', 'When is an asset deprecated or replaced?'],
+        inputs: ['New source feeds', 'Conversion receipts', 'Build metrics', 'Client outcomes', 'Incidents'],
+        outputs: ['Updated rankings', 'New recipes', 'Deprecations', 'Research priorities'],
+        deps: ['P03','P04','P05','P06','P12','P14'],
+        agent: 'Define the evidence flywheel and ranking model using adaptation effort, workflow success, runtime burden and production history.'
+      }
+    ];
+
+    const groupColors = { Demand: '#9ccaff', Supply: '#d299ff', Foundry: '#ffd27c', Experience: '#9000ff', Host: '#7cf3ce', Assembly: '#62d3d0', Runtime: '#ff9caa', Learning: '#9aa39d' };
+    const state = { selected: 'P05', group: 'All', search: '' };
+    const list = document.getElementById('domainList');
+    const detail = document.getElementById('detail');
+    const search = document.getElementById('search');
+    const filters = document.getElementById('filters');
+    const groups = ['All', ...new Set(parts.map(part => part.group))];
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    }
+    function bullets(items) { return `<ul>${items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`; }
+    function noteKey(id) { return `actionist-system-map-note:${id}`; }
+    function getNote(id) { return localStorage.getItem(noteKey(id)) || ''; }
+
+    function renderFilters() {
+      filters.innerHTML = groups.map(group => `<button class="filter ${state.group === group ? 'active' : ''}" data-group="${group}">${group}</button>`).join('');
+      filters.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+        state.group = button.dataset.group; renderFilters(); renderList();
+      }));
+    }
+
+    function filteredParts() {
+      const query = state.search.toLowerCase().trim();
+      return parts.filter(part => (state.group === 'All' || part.group === state.group) && (!query || JSON.stringify(part).toLowerCase().includes(query)));
+    }
+
+    function renderList() {
+      const shown = filteredParts();
+      list.innerHTML = shown.length ? shown.map(part => `
+        <button class="domain-button ${state.selected === part.id ? 'active' : ''}" data-id="${part.id}">
+          <span class="domain-id">${part.id}</span><span class="domain-title">${escapeHtml(part.title)}</span>
+          <span class="dot" style="background:${groupColors[part.group]}"></span>
+        </button>`).join('') : '<div class="empty">No moving parts match this filter.</div>';
+      list.querySelectorAll('button').forEach(button => button.addEventListener('click', () => selectPart(button.dataset.id)));
+    }
+
+    function selectPart(id) {
+      state.selected = id;
+      renderList(); renderDetail();
+    }
+
+    function renderDetail() {
+      const part = parts.find(item => item.id === state.selected) || parts[0];
+      detail.innerHTML = `
+        <div class="detail-head">
+          <div class="detail-meta"><span class="chip">${part.id}</span><span class="chip">${part.group}</span><span class="chip ${part.status}">${part.status}</span></div>
+          <h3>${escapeHtml(part.title)}</h3><div class="thesis">${escapeHtml(part.thesis)}</div>
+          <a class="page-link" href="parts/${part.id.toLowerCase()}/">Open the dedicated knowledge page <span>↗</span></a>
+        </div>
+        <div class="detail-body">
+          <div class="detail-grid">
+            <section class="panel"><h4>What it owns</h4>${bullets(part.owns)}</section>
+            <section class="panel"><h4>What research already tells us</h4>${bullets(part.known)}</section>
+            <section class="panel wide"><h4>Open first-principles questions</h4>${bullets(part.open)}</section>
+            <section class="panel"><h4>Inputs</h4>${bullets(part.inputs)}</section>
+            <section class="panel"><h4>Outputs</h4>${bullets(part.outputs)}</section>
+            <section class="panel wide"><h4>Connected parts</h4><div class="dependency-list">${part.deps.map(id => {
+              const dep = parts.find(item => item.id === id); return `<button class="dependency" data-id="${id}">${id} · ${escapeHtml(dep.title)}</button>`;
+            }).join('')}</div></section>
+            <section class="panel wide"><h4>Agent-sized workstream</h4><p>${escapeHtml(part.agent)}</p></section>
+          </div>
+          <div class="notes"><div class="notes-head"><label for="note-${part.id}">Your input on this part</label><span class="saved" id="saved">Saved locally</span></div><textarea id="note-${part.id}" placeholder="What feels right, wrong, missing, overcomplicated, or worth prioritizing?">${escapeHtml(getNote(part.id))}</textarea></div>
+        </div>`;
+      detail.querySelectorAll('.dependency').forEach(button => button.addEventListener('click', () => selectPart(button.dataset.id)));
+      const textarea = detail.querySelector('textarea');
+      let timer;
+      textarea.addEventListener('input', () => {
+        clearTimeout(timer); localStorage.setItem(noteKey(part.id), textarea.value);
+        const saved = document.getElementById('saved'); saved.classList.add('show');
+        timer = setTimeout(() => saved.classList.remove('show'), 1200);
+      });
+    }
+
+    function notesMarkdown() {
+      const sections = parts.filter(part => getNote(part.id).trim()).map(part => `## ${part.id} — ${part.title}\n\n${getNote(part.id).trim()}`);
+      return `# My Actionist system-map notes\n\nExported ${new Date().toISOString()}\n\n${sections.length ? sections.join('\n\n') : '_No notes yet._'}\n`;
+    }
+    async function copyNotes() {
+      await navigator.clipboard.writeText(notesMarkdown());
+      const button = document.getElementById('copyNotes'); const old = button.textContent; button.textContent = 'Copied'; setTimeout(() => button.textContent = old, 1200);
+    }
+    function downloadNotes() {
+      const blob = new Blob([notesMarkdown()], {type: 'text/markdown'}); const url = URL.createObjectURL(blob);
+      const link = document.createElement('a'); link.href = url; link.download = 'actionist-system-map-notes.md'; link.click(); URL.revokeObjectURL(url);
+    }
+
+    search.addEventListener('input', event => { state.search = event.target.value; renderList(); });
+    document.getElementById('copyNotes').addEventListener('click', copyNotes);
+    document.getElementById('downloadNotes').addEventListener('click', downloadNotes);
+    renderFilters(); renderList(); renderDetail();
+  </script>
+</body>
+</html>

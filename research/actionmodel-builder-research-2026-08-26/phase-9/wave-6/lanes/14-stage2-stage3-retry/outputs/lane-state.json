@@ -1,0 +1,17 @@
+{
+  "schema_version":"p9.lane_state.v1",
+  "lane_id":"P9-L14-STAGE2-STAGE3-RETRY",
+  "parent_goal_status":"active",
+  "research_only":true,
+  "implementation_authorized":false,
+  "execution_status":"UNEXECUTED",
+  "admission_status":"NOT_ADMITTED",
+  "admitted_blocks":0,
+  "promotion_allowed":false,
+  "status":"complete_with_blockers",
+  "denominator":{"l06_pinned_stage0_receipts":76,"shape_receipts":76,"dependency_closure_receipts":76,"source_receipts":76,"unresolved_depth_rows":76},
+  "movement_vs_l09":{"baseline_shape_unknown":76,"retry_shape_unknown":76,"shape_classification_movement":0,"baseline_closure_incomplete":76,"retry_closure_incomplete":76,"closure_complete_movement":0},
+  "observations":{"pinned_tree_api":"76/76 observed","pinned_readme_api":"76/76 observed","pinned_raw_readme":"76/76 observed","approved_source_shape_modes_promoted":0,"transitive_closures_complete":0},
+  "blockers":["Direct dependency normalization and lockfile-to-package graph mapping remain unproven.","Tree and README evidence is insufficient to select a non-unknown approved source_shape mode.","Declared license metadata is not rights clearance.","No admission or promotion is authorized."],
+  "smoke":{"exact_l06_inputs":76,"exact_shape_receipts":76,"exact_dependency_receipts":76,"exact_source_receipts":76,"exact_unresolved_rows":76,"no_bytecode":"PASS","invariants":"PASS"}
+}

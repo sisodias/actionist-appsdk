@@ -1,0 +1,218 @@
+{
+  "record_type": "lane_state_wave4",
+  "schema_version": 1,
+  "artifact_id": "P7-INDUSTRY-JOINS-W4-STATE-001",
+  "lane_id": "P7-INDUSTRY-JOINS-W4",
+  "status": "complete",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "outputs": {
+    "joins": "industry-repository-joins.jsonl",
+    "report": "industry-coverage-report.md",
+    "underfilled": "underfilled-bucket-ledger.jsonl",
+    "state": "lane-state.json"
+  },
+  "counts": {
+    "industries": 17,
+    "buckets": 85,
+    "target_attempts": 1700,
+    "join_records": 931,
+    "selected_defensible_metadata_joins": 602,
+    "held_or_unknown": 317,
+    "rejected": 12,
+    "underfilled_buckets": 52,
+    "quota_reached_buckets": 33,
+    "unique_canonical_identities": 931,
+    "unique_recorded_public_urls": 1913,
+    "wave1_wave2_wave3_identity_overlap": 0,
+    "wave4_duplicate_records": 0
+  },
+  "coverage": {
+    "accounting_firms": {
+      "attempts": 97,
+      "selected": 44,
+      "held": 50,
+      "rejected": 3,
+      "underfilled_buckets": 2
+    },
+    "construction": {
+      "attempts": 76,
+      "selected": 40,
+      "held": 35,
+      "rejected": 1,
+      "underfilled_buckets": 3
+    },
+    "course_creators": {
+      "attempts": 80,
+      "selected": 62,
+      "held": 18,
+      "rejected": 0,
+      "underfilled_buckets": 1
+    },
+    "ecommerce": {
+      "attempts": 77,
+      "selected": 61,
+      "held": 15,
+      "rejected": 1,
+      "underfilled_buckets": 2
+    },
+    "education_training": {
+      "attempts": 79,
+      "selected": 40,
+      "held": 38,
+      "rejected": 1,
+      "underfilled_buckets": 2
+    },
+    "healthcare_medical_practices": {
+      "attempts": 81,
+      "selected": 60,
+      "held": 16,
+      "rejected": 5,
+      "underfilled_buckets": 1
+    },
+    "hospitality": {
+      "attempts": 78,
+      "selected": 50,
+      "held": 28,
+      "rejected": 0,
+      "underfilled_buckets": 2
+    },
+    "insurance_agencies": {
+      "attempts": 48,
+      "selected": 33,
+      "held": 15,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "it_services_msps": {
+      "attempts": 39,
+      "selected": 17,
+      "held": 22,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "law_firms": {
+      "attempts": 59,
+      "selected": 56,
+      "held": 2,
+      "rejected": 1,
+      "underfilled_buckets": 3
+    },
+    "logistics_freight": {
+      "attempts": 22,
+      "selected": 9,
+      "held": 13,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "marketing_social_media_agencies": {
+      "attempts": 32,
+      "selected": 26,
+      "held": 6,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "mortgage_brokers": {
+      "attempts": 20,
+      "selected": 20,
+      "held": 0,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "property_management": {
+      "attempts": 46,
+      "selected": 32,
+      "held": 14,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "real_estate": {
+      "attempts": 38,
+      "selected": 32,
+      "held": 6,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "recruiting_staffing": {
+      "attempts": 39,
+      "selected": 16,
+      "held": 23,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    },
+    "saas": {
+      "attempts": 20,
+      "selected": 4,
+      "held": 16,
+      "rejected": 0,
+      "underfilled_buckets": 4
+    }
+  },
+  "discovery": {
+    "method": "unauthenticated GitHub Search API repository metadata",
+    "page": 3,
+    "queries": 85,
+    "query_attempts": 93,
+    "raw_returned_rows": 957,
+    "unique_emitted_rows": 931,
+    "rate_limit_events": 8,
+    "rate_limit_status": "captured_per_query; 8 reset events preserved",
+    "repo_pages_fetched": false,
+    "readmes_fetched": false,
+    "source_code_inspected": false,
+    "wave1_exclusion_identity_count": 485,
+    "wave2_exclusion_identity_count": 1248,
+    "wave3_exclusion_identity_count": 1056
+  },
+  "source_provenance": {
+    "wave1_packet_sha256": "4978b719ccc2a529459c0ae337958abc4da4cb4709e96db338ec28e115a3539f",
+    "wave2_packet_sha256": "647e9686133590f68051ccfaf8db4030bf774e246acf96724562b75be05255c0",
+    "wave3_packet_sha256": "0c45aee4157d67e36eb1d3b68403b7c901ae9a1067a748f0133a098edec038eb",
+    "dispatch_receipt_sha256": "df601782030aeda5a30e34e12c6a80fa1d9d0e13e1b335992f00f80821ea204e",
+    "query_date_rate_limit_preserved": true,
+    "new_public_requests_performed": true,
+    "auth_used": false
+  },
+  "boundaries": {
+    "research_only": true,
+    "no_login": true,
+    "client_data": false,
+    "private_data": false,
+    "clone": false,
+    "source_copy": false,
+    "source_execution": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false,
+    "implementation": false,
+    "admission": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "shared_phase7_promotion": false
+  },
+  "verification": {
+    "jsonl_schema_count_identity": "PASS",
+    "bucket_coverage_underfill_no_padding": "PASS",
+    "wave1_wave2_wave3_overlap": "PASS",
+    "markdown_link_smoke": "PASS",
+    "rights_source_boundary": "PASS",
+    "git_diff_check": "PASS",
+    "callback_status": "sent_and_verified"
+  },
+  "callback": {
+    "session": "herdr-2",
+    "coordinator_pane": "w659e02f80e5bb1-1",
+    "fresh_resolution": "PASS",
+    "content_identity_verified": "PASS",
+    "pane_run": "submitted_after_enter_only_retry",
+    "sleep_seconds": 2,
+    "readback": "PASS; callback rendered in coordinator pane",
+    "message_status": "DONE lane receipt delivered",
+    "overall_phase_completion_claimed": false
+  },
+  "blockers": [
+    "Coverage gaps are retained: underfilled bucket cells are not padded.",
+    "Rights, SBOM, capability, runtime, and admission remain unknown/unexecuted."
+  ]
+}

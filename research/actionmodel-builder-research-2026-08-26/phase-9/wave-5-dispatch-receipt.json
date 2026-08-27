@@ -1,0 +1,16 @@
+{
+  "schema_version":1,
+  "observed_at":"2026-08-27",
+  "status":"complete_verified_unpromoted",
+  "role":"gpt-5.6-luna",
+  "lane_count":1,
+  "lanes":["P9-L11-COMPETITOR-DIRECT-EVIDENCE"],
+  "research_only":true,
+  "parent_goal_status":"active",
+  "promotion_allowed":false,
+  "agent_receipts":[
+    {"lane":"P9-L11-COMPETITOR-DIRECT-EVIDENCE","agent_id":"01a04160-e0ee-71b1-8aad-607c2834458f","nickname":"Peirce","status":"interrupted_no_artifacts","identity":{"agent_role":"luna_worker","model":"gpt-5.6-luna"}},
+    {"lane":"P9-L11-COMPETITOR-DIRECT-EVIDENCE","agent_id":"01a0416c-daf9-7b41-b96c-1b4839692acb","nickname":"Bohr","status":"complete_verified","identity":{"agent_role":"luna_worker","model":"gpt-5.6-luna"}}
+  ],
+  "independent_verification":{"status":"PASS","cells":4032,"direct":0,"unknown":4032,"promotion_allowed":false}
+}

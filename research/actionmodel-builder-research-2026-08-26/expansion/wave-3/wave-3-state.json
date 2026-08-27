@@ -1,0 +1,114 @@
+{
+  "wave": "matrix-wave-3-industry-dimension-deepening",
+  "status": "floor_verified_parent_goal_active",
+  "mode": "research_only",
+  "baseline": {
+    "parent_slots": 17000,
+    "parent_observed_before_wave_2": 750,
+    "wave_2_delta": 950,
+    "wave_2_observed_before_wave_3": 1700,
+    "wave_2_observations_per_cell": 10,
+    "wave_2_state": "floor_verified_parent_goal_active"
+  },
+  "floor": {
+    "cells": 170,
+    "observations_per_cell_before": 10,
+    "observations_per_cell_after": 20,
+    "new_observations_required": 1700,
+    "combined_observed_required": 3400,
+    "parent_observations_per_cell": 100
+  },
+  "verified_at": "2026-08-26T18:00:00+07:00",
+  "floor_verified": true,
+  "remaining_parent_slots": 13600,
+  "next_wave": "matrix-wave-4-industry-dimension-deepening",
+  "lanes": {
+    "RCH-GITHUB-W3": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "outputs": [
+        "outputs/github-wave-3.jsonl",
+        "outputs/github-wave-3-report.md",
+        "outputs/repo-matrix-wave-3.jsonl"
+      ],
+      "delta_observations": 1700,
+      "observation_indices": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+      "cells": 170,
+      "combined_observed": 3400,
+      "combined_observations_per_cell": 20,
+      "remaining_parent_slots": 13600,
+      "unique_delta_repositories": 159,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-COMPANIES-W3": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/company-dossiers-wave-3.md",
+      "p1_dossiers": 33,
+      "p0_refreshes": 34,
+      "matrix_rows": 67,
+      "direct_urls": 157,
+      "url_404": 0,
+      "url_410": 0,
+      "baseline_immutable": true,
+      "wave_2_immutable": true,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-PUBLIC-W3": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/public-signals-wave-3.md",
+      "baseline_unique_urls": 110,
+      "new_unique_source_ids": 34,
+      "new_slots": 136,
+      "combined_slots": 272,
+      "industries": 17,
+      "signal_types": 8,
+      "status_counts": {
+        "observed": 86,
+        "needs_direct_review": 44,
+        "unobserved": 4,
+        "blocked": 2
+      },
+      "wave_2_wave_3_url_overlap": 0,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-STANDARDS-W3": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/standards-applicability-wave-3.md",
+      "exact_cells": 170,
+      "dimensions": 10,
+      "synthetic_probe_designs": 10,
+      "source_urls": 51,
+      "source_urls_http_200": 49,
+      "source_urls_access_limited": 2,
+      "source_urls_404": 0,
+      "baseline_lines": 566,
+      "baseline_sha256": "22b4024b5163c77eca40597bda43802aca6d9e69f41e827465494ad90f8dbc3f",
+      "execution_receipts": 0,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    },
+    "RCH-NICHE-W3": {
+      "status": "complete",
+      "tasks_completed": 12,
+      "output": "outputs/niche-matrix-join-wave-3.md",
+      "profiles": 17,
+      "exact_cells": 170,
+      "dimensions": 10,
+      "atoms": 12,
+      "combined_observed": 3400,
+      "combined_observations_per_cell": 20,
+      "remaining_parent_slots": 13600,
+      "public_combined_slots": 272,
+      "callback_status": "sent_and_verified",
+      "parent_goal_status": "active"
+    }
+  },
+  "implementation_authorized": false,
+  "parent_goal_status": "active"
+}

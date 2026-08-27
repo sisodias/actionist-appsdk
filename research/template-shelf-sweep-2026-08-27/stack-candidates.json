@@ -1,0 +1,1490 @@
+[
+ {
+  "description": "A React Framework for building  internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.",
+  "forksCount": 3197,
+  "fullName": "refinedev/refine",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-06-05T15:19:38Z",
+  "stargazersCount": 35586,
+  "updatedAt": "2026-08-27T01:29:47Z",
+  "url": "https://github.com/refinedev/refine",
+  "lanes": [
+   "s-internal-tools"
+  ],
+  "known": false,
+  "age_days": 83,
+  "license_key": "mit"
+ },
+ {
+  "description": "A frontend Framework for single-page applications on top of REST/GraphQL APIs, using TypeScript, React and Material Design",
+  "forksCount": 5466,
+  "fullName": "marmelab/react-admin",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T14:54:00Z",
+  "stargazersCount": 26915,
+  "updatedAt": "2026-08-27T01:06:15Z",
+  "url": "https://github.com/marmelab/react-admin",
+  "lanes": [
+   "t-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "A Foundation for Scalable Cross-Platform Apps",
+  "forksCount": 3974,
+  "fullName": "electron-react-boilerplate/electron-react-boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-29T22:35:26Z",
+  "stargazersCount": 24253,
+  "updatedAt": "2026-08-25T09:34:29Z",
+  "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 120,
+  "license_key": "mit"
+ },
+ {
+  "description": "Modern React starter kit with Bun, TypeScript, Tailwind CSS, tRPC, Stripe, and Cloudflare Workers. Production-ready monorepo for building fast web apps.",
+  "forksCount": 4202,
+  "fullName": "kriasoft/react-starter-kit",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-23T20:58:14Z",
+  "stargazersCount": 23669,
+  "updatedAt": "2026-08-25T20:08:12Z",
+  "url": "https://github.com/kriasoft/react-starter-kit",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 4,
+  "license_key": "mit"
+ },
+ {
+  "description": "Open Source eCommerce Platform for B2B, Marketplace, and Enterprise. REST API, TypeScript SDK, and production-ready Next.js storefront. Self-host it. Own your stack. No vendor lock-in. Zero platform fees.",
+  "forksCount": 5292,
+  "fullName": "spree/spree",
+  "isArchived": false,
+  "license": {
+   "key": "bsd-3-clause",
+   "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+   "url": "https://api.github.com/licenses/bsd-3-clause"
+  },
+  "pushedAt": "2026-08-26T21:22:10Z",
+  "stargazersCount": 15647,
+  "updatedAt": "2026-08-26T21:30:47Z",
+  "url": "https://github.com/spree/spree",
+  "lanes": [
+   "t-multi-tenant"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "bsd-3-clause"
+ },
+ {
+  "description": "A 100% free modern JS SaaS boilerplate (React, NodeJS, Prisma). Full-featured: Auth (email, google, github, slack, MS), Email sending, Background jobs, Landing page, Payments (Stripe, Polar.sh), Shadcn UI, S3 file upload. AI-ready with tailored AGENTS.md, skills, and Claude Code plugin. One cmd deploy. Powered by Wasp full-stack framework.",
+  "forksCount": 1867,
+  "fullName": "wasp-lang/open-saas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-06T11:28:44Z",
+  "stargazersCount": 15641,
+  "updatedAt": "2026-08-26T23:41:53Z",
+  "url": "https://github.com/wasp-lang/open-saas",
+  "lanes": [
+   "s-saas-boilerplate",
+   "t-saas-boilerplate",
+   "t-boilerplate",
+   "t-saas-starter"
+  ],
+  "known": false,
+  "age_days": 21,
+  "license_key": "mit"
+ },
+ {
+  "description": "Low-code platform allows you to build business apps, enables you to quickly create internal tools such as dashboard, crud app, admin panel, crm, cms, etc. Supports PostgreSQL, MySQL, Supabase, GraphQL, MongoDB, MSSQL, Rest API, Hugging Face, Redis, etc. Automate workflows with schedule or webhook. Open source Retool. ",
+  "forksCount": 1206,
+  "fullName": "illacloud/illa-builder",
+  "isArchived": false,
+  "license": {
+   "key": "apache-2.0",
+   "name": "Apache License 2.0",
+   "url": "https://api.github.com/licenses/apache-2.0"
+  },
+  "pushedAt": "2026-05-27T02:22:32Z",
+  "stargazersCount": 12311,
+  "updatedAt": "2026-08-25T20:27:54Z",
+  "url": "https://github.com/illacloud/illa-builder",
+  "lanes": [
+   "s-internal-tools"
+  ],
+  "known": false,
+  "age_days": 92,
+  "license_key": "apache-2.0"
+ },
+ {
+  "description": "Vuestic Admin is an open-source, ready-to-use admin template suite designed for rapid development, easy maintenance, and high accessibility. Built on Vuestic UI, Vue 3, Vite, Pinia, and Tailwind CSS. Maintained by Epicmax (@epicmaxco).",
+  "forksCount": 1801,
+  "fullName": "epicmaxco/vuestic-admin",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-02-26T07:06:10Z",
+  "stargazersCount": 10954,
+  "updatedAt": "2026-08-25T08:26:45Z",
+  "url": "https://github.com/epicmaxco/vuestic-admin",
+  "lanes": [
+   "t-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 182,
+  "license_key": "mit"
+ },
+ {
+  "description": "Production-grade Turborepo template for Next.js apps.",
+  "forksCount": 711,
+  "fullName": "vercel/next-forge",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-05-28T14:33:12Z",
+  "stargazersCount": 7660,
+  "updatedAt": "2026-08-27T02:15:43Z",
+  "url": "https://github.com/vercel/next-forge",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 91,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83d\udcbc An enterprise-grade Next.js boilerplate for high-performance, maintainable apps. Packed with features like Tailwind CSS, TypeScript, ESLint, Prettier, testing tools, and more to accelerate your development.",
+  "forksCount": 1963,
+  "fullName": "Blazity/next-enterprise",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T14:57:47Z",
+  "stargazersCount": 7448,
+  "updatedAt": "2026-08-27T00:28:49Z",
+  "url": "https://github.com/Blazity/next-enterprise",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83d\ude80\ud83c\udf89\ud83d\udcda SaaS Boilerplate built with Next.js + Tailwind CSS + Shadcn UI + TypeScript. \u26a1\ufe0f Full-stack React application with Auth, Multi-tenancy, Roles & Permissions, i18n, Landing Page, DB, Logging, Testing",
+  "forksCount": 1334,
+  "fullName": "ixartz/SaaS-Boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-21T00:07:04Z",
+  "stargazersCount": 7381,
+  "updatedAt": "2026-08-26T09:13:48Z",
+  "url": "https://github.com/ixartz/SaaS-Boilerplate",
+  "lanes": [
+   "s-saas-boilerplate",
+   "t-saas-boilerplate",
+   "t-boilerplate",
+   "t-saas-kit"
+  ],
+  "known": false,
+  "age_days": 6,
+  "license_key": "mit"
+ },
+ {
+  "description": "Production Grade Cloud-Ready .NET 10 Starter Kit (Web API + React Client) with Multitenancy Support, and Clean/Modular Architecture that saves roughly 200+ Development Hours! All Batteries Included.",
+  "forksCount": 1992,
+  "fullName": "fullstackhero/dotnet-starter-kit",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-08T03:24:38Z",
+  "stargazersCount": 6734,
+  "updatedAt": "2026-08-25T03:56:37Z",
+  "url": "https://github.com/fullstackhero/dotnet-starter-kit",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 19,
+  "license_key": "mit"
+ },
+ {
+  "description": " \ud83d\ude80 Ready-to-run Prisma example projects",
+  "forksCount": 1472,
+  "fullName": "prisma/prisma-examples",
+  "isArchived": false,
+  "license": {
+   "key": "apache-2.0",
+   "name": "Apache License 2.0",
+   "url": "https://api.github.com/licenses/apache-2.0"
+  },
+  "pushedAt": "2026-08-26T23:57:43Z",
+  "stargazersCount": 6644,
+  "updatedAt": "2026-08-26T23:42:46Z",
+  "url": "https://github.com/prisma/prisma-examples",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "apache-2.0"
+ },
+ {
+  "description": "An invoice generator app built using Next.js, Typescript, and Shadcn",
+  "forksCount": 729,
+  "fullName": "al1abb/invoify",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-24T02:55:34Z",
+  "stargazersCount": 6345,
+  "updatedAt": "2026-08-26T16:57:10Z",
+  "url": "https://github.com/al1abb/invoify",
+  "lanes": [
+   "s-invoicing"
+  ],
+  "known": false,
+  "age_days": 3,
+  "license_key": "mit"
+ },
+ {
+  "description": "A React Native template for building solid applications \ud83d\udc19, using JavaScript \ud83d\udc9b or Typescript \ud83d\udc99 (you choose).",
+  "forksCount": 941,
+  "fullName": "thecodingmachine/react-native-boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-06-30T10:48:00Z",
+  "stargazersCount": 5565,
+  "updatedAt": "2026-08-25T08:31:26Z",
+  "url": "https://github.com/thecodingmachine/react-native-boilerplate",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 58,
+  "license_key": "mit"
+ },
+ {
+  "description": "A progressive web framework based on React and Rsbuild.",
+  "forksCount": 418,
+  "fullName": "web-infra-dev/modern.js",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T18:06:42Z",
+  "stargazersCount": 5039,
+  "updatedAt": "2026-08-26T11:49:51Z",
+  "url": "https://github.com/web-infra-dev/modern.js",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83d\udcf1 A template for your next React Native project: Expo, PNPM, TypeScript, TailwindCSS, Husky, EAS, GitHub Actions, Env Vars, expo-router, react-query, react-hook-form.",
+  "forksCount": 664,
+  "fullName": "obytes/react-native-template-obytes",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-06-02T13:59:47Z",
+  "stargazersCount": 4325,
+  "updatedAt": "2026-08-27T02:25:47Z",
+  "url": "https://github.com/obytes/react-native-template-obytes",
+  "lanes": [
+   "t-boilerplate"
+  ],
+  "known": false,
+  "age_days": 86,
+  "license_key": "mit"
+ },
+ {
+  "description": "50+ open-source generative AI apps you can clone, deploy, and monetize \u2014 image generators, video tools, virtual try-ons, AI SaaS templates, and platform integrations. One-click Vercel deploy on every template.",
+  "forksCount": 434,
+  "fullName": "Anil-matcha/awesome-generative-ai-apps",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-21T10:40:04Z",
+  "stargazersCount": 3071,
+  "updatedAt": "2026-08-27T01:47:16Z",
+  "url": "https://github.com/Anil-matcha/awesome-generative-ai-apps",
+  "lanes": [
+   "s-saas-template",
+   "t-saas-boilerplate",
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 6,
+  "license_key": "mit"
+ },
+ {
+  "description": "A Modern React Admin Template. It is based on React 19, Vite and TypeScript. It's fast ! ",
+  "forksCount": 561,
+  "fullName": "dingyi214/slash-admin",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-06-19T02:45:12Z",
+  "stargazersCount": 3008,
+  "updatedAt": "2026-08-26T06:15:47Z",
+  "url": "https://github.com/dingyi214/slash-admin",
+  "lanes": [
+   "t-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 69,
+  "license_key": "mit"
+ },
+ {
+  "description": "SaaS Boilerplate - Open Source and free SaaS stack that lets you build SaaS products faster in React, Django and AWS. Focus on essential business logic instead of coding repeatable features!",
+  "forksCount": 420,
+  "fullName": "apptension/saas-boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-13T07:20:25Z",
+  "stargazersCount": 2971,
+  "updatedAt": "2026-08-25T16:06:14Z",
+  "url": "https://github.com/apptension/saas-boilerplate",
+  "lanes": [
+   "s-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 136,
+  "license_key": "mit"
+ },
+ {
+  "description": "Modern Admin Dashboard Template built with Shadcn UI and Next.js 16",
+  "forksCount": 596,
+  "fullName": "arhamkhnz/next-shadcn-admin-dashboard",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T13:25:09Z",
+  "stargazersCount": 2944,
+  "updatedAt": "2026-08-27T00:04:11Z",
+  "url": "https://github.com/arhamkhnz/next-shadcn-admin-dashboard",
+  "lanes": [
+   "s-admin-dashboard",
+   "t-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "Business Apps Made Simple with Asp.Net Core MVC / TypeScript",
+  "forksCount": 807,
+  "fullName": "serenity-is/Serenity",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T09:04:39Z",
+  "stargazersCount": 2693,
+  "updatedAt": "2026-08-26T09:10:52Z",
+  "url": "https://github.com/serenity-is/Serenity",
+  "lanes": [
+   "t-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "TailAdmin is a Next.js and Tailwind CSS free, open-source admin dashboard template. Provides developers with the necessary tools, components, pages to build a full-featured back-end, dashboard, or admin panel for any web project.",
+  "forksCount": 846,
+  "fullName": "TailAdmin/free-nextjs-admin-dashboard",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-28T10:22:20Z",
+  "stargazersCount": 2534,
+  "updatedAt": "2026-08-26T06:07:25Z",
+  "url": "https://github.com/TailAdmin/free-nextjs-admin-dashboard",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 121,
+  "license_key": "mit"
+ },
+ {
+  "description": "Free Vue.js 3.x Tailwind 4.x admin dashboard template with dark mode. Vite builds. Pinia state. Laravel integration available",
+  "forksCount": 442,
+  "fullName": "justboil/admin-one-vue-tailwind",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-11-27T15:53:43Z",
+  "stargazersCount": 2464,
+  "updatedAt": "2026-08-16T23:44:18Z",
+  "url": "https://github.com/justboil/admin-one-vue-tailwind",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 273,
+  "license_key": "mit"
+ },
+ {
+  "description": "A modern SaaS template/boilerplate built with SvelteKit, Tailwind, and Supabase. Includes marketing page, blog, subscriptions, auth, user dashboard, user settings, pricing page, and more.",
+  "forksCount": 468,
+  "fullName": "scosman/CMSaasStarter",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-03-21T20:53:07Z",
+  "stargazersCount": 2357,
+  "updatedAt": "2026-08-26T23:47:28Z",
+  "url": "https://github.com/scosman/CMSaasStarter",
+  "lanes": [
+   "s-saas-template",
+   "t-saas-boilerplate",
+   "t-saas-kit"
+  ],
+  "known": false,
+  "age_days": 159,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83d\ude80 Free NextJS Landing Page Template written in Tailwind CSS 3 and TypeScript \u26a1\ufe0f Made with developer experience first: Next.js 14 + TypeScript + ESLint + Prettier + Husky + Lint-Staged + VSCode + Netlify + PostCSS + Tailwind CSS",
+  "forksCount": 722,
+  "fullName": "ixartz/Next-JS-Landing-Page-Starter-Template",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-01-18T21:31:34Z",
+  "stargazersCount": 2137,
+  "updatedAt": "2026-08-25T05:15:20Z",
+  "url": "https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 221,
+  "license_key": "mit"
+ },
+ {
+  "description": "An enterprise-grade Next.js admin dashboard template. Made with developer experience first: Next.js v14 (App Router), Material UI (MUI), Tailwind CSS, TypeScript, ESLint, Prettier, VSCode Configs !! \ud83d\ude80",
+  "forksCount": 658,
+  "fullName": "themeselection/materio-mui-nextjs-admin-template-free",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-03-20T05:51:19Z",
+  "stargazersCount": 1964,
+  "updatedAt": "2026-08-22T08:15:27Z",
+  "url": "https://github.com/themeselection/materio-mui-nextjs-admin-template-free",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 160,
+  "license_key": "mit"
+ },
+ {
+  "description": "Open Source Next.js Saas Boilerplate",
+  "forksCount": 472,
+  "fullName": "revokslab/ShipFree",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-15T10:42:47Z",
+  "stargazersCount": 1690,
+  "updatedAt": "2026-08-25T16:07:07Z",
+  "url": "https://github.com/revokslab/ShipFree",
+  "lanes": [
+   "s-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 12,
+  "license_key": "mit"
+ },
+ {
+  "description": "The AI-Engineering Foundation Framework for CRM/ERP and commerce: open-source TypeScript, with multi-tenancy, RBAC, events and domain modules already decided as conventions and specs, so Cursor, Claude Code and Codex build features instead of re-deciding architecture. Start with 80% done.",
+  "forksCount": 376,
+  "fullName": "open-mercato/open-mercato",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T21:55:56Z",
+  "stargazersCount": 1685,
+  "updatedAt": "2026-08-26T23:18:25Z",
+  "url": "https://github.com/open-mercato/open-mercato",
+  "lanes": [
+   "t-erp",
+   "t-crm"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "Startup is free Next.js template for SaaS startups comes with all the essential pages, components, and sections you need to launch a complete business website.",
+  "forksCount": 586,
+  "fullName": "NextJSTemplates/startup-nextjs",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-12-12T05:47:05Z",
+  "stargazersCount": 1672,
+  "updatedAt": "2026-08-26T15:06:52Z",
+  "url": "https://github.com/NextJSTemplates/startup-nextjs",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 258,
+  "license_key": "mit"
+ },
+ {
+  "description": "The React component library for startups, built with Chakra UI.",
+  "forksCount": 171,
+  "fullName": "saas-js/saas-ui",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-22T19:55:09Z",
+  "stargazersCount": 1647,
+  "updatedAt": "2026-08-26T14:24:27Z",
+  "url": "https://github.com/saas-js/saas-ui",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 5,
+  "license_key": "mit"
+ },
+ {
+  "description": "Admin Dashboard Template Built On Tailwind CSS",
+  "forksCount": 287,
+  "fullName": "moesaid/cleopatra",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-02-24T12:56:07Z",
+  "stargazersCount": 1628,
+  "updatedAt": "2026-08-25T17:48:45Z",
+  "url": "https://github.com/moesaid/cleopatra",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 184,
+  "license_key": "mit"
+ },
+ {
+  "description": "Admin dashboard template.",
+  "forksCount": 579,
+  "fullName": "vercel/nextjs-postgres-nextauth-tailwindcss-template",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-01-15T10:39:06Z",
+  "stargazersCount": 1617,
+  "updatedAt": "2026-08-25T15:49:00Z",
+  "url": "https://github.com/vercel/nextjs-postgres-nextauth-tailwindcss-template",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 224,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83c\udfec relivator: next.js 15 react 19 ecommerce template \u25b2 better-auth polar shadcn/ui tailwind drizzle orm typescript ts radix, postgres neon, app router saas commerce ecommerce shop pricing payments dark mode full stack free \u2b50 more stars \ud83d\udc49 more features",
+  "forksCount": 277,
+  "fullName": "reliverse/relivator",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-10-04T13:33:55Z",
+  "stargazersCount": 1558,
+  "updatedAt": "2026-08-26T07:14:21Z",
+  "url": "https://github.com/reliverse/relivator",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 327,
+  "license_key": "mit"
+ },
+ {
+  "description": "Fullstack SaaS Boilerplate built with tRPC, Fastify and React",
+  "forksCount": 218,
+  "fullName": "alan345/AI-Fullstack-SaaS-Boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-12T10:11:15Z",
+  "stargazersCount": 1408,
+  "updatedAt": "2026-08-23T15:44:35Z",
+  "url": "https://github.com/alan345/AI-Fullstack-SaaS-Boilerplate",
+  "lanes": [
+   "s-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 15,
+  "license_key": "mit"
+ },
+ {
+  "description": "ChadNext - Quick Starter Template for your Next project includes Next.js 15 App router, Shadcn UI, LuciaAuth, Prisma, Server Actions, Stripe, Internationalization and more.",
+  "forksCount": 135,
+  "fullName": "moinulmoin/chadnext",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-12-18T12:25:17Z",
+  "stargazersCount": 1322,
+  "updatedAt": "2026-08-25T09:26:15Z",
+  "url": "https://github.com/moinulmoin/chadnext",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 252,
+  "license_key": "mit"
+ },
+ {
+  "description": "Laravel Admin panel and more. Simple for beginners and powerful for experts. Using Blade, Alpine.js and Tailwind CSS.",
+  "forksCount": 147,
+  "fullName": "moonshine-software/moonshine",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-19T10:40:41Z",
+  "stargazersCount": 1299,
+  "updatedAt": "2026-08-24T14:35:12Z",
+  "url": "https://github.com/moonshine-software/moonshine",
+  "lanes": [
+   "t-crm"
+  ],
+  "known": false,
+  "age_days": 8,
+  "license_key": "mit"
+ },
+ {
+  "description": "Free React Tailwind CSS Admin Dashboard Template - TailAdmin is a free and open-source admin dashboard template built on React and Tailwind CSS, providing developers with everything they need to create a comprehensive, back-end, dashboard, or admin panel solution for upcoming web projects.",
+  "forksCount": 535,
+  "fullName": "TailAdmin/free-react-tailwind-admin-dashboard",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-28T10:31:12Z",
+  "stargazersCount": 1252,
+  "updatedAt": "2026-08-27T01:45:06Z",
+  "url": "https://github.com/TailAdmin/free-react-tailwind-admin-dashboard",
+  "lanes": [
+   "s-admin-dashboard"
+  ],
+  "known": false,
+  "age_days": 121,
+  "license_key": "mit"
+ },
+ {
+  "description": "A full-featured CRM built with React, shadcn/ui, and Supabase.",
+  "forksCount": 774,
+  "fullName": "marmelab/atomic-crm",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-21T15:15:03Z",
+  "stargazersCount": 1206,
+  "updatedAt": "2026-08-25T19:01:26Z",
+  "url": "https://github.com/marmelab/atomic-crm",
+  "lanes": [
+   "t-crm"
+  ],
+  "known": false,
+  "age_days": 6,
+  "license_key": "mit"
+ },
+ {
+  "description": "GoCart is a free and open-source multi-vendor e-commerce template built with Next.js and Tailwind CSS. It features a modern design, responsive layout and essential pages to help you launch scalable online stores and marketplaces with ease.",
+  "forksCount": 332,
+  "fullName": "GreatStackDev/gocart",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-03-26T12:51:39Z",
+  "stargazersCount": 943,
+  "updatedAt": "2026-08-26T21:45:26Z",
+  "url": "https://github.com/GreatStackDev/gocart",
+  "lanes": [
+   "t-multi-tenant"
+  ],
+  "known": false,
+  "age_days": 154,
+  "license_key": "mit"
+ },
+ {
+  "description": "Free SaaS boilerplate (Python/PostgreSQL/ReactJS/Webpack)",
+  "forksCount": 120,
+  "fullName": "saasforge/open-source-saas-boilerpate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-07-11T22:27:28Z",
+  "stargazersCount": 842,
+  "updatedAt": "2026-07-22T01:13:32Z",
+  "url": "https://github.com/saasforge/open-source-saas-boilerpate",
+  "lanes": [
+   "s-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 47,
+  "license_key": "mit"
+ },
+ {
+  "description": "battery packed template / boilerplate to initialize Next.js app with Chakra UI & Typescript setup \u2728",
+  "forksCount": 106,
+  "fullName": "agustinusnathaniel/nextarter-chakra",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-21T06:43:25Z",
+  "stargazersCount": 838,
+  "updatedAt": "2026-08-21T06:44:06Z",
+  "url": "https://github.com/agustinusnathaniel/nextarter-chakra",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 6,
+  "license_key": "mit"
+ },
+ {
+  "description": "Cloudflare Workers/Next.js SaaS Template",
+  "forksCount": 167,
+  "fullName": "LubomirGeorgiev/cloudflare-workers-nextjs-saas-template",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-26T11:18:08Z",
+  "stargazersCount": 782,
+  "updatedAt": "2026-08-26T11:18:49Z",
+  "url": "https://github.com/LubomirGeorgiev/cloudflare-workers-nextjs-saas-template",
+  "lanes": [
+   "s-saas-template",
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 1,
+  "license_key": "mit"
+ },
+ {
+  "description": "NextCRM \u2014 Open-source CRM built with Next.js 16, React 19, PostgreSQL, Prisma 7, and shadcn/ui. CRM, projects, invoicing, documents, email client & AI features.",
+  "forksCount": 261,
+  "fullName": "pdovhomilja/nextcrm-app",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-10T16:05:14Z",
+  "stargazersCount": 684,
+  "updatedAt": "2026-08-26T18:11:28Z",
+  "url": "https://github.com/pdovhomilja/nextcrm-app",
+  "lanes": [
+   "s-open-source-crm"
+  ],
+  "known": false,
+  "age_days": 17,
+  "license_key": "mit"
+ },
+ {
+  "description": "Next.js SaaS Boilerplate and Starter Kit designed and built for SaaS startups. It comes with all necessary integrations, pages, and components you need to launch a feature-rich SaaS websites.",
+  "forksCount": 179,
+  "fullName": "NextJSTemplates/play-nextjs",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-05-19T07:03:37Z",
+  "stargazersCount": 608,
+  "updatedAt": "2026-08-15T06:45:41Z",
+  "url": "https://github.com/NextJSTemplates/play-nextjs",
+  "lanes": [
+   "s-saas-boilerplate",
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 100,
+  "license_key": "mit"
+ },
+ {
+  "description": "Production-ready B2B SaaS Starter Kit (Go + Next.js). Modular Monolith. Hexagonal Arch.",
+  "forksCount": 77,
+  "fullName": "moasq/production-saas-starter",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-01-25T16:50:51Z",
+  "stargazersCount": 530,
+  "updatedAt": "2026-08-20T07:58:04Z",
+  "url": "https://github.com/moasq/production-saas-starter",
+  "lanes": [
+   "s-saas-starter",
+   "s-b2b-saas"
+  ],
+  "known": false,
+  "age_days": 214,
+  "license_key": "mit"
+ },
+ {
+  "description": "Nextplate is a free starter template built with Next.js and TailwindCSS. It provides you with almost everything you need to jump-start your Next.js project. Try Nextplate and save yourself hours of work.",
+  "forksCount": 288,
+  "fullName": "zeon-studio/nextplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-07-25T04:22:01Z",
+  "stargazersCount": 518,
+  "updatedAt": "2026-08-05T13:54:42Z",
+  "url": "https://github.com/zeon-studio/nextplate",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 33,
+  "license_key": "mit"
+ },
+ {
+  "description": "Saasy Land is an open-source, opinionated, clean, elegant Next.js starter kit for production-grade SaaS. Engineered for scale with Bun, Vercel, Elysia, Better Auth, Neon Postgres + Drizzle, and Shadcn UI. The robust, high-performance foundation for serious builders to ship modern, scalable full-stack applications without the boilerplate overhead.",
+  "forksCount": 103,
+  "fullName": "pjborowiecki/saasyland.com",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-16T17:16:23Z",
+  "stargazersCount": 434,
+  "updatedAt": "2026-08-26T03:40:59Z",
+  "url": "https://github.com/pjborowiecki/saasyland.com",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 11,
+  "license_key": "mit"
+ },
+ {
+  "description": "Modernize Next.js Free is a developer-friendly admin dashboard template built with Next.js, MUI, and Tailwind CSS. Designed for scalability, performance, and SEO, it helps developers create modern web apps faster with reusable components, clean architecture, and responsive UI for real projects.",
+  "forksCount": 202,
+  "fullName": "adminmart/Modernize-Nextjs-Free",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-11-21T13:11:37Z",
+  "stargazersCount": 424,
+  "updatedAt": "2026-08-18T19:51:40Z",
+  "url": "https://github.com/adminmart/Modernize-Nextjs-Free",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 279,
+  "license_key": "mit"
+ },
+ {
+  "description": "\ud83d\ude80\ud83c\udf89\ud83d\udcda Boilerplate and Starter for React Native, Expo, NativeWind and TypeScript \u26a1\ufe0f Made with developer experience first: React Native + Expo + TypeScript + ESLint + Prettier + Husky + Lint-Staged + Jest + Detox + VSCode + NativeWind",
+  "forksCount": 89,
+  "fullName": "ixartz/React-Native-Boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-08-31T15:06:55Z",
+  "stargazersCount": 409,
+  "updatedAt": "2026-08-25T08:02:08Z",
+  "url": "https://github.com/ixartz/React-Native-Boilerplate",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 361,
+  "license_key": "mit"
+ },
+ {
+  "description": "A complete & open source Nextjs.14, Stripe and Supabase SaaS Starter Template using App Router",
+  "forksCount": 74,
+  "fullName": "antoineross/Hikari",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-09-11T05:04:52Z",
+  "stargazersCount": 390,
+  "updatedAt": "2026-08-03T17:46:29Z",
+  "url": "https://github.com/antoineross/Hikari",
+  "lanes": [
+   "s-saas-starter",
+   "q-supabase-saas-starter"
+  ],
+  "known": false,
+  "age_days": 350,
+  "license_key": "mit"
+ },
+ {
+  "description": "A production-ready Convex Stack for your next SaaS application with Convex Auth, Stripe, TanStack, Resend, Tailwindcss, and shadcn.",
+  "forksCount": 48,
+  "fullName": "get-convex/convex-saas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-05-02T17:49:25Z",
+  "stargazersCount": 374,
+  "updatedAt": "2026-08-21T14:19:47Z",
+  "url": "https://github.com/get-convex/convex-saas",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 117,
+  "license_key": "mit"
+ },
+ {
+  "description": "A complete starter kit that you can use to build and deploy a Next.js SaaS app powered by Paddle Billing.",
+  "forksCount": 498,
+  "fullName": "PaddleHQ/paddle-nextjs-starter-kit",
+  "isArchived": false,
+  "license": {
+   "key": "apache-2.0",
+   "name": "Apache License 2.0",
+   "url": "https://api.github.com/licenses/apache-2.0"
+  },
+  "pushedAt": "2026-07-21T20:37:35Z",
+  "stargazersCount": 360,
+  "updatedAt": "2026-08-13T17:17:44Z",
+  "url": "https://github.com/PaddleHQ/paddle-nextjs-starter-kit",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 37,
+  "license_key": "apache-2.0"
+ },
+ {
+  "description": "A MERN stack based expense tracking application [Full-Stack React Projects]",
+  "forksCount": 71,
+  "fullName": "shamahoque/mern-expense-tracker",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-03-03T00:36:07Z",
+  "stargazersCount": 359,
+  "updatedAt": "2026-08-26T12:51:47Z",
+  "url": "https://github.com/shamahoque/mern-expense-tracker",
+  "lanes": [
+   "s-expense-tracker"
+  ],
+  "known": false,
+  "age_days": 177,
+  "license_key": "mit"
+ },
+ {
+  "description": "Next.js project starter. Configured with tailwindcss and shadcn-ui",
+  "forksCount": 36,
+  "fullName": "lucky-chap/kaminari",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-02-26T16:29:09Z",
+  "stargazersCount": 358,
+  "updatedAt": "2026-07-28T06:08:03Z",
+  "url": "https://github.com/lucky-chap/kaminari",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 182,
+  "license_key": "mit"
+ },
+ {
+  "description": "A production-ready SaaS template built with Next.js 15, Supabase, and Tailwind CSS. Includes authentication, user management, file storage, task management demos, and secure RLS policies. Now with a complete React Native + Expo mobile app template! Easily customizable with pre-built themes, i18n support (EN/PL/ZH), and legal documents. ",
+  "forksCount": 183,
+  "fullName": "Razikus/supabase-nextjs-template",
+  "isArchived": false,
+  "license": {
+   "key": "apache-2.0",
+   "name": "Apache License 2.0",
+   "url": "https://api.github.com/licenses/apache-2.0"
+  },
+  "pushedAt": "2025-12-06T01:04:19Z",
+  "stargazersCount": 320,
+  "updatedAt": "2026-08-10T15:09:50Z",
+  "url": "https://github.com/Razikus/supabase-nextjs-template",
+  "lanes": [
+   "s-saas-template"
+  ],
+  "known": false,
+  "age_days": 264,
+  "license_key": "apache-2.0"
+ },
+ {
+  "description": "Full-stack SaaS application built with Next.js",
+  "forksCount": 67,
+  "fullName": "justnode/better-saas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-18T14:57:43Z",
+  "stargazersCount": 309,
+  "updatedAt": "2026-08-22T05:23:39Z",
+  "url": "https://github.com/justnode/better-saas",
+  "lanes": [
+   "t-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 131,
+  "license_key": "mit"
+ },
+ {
+  "description": "Miru | Time Tracking and Invoicing and Employee Benefits. Built using Ruby On Rails and ReactJS",
+  "forksCount": 95,
+  "fullName": "saeloun/miru-web",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-22T10:50:25Z",
+  "stargazersCount": 266,
+  "updatedAt": "2026-08-22T10:50:28Z",
+  "url": "https://github.com/saeloun/miru-web",
+  "lanes": [
+   "t-invoicing"
+  ],
+  "known": false,
+  "age_days": 5,
+  "license_key": "mit"
+ },
+ {
+  "description": "Open Source Next.js Saas Starter. Built with Better Auth UI, Shadcn/Ui, Drizzle ORM, UploadThing, Resend and Stripe",
+  "forksCount": 59,
+  "fullName": "indieceo/Indiesaas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-11-14T09:18:32Z",
+  "stargazersCount": 230,
+  "updatedAt": "2026-08-16T10:02:10Z",
+  "url": "https://github.com/indieceo/Indiesaas",
+  "lanes": [
+   "s-saas-starter"
+  ],
+  "known": false,
+  "age_days": 286,
+  "license_key": "mit"
+ },
+ {
+  "description": "Get started quickly with Next.js, Postgres, StepPay, and shadcn/ui.",
+  "forksCount": 31,
+  "fullName": "kych0912/saas-starter-ko",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-12-29T07:47:02Z",
+  "stargazersCount": 227,
+  "updatedAt": "2026-08-11T16:02:25Z",
+  "url": "https://github.com/kych0912/saas-starter-ko",
+  "lanes": [
+   "s-saas-starter"
+  ],
+  "known": false,
+  "age_days": 241,
+  "license_key": "mit"
+ },
+ {
+  "description": "A modern, production-ready Django boilerplate for building SaaS applications with HTMX, Tailwind CSS, and Alpine.js. This template provides everything you need to kickstart your next SaaS project with best practices and modern tooling.",
+  "forksCount": 60,
+  "fullName": "eriktaveras/django-saas-boilerplate",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-04-15T15:54:41Z",
+  "stargazersCount": 225,
+  "updatedAt": "2026-08-24T14:13:08Z",
+  "url": "https://github.com/eriktaveras/django-saas-boilerplate",
+  "lanes": [
+   "s-saas-boilerplate",
+   "q-django-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 134,
+  "license_key": "mit"
+ },
+ {
+  "description": "The Auth0 SaaS Starter Kit is a full-stack Next.js + Radix UI application designed to help you get started building B2B SaaS with Auth0.  It features multi-tenancy support, organization member management and access controls, security policies, self-service Single Sign-On configuration, and more.",
+  "forksCount": 98,
+  "fullName": "auth0-developer-hub/auth0-b2b-saas-starter",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-11T19:07:14Z",
+  "stargazersCount": 207,
+  "updatedAt": "2026-08-17T04:34:34Z",
+  "url": "https://github.com/auth0-developer-hub/auth0-b2b-saas-starter",
+  "lanes": [
+   "s-saas-starter",
+   "s-b2b-saas"
+  ],
+  "known": false,
+  "age_days": 16,
+  "license_key": "mit"
+ },
+ {
+  "description": "Fullstack TypeScript Next.js Boilerplate with  modular architecture with full customization.",
+  "forksCount": 19,
+  "fullName": "gadingnst/fullstack-next-template",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-01-03T09:13:48Z",
+  "stargazersCount": 175,
+  "updatedAt": "2026-07-20T12:56:36Z",
+  "url": "https://github.com/gadingnst/fullstack-next-template",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 236,
+  "license_key": "mit"
+ },
+ {
+  "description": "A Next.js 15 Blog using Server Components - backed by Wisp CMS ",
+  "forksCount": 54,
+  "fullName": "Wisp-CMS/nextjs-blog-cms-wisp",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2025-12-08T13:33:01Z",
+  "stargazersCount": 167,
+  "updatedAt": "2026-08-25T15:41:20Z",
+  "url": "https://github.com/Wisp-CMS/nextjs-blog-cms-wisp",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 262,
+  "license_key": "mit"
+ },
+ {
+  "description": "SaaS boilerplate/starter-kit in Go+React with Stripe integration, multi-tenant support, comprehensive features and AI-agent ready",
+  "forksCount": 53,
+  "fullName": "jonradoff/lastsaas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-03-05T18:12:51Z",
+  "stargazersCount": 161,
+  "updatedAt": "2026-08-26T01:41:15Z",
+  "url": "https://github.com/jonradoff/lastsaas",
+  "lanes": [
+   "s-saas-boilerplate"
+  ],
+  "known": false,
+  "age_days": 175,
+  "license_key": "mit"
+ },
+ {
+  "description": "A production-ready Next.js SaaS notes starter kit on DigitalOcean App Platform \u2014 includes GradientAI, Stripe payments, Resend email, and Spaces storage.",
+  "forksCount": 115,
+  "fullName": "digitalocean/sea-notes-saas-starter-kit",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-02-11T17:19:25Z",
+  "stargazersCount": 147,
+  "updatedAt": "2026-08-04T04:53:43Z",
+  "url": "https://github.com/digitalocean/sea-notes-saas-starter-kit",
+  "lanes": [
+   "s-saas-starter"
+  ],
+  "known": false,
+  "age_days": 197,
+  "license_key": "mit"
+ },
+ {
+  "description": "A SaaS Starter Kit built with Expo 52+, React Native, and Tailwind CSS using a Supabase backend",
+  "forksCount": 34,
+  "fullName": "makerkit/react-native-expo-turbo-saas-kit",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-05-21T10:25:20Z",
+  "stargazersCount": 134,
+  "updatedAt": "2026-08-05T12:56:24Z",
+  "url": "https://github.com/makerkit/react-native-expo-turbo-saas-kit",
+  "lanes": [
+   "s-saas-starter"
+  ],
+  "known": false,
+  "age_days": 98,
+  "license_key": "mit"
+ },
+ {
+  "description": "A modern SaaS template/boilerplate built with SvelteKit, Convex, Better Auth, and shadcn-svelte. Includes subscriptions, auth, user & admin dashboard, user settings, and more.",
+  "forksCount": 25,
+  "fullName": "joachimchauvet/modernstack-saas",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-07-13T15:12:47Z",
+  "stargazersCount": 133,
+  "updatedAt": "2026-08-25T08:32:29Z",
+  "url": "https://github.com/joachimchauvet/modernstack-saas",
+  "lanes": [
+   "s-saas-template"
+  ],
+  "known": false,
+  "age_days": 45,
+  "license_key": "mit"
+ },
+ {
+  "description": "battery packed template / boilerplate to initialize PWA ready Next.js app with TailwindCSS & Typescript setup \u2728",
+  "forksCount": 11,
+  "fullName": "agustinusnathaniel/nextarter-tailwind",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-21T06:45:12Z",
+  "stargazersCount": 125,
+  "updatedAt": "2026-08-21T06:45:31Z",
+  "url": "https://github.com/agustinusnathaniel/nextarter-tailwind",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 6,
+  "license_key": "mit"
+ },
+ {
+  "description": "CodeNight Starter \u2014 An open-source foundation for building modern web applications. Built on industry standards with Next.js, shadcn/ui, Better Auth, Prisma, and PostgreSQL, and designed to be customized for your brand and workflow.",
+  "forksCount": 1,
+  "fullName": "oyanmuhammad/codenight-starter",
+  "isArchived": false,
+  "license": {
+   "key": "mit",
+   "name": "MIT License",
+   "url": "https://api.github.com/licenses/mit"
+  },
+  "pushedAt": "2026-08-01T10:57:07Z",
+  "stargazersCount": 121,
+  "updatedAt": "2026-08-24T07:55:38Z",
+  "url": "https://github.com/oyanmuhammad/codenight-starter",
+  "lanes": [
+   "t-nextjs-boilerplate"
+  ],
+  "known": false,
+  "age_days": 26,
+  "license_key": "mit"
+ }
+]

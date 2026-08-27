@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "receipt_id": "P7-COORD-W7-RECEIPT-001",
+  "phase": "phase-7",
+  "wave": {
+    "lanes": 5,
+    "lanes_verified": 5,
+    "callbacks_pending": 0,
+    "output_files_verified": 22,
+    "complete_pair_gap_preserved": 1430,
+    "pending_lanes": [],
+    "blocked_lanes": [
+      "P7-RIGHTS-EVAL-READINESS"
+    ],
+    "overall_completion_claim": false
+  },
+  "status": "receipt_verified_with_blocker_unpromoted_parent_goal_active",
+  "observed_at": "2026-08-27",
+  "parent_goal_status": "active",
+  "phase_verified": false,
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "target": {
+    "industries": 17,
+    "dimensions": 10,
+    "complete_pairs": 1700,
+    "dimension_records": 17000,
+    "repositories_per_industry": 100
+  },
+  "baseline_preserved": {
+    "merged_observed_slots": 17000,
+    "distinct_repository_urls": 216,
+    "industry_repository_pairs": 3346,
+    "complete_pairs": 270,
+    "partial_pairs": 3076,
+    "complete_pair_gap": 1430,
+    "platform_register_records": 117,
+    "feature_taxonomy": "68_stated_vs_144_enumerated_unresolved"
+  },
+  "wave_7_delta": {
+    "corpus_new_partial_pairs": 170,
+    "dimension_ledger_rows": 1700,
+    "dimension_source_receipts": 1700,
+    "feature_evidence_rows": 944,
+    "industry_join_rows": 833,
+    "industry_recorded_public_urls": 1708,
+    "rights_rows_emitted": 0,
+    "rights_missing_repository_records": 100,
+    "rights_missing_surface_records": 20
+  },
+  "lanes": [
+    {
+      "lane_id": "P7-CORPUS-INTEGRITY-W7",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selection_rows": 170,
+        "identity_edges": 170,
+        "industries": 17,
+        "selected_pairs_per_industry": 10,
+        "wave1_t1_excluded_queue_ids": 10,
+        "wave2_dimension_excluded_queue_ids": 170,
+        "wave3_dimension_excluded_queue_ids": 170,
+        "wave4_dimension_excluded_queue_ids": 170,
+        "wave5_dimension_excluded_queue_ids": 170,
+        "wave6_dimension_excluded_queue_ids": 170,
+        "prior_exclusion_union": 860,
+        "prior_identity_pairs_excluded": 2176,
+        "prior_identity_overlap_selected": 0,
+        "dimension_count_distribution": {
+          "5": 19,
+          "6": 143,
+          "7": 8
+        },
+        "complete_pairs_preserved": 270,
+        "partial_pairs_preserved": 3076,
+        "complete_pair_gap_preserved": 1430
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "selection-ledger-wave-7.jsonl": "1e949309c4edd9bff5cc370a66cbd233efb6bf14d3091b45f9f2bf67b486add3",
+        "identity-edges-wave-7.jsonl": "360c1e74d479d3f857c83a10ffb01b770e92e10273d5865799dcf7f8a5596da6",
+        "corpus-integrity-wave-7-report.md": "0d7ad2613f28e08560a249dc1a6b16e21d98fb26efcbfdb97319aac1888854a3",
+        "lane-state.json": "db31c0add00ee29cf9005a1ebaadab5d1293146cef1f7909840f355d1024a838",
+        "post-write-smoke.py": "e5ffd140df8878b67a4b7e94caecedb78bb11f71410e2333bf8211ee2a67b3a1"
+      }
+    },
+    {
+      "lane_id": "P7-DIMENSION-EVIDENCE-W7",
+      "status": "completed",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "selected_pairs": 170,
+        "selected_pairs_per_industry": 10,
+        "ledger_rows": 1700,
+        "source_receipts": 1700,
+        "dimensions": 10,
+        "rows_per_dimension": 170,
+        "exact_pair_dimension_keys": 1700,
+        "excluded_prior_queue_ids": 860
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "dimension-evidence-ledger.jsonl": "0f27199a02990c544263aa995350c40d64e10d4e727807429f2d3a322eb6b079",
+        "source-receipts.jsonl": "3c43ff6f7384e2b81c234d88ed15fb60d76e146b5df122599c1d3c7a62c81bc5",
+        "dimension-depth-report.md": "71e2b9677ab19f40823bd9dbd4f930ff8a641363113466e2316d17f7b3a65405",
+        "lane-state.json": "4109682561c052b9ca33e7e11b0205ba4b1881a6cf0d2a67d139b14fc1600520",
+        "smoke-dimension-evidence-wave-7.mjs": "b1106c6cd1d9da4ea4c163f75d4cbdc75f4f33394c69b42a0a24325ebaa4ff1b"
+      }
+    },
+    {
+      "lane_id": "P7-COMPETITOR-FEATURES-W7",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "evidence_round": 3,
+        "surfaces": 118,
+        "ranked_surfaces": 117,
+        "explicit_gap_surfaces": [
+          "PS-118"
+        ],
+        "feature_keys": 8,
+        "ranked_rows": 936,
+        "gap_rows": 8,
+        "feature_evidence_rows": 944,
+        "unique_round_aware_identities": 944,
+        "padding": false,
+        "taxonomy_stated_keys": 68,
+        "taxonomy_enumerated_keys": 144,
+        "taxonomy_denominator": null
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "competitor-feature-evidence.jsonl": "175c70bd5fb32b70f5bad8f390a39a2ed04ecf8139624406b6ed2f1365545ce8",
+        "feature-census-report.md": "e78ed62dd2c67e10c2e2cc133a0145ae049d6e6e2a4705a2a6b171c27759d87e",
+        "lane-state.json": "ff1c222a809363383607c272b0a2ffe6e9c806842db5229a21496a8226026c83"
+      }
+    },
+    {
+      "lane_id": "P7-INDUSTRY-JOINS-W7",
+      "status": "complete",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "join_records": 833,
+        "unique_canonical_identities": 833,
+        "coverage_industries": 17,
+        "buckets": 85,
+        "selected_defensible_metadata_joins": 485,
+        "held_or_unknown": 334,
+        "rejected": 14,
+        "underfilled_buckets": 50,
+        "quota_reached_buckets": 35,
+        "recorded_public_metadata_urls": 1708,
+        "target_attempts": 1700,
+        "page6_query_count": 85,
+        "http_attempts": 93,
+        "raw_returned_rows": 840,
+        "rate_limit_events": 8,
+        "prior_wave_identity_overlap": 0,
+        "duplicate_records": 0
+      },
+      "smoke": "PASS",
+      "artifact_hashes": {
+        "industry-repository-joins.jsonl": "4195ccc778aaa525a7a242e0778daee3dfad74d977d3c51d1c359a7285590849",
+        "underfilled-bucket-ledger.jsonl": "23898cc15dbd3e2abd9dfe700606b9306c423922b24a0ce14ccfacbc39d0bfb8",
+        "industry-coverage-report.md": "bd79f3c043eef30fd16b143575488043ec243878b1b3b07a4c0bd6bc4a0979a5",
+        "lane-state.json": "811c869b09ec8bb8941890b00d93b5296c5528d4f842f347bfc3b12a34d94e48"
+      }
+    },
+    {
+      "lane_id": "P7-RIGHTS-EVAL-READINESS-W7",
+      "status": "blocked",
+      "callback_status": "sent_and_verified",
+      "counts": {
+        "rights_provenance_rows": 0,
+        "rights_provenance_rows_requested": 100,
+        "repository_evaluation_rows": 0,
+        "repository_evaluation_rows_requested": 100,
+        "competitor_surface_evaluation_rows": 0,
+        "competitor_surface_evaluation_rows_max": 20,
+        "evaluation_total_rows": 0,
+        "evaluation_total_rows_max": 120,
+        "missing_repository_records": 100,
+        "missing_surface_records": 20,
+        "gcp_rank_requested_range": "501..600",
+        "surface_id_requested_range": "108..127",
+        "immutable_versions_captured": 0,
+        "model_runs": 0,
+        "runtime_runs": 0,
+        "benchmark_runs": 0,
+        "scans": 0,
+        "admitted_blocks": 0
+      },
+      "smoke": "PASS_WITH_EXPLICIT_BLOCKER",
+      "blocker": "immutable candidate ledger ends at GCP-500 and platform register existing_surface IDs end at 67; no substitutions or padding",
+      "artifact_hashes": {
+        "rights-provenance-ledger.jsonl": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "evaluation-readiness-ledger.jsonl": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "missing-source-reconciliation.json": "a1699c31c0a6772623628f1c8b8afd81e52cbea75f84118ed1348b072daf2a9a",
+        "rights-eval-report.md": "015b530420c7d9fe85309f3f20b7d6022d1ab2cbc5b33868010f3fe2ecc11b60",
+        "lane-state.json": "978bff4739978e16af213c70f0f3fe9b0d2ec951c9482cc8bebbf91929b382fb"
+      }
+    }
+  ],
+  "promotion_blockers": [
+    "1,430 complete industry-repository pairs remain; W7 selected partial pairs and did not promote any pair",
+    "The measured 17,000-slot matrix still has only 270 complete pairs; the 1,700-pair complete-repository invariant is not satisfied",
+    "Competitor feature taxonomy remains 68 stated versus 144 enumerated with no accepted denominator",
+    "W7 rights/evaluation is blocked: immutable GCP candidates stop at 500 and immutable existing-surface IDs stop at 67",
+    "Rights, SBOM, capability, evaluation, security, runtime, rollback, economics, and client/legal gates remain unexecuted or unknown",
+    "Industry discovery retains 50 underfilled buckets and does not pad or infer demand from public metadata"
+  ],
+  "independent_verification": {
+    "corpus": "CORPUS_W7_INDEPENDENT_PASS selections=170 edges=170 industries=17 per_industry=10 excluded_queue_union=860 prior_identity_excluded=2176 selected_overlap=0 complete=270 partial=3076 gap=1430 callback=sent_and_verified boundary=PASS",
+    "dimensions": "DIMENSION_W7_INDEPENDENT_PASS pairs=170 industries=17 ledger=1700 receipts=1700 dimensions=10 per_dimension=170 unique_pair_dimension=1700 excluded_prior=860 corpus_parity=PASS callback=sent_and_verified boundary=PASS hashes=PASS",
+    "features": "FEATURES_W7_INDEPENDENT_PASS rows=944 surfaces=118 ranked=117 gap=PS-118 keys=8 round=3 unique_round_aware=944 taxonomy=68-vs-144 boundary=PASS callback=sent_and_verified hashes=PASS",
+    "industry": "INDUSTRY_W7_INDEPENDENT_PASS joins=833 unique=833 coverage_industries=17 buckets=85 selected=485 hold=334 reject=14 underfilled=50 quota_reached=35 prior_overlap=0 urls=1708 queries=85 attempts=93 rate_events=8 callback=sent_and_verified boundary=PASS hashes=PASS",
+    "rights_eval": "RIGHTS_W7_INDEPENDENT_PASS rights=0 repo_eval=0 missing_repository_records=100 gcp=501-600 surface_eval=0 missing_surface_records=20 ids=108-127 blocked=PASS callback=sent_and_verified boundary=PASS output_hashes=PASS",
+    "coordinator_post_write_smoke": "W7_COORDINATOR_POST_WRITE_SMOKE_PASS receipt=verified lanes=5 callbacks=0 output_files=22 hashes=22 gap=1430 blocker=rights_missing_upstream_ids boundary=PASS"
+  },
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "implementation_authorized": false,
+    "admitted_blocks": 0,
+    "parent_goal_status": "active",
+    "phase_verified": false,
+    "overall_completion_claim": false,
+    "client_data": false,
+    "private_data": false,
+    "vendor_login": false,
+    "credentials": false,
+    "source_execution": false,
+    "clone_or_copy": false,
+    "build": false,
+    "deploy": false,
+    "benchmark": false,
+    "scan": false
+  }
+}

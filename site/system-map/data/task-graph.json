@@ -1,0 +1,260 @@
+{
+  "schema_version": "actionist.task-graph.v1",
+  "status": "designed_not_started",
+  "sprints": [
+    {
+      "id": "S1",
+      "title": "Independent evidence harvest",
+      "purpose": "Research the domains that do not require a finished cross-system contract. Five persistent Opus owners work in parallel.",
+      "gate": "Five verified evidence packets; no synthesis contracts promoted.",
+      "lanes": [
+        {
+          "id": "S1-L1",
+          "title": "Client demand science",
+          "parts": [
+            "P01",
+            "P02"
+          ],
+          "result": "Client-intelligence and ProductSpec evidence packs joined to all 17 industries.",
+          "notes": [
+            "Commercial discovery/product-spec survey",
+            "OSS discovery/spec agents",
+            "Industry priors and first-principles question policy"
+          ]
+        },
+        {
+          "id": "S1-L2",
+          "title": "Capability supply graph",
+          "parts": [
+            "P03"
+          ],
+          "result": "Top-100 candidate shelf with top-10 dossiers, overlap graph and industry joins.",
+          "notes": [
+            "Repository capability decomposition",
+            "Composite-repo overlap matrix",
+            "User-provided SaaS/repository lists retained as a separate source lane"
+          ]
+        },
+        {
+          "id": "S1-L3",
+          "title": "Experience science",
+          "parts": [
+            "P05",
+            "P06",
+            "P08"
+          ],
+          "result": "Component taxonomy, preference-science report and shell/archetype option map.",
+          "notes": [
+            "21st refresh/dedupe/gallery research",
+            "Choice modelling and stopping rules",
+            "ISSO, SISOCRM, Bykonz and competitor shell comparisons"
+          ]
+        },
+        {
+          "id": "S1-L4",
+          "title": "Host foundation",
+          "parts": [
+            "P09",
+            "P10",
+            "P11"
+          ],
+          "result": "Data, identity/settings/navigation and connector evidence packs.",
+          "notes": [
+            "Workload-based data study",
+            "Host absorption and donor chrome removal",
+            "Tenant-safe connector architecture"
+          ]
+        },
+        {
+          "id": "S1-L5",
+          "title": "Editor, runtime and learning",
+          "parts": [
+            "P13",
+            "P14",
+            "P15"
+          ],
+          "result": "Private/OSS editor census, runtime profiles and production-learning model.",
+          "notes": [
+            "Open Design and comparable editor census",
+            "Sandbox/release/rollback precedents",
+            "Evidence feedback and asset reranking"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Framework and contract synthesis",
+      "purpose": "Use Sprint 1 evidence to design the three missing cross-domain systems and formalize the experience/runtime contracts.",
+      "gate": "All 15 node contracts reconcile; solver dry-run returns no hidden dependency.",
+      "lanes": [
+        {
+          "id": "S2-L1",
+          "title": "Repo-to-block framework",
+          "parts": [
+            "P04"
+          ],
+          "result": "Source-shape protocol, normalization surgery map and three worked conversion traces.",
+          "notes": [
+            "Consumes P03, P09, P10 and P14",
+            "Service, transplant and package examples",
+            "Branding/onboarding/settings/token/update mechanics"
+          ]
+        },
+        {
+          "id": "S2-L2",
+          "title": "Design harmonization",
+          "parts": [
+            "P07"
+          ],
+          "result": "Token extraction/mapping contract and visual-coherence experiments.",
+          "notes": [
+            "Consumes P05 and P06 evidence",
+            "Tests three visually different donors",
+            "Produces semantic token and scoped bridge contracts"
+          ]
+        },
+        {
+          "id": "S2-L3",
+          "title": "Shell and editing framework",
+          "parts": [
+            "P08",
+            "P13"
+          ],
+          "result": "Archetype/shell contract plus an upgrade-safe visual change model.",
+          "notes": [
+            "Formalizes Sprint 1 option research",
+            "20/80 host/app pane and alternative shells",
+            "Replace/add/remove/theme/text edit taxonomy"
+          ]
+        },
+        {
+          "id": "S2-L4",
+          "title": "Deterministic composer",
+          "parts": [
+            "P12"
+          ],
+          "result": "Compatibility schema, solver, UNDERDETERMINED protocol and synthetic fixtures.",
+          "notes": [
+            "Consumes every Sprint 1 contract",
+            "Model receives feasible sets only",
+            "Measures glue budget and clarification needs"
+          ]
+        },
+        {
+          "id": "S2-L5",
+          "title": "Runtime and learning contracts",
+          "parts": [
+            "P14",
+            "P15"
+          ],
+          "result": "Runtime profile, qualification, release, rollback and feedback contracts.",
+          "notes": [
+            "Joins package/module/service execution",
+            "Defines accepted-build and maintained-client metrics",
+            "Independent review of framework operability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Convergence and pilot blueprint",
+      "purpose": "Pressure-test the complete graph against one industry workflow and produce a build-ready, independently reviewed pilot packet.",
+      "gate": "One chosen pilot, complete contracts, falsifiable evals and no unresolved critical edge.",
+      "lanes": [
+        {
+          "id": "S3-L1",
+          "title": "Pilot demand and workflow",
+          "parts": [
+            "P01",
+            "P02",
+            "P08"
+          ],
+          "result": "Industry choice, client workflow, archetype and acceptance fixtures.",
+          "notes": [
+            "Scores all 17 industries",
+            "Requires an accessible client path",
+            "Keeps one generic dashboard as control only"
+          ]
+        },
+        {
+          "id": "S3-L2",
+          "title": "Pilot supply pack",
+          "parts": [
+            "P03",
+            "P04",
+            "P05",
+            "P07"
+          ],
+          "result": "Exact service, block, components and visual bindings for the pilot.",
+          "notes": [
+            "Pins reuse shapes",
+            "Records normalization surgery",
+            "No substitute or padding when supply is weak"
+          ]
+        },
+        {
+          "id": "S3-L3",
+          "title": "Pilot host pack",
+          "parts": [
+            "P09",
+            "P10",
+            "P11",
+            "P14"
+          ],
+          "result": "Data, identity, settings, connectors, runtime and rollback plan.",
+          "notes": [
+            "One owner per state resource",
+            "Tenant-safe external actions",
+            "Preview and production profiles"
+          ]
+        },
+        {
+          "id": "S3-L4",
+          "title": "Pilot assembly and editor",
+          "parts": [
+            "P12",
+            "P13"
+          ],
+          "result": "Deterministic AssemblyPlan, bounded change model and complete eval sequence.",
+          "notes": [
+            "No open-ended codegen assumption",
+            "Compares custom build, direct generation and assembly",
+            "Measures tokens, repairs and glue size"
+          ]
+        },
+        {
+          "id": "S3-L5",
+          "title": "Independent adversary",
+          "parts": [
+            "P15"
+          ],
+          "result": "Cross-source verification, contradiction ledger and proceed/redesign/stop verdict.",
+          "notes": [
+            "Owns no design artifact",
+            "Attempts to falsify every promoted claim",
+            "Checks all 15 pages and source receipts"
+          ]
+        }
+      ]
+    }
+  ],
+  "common_reads": [
+    "AGENTS.md and CURRENT_STATE.md",
+    "knowledge/00-MASTER-SYNTHESIS.md",
+    "knowledge/02-ASSUMPTION-LEDGER.md",
+    "knowledge/03-EVIDENCE-MAP.md",
+    "17-industry specifications and niche→atom→block join",
+    "The dedicated page and linked resources for every owned part"
+  ],
+  "output_contract": [
+    "research-report.md — source-backed findings and synthesis",
+    "source-register.jsonl — every commercial, OSS and local source",
+    "top-companies.jsonl and top-repos.jsonl — explicit denominators and top-10 dossiers",
+    "innovation-register.jsonl — wide ideas, scores and retained top 10",
+    "first-principles.md — irreducible problem, assumptions, contradictions and design",
+    "decision-ledger.json — decisions, confidence, falsifiers and dependencies",
+    "lane-state.json — counts, hashes, blockers, verification and callback"
+  ]
+}
