@@ -1,6 +1,6 @@
 {
-  "schema_version": "actionist.task-graph.v1",
-  "status": "designed_not_started",
+  "schema_version": "actionist.task-graph.v2",
+  "status": "sprint_1_running",
   "sprints": [
     {
       "id": "S1",
@@ -240,6 +240,172 @@
       ]
     }
   ],
+  "convergence": {
+    "id": "S1-GATE",
+    "title": "Sprint 1 evidence convergence",
+    "owner": "CENA coordinator",
+    "status": "waiting_for_five_lane_callbacks",
+    "purpose": "Turn five independent lane returns into one verified architectural handoff. Research owners supply evidence; the coordinator reconciles it; an independent verifier attacks it; Shaan decides consequential trade-offs.",
+    "waits_for": [
+      "S1-L1",
+      "S1-L2",
+      "S1-L3",
+      "S1-L4",
+      "S1-L5"
+    ],
+    "inputs": [
+      {
+        "lane": "S1-L1",
+        "parts": [
+          "P01",
+          "P02"
+        ],
+        "contribution": "Client evidence, industry priors, question policy and candidate ProductSpec."
+      },
+      {
+        "lane": "S1-L2",
+        "parts": [
+          "P03"
+        ],
+        "contribution": "Capability shelf, top-10 dossiers, overlap graph and industry joins."
+      },
+      {
+        "lane": "S1-L3",
+        "parts": [
+          "P05",
+          "P06",
+          "P08"
+        ],
+        "contribution": "Component taxonomy, preference experiments and shell/archetype options."
+      },
+      {
+        "lane": "S1-L4",
+        "parts": [
+          "P09",
+          "P10",
+          "P11"
+        ],
+        "contribution": "Data ownership, host identity/settings/navigation and connector constraints."
+      },
+      {
+        "lane": "S1-L5",
+        "parts": [
+          "P13",
+          "P14",
+          "P15"
+        ],
+        "contribution": "Editor operations, runtime/release profiles and learning evidence."
+      }
+    ],
+    "part_packets": [
+      "P01",
+      "P02",
+      "P03",
+      "P05",
+      "P06",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P13",
+      "P14",
+      "P15"
+    ],
+    "artifacts": [
+      {
+        "file": "S1-CONVERGENCE.md",
+        "purpose": "Readable synthesis of shared findings, contradictions, unknowns and architectural implications."
+      },
+      {
+        "file": "s1-contract-handoff.json",
+        "purpose": "Machine-readable candidate inputs, outputs, invariants and unresolved fields for every moving part."
+      },
+      {
+        "file": "cross-lane-dependency-matrix.json",
+        "purpose": "Exact evidence and contract dependencies between Sprint 1 findings and Sprint 2 owners."
+      },
+      {
+        "file": "s1-decision-gates.json",
+        "purpose": "Resolved, provisional, contradictory, experiment-required, operator-required and deferred decisions."
+      }
+    ],
+    "artifact_root": "research/workstreams/2026-08-27-sprint-1/convergence/",
+    "verification": [
+      "Coordinator verifies packet counts, source identities, hashes, evidence classes and links.",
+      "Claims are deduplicated and normalized without rewriting historical receipts.",
+      "Contradictions and missing evidence remain explicit; no majority-vote synthesis.",
+      "A fresh-context Opus verifier attempts to falsify promoted claims but owns no product decision.",
+      "Shaan reviews decisions that change product direction, scope or irreversible architecture."
+    ],
+    "decision_states": [
+      "resolved_by_evidence",
+      "provisional",
+      "contradictory",
+      "requires_experiment",
+      "requires_shaan",
+      "deferred_to_pilot"
+    ],
+    "sprint_2_edges": [
+      {
+        "lane": "S2-L1",
+        "parts": [
+          "P03",
+          "P09",
+          "P10",
+          "P14"
+        ],
+        "result": "P04 repo-to-block framework"
+      },
+      {
+        "lane": "S2-L2",
+        "parts": [
+          "P05",
+          "P06"
+        ],
+        "result": "P07 design harmonization contract"
+      },
+      {
+        "lane": "S2-L3",
+        "parts": [
+          "P05",
+          "P06",
+          "P08",
+          "P13"
+        ],
+        "result": "Formal P08 shell and P13 bounded-editor contracts"
+      },
+      {
+        "lane": "S2-L4",
+        "parts": [
+          "P01",
+          "P02",
+          "P03",
+          "P05",
+          "P06",
+          "P08",
+          "P09",
+          "P10",
+          "P11",
+          "P13",
+          "P14",
+          "P15"
+        ],
+        "result": "P12 deterministic composer and compatibility schema"
+      },
+      {
+        "lane": "S2-L5",
+        "parts": [
+          "P09",
+          "P10",
+          "P11",
+          "P14",
+          "P15"
+        ],
+        "result": "Formal runtime, qualification, release, rollback and learning contracts"
+      }
+    ],
+    "promotion_gate": "All five lane callbacks exist, twelve part packets pass structural and claim verification, four convergence artifacts exist, contradictions are classified, and operator-required decisions are reviewed. Until then Sprint 2 remains blocked."
+  },
   "common_reads": [
     "AGENTS.md and CURRENT_STATE.md",
     "knowledge/00-MASTER-SYNTHESIS.md",

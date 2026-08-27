@@ -10,9 +10,17 @@
   "execution_status": "UNEXECUTED",
   "admission_status": "NOT_ADMITTED",
   "admitted_blocks": 0,
-  "model": "fable[1m]",
+  "model": "opus[1m]",
   "context_window": "1M",
-  "subagent_model_policy": "opus_only",
+  "subagent_model_policy": "opus_5_only",
+  "model_transition": {
+    "from": "fable[1m]",
+    "to": "opus[1m]",
+    "method": "in_place_model_switch",
+    "sessions_preserved": true,
+    "checkpoints_preserved": true,
+    "completed_subagent_outputs_preserved": true
+  },
   "herdr": {
     "session": "herdr-2",
     "workspace_id": "w65a03bb5881be2",

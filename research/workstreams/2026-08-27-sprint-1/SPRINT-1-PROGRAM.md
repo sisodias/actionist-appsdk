@@ -6,7 +6,9 @@ Status: dispatched, unpromoted
 
 ## Objective
 
-Resolve the independent research questions behind the first Actionist architecture pass without prematurely designing the cross-domain contracts. Five persistent Fable agents own disjoint moving-part directories and may use only Opus subagents.
+Resolve the independent research questions behind the first Actionist architecture pass without prematurely designing the cross-domain contracts. Five persistent Opus 5 agents own disjoint moving-part directories and may use only Opus 5 subagents.
+
+Runtime correction: the five original sessions were switched in place from Fable 5 to Opus 5 with 1M context on 2026-08-27. Session IDs, transcripts, checkpoints, files and completed teammate outputs were preserved. The historical run ID retains `fable` to avoid breaking already-written paths; it no longer describes the active model.
 
 ## Depth contract
 

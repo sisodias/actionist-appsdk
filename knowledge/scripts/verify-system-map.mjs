@@ -62,7 +62,15 @@ const taskGraph = JSON.parse(await readFile(resolve(root, 'site', 'system-map', 
 if (partRegistry.length !== 15) failures.push(`part_registry_count:${partRegistry.length}`);
 if (taskGraph.sprints?.length !== 3) failures.push(`sprint_count:${taskGraph.sprints?.length}`);
 if (taskGraph.sprints?.some(sprint => sprint.lanes.length !== 5)) failures.push('sprint_lane_count_not_five');
-if (taskGraph.status !== 'designed_not_started') failures.push('task_graph_dispatch_boundary');
+if (taskGraph.status !== 'sprint_1_running') failures.push('task_graph_dispatch_boundary');
+if (taskGraph.schema_version !== 'actionist.task-graph.v2') failures.push('task_graph_schema_version');
+if (taskGraph.convergence?.id !== 'S1-GATE') failures.push('convergence_gate_missing');
+if (taskGraph.convergence?.owner !== 'CENA coordinator') failures.push('convergence_owner');
+if (taskGraph.convergence?.waits_for?.length !== 5) failures.push('convergence_wait_count');
+if (taskGraph.convergence?.part_packets?.length !== 12) failures.push('convergence_part_packet_count');
+if (taskGraph.convergence?.artifacts?.length !== 4) failures.push('convergence_artifact_count');
+if (taskGraph.convergence?.sprint_2_edges?.length !== 5) failures.push('convergence_sprint_2_edge_count');
+if (!taskGraph.convergence?.sprint_2_edges?.find(edge => edge.lane === 'S2-L4' && edge.parts.length === 12)) failures.push('composer_full_input_edge');
 
 for (const part of partRegistry) {
   const pagePath = resolve(root, 'site', 'system-map', part.page, 'index.html');
@@ -78,7 +86,7 @@ for (const part of partRegistry) {
 
 const taskPage = await readFile(resolve(root, 'site', 'system-map', 'task-graph', 'index.html'), 'utf8').catch(() => null);
 if (!taskPage) failures.push('task_graph_page_missing');
-for (const required of ['Independent evidence harvest', 'Framework and contract synthesis', 'Convergence and pilot blueprint', 'How every agent gets enough context']) {
+for (const required of ['Independent evidence harvest', 'Sprint 1 evidence convergence', 'Exact handoff into Sprint 2', 'S1-CONVERGENCE.md', 'Framework and contract synthesis', 'Convergence and pilot blueprint', 'How every agent gets enough context']) {
   if (!taskPage?.includes(required)) failures.push(`task_graph_content:${required}`);
 }
 
@@ -87,4 +95,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-process.stdout.write('SYSTEM_MAP_SMOKE_PASS parts=15 pages=15 groups=8 sprints=3 lanes=15 dependencies=valid notes=enabled theme=trader-os-action-model\n');
+process.stdout.write('SYSTEM_MAP_SMOKE_PASS parts=15 pages=15 groups=8 sprints=3 lanes=15 convergence=5-to-12-to-4-to-5 dependencies=valid notes=enabled theme=trader-os-action-model\n');

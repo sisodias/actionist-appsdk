@@ -68,6 +68,22 @@
 .context-card { padding: 17px; border: 1px solid var(--paper-line); border-radius: 11px; background: #fff; }
 .context-card h3 { margin: 0 0 8px; color: #76578b; font: 550 8px "Geist Mono", monospace; text-transform: uppercase; }
 .context-card li { color: #6e6770; font-size: 9px; }
+.convergence { margin-top: 16px; padding: 22px; border: 1px solid #c9eadf; border-radius: 14px; background: #edf9f5; }
+.convergence-head { display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 20px; align-items: start; }
+.convergence-head h2 { margin: 8px 0 6px; color: #273a35; font-size: 24px; }
+.convergence-head p { max-width: 840px; margin: 0; color: #61766f; font-size: 10px; line-height: 1.55; }
+.convergence-status { color: #39715f; font: 550 8px "Geist Mono", monospace; text-align: right; text-transform: uppercase; }
+.convergence-flow { display: grid; grid-template-columns: repeat(7,auto); gap: 12px; align-items: center; justify-content: center; margin: 22px 0; }
+.convergence-flow div { min-width: 120px; padding: 13px 16px; border: 1px solid #c4e5da; border-radius: 10px; background: #fff; text-align: center; }
+.convergence-flow strong { display: block; color: #2f6d59; font-size: 23px; }
+.convergence-flow span { color: #758b84; font-size: 8px; text-transform: uppercase; }
+.convergence-flow b { color: #65a993; font-size: 18px; }
+.convergence-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
+.convergence-grid article { padding: 14px; border: 1px solid #cbe8df; border-radius: 10px; background: rgba(255,255,255,.84); }
+.convergence-grid p { color: #62776f; font-size: 9px; line-height: 1.45; }
+.convergence-artifacts { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 10px; }
+.matrix-title { margin: 22px 0 9px; color: #39715f; font: 600 9px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
+.convergence .artifact-table a { color: #39715f; font-weight: 600; text-decoration: none; }
 
-@media (max-width: 1050px) { .research-protocol { grid-template-columns: repeat(2,1fr); } .lane-grid { grid-template-columns: repeat(2,1fr); } .lane { border-bottom: 1px solid var(--paper-line); } }
-@media (max-width: 700px) { .node-shell { width: 100%; margin: 0; border-radius: 0; } .node-header { padding: 0 15px; } .node-content { width: calc(100% - 30px); padding-top: 32px; } .node-hero, .node-grid, .context-pack { grid-template-columns: 1fr; } .node-card.wide { grid-column: auto; } .research-protocol, .graph-summary, .lane-grid { grid-template-columns: 1fr; } .sprint-head { grid-template-columns: 45px 1fr; } .sprint-gate { grid-column: 1/-1; text-align: left; } .lane { border-right: 0; } }
+@media (max-width: 1050px) { .research-protocol { grid-template-columns: repeat(2,1fr); } .lane-grid, .convergence-grid { grid-template-columns: repeat(2,1fr); } .lane { border-bottom: 1px solid var(--paper-line); } .convergence-flow { grid-template-columns: 1fr; } .convergence-flow b { transform: rotate(90deg); text-align: center; } }
+@media (max-width: 700px) { .node-shell { width: 100%; margin: 0; border-radius: 0; } .node-header { padding: 0 15px; } .node-content { width: calc(100% - 30px); padding-top: 32px; } .node-hero, .node-grid, .context-pack, .convergence-head, .convergence-grid, .convergence-artifacts { grid-template-columns: 1fr; } .convergence-status { text-align: left; } .node-card.wide { grid-column: auto; } .research-protocol, .graph-summary, .lane-grid { grid-template-columns: 1fr; } .sprint-head { grid-template-columns: 45px 1fr; } .sprint-gate { grid-column: 1/-1; text-align: left; } .lane { border-right: 0; } }
