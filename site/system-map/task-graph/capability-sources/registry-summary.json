@@ -1,0 +1,26 @@
+{
+  "schema_version": "actionist.capability-source-registry.v1",
+  "generated_at": "2026-08-28",
+  "counts": {
+    "total_sources": 191,
+    "expanded_universe_seeds": 144,
+    "p03_deeper_evidence": 100,
+    "historical_operator_nominations": 30,
+    "client_runtime_precedents": 7,
+    "bykonz_pass_or_hold": 7,
+    "admitted_sources": 0
+  },
+  "source_programs": [
+    "expanded_base_universe",
+    "p03_capability_shelf",
+    "foundry_great_library",
+    "bykonz_client_precedents",
+    "operator_nominations"
+  ],
+  "status": "current_projection_not_qualification_or_admission",
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "admitted_sources": 0
+  }
+}

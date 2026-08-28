@@ -1,0 +1,99 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P14",
+  "lane": "S2-L5",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "status": { "research_only": true, "execution_status": "UNEXECUTED", "admission_status": "NOT_ADMITTED", "admitted_blocks": 0 },
+  "decisions": [
+    {
+      "id": "D-S2-P14-01",
+      "decision": "Runtime profile is selected by declared state/migration ownership, not by deployment convenience.",
+      "rationale": "Two capabilities with identical Dockerfiles take different profiles if one owns a database. Prevents sidecar-service becoming the dumping ground for anything awkward to bundle.",
+      "rejected_alternative": "Select profile by packaging artifact type.",
+      "why_rejected": "Artifact type does not determine who owns migrations, which is the property that sets the recovery horizon.",
+      "state": "proposed",
+      "falsifier": "AP14-1 — a representative capability fitting no profile. Likeliest: iframe-with-own-origin isolation owning no store."
+    },
+    {
+      "id": "D-S2-P14-02",
+      "decision": "attribution_class is an admission-blocking, induced-failure-verified property; 'none' is inadmissible.",
+      "rationale": "Sprint 1 found only 4 of 29 vendors reach dependency-level attribution and that an uninstrumentable capability caps the system at the call boundary. Recording the ceiling stops P15 fabricating fine-grained blame.",
+      "rejected_alternative": "Self-declared attribution level from the capability's documentation.",
+      "why_rejected": "Elastic's failure mode is silent — no traceparent propagation means the capability simply does not appear, rather than appearing as a gap. Declaration cannot be trusted without an induced failure.",
+      "state": "proposed",
+      "falsifier": "F-P14-ATTRIB — >20% of induced failures unattributable."
+    },
+    {
+      "id": "D-S2-P14-03",
+      "decision": "An uncomputable recovery horizon contributes 0 and thereby refuses the release (H-3).",
+      "rationale": "Unknown must not be optimistic. Making it arithmetic rather than a separate rule means it cannot be forgotten.",
+      "rejected_alternative": "Treat uncomputable horizons as a warning.",
+      "why_rejected": "A warning at release time is discovered during an incident, which is the exact failure I-P14-2 exists to prevent.",
+      "state": "proposed",
+      "falsifier": "Horizons prove uncomputable for most real objects, making every release refused and the rule unusable."
+    },
+    {
+      "id": "D-S2-P14-04",
+      "decision": "Unrecoverable effects are held outside the horizon calculation in non_recoverable_effects (H-4).",
+      "rationale": "A sent email cannot be unsent. Under a naive minimum rule it would contribute 0 and make every composition containing a notification job permanently unreleasable.",
+      "rejected_alternative": "Treat unrecoverable objects as horizon 0.",
+      "why_rejected": "Conflates 'cannot be undone' with 'cannot be released'. The minimum governs recovery, not effects that were never recoverable.",
+      "state": "proposed",
+      "falsifier": "The distinction proves unmaintainable — operators reclassify recoverable objects as non-recoverable to bypass the refusal."
+    },
+    {
+      "id": "D-S2-P14-05",
+      "decision": "Rollback rehearsal evidence is per object class, reusable while mechanism and horizon are unchanged.",
+      "rationale": "Rehearsing artifact rollback proves nothing about schema rollback. Per-release rehearsal of every class would be unaffordable and would be skipped.",
+      "rejected_alternative": "Rehearse the full plan on every release.",
+      "why_rejected": "A gate too expensive to run is a gate that gets waived.",
+      "state": "proposed",
+      "falsifier": "F-P14-ROLLBACK — a rehearsed rollback leaves an object unrestored, indicating class-level rehearsal does not generalize across releases."
+    },
+    {
+      "id": "D-S2-P14-06",
+      "decision": "Rollback executes in a fixed dependency order; worker drain precedes artifact revert.",
+      "rationale": "Reverting code before draining leaves old binaries consuming envelopes written by newer code; reverting schema before code points live new code at an old schema.",
+      "rejected_alternative": "Revert all objects concurrently for speed.",
+      "why_rejected": "Concurrency across dependent objects converts a recoverable outage into state corruption.",
+      "state": "proposed",
+      "falsifier": "E-P14-1 — an executed multi-object rollback in this order still leaves an object unrestored."
+    },
+    {
+      "id": "D-S2-P14-07",
+      "decision": "Do not add a sixth runtime profile for iframe-own-origin isolation on current evidence.",
+      "rationale": "The seam is real but unfalsified. A speculative profile is harder to remove than a named open seam is to close.",
+      "rejected_alternative": "Add an 'isolated-surface' profile now.",
+      "why_rejected": "AP14-1 has not been falsified by a representative capability; adding a profile pre-emptively would be designing for an imagined case.",
+      "state": "proposed",
+      "falsifier": "A real capability requiring origin isolation without store ownership."
+    }
+  ],
+  "open_contradictions": [
+    {
+      "id": "X-P14-1",
+      "statement": "ComputeSDK cannot be the load-bearing abstraction if memory-preserving pause is a justifying property; its interface has no pause/resume and its status enum cannot represent a paused sandbox.",
+      "state": "resolved_against_the_abstraction",
+      "note": "This lane does not select among the three options (direct E2B binding, getInstance escape hatch, or an Actionist-owned narrow interface). It records that the choice must be explicit because the failure mode is silent: previews cold-boot and lose process state with no runtime error.",
+      "caveat": "Static read of the interface at main on 2026-08-27; no execution against a live provider."
+    },
+    {
+      "id": "X-P14-5 / AP14-5",
+      "statement": "K long-lived schema versions exceed pgroll and reshape, which hold two versions transiently between start and complete.",
+      "state": "doubtful_not_assumed",
+      "note": "Sprint 2 contracts do not assume K-version coexistence. Fallback is lockstep upgrade, whose cost must be priced (GP14-D)."
+    },
+    {
+      "id": "X-P14-3",
+      "statement": "Multi-node Caddy may need a custom binary for shared certificate storage.",
+      "state": "secondary_sourced_unconfirmed",
+      "note": "Not relied upon by any Sprint 2 contract."
+    },
+    {
+      "id": "X-P14-6",
+      "statement": "Vendor rollback claims (Northflank one-click, Datadog Synthetics automatic rollback) are asserted without documented mechanism.",
+      "state": "open",
+      "note": "Must not be quoted as capability. Verify before reliance."
+    }
+  ]
+}

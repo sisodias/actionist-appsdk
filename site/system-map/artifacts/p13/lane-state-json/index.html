@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P13 research artifact lane-state.json"><link rel="icon" href="../../../favicon.svg"><title>P13 · lane-state.json · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p13/">P13</a> / Research artifact / lane-state.json</div><div class="node-actions"><a class="button" href="../raw/lane-state.json" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>lane-state.json</h1><p><code>research/workstreams/p13-preview-editor/runs/2026-08-27-sprint-1-fable/lane-state.json</code></p></div><pre class="artifact-source">{
+  &quot;schema_version&quot;: &quot;actionist.lane-state.v1&quot;,
+  &quot;part&quot;: &quot;P13&quot;,
+  &quot;title&quot;: &quot;Preview, editor and change loop&quot;,
+  &quot;lane&quot;: &quot;S1-L5&quot;,
+  &quot;run_id&quot;: &quot;2026-08-27-sprint-1-fable&quot;,
+  &quot;owner_agent&quot;: &quot;ACTIONIST-S1-L5-RUNTIME&quot;,
+  &quot;parent_model_at_report&quot;: &quot;opus-5[1m]&quot;,
+  &quot;parent_model_at_wave1&quot;: &quot;fable-5[1m]&quot;,
+  &quot;subagent_model_policy&quot;: &quot;opus_only&quot;,
+  &quot;subagent_policy_violations&quot;: 0,
+  &quot;recorded&quot;: &quot;2026-08-27&quot;,
+  &quot;waves&quot;: 2,
+  &quot;counts&quot;: {
+    &quot;commercial_records&quot;: 40,
+    &quot;commercial_top10&quot;: 10,
+    &quot;oss_records&quot;: 70,
+    &quot;oss_top10&quot;: 10,
+    &quot;innovations&quot;: 100,
+    &quot;innovations_ranked&quot;: 10,
+    &quot;source_register_records&quot;: 26,
+    &quot;decisions&quot;: 8
+  },
+  &quot;denominator_targets&quot;: {
+    &quot;commercial&quot;: 100,
+    &quot;oss&quot;: 100,
+    &quot;innovations&quot;: 100
+  },
+  &quot;denominator_met&quot;: {
+    &quot;commercial&quot;: false,
+    &quot;oss&quot;: false,
+    &quot;innovations&quot;: true
+  },
+  &quot;denominator_notes&quot;: {},
+  &quot;files&quot;: {
+    &quot;research-report.md&quot;: {
+      &quot;bytes&quot;: 11421,
+      &quot;sha256_16&quot;: &quot;423f98c481be15c0&quot;
+    },
+    &quot;source-register.jsonl&quot;: {
+      &quot;bytes&quot;: 10399,
+      &quot;sha256_16&quot;: &quot;86aa80b72c46e910&quot;,
+      &quot;records&quot;: 26,
+      &quot;parse_failures&quot;: 0
+    },
+    &quot;top-companies.jsonl&quot;: {
+      &quot;bytes&quot;: 52643,
+      &quot;sha256_16&quot;: &quot;bf4c9a6bf7c9a22d&quot;,
+      &quot;records&quot;: 40,
+      &quot;parse_failures&quot;: 0
+    },
+    &quot;top-repos.jsonl&quot;: {
+      &quot;bytes&quot;: 103185,
+      &quot;sha256_16&quot;: &quot;4314ba1e60c8e849&quot;,
+      &quot;records&quot;: 70,
+      &quot;parse_failures&quot;: 0
+    },
+    &quot;innovation-register.jsonl&quot;: {
+      &quot;bytes&quot;: 47416,
+      &quot;sha256_16&quot;: &quot;db58a90a1e4ac662&quot;,
+      &quot;records&quot;: 100,
+      &quot;parse_failures&quot;: 0
+    },
+    &quot;first-principles.md&quot;: {
+      &quot;bytes&quot;: 14801,
+      &quot;sha256_16&quot;: &quot;8536eed0afa67359&quot;
+    },
+    &quot;decision-ledger.json&quot;: {
+      &quot;bytes&quot;: 3703,
+      &quot;sha256_16&quot;: &quot;08986454fe073aaa&quot;
+    },
+    &quot;lane-state.json&quot;: {
+      &quot;bytes&quot;: 2707,
+      &quot;sha256_16&quot;: &quot;8709e0112061cb83&quot;
+    }
+  },
+  &quot;missing_required_files&quot;: [],
+  &quot;checkpoints&quot;: [
+    &quot;checkpoint-1-prior-evidence-audit.md&quot;,
+    &quot;checkpoint-2-3-survey-wave-1.md&quot;,
+    &quot;checkpoint-4-verification-and-callback.md&quot;,
+    &quot;local-estate-join.md&quot;,
+    &quot;cross-lane-inputs-S1-L4.md&quot;
+  ],
+  &quot;boundary&quot;: {
+    &quot;research_only&quot;: true,
+    &quot;execution_status&quot;: &quot;UNEXECUTED&quot;,
+    &quot;admission_status&quot;: &quot;NOT_ADMITTED&quot;,
+    &quot;admitted_blocks&quot;: 0,
+    &quot;implementation_authorized&quot;: false,
+    &quot;client_data_used&quot;: false,
+    &quot;vendor_login_used&quot;: false,
+    &quot;repository_code_copied&quot;: false,
+    &quot;external_side_effects&quot;: &quot;none&quot;,
+    &quot;production_deployment&quot;: false,
+    &quot;executed_rollback&quot;: false,
+    &quot;wrote_only_owned_paths&quot;: true,
+    &quot;sprint_promotion&quot;: &quot;unpromoted&quot;,
+    &quot;parent_goal_status&quot;: &quot;active&quot;
+  },
+  &quot;blockers&quot;: [
+    &quot;Account-wide usage limit terminated survey wave 1 across all six subagents; BLOCKED not FAIL.&quot;,
+    &quot;Commercial/OSS denominator shortfalls recorded per survey; no padding.&quot;
+  ]
+}</pre></div></main></body></html>

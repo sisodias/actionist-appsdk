@@ -1,0 +1,225 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P12",
+  "part_title": "Deterministic composer and assembly planning",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "lane": "S2-L4",
+  "owner_domain": "D15",
+  "observed_at": "2026-08-27",
+
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "no_model_run": true,
+    "no_registry_query": true,
+    "no_solver_implemented": true,
+    "no_benchmark_run": true
+  },
+
+  "decisions": [
+    {
+      "id": "P12-D-01",
+      "decision": "The solver returns three verdicts (FEASIBLE, INFEASIBLE, UNDERDETERMINED), never two.",
+      "state": "proposed",
+      "rationale": "Collapsing UNDERDETERMINED into INFEASIBLE discards viable modules on absent evidence and silently suppresses the contract defect. Collapsing it into FEASIBLE fabricates compatibility — the failure a green build never catches.",
+      "source": "Phase 8 §6.2 (E); A-ledger invariant 5 (E)",
+      "falsifier": "A real composition corpus where UNDERDETERMINED never distinguishes a case that INFEASIBLE would have handled correctly."
+    },
+    {
+      "id": "P12-D-02",
+      "decision": "22 rules evaluate in a fixed total order across 7 phases; the FIRST failing rule names the verdict.",
+      "state": "proposed",
+      "rationale": "The named constraint selects the next gate. An unordered solver picking 'the worst' failure requires a severity ranking, which is a judgement call — exactly what a deterministic solver must not contain.",
+      "source": "Phase 8 §10.5.1 (E); demonstrated in solver-dry-run.md §2",
+      "falsifier": "Operators consistently need a constraint other than the first-failing one to plan the next action."
+    },
+    {
+      "id": "P12-D-03",
+      "decision": "migration_owner is a SEPARATE constraint from namespace.",
+      "state": "proposed",
+      "rationale": "namespace catches COLLISION (two modules naming one object; fix = rename/reshape). migration_owner catches contested AUTHORITY over an object both legitimately touch (fix = a human product decision). Same symptom, different disease, different gate. Folding them is the most plausible simplification available and it is wrong.",
+      "source": "P04 C6 (E) — the only composition rule proved by OPERATING it (SISOCRM Prisma/Teable vs Django/Plane); INV-P09-1 (E)",
+      "falsifier": "No real composition distinguishes the two; then merge and simplify the table."
+    },
+    {
+      "id": "P12-D-04",
+      "decision": "One migration owner per RESOURCE, not per composition.",
+      "state": "proposed",
+      "rationale": "CF-01 has two legitimate migration owners (donor_upstream for an intact service, actionist_single_owner for absorbed/owned code) and no contested resource. A solver enforcing one owner per COMPOSITION would reject it and make heterogeneous reuse impossible — defeating the Actionist thesis.",
+      "source": "A11/A12 (E); P09 decision table (E)",
+      "falsifier": "A pilot workflow that cannot be expressed without two writers on one resource."
+    },
+    {
+      "id": "P12-D-05",
+      "decision": "Candidate ranking is min-gated on the weakest evidence family, never a weighted average.",
+      "state": "proposed",
+      "rationale": "A weighted score is DESIGNED to let strength in one dimension compensate for weakness in another. For a capability entering a client's production system that is catastrophic: excellent adaptation cost plus unresolved rights must not outrank clean rights.",
+      "source": "I-P15-2 (E) — a deliberate divergence from the entire external recommender census; P14 C6 (E)",
+      "falsifier": "F-P12-05: weighted scoring selects better assets in a paired comparison."
+    },
+    {
+      "id": "P12-D-06",
+      "decision": "The composer consumes exactly five ProductSpec field groups; everything else is for humans, acceptance and learning.",
+      "state": "proposed",
+      "rationale": "Closes P02's explicit deferral: 'The minimum cannot be closed until S2-L4 defines what the composer consumes.' Consumed: requirements[].atom, requirements[].authority, requirements[].coverage, entities[], and the session ladders (authority_ceiling, data_mode, non_goals).",
+      "source": "P02 first-principles §12 (E)",
+      "falsifier": "F-P12-07: a composition needs a sixth field."
+    },
+    {
+      "id": "P12-D-07",
+      "decision": "The composer refuses to plan against a spec with open_markers > 0 or uncovered_requirements > 0, absent a recorded waiver_ref. It never resolves a marker itself.",
+      "state": "proposed",
+      "rationale": "P02's own A4 names the failure: marker count falling because the model got confident rather than because ambiguity was resolved. A composer that clears markers is that failure.",
+      "source": "P02 §6 computed gates (E); P02 A4 (E)",
+      "falsifier": "Gate proves ceremonial — near-100% waiver rate."
+    },
+    {
+      "id": "P12-D-08",
+      "decision": "Nine constraints are added to Phase 8's ten: identity, navigation, migration_owner, tenancy, rollback, host_version, glue_budget, observability_identity, evidence_tier.",
+      "state": "proposed",
+      "rationale": "Each names a failure the original ten could not. Every one traces to a specific Sprint 1 packet that proved the failure rather than hypothesised it.",
+      "source": "P10, P09, P11, P14, P15, P04 (all E)",
+      "falsifier": "A constraint that never fires distinctly across a real corpus is redundant and should be merged."
+    },
+    {
+      "id": "P12-D-09",
+      "decision": "The solver may never relax a constraint; relaxations_applied is const 0.",
+      "state": "proposed",
+      "rationale": "A solver that degrades gracefully by dropping a constraint is indistinguishable from a broken solver, and makes every downstream eval result uninterpretable. Relaxation is a human decision recorded as an approval event.",
+      "source": "Phase 8 §6.3 solver honesty rule (E)",
+      "falsifier": "None expected; this is definitional. Violation voids the plan."
+    },
+    {
+      "id": "P12-D-10",
+      "decision": "Glue-budget overflow with exceeded_action=escalate_human_review yields FEASIBLE with feasibility_class=determined_with_human_gate, NOT a refusal.",
+      "state": "proposed",
+      "rationale": "Treating every overflow as a refusal makes escalate_human_review dead config. But feasible-with-a-gate must never read as promotable — hence a distinct feasibility_class rather than a bare FEASIBLE.",
+      "source": "P04 BindingPlan.glue_budget.exceeded_action (E)",
+      "falsifier": "CF-21: a solver that cannot distinguish the two states."
+    },
+    {
+      "id": "P12-D-11",
+      "decision": "Glue budget must be priced PER COST CLASS (cosmetic / boundary / architectural), not as one changed-lines ceiling. Recorded as an OWED REVISION to R-GLUE, not yet applied.",
+      "state": "proposed_owed_revision",
+      "rationale": "S2-L1's normalization taxonomy (28 surgeries / 14 categories, split 3 cosmetic / 13 boundary / 12 architectural) operationalises the master synthesis distinction: replacing a logo is trivial, replacing migration authority is not. A single line-count ceiling cannot tell them apart.",
+      "source": "P04 normalization-surgery-taxonomy.jsonl (E, read 2026-08-27); knowledge/00-MASTER-SYNTHESIS.md (E)",
+      "why_not_applied_now": "Changing a rule after the dry run executed against it would leave the traces describing a table that no longer exists. The dry run's value is that it was executed against the table as written.",
+      "falsifier": "F-P12-06: overflow does not correlate with reuse-shape errors once priced per class."
+    }
+  ],
+
+  "invariants_enforced_not_authored": [
+    { "id": "I1", "statement": "One authoritative owner per stateful resource", "source": "A11 / INV-P09-1", "enforced_by": "R-MIGOWNER" },
+    { "id": "I3", "statement": "Models cannot grant themselves data, tenant or side-effect authority", "source": "A-ledger invariant 4", "enforced_by": "R-AUTHORITY, model_boundary" },
+    { "id": "I4", "statement": "Unknown compatibility returns UNDERDETERMINED", "source": "A-ledger invariant 5", "enforced_by": "verdict model, underdetermined channel" },
+    { "id": "I6", "statement": "Every release pins exact capability and binding versions", "source": "A-ledger invariant 7", "enforced_by": "R-HORIZON pin-by-digest rule" },
+    { "id": "I7", "statement": "Every production composition has a recovery path", "source": "A-ledger invariant 8", "enforced_by": "R-ROLLBACK" },
+    { "id": "I8", "statement": "Evidence tier is the minimum across families, never an average", "source": "I-P15-2 / P14 C6", "enforced_by": "R-EVIDENCE" },
+    { "id": "I9", "statement": "Composition authority is the intersection, never the union", "source": "P04 C4 / P13 C2", "enforced_by": "R-AUTHORITY" }
+  ],
+
+  "rejected_here": [
+    { "rejected": "Model decides compatibility", "why": "Unfalsifiable; produces identical output whether contracts were complete or empty. The solver returns UNDERDETERMINED naming the missing field." },
+    { "rejected": "Two verdicts instead of three", "why": "Discards viable modules or fabricates compatibility." },
+    { "rejected": "One migration owner per composition", "why": "Would reject the reference mixed-shape fixture and make heterogeneous reuse impossible." },
+    { "rejected": "Fold migration_owner into namespace", "why": "Sends contested authority to a rename gate; renaming solves nothing." },
+    { "rejected": "Weighted ranking score", "why": "Averages fatal unknowns (rights, tenancy) into good scores." },
+    { "rejected": "Union for composed authority scope", "why": "P04 C4: the natural implementation is exactly where privilege escalation occurs." },
+    { "rejected": "Graceful constraint relaxation", "why": "Indistinguishable from a broken solver." },
+    { "rejected": "Adopt a connector catalogue together with its connection store", "why": "A26 rejected; OpenConnector proved the tenancy failure by demonstration, not inference." },
+    { "rejected": "Popularity/star metadata as a ranking input", "why": "A22 unproven/weak; stars did not predict adaptation quality in any measured way." },
+    { "rejected": "Negotiated multi-agent composition for the first pilot", "why": "Adds coordination failure modes on top of composition failure modes before the base case is proven." },
+    { "rejected": "Re-running Sprint 1 surveys", "why": "Explicitly prohibited by the Sprint 2 program; the strongest evidence was consumed instead." }
+  ],
+
+  "open_decisions": [
+    {
+      "id": "P12-OD-01",
+      "question": "How do P04's authority_class and the Phase 8 session authority ladder compose?",
+      "status": "open_escalated",
+      "owner": "coordinator, with S2-L1",
+      "note": "S2-L1 owns authority_class; Phase 8 owned the session ladder; NEITHER owns the join. This lane proposes an explicit mapping table with a stated asymmetry (port-level external_effect is authoritative over the class summary) and flags it as the most likely site of a silent privilege bug in the design.",
+      "class": "I"
+    },
+    {
+      "id": "P12-OD-02",
+      "question": "What are the calibrated glue-budget thresholds per cost class?",
+      "status": "open",
+      "note": "A07 ('adaptation is always only 1-2% of the work') is explicitly unknown. The budget is a mechanism with uncalibrated numbers, and this lane declines to invent figures."
+    },
+    {
+      "id": "P12-OD-03",
+      "question": "Can any real module populate the fields these rules read?",
+      "status": "open_blocking",
+      "note": "Zero admitted modules exist. F-C06 stands: the strategy cannot be piloted end-to-end. This is a supply dependency, not an agent defect.",
+      "next_step": "P12-EXP-01"
+    },
+    {
+      "id": "P12-OD-04",
+      "question": "Does the ordering of phases survive contact with operator practice?",
+      "status": "open",
+      "note": "If operators need secondary failures alongside the named constraint, checks_run[] is the channel — not a change to which constraint names the verdict."
+    }
+  ],
+
+  "contradictions_held_open": [
+    { "id": "P12-X-01", "statement": "The composition architecture requires admitted modules; zero exist.", "state": "unresolved", "source": "F-C06 (E)" },
+    { "id": "P12-X-02", "statement": "Absorption (one schema, real FKs) and federation (schemas + read models) pull the data plane in opposite directions; both are locally proven.", "state": "resolved_per_capability", "resolution": "Chosen per capability by PackagingProfile; the composer prices both. CF-01 exists to prove it can." },
+    { "id": "P12-X-03", "statement": "host_rendered donor settings is a research bet, not an engineering estimate.", "state": "unresolved", "source": "P10: after 33 commercial surfaces, ZERO render a third party's settings inside host-owned chrome (E). v1 default is donor_rendered_behind_host_nav." },
+    { "id": "P12-X-04", "statement": "The eval suite cannot be run: tiers A/B need a registry and the registry is empty.", "state": "unresolved" }
+  ],
+
+  "self_inflicted_defect_found_and_fixed": {
+    "id": "P12-DEF-01",
+    "rule": "R-EVIDENCE",
+    "defect": "As first drafted, 'minimum across families' was undecidable when two modules report DIFFERENT receipt family sets. The permissive reading (minimum over REPORTED families) would let a module raise its tier by reporting FEWER families — inverting the anti-averaging rule the check exists to enforce.",
+    "found_by": "hand execution of Trace A in solver-dry-run.md",
+    "fix": "A required family absent from families_reported is treated as not_run, yielding UNDERDETERMINED naming that family. Never a pass, never omitted from the minimum.",
+    "why_recorded": "A rule table quietly repaired reads as though it was correct when written. The next reader should know which rules have been executed even once."
+  },
+
+  "counts_corrected_during_smoke": {
+    "note": "Recorded because this project's evidence standard requires re-running counts from source immediately before quoting them.",
+    "composition_fixtures_verdicts": "declared 14 INFEASIBLE / 6 UNDERDETERMINED / 4 held_out; recomputed from the fixture array to 15 / 5 / 3. Cause: CF-16 is INFEASIBLE on R-HORIZON with a SECONDARY underdetermined field and had been counted in the underdetermined bucket.",
+    "rule_count": "declared 19 rules; recomputed to 22 rules resolving to 19 DISTINCT constraint names (R-PORTCLOSE/R-PORTTYPE share port_closure; R-AUTHORITY/R-CONSENT share authority; R-ROLLBACK/R-HORIZON share rollback)."
+  },
+
+  "feeds_experiments": [
+    {
+      "id": "P12-EXP-01",
+      "name": "Contract sufficiency dry run on three real shelf modules",
+      "description": "Encode three real P03 shelf modules into the S2-L1 contract family, then hand-execute the 22 rules against them.",
+      "why_this_is_the_smallest_next_step": "Needs no model, no execution environment, no admission and no client. Every UNDERDETERMINED it produces is a concrete contract-field bug report.",
+      "tests": ["F-P12-01", "F-P12-07"],
+      "stop_rule": "If >30% of checks return UNDERDETERMINED (K5), fix the contract family rather than building a solver.",
+      "status": "PROPOSED_UNAUTHORIZED"
+    },
+    {
+      "id": "P12-EXP-02",
+      "name": "Authority-axis composition check",
+      "description": "Take ten capability shapes and attempt to derive the correct session ceiling from authority_class plus port external_effect alone.",
+      "tests": ["F-P12-04"],
+      "status": "PROPOSED_UNAUTHORIZED"
+    },
+    {
+      "id": "P12-EXP-03",
+      "name": "Determinism repeat run",
+      "description": "Execute the fixture suite three times against a byte-identical input_digest, including the tie case.",
+      "tests": ["F-P12-08"],
+      "stop_rule": "K6 — any divergence makes every other result uninterpretable.",
+      "status": "PROPOSED_UNAUTHORIZED"
+    }
+  ],
+
+  "handoff_edges": [
+    { "to": "S2-L1 (P04)", "passes": "UNDERDETERMINED fields as contract defect reports; owed R-GLUE per-cost-class revision", "direction": "both" },
+    { "to": "S2-L2 (P07)", "passes": "Token pack validity deferred to that lane; this lane checks resolution and single-source only", "direction": "consume" },
+    { "to": "S2-L3 (P08/P13)", "passes": "A bounded edit that invalidates a binding re-enters the solver", "direction": "both" },
+    { "to": "S2-L5 (P14/P15)", "passes": "Runtime profiles, rollback objects, horizons, evidence min-gate", "direction": "consume" },
+    { "to": "P02", "passes": "The five-field ProductSpec minimum, now closed", "direction": "produce" },
+    { "to": "coordinator", "passes": "P12-OD-01 authority-axis mapping requires cross-lane adjudication", "direction": "escalate" }
+  ]
+}

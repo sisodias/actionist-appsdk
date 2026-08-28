@@ -1,0 +1,276 @@
+{
+  "schema_version": "actionist.three-candidate.contract-projection.v1",
+  "projection_id": "projection.affine-workspace.v1",
+  "candidate_id": "actionist/affine-workspace@0.1.0",
+  "source_id": "SRC-0002",
+  "display_name": "AFFiNE",
+  "projection_status": "normalized_without_source_mutation",
+  "projection_basis": {
+    "source_records_unchanged": true,
+    "source_record_paths": [
+      "blocks/affine-workspace/actionist-block.json",
+      "blocks/affine-workspace/records/01-capability.json",
+      "blocks/affine-workspace/records/02-packaging.json",
+      "blocks/affine-workspace/records/03-host-requirements.json",
+      "blocks/affine-workspace/records/04-binding-plan.json",
+      "blocks/affine-workspace/records/05-qualification.json",
+      "blocks/affine-workspace/records/06-registry.json",
+      "blocks/affine-workspace/records/07-release.json",
+      "research/workstreams/2026-08-28-affine-block/run/COMPLETION-PACKET.md",
+      "../fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json"
+    ],
+    "normalization_note": "Canonical field names are a comparison projection; the AFFiNE seven-record package remains read-only and its holds are copied below as explicit evidence state."
+  },
+  "records": {
+    "CapabilityContract": {
+      "record_type": "CapabilityContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "capability_kind": "surface",
+      "outcome_statement": "A host user can open and edit an authenticated collaborative workspace inside the host's assigned documents destination.",
+      "supported_atoms": ["extract_structure"],
+      "provides": [
+        { "port_id": "workspace.ui", "port_kind": "ui", "schema_ref": "actionist://ports/workspace-frame.v1", "external_effect": "none" },
+        { "port_id": "workspace.session", "port_kind": "input", "schema_ref": "actionist://ports/host-session-assertion.v1", "external_effect": "none" },
+        { "port_id": "workspace.navigation", "port_kind": "output", "schema_ref": "actionist://ports/navigation-intent.v1", "external_effect": "none" },
+        { "port_id": "workspace.edit", "port_kind": "action", "schema_ref": "actionist://ports/donor-document-edit.v1", "external_effect": "none" },
+        { "port_id": "workspace.lifecycle", "port_kind": "event", "schema_ref": "actionist://events/capability-envelope.v1", "external_effect": "none" }
+      ],
+      "requires_host": ["identity", "tenant", "settings", "navigation", "files", "events", "secrets"],
+      "requires_capabilities": [],
+      "state_semantics": {
+        "state_classes": ["donor_owned_intact", "document_collaboration", "files_objects", "events"],
+        "authoritative_owner": "donor",
+        "tenant_model": "workspace_id",
+        "tenant_key": null,
+        "tenant_bridge": null,
+        "resource_names": ["affine.workspace", "affine.documents", "affine.files"]
+      },
+      "authority_class": "tenant_scoped_write"
+    },
+    "PackagingProfile": {
+      "record_type": "PackagingProfile",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "reuse_shape": "intact_service",
+      "runtime_profile": "sidecar_service",
+      "rights_exposure": "none_network_only",
+      "source_identity": {
+        "purl": "pkg:github/toeverything/AFFiNE",
+        "immutable_revision": "v0.27.3",
+        "source_digest": "sha256:bdeaa87ae8f200d63c738dfcdc3a8435fd8386e82cb28ef8b1ac5cc975207264",
+        "identity_status": "NOT_CAPTURED"
+      },
+      "rights_state": "declared",
+      "dependency_closure_state": "not_applicable",
+      "normalization_applied": ["NS-IDENT-01", "NS-SETTINGS-02", "NS-NAV-01", "NS-NAV-02", "NS-EVENT-01", "NS-ROLLBACK-02"],
+      "upstream_sync_model": "downstream_service"
+    },
+    "HostContract": {
+      "record_type": "HostContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "source_host_contract_version": "actionist.affine.host.v0.1",
+      "identity": {
+        "identity_source": "host_verified_context",
+        "token_model": "two_token",
+        "assertion_lifetime_seconds": 120,
+        "audience_bound": true,
+        "single_use": true,
+        "query_parameter_identity": "forbidden",
+        "donor_login_route": "forbidden",
+        "long_lived_credential_client_side": false
+      },
+      "tenancy": {
+        "tenant_key": null,
+        "resource_key": "workspace_id",
+        "selection_authority": "host",
+        "explicit_bridge": null,
+        "client_supplied_headers_trusted": false
+      },
+      "settings": {
+        "combination_rule": "REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS",
+        "scopes": ["application", "capability", "user"],
+        "donor_settings_policy": "donor_rendered_behind_host_nav"
+      },
+      "navigation": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "permission_and_entitlement_separate": true,
+        "cascading_emptiness": true
+      },
+      "data": {
+        "data_mode": "read_only_external",
+        "cross_owner_reads": "forbidden",
+        "cross_owner_writes": "forbidden",
+        "migration_owners": { "affine_workspace": "donor", "affine_documents": "donor", "affine_files": "donor" }
+      },
+      "files": {
+        "owner": "donor",
+        "namespace": "workspace/{workspaceId}",
+        "host_authorization_before_access": true
+      },
+      "events": {
+        "envelope": "actionist.capability-event.v1",
+        "capability_id": "actionist/affine-workspace@0.1.0",
+        "tenant_field": "workspace_id"
+      },
+      "observability": {
+        "capability_identifier": "actionist/affine-workspace@0.1.0",
+        "per_capability_release_correlation": true,
+        "trace_propagation": true,
+        "failure_cause_group_id": true
+      },
+      "url_authority": "host_owns_url_space_guest_owns_internal_router"
+    },
+    "BindingPlan": {
+      "record_type": "BindingPlan",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "binding_id": "template-affine-workspace",
+      "application_id": "pilot.marketing-social-agency",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "lifecycle_state": "planned",
+      "port_wiring": [
+        { "from_port": "host.identity", "to_port": "workspace.session", "schema_compatibility": "adapter_required" },
+        { "from_port": "host.tenant.workspace", "to_port": "workspace.ui", "schema_compatibility": "adapter_required" },
+        { "from_port": "workspace.navigation", "to_port": "host.navigation.intent", "schema_compatibility": "identical" },
+        { "from_port": "host.settings.entry", "to_port": "workspace.settings", "schema_compatibility": "adapter_required" }
+      ],
+      "data_binding": {
+        "resources": [
+          { "resource": "affine.workspace", "owner": "donor", "migration_owner": "donor", "tenant_key": "workspace_id" },
+          { "resource": "affine.documents", "owner": "donor", "migration_owner": "donor", "tenant_key": "workspace_id" },
+          { "resource": "affine.files", "owner": "donor", "migration_owner": "donor", "tenant_key": "workspace_id" }
+        ],
+        "migration_authority": "donor",
+        "cross_owner_reads": "forbidden",
+        "cross_owner_mutations": "forbidden"
+      },
+      "identity_binding": {
+        "host_is_single_issuer": true,
+        "assertion_transport": "postMessage_and_backend_header",
+        "assertion_query_parameter": false,
+        "audience_bound": true,
+        "single_use": true,
+        "maximum_lifetime_seconds": 120,
+        "donor_login_route": "forbidden"
+      },
+      "navigation_binding": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "route_guard": "role_and_tenant_entitlement",
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "entitlement_and_permission_separate": true,
+        "deep_link_rewrite": true
+      },
+      "token_binding": {
+        "ui_bearing": true,
+        "token_paths": [],
+        "resolver_context_id": null,
+        "cross_origin_isolated": true
+      },
+      "owned_namespaces": {
+        "routes": ["/documents"],
+        "tables": ["affine.workspace", "affine.documents", "affine.files"],
+        "migration_lineages": ["affine"],
+        "environment_variables": ["AFFINE_FRAME_ORIGIN", "AFFINE_SERVER_ORIGIN"],
+        "event_streams": ["actionist/affine-workspace@0.1.0"],
+        "file_namespaces": ["workspace/{workspaceId}"]
+      },
+      "external_effects": [],
+      "consent": [],
+      "glue_budget": {
+        "declared_max_changed_files": 2,
+        "declared_max_changed_lines": 120,
+        "predicted_changed_files": 1,
+        "predicted_changed_lines": null,
+        "predicted_cost_class": "boundary",
+        "exceeded_action": "reshape"
+      }
+    },
+    "QualificationDossier": {
+      "record_type": "QualificationDossier",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "artifact_digest": "sha256:bdeaa87ae8f200d63c738dfcdc3a8435fd8386e82cb28ef8b1ac5cc975207264",
+      "environment_digest": "sha256:1ff8840d4f196ea1b479f1d0c915f9d50456cdb3005eff947823be48a6a601d9",
+      "evidence_tier": "T0",
+      "qualification_status": "NOT_QUALIFIED",
+      "required_families": ["F1_source_identity", "F2_shape_and_rights", "F3_contract_and_ports", "F4_runtime_and_mount", "F5_workflow_and_persistence", "F6_authority_and_tenancy", "F7_security_and_egress", "F8_observability_and_operations", "F9_rollback_and_human_admission"],
+      "families_reported": {
+        "F1_source_identity": "unknown",
+        "F2_shape_and_rights": "unknown",
+        "F3_contract_and_ports": "pass",
+        "F4_runtime_and_mount": "not_run",
+        "F5_workflow_and_persistence": "not_run",
+        "F6_authority_and_tenancy": "not_run",
+        "F7_security_and_egress": "not_run",
+        "F8_observability_and_operations": "not_run",
+        "F9_rollback_and_human_admission": "deferred"
+      },
+      "receipts": [
+        { "receipt_id": "Q-AFFINE-IDENTITY-001", "receipt_type": "source_identity", "status": "unknown", "source_path": "blocks/affine-workspace/records/05-qualification.json" },
+        { "receipt_id": "Q-AFFINE-SCHEMA-001", "receipt_type": "schema_valid", "status": "pass", "source_path": "blocks/affine-workspace/records/05-qualification.json" },
+        { "receipt_id": "Q-AFFINE-TENANCY-001", "receipt_type": "tenancy_isolation", "status": "not_run", "source_path": "blocks/affine-workspace/records/05-qualification.json" },
+        { "receipt_id": "Q-AFFINE-ROLLBACK-001", "receipt_type": "recovery_rollback", "status": "not_run", "source_path": "blocks/affine-workspace/records/05-qualification.json" }
+      ]
+    },
+    "RegistryRecord": {
+      "record_type": "RegistryRecord",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "scope_id": "prototype-only",
+      "lifecycle_status": "prototype_held",
+      "admission_status": "NOT_ADMITTED",
+      "admission_scope": { "tenants": [], "applications": [], "environments": [] },
+      "admitted_for_host_scope": false,
+      "projection_policy": { "lossy_flagged": true, "refuse_projection_when": ["rights_state:ambiguous", "rights_state:incompatible"] },
+      "revocation_propagation": "reopen_all_composing_assemblies_to_held"
+    },
+    "ReleaseManifest": {
+      "record_type": "ReleaseManifest",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/affine-workspace@0.1.0",
+      "release_id": "actionist/affine-workspace@0.1.0-prototype",
+      "status": "DRAFT",
+      "release_status": "not_released",
+      "pinned_bindings": ["template-affine-workspace"],
+      "upstream_sync_model": "downstream_service",
+      "rollback_plan": {
+        "rehearsed": false,
+        "objects": [
+          { "object_kind": "code_artifact", "restore_procedure": "Restore host binding by retained content digest.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "configuration", "restore_procedure": "Restore host configuration snapshot.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "secrets", "restore_procedure": "Restore secret reference through host secret manager.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "database_schema", "restore_procedure": "Use donor migration-owner procedure.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "data", "restore_procedure": "Use donor workspace/document restore procedure.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "donor_revision", "restore_procedure": "Re-point donor runtime to retained immutable artifact.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "surface_route", "restore_procedure": "Restore host route entry.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "connector_credential_state", "restore_procedure": "Verify no connector credential state is owned by this candidate.", "recovery_horizon_seconds": 0, "owner": "actionist" }
+        ]
+      },
+      "recovery_horizon_seconds": 0,
+      "donor_revision_recovery_declared": false,
+      "artifact_retention": { "pinned_by_digest": true, "retained_in_actionist_storage": false },
+      "deployment_performed": false,
+      "admission_claimed": false
+    }
+  },
+  "preserved_holds": [
+    { "hold_id": "H-THEME", "status": "OPEN", "statement": "Cross-origin token/radius/spacing/font parity is not proven.", "owner": "runtime-and-design" },
+    { "hold_id": "H-SETTINGS", "status": "OPEN", "statement": "The donor settings pane remains donor-rendered behind a host settings entry; host-chrome remount has no precedent.", "owner": "shell-and-editor" },
+    { "hold_id": "H-UPGRADE", "status": "OPEN", "statement": "Donor upgrade replay and donor-export anchor survival have not been run.", "owner": "runtime-and-learning" },
+    { "hold_id": "H-DENSITY", "status": "OPEN", "statement": "Runtime density, mobile, below-full-page behaviour, tenant switching and isolation remain unmeasured.", "owner": "runtime-and-learning" },
+    { "hold_id": "H-CE-WEB", "status": "OPEN", "statement": "Official CE web/service provenance and file-level redistribution proof are not established.", "owner": "operator" }
+  ],
+  "evidence_refs": [
+    "knowledge/capability-shelf/source-registry.jsonl",
+    "../fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json",
+    "../../apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+    "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md",
+    "research/workstreams/2026-08-28-affine-block/run/verification.json"
+  ]
+}

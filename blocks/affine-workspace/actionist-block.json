@@ -1,0 +1,104 @@
+{
+  "$schema": "./schemas/actionist-block.schema.json",
+  "schema_version": "actionist.block-manifest.v1",
+  "block_id": "actionist/affine-workspace@0.1.0",
+  "display_name": "AFFiNE workspace",
+  "capability_id": "actionist/affine-workspace@0.1.0",
+  "capability_kind": "surface",
+  "outcome_statement": "A host user can open and edit an authenticated collaborative workspace inside the host's assigned documents destination.",
+  "prototype": true,
+  "implementation_authorized": true,
+  "execution_status": "LOCAL_SYNTHETIC_ONLY",
+  "admission_status": "NOT_ADMITTED",
+  "reuse": {
+    "shape": "intact_service",
+    "rights_exposure": "none_network_only",
+    "mount_profile": "preserved_identity_erased",
+    "mount_topology": "iframe_cross_origin",
+    "binding_class": "B5",
+    "coherence_ceiling": "bounded"
+  },
+  "ownership": {
+    "block_contracts": "actionist",
+    "host_identity_and_route": "host",
+    "donor_source": "toeverything/AFFiNE",
+    "donor_runtime": "donor",
+    "donor_workspace_data": "donor",
+    "donor_files_and_blobs": "donor",
+    "host_event_envelope": "shared-contract",
+    "client_application": "none"
+  },
+  "records": {
+    "capability": "records/01-capability.json",
+    "packaging": "records/02-packaging.json",
+    "host_requirements": "records/03-host-requirements.json",
+    "binding_plan": "records/04-binding-plan.json",
+    "qualification": "records/05-qualification.json",
+    "registry": "records/06-registry.json",
+    "release": "records/07-release.json"
+  },
+  "host_binding": {
+    "typescript_interface": "host-binding/affine-workspace-host-binding.ts",
+    "json_schema": "schemas/host-binding.schema.json",
+    "generated_binding_filename": "binding.generated.json"
+  },
+  "configuration": {
+    "schema": "config/environment.schema.json",
+    "example": "config/example.json",
+    "secret_policy": "Only secret references are persisted; assertion values arrive at runtime."
+  },
+  "fixture": "fixture/host.json",
+  "evidence": {
+    "index": "../../research/workstreams/2026-08-28-affine-block/run/evidence-index.json",
+    "current_interpretation": "../../research/workstreams/2026-08-28-affine-block/run/CURRENT-INTERPRETATION.md"
+  },
+  "commands": {
+    "validate": "node scripts/validate.mjs",
+    "bind": "node scripts/bind.mjs --host fixture/host.json --out ./out",
+    "install": "node scripts/install.mjs --host fixture/host.json --out ./out"
+  },
+  "holds": [
+    {
+      "id": "H-THEME",
+      "status": "OPEN",
+      "statement": "Cross-origin framing negotiates mode only; token, radius, spacing and font parity are not proven.",
+      "owner": "runtime-and-design",
+      "next_gate": "P07 X-3 / gates K-N"
+    },
+    {
+      "id": "H-SETTINGS",
+      "status": "OPEN",
+      "statement": "The donor settings pane remains donor-rendered behind a host settings entry; host-chrome remount has no precedent.",
+      "owner": "shell-and-editor",
+      "next_gate": "P08 Loop 3"
+    },
+    {
+      "id": "H-UPGRADE",
+      "status": "OPEN",
+      "statement": "The host seam is versioned, but donor upgrade replay and donor-export anchor survival have not been run.",
+      "owner": "runtime-and-learning",
+      "next_gate": "P13 upgrade replay"
+    },
+    {
+      "id": "H-DENSITY",
+      "status": "OPEN",
+      "statement": "Runtime density, below-full-page behaviour, tenant switching and mobile acceptance remain unmeasured.",
+      "owner": "runtime-and-learning",
+      "next_gate": "host absorption pilot"
+    },
+    {
+      "id": "H-CE-WEB",
+      "status": "OPEN",
+      "statement": "The official v0.27.3 native artifact is pinned, but a CE web/service adapter and file-level redistribution proof are not established.",
+      "owner": "operator",
+      "next_gate": "official CE web receipt with manifest, SBOM and notices"
+    }
+  ],
+  "source_boundary": {
+    "source_copied": false,
+    "donor_repository_vendored": false,
+    "secrets_embedded": false,
+    "absolute_client_paths_embedded": false,
+    "deployment_performed": false
+  }
+}

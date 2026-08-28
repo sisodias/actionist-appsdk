@@ -1,0 +1,387 @@
+# P14 — Runtime, verification and release: OSS census
+
+Run: 2026-08-27, Sprint-1 lane S1-L5. Research only; nothing cloned or executed.
+Companion data: `top-repos.jsonl` (80 records, `P14-R-001` … `P14-R-080`).
+
+## Method
+
+Three evidence tiers, applied in this order:
+
+1. **Read the source.** For the lane's decisive question (ComputeSDK portability) I read the
+   actual TypeScript interface definitions, not the README. This is what produced the finding.
+2. **Read the LICENSE body.** Every licence marked `NOASSERTION` by the GitHub API was opened
+   and read. That is where the hazards were: five of eight NOASSERTION repos turned out to carry
+   restrictions their star counts and reputations do not advertise.
+3. **First-party docs for behavioural claims**, particularly what a rollback restores. Where a
+   doc is silent, I recorded the silence rather than inferring, and where I inferred from a
+   mechanism I labelled it as such.
+
+Metadata (stars, `pushed_at`, `archived`, SPDX) came from the GitHub REST API, read fresh on
+2026-08-27 via `gh api repos/<owner>/<name>`. Star counts are recorded as a popularity signal
+only; several entries note where they badly misrepresent real adoption in both directions.
+
+**Honest limits.** 80 is the real count, not the ~100 target — I stopped rather than pad with
+projects I had not actually examined. Every record carries an `evidence_class`, and 11 records
+contain an explicit `UNVERIFIED` marker on a licence I did not open. Those are gaps, listed at
+the end, not silent assumptions.
+
+## Denominator
+
+**80 projects.** 10 top-10, 2 excluded, 68 census.
+
+| Category | Count |
+|---|---|
+| isolation | 14 |
+| progressive_delivery | 9 |
+| observability | 9 |
+| worker_runtime | 9 |
+| verification | 9 |
+| db_migration | 8 |
+| microfrontend | 7 |
+| paas | 6 |
+| release_tooling | 5 |
+| visual_regression | 4 |
+
+Two projects are **excluded** as unusable rather than merely unsuitable: `keptn/keptn`
+(archived, last push 2023-12-21) and `lost-pixel/lost-pixel` (archived, last push 2026-04-22).
+
+## The ComputeSDK portability finding
+
+**Verdict: the concern was correct. ComputeSDK cannot express memory-preserving pause. The
+abstraction degrades to exactly the filesystem lowest common denominator that was feared.**
+
+This is the lane's top open question and it resolves against the prior local recommendation.
+
+### What E2B actually offers
+
+E2B's own docs are unambiguous that pause preserves memory
+(`https://docs.e2b.dev/sandbox/persistence`):
+
+- "This includes not only state of the sandbox's filesystem but also the sandbox's memory."
+- "all the running processes, loaded variables, data, etc. will be restored."
+- Pause costs "approximately **4 seconds per 1 GiB of RAM**"; resume takes "approximately **1 second**".
+- There is an explicit opt-out, `keepMemory: false`, which gives a filesystem-only snapshot that
+  **reboots** on resume.
+
+That last point matters most: E2B itself treats memory-preserving pause and filesystem snapshot
+as two different products with different costs. They are not interchangeable.
+
+### What ComputeSDK exposes
+
+I read `packages/computesdk/src/types/universal-sandbox.ts` in full (271 lines). It is the
+canonical interface every provider implements. The `Sandbox` interface declares exactly:
+
+```
+sandboxId, provider, runCommand(), getInfo(), getUrl(), destroy(),
+filesystem { readFile, writeFile, readdir, mkdir, exists, remove }
+```
+
+There is **no `pause`, `resume`, or `suspend`**. Worse, the state model forecloses it:
+
+```ts
+status: 'running' | 'stopped' | 'error';
+```
+
+The interface cannot even *represent* a paused sandbox. This is not a missing method that could
+be added by a small patch; the type has no state to put it in.
+
+Corroborating reads:
+
+- `packages/provider/src/index.ts` (the framework every custom provider builds on): **zero**
+  occurrences of `pause`, `resume`, `suspend`, `memory`, or `keepMemory`.
+- `packages/e2b/src/index.ts` (the E2B provider): **zero** occurrences of `pause`, `resume`,
+  `memory`, or `keepMemory`. It implements `snapshot.create/list/delete`, and `snapshot.list`
+  and `snapshot.delete` **fall through to `listTemplates` / `deleteTemplate`** — E2B *templates*,
+  which are images. `keepMemory` is never passed, so the memory-preserving path is unreachable
+  through this provider.
+
+### The confession in the source
+
+The clearest evidence is a comment the CreateOS provider author wrote about their own work
+(`packages/createos-sandbox/src/index.ts`, lines 9-11):
+
+> `getInstance()` hands callers the full stateful API (pause / resume / fork /
+> disks / networks / bandwidth) **that ComputeSDK's core surface does not model.**
+
+And at line 430:
+
+> `// Escape hatch: the bare native @nodeops-createos/sandbox handle (pause/resume/fork/disks/...).`
+
+So pause/resume *is* reachable — only by calling `getInstance()` to get the raw provider handle.
+That is the definition of forfeiting portability: code that pauses is provider-specific code, and
+the abstraction has been bypassed, not used.
+
+Note also that CreateOS's snapshot semantics differ from E2B's outright (lines 21-24): its
+`snapshot.create` *pauses* the source VM and the paused sandbox id *is* the snapshot id. The same
+`snapshot.create` call means materially different things on different providers.
+
+### Consequence for Actionist
+
+If memory-preserving pause is a justifying property for warm previews — and wave-1 concluded it
+is — then **ComputeSDK cannot be the load-bearing abstraction**. Three options:
+
+1. Bind directly to the E2B SDK and accept provider lock-in for that capability.
+2. Use ComputeSDK for exec/filesystem portability and drop to `getInstance()` for pause,
+   accepting that the pause path is per-provider code needing per-provider testing.
+3. Define Actionist's own narrow interface with pause/resume as a required primitive, and
+   implement it only for providers that genuinely have it.
+
+What must **not** happen is adopting ComputeSDK on the assumption that pause portability exists
+and discovering at integration time that every preview cold-boots. There is no runtime error
+here — the code compiles and runs, it is just silently slower and loses process state.
+
+**Caveat:** this is a static read of the interface at `main` on 2026-08-27. I did not execute
+against a live provider. But the finding does not depend on runtime behaviour: a method absent
+from the interface cannot be called through the interface.
+
+## The pgroll / reshape concurrent-version count
+
+**The prior local audit's claim is CORRECT. Both hold exactly two schema versions live. Verified
+independently from each project's own documentation.**
+
+**pgroll** (`https://github.com/xataio/pgroll`, Apache-2.0) — its README says "multiple schema
+versions", which is where an unchecked reading goes wrong. Every *concrete* statement is a pair:
+
+- "Keep old and new schema versions working simultaneously."
+- "both the old version of the schema (with no customers table) and the new one (with the
+  customers table) will be accessible simultaneously."
+- "Client applications can then access the new schema version, while the old one is still available."
+
+Nothing in the documentation describes three or more concurrent versions. The mechanism explains
+why: pgroll maintains the old physical column and a new physical column with triggers propagating
+writes "to its counterpart" — singular. Each additional live version would need pairwise trigger
+propagation among all live versions.
+
+**reshape** (`https://github.com/fabianlindfors/reshape`, MIT) — same answer:
+
+- "During a migration, Reshape ensures both the old and new schema are available at the same time."
+- "The existing deployment will continue using the old schema whilst the new deployment uses the
+  new schema."
+
+### Why this is the highest-value gap in the lane
+
+Actionist needs **K long-lived versions** across independently-upgrading client apps. Both tools
+give K=2, and — more restrictive still — that K=2 window is **transient by design**. It exists
+only between `start` and `complete`; completing the migration drops the old version, and after
+completion rollback is impossible. Neither tool supports two versions coexisting *indefinitely*
+while client A stays on v1 for months and client B moves to v2.
+
+So the gap is two-dimensional, and the second dimension is the one that hurts:
+
+| | pgroll / reshape | Actionist needs |
+|---|---|---|
+| Concurrent versions | 2 | K |
+| Duration | transient (migration window) | long-lived |
+
+The versioned-view technique itself is sound and proven, and both projects converge on it
+independently, which is good evidence it is the right primitive. Actionist would be extending a
+validated mechanism, not inventing one — but it *is* an extension, and it should be planned and
+costed as such rather than assumed to be a configuration option. pgroll's Apache-2.0 and
+reshape's MIT both permit that work.
+
+## Top 10
+
+Ranked by how directly each answers Actionist's requirement, weighted toward projects whose
+evidence changes a design decision.
+
+| # | Project | Category | Licence (how observed) |
+|---|---|---|---|
+| 1 | `xataio/pgroll` | db_migration | **Apache-2.0** — README body + API SPDX agree |
+| 2 | `e2b-dev/infra` | isolation | **Apache-2.0** — LICENSE body read; no Additional Use Grant, no change date |
+| 3 | `argoproj/argo-rollouts` | progressive_delivery | **Apache-2.0** — API SPDX |
+| 4 | `argoproj/argo-cd` | progressive_delivery | **Apache-2.0** — API SPDX |
+| 5 | `firecracker-microvm/firecracker` | isolation | **Apache-2.0** — API SPDX |
+| 6 | `fabianlindfors/reshape` | db_migration | **MIT** — README body + API SPDX agree |
+| 7 | `module-federation/core` | microfrontend | **MIT** — API SPDX |
+| 8 | `microsoft/playwright` | verification | **Apache-2.0** — API SPDX |
+| 9 | `computesdk/computesdk` | isolation | **MIT** — API SPDX |
+| 10 | `basecamp/kamal` | paas | **MIT** — API SPDX |
+
+Number 9 is included because it **fails** the lane's key test, and that failure is decisive for
+the architecture. It is not a recommendation.
+
+The three licences the task flagged for verification were all read directly, and all three
+matter (details below): **Windmill** AGPLv3 + proprietary, **Sentry** FSL-1.1-Apache-2.0,
+**atlas** Apache-2.0 (clean at root).
+
+## What each top-10 rollback restores — and omits
+
+The wave-1 thesis (artifact rollback ≠ composition rollback) **reproduces in OSS**, and in two
+cases the OSS failure mode is worse than the commercial one.
+
+| # | Project | Restores | Silently omits |
+|---|---|---|---|
+| 1 | pgroll | Old schema; drops new versioned views/columns | Reversibility ends permanently at `complete`; no config |
+| 2 | e2b-dev/infra | **Filesystem + memory**, processes and variables intact | Everything outside the sandbox: external DB state, control-plane config |
+| 3 | argo-rollouts | A prior ReplicaSet, i.e. the pod template | **ConfigMap/Secret contents; DB schema** |
+| 4 | argo-cd | Every manifest in a prior git commit — genuinely composition-wide | Externally-resolved secrets (resolve to *current* values); schema |
+| 5 | firecracker | Full guest memory + device state | **Disk files ("managed by the users"), network connectivity, wall-clock, MMDS data store** |
+| 6 | reshape | Pre-migration state via `abort` | Same post-`complete` cliff as pgroll |
+| 7 | module-federation | A remote's prior build via its entry URL | Shared-dependency singleton resolution shifts under it; host config |
+| 8 | playwright | n/a — the gate that decides | n/a |
+| 9 | computesdk | Filesystem snapshot only | **Memory and process state** |
+| 10 | kamal | The container image, fast, no registry pull | **Env vars and secrets; accessories; target expires in 3 days** |
+
+Three of these deserve emphasis.
+
+**Argo Rollouts (#3) fails worse than Vercel or Fly.** A Kubernetes revision is a ReplicaSet,
+which stores the pod template — and the pod template holds the *name* of a ConfigMap, never its
+contents. So a rolled-back pod reads whatever the ConfigMap holds *now*. And because editing a
+ConfigMap in place does not change the pod template, it produces **no new revision and triggers
+no rollout at all**: there is nothing to roll back *to*, and no record that anything changed.
+Vercel at least tells you config is not reverted. Kubernetes cannot see the change happened.
+Notably, the Argo Rollouts rollback documentation never mentions ConfigMaps, Secrets, or schema —
+the gap is invisible unless you already know to look.
+
+**Kamal (#10) confirms the gap by mechanism, on infrastructure Actionist would own.** The
+rollback doc describes only stopping the container and starting one from the older image. The env
+doc explains why config cannot follow: "Unlike clear values, secrets are not passed directly to
+the container but are stored in an env file on the host." Image and secrets are stored
+separately, so reverting the image starts old code against current secrets. Kamal also supplies
+the cleanest **retention** instance of wave-1's finding: "old containers are pruned after 3 days
+when you run `kamal deploy`" — the rollback target self-destructs, on a default you did not set.
+
+**Argo CD (#4) is the one architecture that gets it right,** and it is worth copying. Because the
+unit of versioning is a git commit spanning *all* manifests, reverting restores the whole declared
+composition rather than one artifact. The lesson generalises beyond Kubernetes: **make the unit of
+rollback a manifest that names everything, not a pointer to one artifact.** The caveat is equally
+instructive — externally-resolved secrets punch a hole straight through it, because a reference
+resolved at apply time is not versioned by the thing holding the reference.
+
+## Five strongest production-evidence findings
+
+1. **Firecracker: resuming one snapshot many times duplicates secrets.** The docs state guest
+   data "assumed to be unique may in fact not be" — identifiers, RNG seeds, the entropy pool and
+   cryptographic tokens "**will** still be replicated across multiple microVMs resumed from the
+   same snapshot", with de-duplication left to users. VMGenID reseeds the Linux PRNG on kernel
+   ≥5.18; other state does not recover. **This is a direct constraint on Actionist's design:** if
+   warm previews fan out from one paused snapshot — the obvious optimisation — every preview
+   shares seeds and tokens unless explicitly re-randomized on resume. Discoverable only by reading
+   these docs; no wrapper surfaces it.
+
+2. **Firecracker's memory snapshot excludes disks and breaks the network.** "Guest network
+   connectivity is not guaranteed to be preserved after resume", open vsock connections "are
+   closed", disk files are "managed by the users" and are *not* in the snapshot, and the guest
+   wall-clock resumes at the snapshot instant. A resumed sandbox is not simply where you left it.
+
+3. **Dokploy: 36.9k stars, and part of the tree needs a paid licence for production.** Its DSAL
+   v1.0 says the proprietary portion "may only be used in production, if you (and any entity that
+   you represent) have agreed to, and are in compliance with, a valid commercial agreement from
+   Dokploy", allows copying only "for development and testing purposes", and asserts that Dokploy
+   "retain[s] all right, title and interest" in *your* modifications. GitHub's API reports
+   `NOASSERTION`. Nothing short of opening the file reveals this.
+
+4. **Inngest is SSPL-1.0.** The strongest copyleft in this census, on a project sitting in an
+   otherwise permissive ecosystem, again behind a `NOASSERTION` badge. Its service clause is
+   hostile to exactly Actionist's model (running it inside a client-facing platform). Directly
+   adjacent alternatives are far cleaner: **Trigger.dev is Apache-2.0**, Hatchet MIT, BullMQ MIT.
+
+5. **The star count is an unreliable proxy in both directions, and E2B shows the split.**
+   `e2b-dev/E2B` (SDK) has 13,562 stars against `e2b-dev/infra` (self-hostable) at 1,344 — a 10:1
+   gap saying most users consume the *hosted* service, so the self-hosting path Actionist would
+   depend on is much less travelled than the brand suggests. In the other direction,
+   `pact-foundation/pact-specification` (317) and `storybookjs/test-runner` (278) badly understate
+   ecosystems in wide use, and `browserbase/stagehand` (24,076) reflects AI interest rather than
+   deployment depth — its LLM-driven steps are non-deterministic and unsuited to a release gate.
+
+## Licence findings
+
+Reading LICENSE bodies changed the answer for **five of eight** `NOASSERTION` repos:
+
+| Project | Badge says | Actually is |
+|---|---|---|
+| Dokploy | NOASSERTION | Apache-2.0 + **DSAL** (paid for production) |
+| Inngest | NOASSERTION | **SSPL-1.0** |
+| Sentry | NOASSERTION | **FSL-1.1-Apache-2.0** |
+| Windmill | NOASSERTION | **AGPLv3 + proprietary enterprise** |
+| Flipt | NOASSERTION | **GPL-3.0** |
+| Bytebase | NOASSERTION | MIT Expat + enterprise carve-out |
+| SigNoz | NOASSERTION | MIT Expat + `ee/` carve-out |
+| golang-migrate | NOASSERTION | plain **MIT** (dual copyright lines from the fork confused the detector) |
+
+Two nuances worth carrying forward:
+
+- **Sentry's FSL is workable for Actionist's likely use.** Permitted Purposes explicitly include
+  "for your internal use and access" and use "in connection with professional services that you
+  provide to a licensee". Self-hosting for Actionist's own ops is fine. Bundling it *into* a
+  client-facing product as the monitoring feature risks the "Competing Use" prohibition and needs
+  legal review.
+- **Carve-out shape determines compliance cost.** SigNoz (`ee/`, `cmd/enterprise/`) and GrowthBook
+  (three named `enterprise` directories) are *path-based* and can be checked mechanically.
+  **Bytebase's is functional** — "Any code controlling feature, permission, role and plan
+  enablement" — which cannot be resolved from the directory tree at all. That is a materially
+  more expensive licence to comply with.
+
+Windmill, read directly, is AGPLv3 for `backend/` and `frontend/` with proprietary enterprise
+snippets behind a compile flag and licence checks, Apache-2.0 for the client SDKs and the
+OpenAPI/OpenFlow spec, and carries an explicit instruction: "Private and public forks MUST not
+include any of the above proprietary and commercial code." The Apache-2.0 client SDKs are the
+safe integration surface.
+
+## Digest pinning
+
+Only **cosign** answers the pinning question authoritatively, and it confirms the wave-1 concern
+from first-party docs: "you should always sign images based on their digest (`@sha256:...`)
+rather than a tag (`:latest`) because otherwise you might sign something you didn't intend to!"
+Signatures "protect the digests of objects stored in a registry" and are *located* by a
+digest-derived tag. Critically, the tag→digest mapping is **not** inherently covered — asserting
+it requires an explicit annotation (`-a tag=$TAG`).
+
+Digest-native or digest-capable: **oras** (OCI content-addressing by construction), **Flux**
+(OCI artifact sources referenced by digest — the strongest pinning story among delivery tools),
+**Testcontainers**, **Spin**. Everything else pins by convention at best: Argo CD, Argo Rollouts
+and Flagger all accept whatever image reference the user supplies, and Module Federation and
+single-spa reference remotes by **mutable URL**, which is the frontend restatement of the Render
+mutable-tag hazard. Import maps are the interesting exception: because map targets are arbitrary
+URLs, content-hashed URLs make the import map a genuinely content-pinned frontend composition
+manifest — and swapping one map atomically repoints the entire frontend.
+
+## What this census says about the gap Actionist fills
+
+Three structural observations, each supported by records above:
+
+1. **Nobody rolls back a composition.** Every tool surveyed reverts one layer — image (Kamal),
+   pod template (Argo Rollouts), schema (pgroll), flag state (Flipt/Unleash/GrowthBook), a remote
+   bundle (Module Federation). Only Argo CD approaches composition-wide rollback, and only because
+   git happens to be the unit, and even then externally-resolved secrets escape it.
+
+2. **The two rollback horizons are real and independently confirmed.** Kamal prunes rollback
+   targets after **3 days**; pgroll and reshape end reversibility **permanently** at `complete`.
+   These bounds are set by defaults nobody chose deliberately. The shorter horizon governs the
+   composition, as wave-1 argued.
+
+3. **The composition-preview space is genuinely empty in OSS.** Uffizzi — ephemeral multi-service
+   preview environments, conceptually the closest match to Actionist's requirement — has 354 stars
+   and has not been pushed since **2024-08-07**. Its dormancy is the finding: there is no
+   actively-maintained OSS project doing multi-service preview compositions well, which is why the
+   commercial platforms own this space and why the wave-1 census found the gap there too.
+
+## Unknowns and gaps
+
+Recorded honestly; these are not assumptions in disguise.
+
+**Licences not read (11 records carry an `UNVERIFIED` marker):** `cloud-hypervisor` (API returns
+`license: null` — genuinely undetermined, must be read before adoption), `liquibase`,
+`activepieces` (both `NOASSERTION`, and this census found real hazards behind three such badges),
+`single-spa`, `WICG/import-maps`, plus SPDX-only reads for Unleash, k6, Grafana, Loki, Tempo and
+OpenObserve (all AGPL-3.0 per the API; bodies unopened). Sub-licences also unread: `ee/LICENSE`
+(SigNoz), GrowthBook's enterprise files, `LICENSE.enterprise` (Bytebase). Wasmtime's likely
+Apache-2.0-WITH-LLVM-exception was not confirmed.
+
+**Behaviour not verified:** Coolify's rollback semantics (the doc fetched did not cover it);
+Dokku's — though `dokku config:set` stores config separately from the image, so Kamal's failure
+mode very likely applies, and I have marked that as inference, not observation; gVisor and
+cloud-hypervisor checkpoint/restore specifics; Temporal's Worker Versioning; Piral's pilet
+content-addressing.
+
+**Method limits:** ComputeSDK was assessed by reading `main` statically, not by executing against
+a live provider — though the central finding (a method absent from an interface cannot be called
+through it) does not depend on runtime behaviour. No performance claim in this census was
+independently benchmarked; E2B's pause/resume timings and OpenObserve's storage-efficiency claims
+are vendor figures. Production-evidence notes rest on documented adoption and project provenance;
+I found **no independent postmortems** for any surveyed project this run, so no record claims one.
+
+**Not reached:** the census stopped at 80 rather than reaching ~100. Thinnest coverage is
+release/supply-chain (5) and visual regression (4) — the latter partly because the category is
+genuinely depleted, with Lost Pixel archived and BackstopJS dormant since 2024, leaving
+`reg-suit` and `argos` as the maintained options.

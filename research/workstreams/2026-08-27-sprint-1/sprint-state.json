@@ -2,8 +2,8 @@
   "schema_version": "actionist.sprint-state.v1",
   "sprint_id": "S1",
   "run_id": "2026-08-27-sprint-1-fable",
-  "status": "running",
-  "promotion_status": "unpromoted",
+  "status": "converged_with_holds",
+  "promotion_status": "sprint_2_unlocked_research_only",
   "parent_goal_status": "active",
   "research_only": true,
   "implementation_authorized": false,
@@ -29,10 +29,22 @@
     "verified_pane_count": 5
   },
   "lanes": [
-    {"id": "S1-L1", "agent": "ACTIONIST-S1-L1-DEMAND", "status": "working", "terminal_id": "term_65a03bb5880b518"},
-    {"id": "S1-L2", "agent": "ACTIONIST-S1-L2-SUPPLY", "status": "working", "terminal_id": "term_65a03bbe20cd219"},
-    {"id": "S1-L3", "agent": "ACTIONIST-S1-L3-EXPERIENCE", "status": "working", "terminal_id": "term_65a03bbe243551a"},
-    {"id": "S1-L4", "agent": "ACTIONIST-S1-L4-HOST", "status": "working", "terminal_id": "term_65a03bbe414451b"},
-    {"id": "S1-L5", "agent": "ACTIONIST-S1-L5-RUNTIME", "status": "working", "terminal_id": "term_65a03bbe452c51c"}
-  ]
+    {"id": "S1-L1", "agent": "ACTIONIST-S1-L1-DEMAND", "status": "verified_with_holds", "terminal_id": "term_65a03bb5880b518", "verification_receipt": "research/workstreams/2026-08-27-sprint-1/convergence/receipts/S1-L1-verification.json"},
+    {"id": "S1-L2", "agent": "ACTIONIST-S1-L2-SUPPLY", "status": "verified_with_holds", "terminal_id": "term_65a03bbe20cd219", "verification_receipt": "research/workstreams/2026-08-27-sprint-1/convergence/receipts/S1-L2-verification.json"},
+    {"id": "S1-L3", "agent": "ACTIONIST-S1-L3-EXPERIENCE", "status": "packet_on_disk_verified_with_holds", "terminal_id": "term_65a03bbe243551a"},
+    {"id": "S1-L4", "agent": "ACTIONIST-S1-L4-HOST", "status": "packet_on_disk_verified_with_holds", "terminal_id": "term_65a03bbe414451b"},
+    {"id": "S1-L5", "agent": "ACTIONIST-S1-L5-RUNTIME", "status": "verified_with_holds", "terminal_id": "term_65a03bbe452c51c", "verification_receipt": "research/workstreams/2026-08-27-sprint-1/convergence/receipts/S1-L5-verification.json"}
+  ],
+  "convergence_progress": {
+    "callbacks_received": 5,
+    "callbacks_required": 5,
+    "part_packets_received": 12,
+    "part_packets_expected": 12,
+    "verified_clean": 0,
+    "verified_with_holds": 5,
+    "pending_correction": 0,
+    "rejected": 0,
+    "sprint_2_unlocked": true,
+    "convergence_receipt": "research/workstreams/2026-08-27-sprint-1/convergence/S1-CONVERGENCE.md"
+  }
 }

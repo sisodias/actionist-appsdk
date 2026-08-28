@@ -13,7 +13,9 @@ const requiredDocs = [
   '02-ASSUMPTION-LEDGER.md',
   '03-EVIDENCE-MAP.md',
   '04-OPEN-QUESTIONS.md',
-  '05-EXPERIMENT-ROADMAP.md'
+  '05-EXPERIMENT-ROADMAP.md',
+  '06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md',
+  'frameworks/README.md'
 ];
 
 const failures = [];

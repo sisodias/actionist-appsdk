@@ -1,0 +1,31 @@
+{
+  "schema_version": "actionist.repo-to-module-foundry.v1",
+  "decision_unit": ["source_repository", "capability", "target_context", "host_contract", "reuse_shape"],
+  "independent_axes": {
+    "source_reusability": ["discovered", "source_read", "reusable_candidate", "rejected_for_capability"],
+    "adaptation_status": ["unplanned", "surgery_planned", "adapted", "upstream_sync_declared"],
+    "proof_status": ["unexecuted", "partial_local_proof", "locally_proven", "qualified_for_host"],
+    "admission_status": ["not_considered", "held_for_decision", "admitted_for_scope", "retired"]
+  },
+  "global_blocked_repository_state_allowed": false,
+  "stages": [
+    {"id": 0, "name": "intake_identity", "output": "SourceRecord"},
+    {"id": 1, "name": "product_bar_capability_map", "output": "CapabilityMap"},
+    {"id": 2, "name": "target_context", "output": "TargetContext"},
+    {"id": 3, "name": "reuse_shape_decision", "output": "ReuseDecision"},
+    {"id": 4, "name": "normalization_surgery_prediction", "output": "SurgeryPlan"},
+    {"id": 5, "name": "linked_module_records", "output": "SevenRecordModuleFamily"},
+    {"id": 6, "name": "deterministic_compatibility", "output": "ComposerVerdict"},
+    {"id": 7, "name": "bounded_adaptation", "output": "AdaptedBinding"},
+    {"id": 8, "name": "qualification", "output": "QualificationDossier"},
+    {"id": 9, "name": "scoped_admission_release", "output": "ReleaseManifest"},
+    {"id": 10, "name": "production_learning", "output": "AttributedLearningReceipt"}
+  ],
+  "composer_verdicts": ["FEASIBLE", "INFEASIBLE", "UNDERDETERMINED"],
+  "composer_relaxations_allowed": 0,
+  "human_decisions": ["product_equivalence", "reuse_shape", "data_migration_authority", "irreversible_surgery", "admission_release"],
+  "boundary": {
+    "implementation_authorized": false,
+    "current_admitted_sources": 0
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "schema": "actionist.decision-ledger.v2",
+  "part": "P06",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "status": "research_only_unpromoted",
+  "authored_by": "opus_subagent_s1l3-p06, revising the lane owner's v1 ledger",
+  "revision_note": "v1 was authored by the lane owner at ~16:35 as a placeholder while this subagent had produced no output. v1 decisions are PRESERVED below with their original IDs. D01 is the one place where the completed research reaches a different primary recommendation; the disagreement is recorded rather than silently resolved, and is resolvable by Gate 4. D02 and D07 are revised because the completed denominator supplied five independent empirical anchors the owner did not have. D03, D04, D05, D06 are confirmed and strengthened.",
+  "decisions": [
+    {
+      "id": "P06-D01",
+      "decision": "Comparison format",
+      "options_considered": [
+        "binary pairwise",
+        "4-up gallery with explicit outside option",
+        "4-way best-worst (MaxDiff Case 1)",
+        "attribute-level best-worst (Case 2)",
+        "full ranking of 4",
+        "9-up gallery",
+        "single-item Likert rating"
+      ],
+      "chosen": "4-up gallery with an explicit outside option as PRIMARY; 4-way best-worst pre-registered as A/B arm B",
+      "v1_chosen": "4-way best-worst",
+      "status": "DIVERGENCE FROM v1 — UNRESOLVED BY ARGUMENT, RESOLVABLE BY GATE 4",
+      "evidence_for_chosen": [
+        "Derived: 4-up+none = 2.32 noiseless bits, ~0.91 effective bits at p=0.15 -> ~5 rounds for the 4.04-bit target",
+        "Sawtooth Lighthouse Studio manual (fetched verbatim): 'we recommend displaying either four or five items at a time'; beyond ~5 'gains in precision of the estimates are minimal'",
+        "Midjourney Style Creator (shipped): grid pick with picks AND non-picks as evidence, 5-10 rounds to stabilise",
+        "Live prototype actionist-taste.pages.dev already implements 4-up + 'none of these' + least-resolved-knob targeting",
+        "Sequential Gallery: 14.8s for a SINGLE pick subtask — best-worst roughly doubles per-screen deliberation"
+      ],
+      "evidence_for_v1_alternative": [
+        "P06-SR-007: best-worst on 4 items recovers 5 of the 6 implied pairwise relations (combinatorial, checkable)",
+        "Derived: best-worst of 4 = 3.58 noiseless bits vs 2.32, cutting rounds ~5 -> ~3 at p=0.15",
+        "P06-SR-009: BWS Case 2 usable by populations that struggle with conventional DCEs",
+        "Marley & Louviere 2005; Marley, Flynn & Louviere 2008 (both verified via Crossref)"
+      ],
+      "why_primary_differs": "The information advantage of best-worst is real and undisputed. It is outweighed for v1 by three non-statistical factors: (1) deliberation cost is not linear in information, so 3 best-worst screens may cost more wall-clock and fatigue than 5 single-pick screens; (2) repeatedly asking a paying client during onboarding to name the WORST work reads badly and this is a client-relationship judgement, not a statistical one; (3) the marginal 2 rounds saved is small against a 15-round ceiling. Additionally, true MaxDiff's assumption is empirically doubtful (P06-SR-008), so best-worst would have to be modelled as sequential best-then-worst per D05.",
+      "confidence": "medium — the statistical case favours arm B, the product case favours arm A",
+      "falsifier": "F6: if best-worst converges in materially fewer rounds WITHOUT worse completion, wall-clock or satisfaction, switch to best-worst.",
+      "gate": "Gate 4"
+    },
+    {
+      "id": "P06-D02",
+      "decision": "Choice budget",
+      "options_considered": [
+        "7 (inherited from parts.json)",
+        "14 (inherited from parts.json)",
+        "6-10 (v1 lane owner)",
+        "8-12 with floor 5 and ceiling 15",
+        "23-35 (exact point identification under noise)"
+      ],
+      "chosen": "8-12 rounds, hard floor 5, hard ceiling 15",
+      "v1_chosen": "6-10 screens",
+      "status": "REVISED from v1 — same order of magnitude, wider band, now anchored empirically",
+      "evidence": [
+        "Derived: 7 knobs -> 36,000 packs -> 15.14 bits; +/-1-level tolerance leaves only 4.04 bits to acquire; at p=0.15 a 4-up+none screen delivers ~0.91 effective bits -> 5 rounds; recommend ~2x for myopic acquisition, exploration overhead and knob correlation",
+        "Sequential Gallery (SIGGRAPH 2020, full-text verified): mean 5.36 +/- 2.69 rounds to satisfaction, 5D-20D",
+        "Sequential Line Search (SIGGRAPH 2017, full-text verified): 'distances become small rapidly in the first 4 or 5 iterations' at 6D and 7D",
+        "Brochu et al. NIPS 2007 (full-text verified): 8.56 +/- 5.23 clicks vs ~18 non-adaptive",
+        "Brochu et al. SCA 2010 (full-text verified): 5.38-8.45 iterations; 20 is where users quit",
+        "Midjourney Style Creator docs: 'most styles stabilize after 5-10 rounds'; past 15 'small and subtle'"
+      ],
+      "supersedes": "P06-SR-012, whose 0.4-0.6 bits/comparison efficiency band was an unverified assumption. The channel-capacity derivation in first-principles.md §3 replaces it with an explicit, checkable noise model.",
+      "confidence": "medium-high — a first-principles derivation and five independent empirical sources agree on the 5-15 band",
+      "note_on_inherited_numbers": "7 is approximately right BY COINCIDENCE (near the noiseless 4-up+none requirement) but must NOT be justified by Miller 7+/-2, which concerns absolute judgment and memory span, not interface option counts. 14 has NO derivation that could be found or reconstructed; it sits inside the defensible band but is not a result.",
+      "falsifier": "F2: per-knob credible intervals still exceed +/-1 level at round 12 for >30% of clients.",
+      "gate": "Gate 3 (simulate-to-size) converts this from derived to measured"
+    },
+    {
+      "id": "P06-D03",
+      "decision": "Preference-to-token compilation",
+      "options_considered": [
+        "continuous token interpolation",
+        "seed-derived generation (M3 HCT style)",
+        "closed pre-authored gallery selected by nearest neighbour",
+        "learn a favourite pack ID directly"
+      ],
+      "chosen": "Continuous preference vector learned in knob space; closed pre-authored gate-passing pack selected by nearest neighbour. Never interpolate tokens.",
+      "status": "CONFIRMED from v1 and strengthened",
+      "evidence": [
+        "token-pack-science machine gates A-J: an interpolated pack has passed NONE of them",
+        "WCAG relative-luminance is non-linear in channel values, so the midpoint of two AA-passing palettes can fail AA — this follows from the formula, not from speculation",
+        "CLAUDE-LANES-SYNTHESIS: learn a preference vector in knob space, not a favourite pack ID, so the catalogue can grow without re-eliciting"
+      ],
+      "anti_overfitting_rationale": "Snapping to ~20-30 packs is a hard regularizer: the output space cannot absorb an overfit from ten noisy clicks. Reinforced by hierarchical-Bayes shrinkage toward a population prior (standard conjoint practice for the few-observations regime) and a warm-start population aesthetic prior (Brochu et al. 2010 measured 11.25 -> 6.5 iterations from a learned prior).",
+      "confidence": "high",
+      "falsifier": "F5: clients cannot identify their own pack against the 2nd and 3rd nearest above chance (catalogue too dense), or reliably prefer a neighbour (distance metric mis-weighted).",
+      "gate": "Gate 5"
+    },
+    {
+      "id": "P06-D04",
+      "decision": "Outside option",
+      "options_considered": [
+        "forced choice",
+        "optional skip treated as a null observation",
+        "explicit none-of-these treated as weak negative evidence"
+      ],
+      "chosen": "Explicit 'none of these' on every screen, modelled as WEAK NEGATIVE evidence against all displayed cards; cap 3 consecutive selections, then re-seed from a different region",
+      "status": "CONFIRMED from v1, with the modelling treatment now specified",
+      "evidence": [
+        "CLAUDE-LANES-SYNTHESIS: forced choice without a none option pollutes the model",
+        "Havenly (live consumer flow): explicit 'I don't like these. Skip.'",
+        "Netflix: title picker is explicitly optional/skippable",
+        "Midjourney legacy Style Tuner: neutral middle box to skip a pair — a shipped outside-option affordance"
+      ],
+      "deliberate_divergence": "Midjourney Style Creator states 'skipping does not affect your style development' — i.e. they make skipping NON-informative. That is defensible for keeping a user moving, but it discards information. We knowingly diverge: a decline is real evidence that the current region is wrong.",
+      "modelling_hazards": [
+        "Treating it as a null observation discards information and makes re-roll free, inviting click-through",
+        "Treating it as STRONG negative evidence is also wrong: a client may decline because all four are slightly off on one knob while right on six"
+      ],
+      "confidence": "high on presence, medium on weight (the weight is a free parameter needing calibration)",
+      "falsifier": "Removing the outside option does not change held-out profile accuracy."
+    },
+    {
+      "id": "P06-D05",
+      "decision": "Response likelihood if best-worst is adopted",
+      "chosen": "Model as sequential best-then-worst with separate best/worst terms on a shared latent scale, NOT true MaxDiff",
+      "status": "CONFIRMED from v1 — contingent on D01 arm B winning Gate 4",
+      "evidence": [
+        "P06-SR-008: the method's own authors report they have virtually never met a practitioner who admitted using the true max-difference strategy; most describe sequential best-then-worst",
+        "Marley, Flynn & Louviere 2008 (Crossref-verified) formalises attribute-level/Case 2 variants"
+      ],
+      "confidence": "medium",
+      "falsifier": "E3: dropping the worst term leaves the ranking unchanged, in which case simplify to best-only."
+    },
+    {
+      "id": "P06-D06",
+      "decision": "Stimulus construction",
+      "options_considered": [
+        "controlled fragments",
+        "whole screens varying all knobs",
+        "whole screens varying only targeted knobs",
+        "harvested original 21st thumbnails"
+      ],
+      "chosen": "Whole screens re-rendered from our own spec, with ONLY the targeted knobs varied and the rest held at the posterior mean; content held constant within a round; fragments reserved for a targeted disambiguation phase only",
+      "status": "CONFIRMED from v1, with the 'only targeted knobs vary' constraint made explicit",
+      "evidence": [
+        "ui-pick-to-spec §6: previews must be re-themed and re-rendered, never the original thumbnail, or the expectation gap is architectural",
+        "21st-corpus-audit: 86.7% of colour-bearing CSS rules already resolve through var(--token) (n=25); 87.3% of bundles carry a shadcn :root oklch block (n=200)",
+        "P05 corpus supplies 8,515 identities as re-themable bundles — identical structure, varying treatment",
+        "Live demo already targets the 'least-resolved knob' while holding inferred preferences steady",
+        "Sequential Gallery reduced 5x5 to 3x3 on a 13-inch display — grid size is display-dependent, not a product constant"
+      ],
+      "rationale": "If two whole screens differ on all seven knobs the pick yields one bit about a seven-dimensional vector. Varying only targeted knobs is what makes a whole-screen stimulus informative per knob.",
+      "confidence": "medium-high",
+      "falsifier": "F4: per-knob confidence from whole-screen rounds is materially worse than from fragment rounds on the same knob."
+    },
+    {
+      "id": "P06-D07",
+      "decision": "Stopping rule",
+      "options_considered": [
+        "fixed battery",
+        "posterior threshold only",
+        "threshold + EIG floor + cap",
+        "threshold + EIG floor + cap + user-satisfaction terminal"
+      ],
+      "chosen": "Stop on ANY of: (1) every knob's posterior interval within +/-1 level AND expected information gain of the best next question < ~0.25 bits; (2) ceiling of 15 rounds; (3) user presses an always-available 'this is right'. Hard floor of 5 rounds.",
+      "v1_chosen": "threshold ~0.7 sustained over 2 screens, OR EIG < ~0.15 bits, OR cap 10",
+      "status": "REVISED from v1 — adds the user-satisfaction terminal and raises the ceiling on evidence",
+      "evidence": [
+        "Sequential Gallery: participants had an explicit satisfaction button; mean 5.36 rounds to press it — the user's own judgement is the criterion the whole exercise proxies for",
+        "Brochu et al. SCA 2010: 20 iterations is 'roughly the point at which users start to quit if they do not see significant improvement'",
+        "Midjourney: past round 15 changes are 'small and subtle'",
+        "Chen & Suh 2015: sample complexity scales INVERSELY with the separation measure — near-tied options are where rounds get burned, so detect and stop rather than continue"
+      ],
+      "reporting_rule": "Report confidence PER KNOB, never as a single scalar. Some knobs resolve in two rounds; a client may genuinely not care about shadow, and 'no preference' is a first-class finding, not a failure. A single aggregate confidence number would be actively misleading.",
+      "confidence": "medium — the structure is well-evidenced, the specific thresholds are proposed policy",
+      "thresholds_are_policy_not_constants": true,
+      "falsifier": "Adaptive stopping saves <1 round on average versus a fixed 10-round battery."
+    },
+    {
+      "id": "P06-D08",
+      "decision": "Brand and industry constraints enter as hard prunes, not learned preferences",
+      "chosen": "Existing brand colours/fonts and regulated-industry constraints prune the stimulus space BEFORE elicitation; the prior must be overridable within ~3 rounds",
+      "status": "NEW in v2",
+      "evidence": [
+        "Sawtooth ACBC must-have/unacceptable mechanism (vendor manual): 'once identified, all further concepts shown satisfy those requirements'",
+        "b2b-template-shelf-report §3: healthcare PHI, law firm privilege, insurance/mortgage document authority constrain the acceptable design space a priori",
+        "token-pack-science Gates C and D: accessibility is never a preference axis — a client cannot choose to fail WCAG"
+      ],
+      "confidence": "medium-high",
+      "falsifier": "Clients in conservative industries systematically override the prior within 3 rounds, indicating the industry prior encodes a stereotype rather than a constraint."
+    },
+    {
+      "id": "P06-D09",
+      "decision": "The preference learner must itself be A/B tested against a static industry-default pack",
+      "chosen": "A system-level holdout is a precondition for any claim that elicitation works",
+      "status": "NEW in v2 — methodological gate",
+      "evidence": [
+        "Spotify Engineering 2026: with a contextual bandit there is no single 'best button', only a 'best system', so it still needs an experiment against the static baseline — 'the bandit is a feature you've built, not an experimental method'",
+        "Optimizely contextual-bandit docs: no statistical significance is calculated for CMAB optimisations, so significance must come from a wrapping experiment"
+      ],
+      "confidence": "high",
+      "falsifier": "Elicited packs show no acceptance advantage over an industry-default pack, in which case the whole part is unjustified and a default-pack-per-industry ships instead.",
+      "gate": "Gate 6 — likely the binding constraint, since it needs enough clients for a powered comparison"
+    },
+    {
+      "id": "P06-D10",
+      "decision": "Treat the TasteProfile as perishable, not permanent",
+      "chosen": "Prefer cheap explicit re-elicitation over silent drift modelling; treat client approval/rejection of delivered work as a higher-quality revealed signal",
+      "status": "NEW in v2",
+      "evidence": [
+        "Pinterest Engineering 2026: REPLACED onboarding followed-interests as a retrieval condition because it 'skewed heavily toward dominant interests' and was 'static, not evolving with behavior'",
+        "Netflix Help Centre: initial picks are 'superseded' once engagement begins, recent outweighing older",
+        "Hinge: preference rankings inferred from a rolling 24h behaviour window",
+        "Slovic 1995: preferences are partly CONSTRUCTED during elicitation, bounding meaningful precision"
+      ],
+      "confidence": "medium-high",
+      "falsifier": "F7 / Gate 2: two-week test-retest per-knob agreement at or near chance would mean there is no stable preference to track, killing the part rather than adjusting it."
+    }
+  ],
+  "resolved_shortfalls_from_v1": [
+    {
+      "id": "P06-SF01",
+      "what": "Commercial denominator near 100",
+      "v1_status": "not_built",
+      "v2_status": "BUILT BUT WEAK — 103 surfaces enumerated, only 13 'observed'",
+      "residual_risk": "57 rows are 'hypothesis'. Consumer style quizzes are client-side JS behind bot protection (403s from Stitch Fix, Warby Parker, Looka, Behr, Hinge; JS shell from Function of Beauty; 404 from 1000minds, Conjointly). Closing this needs a browser session, not more fetching. The market-coverage leg must be described as thin."
+    },
+    {
+      "id": "P06-SF02",
+      "what": "OSS/literature denominator near 100",
+      "v1_status": "partial (4 verified)",
+      "v2_status": "RESOLVED — 119 rows, 109 'observed'",
+      "residual_risk": "Repos verified via authenticated gh api with LICENCE BODIES read, not badges (this caught the sublee/trueskill commercial bar). Papers verified via arXiv/Crossref with several full-text PDF extractions. Four items explicitly unverified: Lindgaard 2006's numeric correlation, a numeric best-worst information-gain multiplier, Rajkumar & Agarwal (dropped, no record found), TrueSkill 2 (marked hypothesis, HOLD)."
+    },
+    {
+      "id": "P06-SF03",
+      "what": "~100 innovation candidates",
+      "v1_status": "partial (30 written)",
+      "v2_status": "RESOLVED — 100 candidates across 6 groups, 10 ranked"
+    },
+    {
+      "id": "P06-SF04",
+      "what": "Inspect https://actionist-taste.pages.dev/",
+      "v1_status": "not_done",
+      "v2_status": "RESOLVED — fetched 2026-08-27",
+      "finding": "Four cards per round, explicit 'none of these' plus 'start over', ~10 picks, later rounds target the 'least-resolved knob', five of seven knobs varied (palette, radius, type, density, shadow), live belief panel, win-rate counting with Laplace smoothing (a zeroth-order Bradley-Terry), page names choix or a GP preference model as production intent.",
+      "residual_risk": "Its '~10 picks instead of ~50' convergence claim is an UNMEASURED assertion and must not be recycled into a client deliverable. A UI inconsistency exists: the picker labels itself 'pick 1 of 10' while showing four cards."
+    }
+  ],
+  "boundaries": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "promotion_status": "unpromoted"
+  }
+}

@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P06 research artifact lane-state.json"><link rel="icon" href="../../../favicon.svg"><title>P06 · lane-state.json · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p06/">P06</a> / Research artifact / lane-state.json</div><div class="node-actions"><a class="button" href="../raw/lane-state.json" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>lane-state.json</h1><p><code>research/workstreams/p06-preference-science/runs/2026-08-27-sprint-1-fable/lane-state.json</code></p></div><pre class="artifact-source">{
+  &quot;schema&quot;: &quot;actionist.lane-state.v1&quot;,
+  &quot;part&quot;: &quot;P06&quot;,
+  &quot;run_id&quot;: &quot;2026-08-27-sprint-1-fable&quot;,
+  &quot;lane&quot;: &quot;S1-L3&quot;,
+  &quot;agent&quot;: &quot;ACTIONIST-S1-L3-EXPERIENCE&quot;,
+  &quot;authored_by&quot;: &quot;opus_subagent_s1l3-p06 (denominators, report, first-principles, decision-ledger v2, registers); lane_owner (v1 placeholder packet, preserved and superseded)&quot;,
+  &quot;model_policy&quot;: &quot;opus_only_subagents&quot;,
+  &quot;parent_model_at_write&quot;: &quot;opus-5-1m&quot;,
+  &quot;counts&quot;: {
+    &quot;source_register&quot;: 26,
+    &quot;top_companies&quot;: 113,
+    &quot;top_companies_ranked&quot;: 10,
+    &quot;top_repos&quot;: 119,
+    &quot;top_repos_ranked&quot;: 10,
+    &quot;innovation_register&quot;: 110,
+    &quot;innovation_ranked&quot;: 10,
+    &quot;decisions&quot;: 10
+  },
+  &quot;evidence_quality&quot;: {
+    &quot;source_register&quot;: {
+      &quot;observed&quot;: 25,
+      &quot;inferred&quot;: 1,
+      &quot;hypothesis&quot;: 0
+    },
+    &quot;top_companies&quot;: {
+      &quot;observed&quot;: 13,
+      &quot;inferred&quot;: 33,
+      &quot;hypothesis&quot;: 57,
+      &quot;note&quot;: &quot;counts exclude the 10 ranked rows, which duplicate their parent record&quot;
+    },
+    &quot;top_repos&quot;: {
+      &quot;observed&quot;: 108,
+      &quot;inferred&quot;: 0,
+      &quot;hypothesis&quot;: 1,
+      &quot;note&quot;: &quot;counts exclude the 10 ranked rows, which duplicate their parent record&quot;
+    },
+    &quot;innovation_register&quot;: {
+      &quot;observed&quot;: 42,
+      &quot;inferred&quot;: 31,
+      &quot;hypothesis&quot;: 27,
+      &quot;note&quot;: &quot;counts exclude the 10 ranked rows, which duplicate their parent record&quot;
+    }
+  },
+  &quot;denominator_targets&quot;: {
+    &quot;commercial&quot;: 100,
+    &quot;oss_literature&quot;: 100,
+    &quot;innovations&quot;: 100
+  },
+  &quot;denominator_actual&quot;: {
+    &quot;commercial&quot;: 103,
+    &quot;oss_literature&quot;: 109,
+    &quot;innovations&quot;: 100
+  },
+  &quot;depth_contract&quot;: &quot;MET ON COUNT; UNEVEN ON VERIFICATION. OSS/literature is strong: 109 base rows, 108 observed — repos verified via authenticated gh api with LICENCE BODIES read rather than badges, papers via arXiv/Crossref with several full-text PDF extractions. Commercial is the weak leg: 103 surfaces enumerated but only 13 observed, because consumer style quizzes are client-side JS behind bot protection and are not fetchable.&quot;,
+  &quot;resolved_questions&quot;: {
+    &quot;comparison_format&quot;: &quot;4-up gallery with explicit outside option as PRIMARY; 4-way best-worst pre-registered as A/B arm B. This DIVERGES from the lane owner&#39;s v1 ledger, which chose best-worst; the disagreement is recorded in decision-ledger.json P06-D01 and is resolvable by Gate 4.&quot;,
+    &quot;how_many_choices&quot;: &quot;8-12 rounds, hard floor 5, hard ceiling 15. Derived from a channel-capacity argument (36,000 packs = 15.14 bits; +/-1-level tolerance leaves 4.04 bits to acquire; ~0.91 effective bits per screen at p=0.15) and independently corroborated by five empirical sources all landing in the 5-15 band. &#39;Is it 7 or 14&#39; is not well-posed as asked; 7 is approximately right by coincidence, 14 has no derivation.&quot;,
+    &quot;stopping_rule&quot;: &quot;Three conditions, any of: per-knob posterior within +/-1 level AND expected information gain &lt; ~0.25 bits; ceiling of 15 rounds; user presses an always-available &#39;this is right&#39;. Floor of 5. Confidence reported PER KNOB, never as one scalar.&quot;,
+    &quot;taste_profile_to_tokens&quot;: &quot;Continuous preference vector learned in knob space; closed pre-authored gate-passing pack selected by nearest neighbour. Never interpolate tokens — an interpolated pack has passed none of gates A-J, and WCAG luminance is non-linear so the midpoint of two AA-passing palettes can fail AA. Closed-pack snapping IS the anti-overfitting mechanism.&quot;,
+    &quot;screens_vs_fragments&quot;: &quot;Whole screens re-rendered from our own spec, with only the targeted knobs varied and content held constant within a round. Fragments reserved for a targeted disambiguation phase only (falsifier F4).&quot;
+  },
+  &quot;checkpoints&quot;: [
+    &quot;prior-evidence audit (4 local priors read in full)&quot;,
+    &quot;live demo inspected — resolves v1 shortfall SF04&quot;,
+    &quot;dispatch of 2 Opus research workers&quot;,
+    &quot;OSS/literature denominator returned and verified (119 rows)&quot;,
+    &quot;commercial worker hit a credit limit at ~8 surfaces; lane re-ran the sweep directly&quot;,
+    &quot;information-theoretic derivation + sensitivity analysis&quot;,
+    &quot;packet authored; v1 owner packet preserved and explicitly superseded&quot;
+  ],
+  &quot;blockers&quot;: [
+    &quot;COMMERCIAL DENOMINATOR THINLY VERIFIED — 13 of 103 observed. Consumer style quizzes are client-side JS behind bot protection (403 from Stitch Fix, Warby Parker, Looka, Behr, Hinge; JS shell from Function of Beauty; 404 from 1000minds, Conjointly). Needs a real browser session, not more fetching.&quot;,
+    &quot;NO SUFFICIENCY GUARANTEE EXISTS for our setting. The 8-12 recommendation is a derivation plus five converging empirical sources, not a theorem. Gate 3 (simulate-to-size) must convert it into a measured number before it is quoted to the client as anything firmer.&quot;,
+    &quot;DUAL-AUDIENCE PROBLEM UNSOLVED — for the 6 of 17 industries where `portal` is the secondary archetype, the person choosing (operator) is not the person using (end customer). No prior art found anywhere in the denominator. This is a design gap, not a research gap.&quot;,
+    &quot;KNOB INDEPENDENCE ASSUMED, NOT MEASURED (Gate 1). The whole few-rounds argument rests on effective dimensionality being below 7.&quot;,
+    &quot;1000minds PAPRIKA UNVERIFIED (404 on both attempted paths). Its transitivity-based pair elimination is potentially directly applicable and should be verified before the format decision is frozen.&quot;,
+    &quot;FORMAT DIVERGENCE from the lane owner&#39;s v1 ledger is live and unresolved by argument (P06-D01).&quot;
+  ],
+  &quot;falsifiers&quot;: [
+    {
+      &quot;id&quot;: &quot;F1&quot;,
+      &quot;claim&quot;: &quot;+/-1-level tolerance is acceptable&quot;,
+      &quot;gate&quot;: &quot;Gate 0&quot;,
+      &quot;priority&quot;: &quot;run first — most load-bearing and cheapest&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F2&quot;,
+      &quot;claim&quot;: &quot;8-12 rounds suffice&quot;,
+      &quot;gate&quot;: &quot;Gate 3&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F3&quot;,
+      &quot;claim&quot;: &quot;knobs are correlated so effective d &lt; 7&quot;,
+      &quot;gate&quot;: &quot;Gate 1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F4&quot;,
+      &quot;claim&quot;: &quot;whole-screen controlled stimuli beat fragments&quot;,
+      &quot;gate&quot;: &quot;deferred&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F5&quot;,
+      &quot;claim&quot;: &quot;closed-pack nearest-neighbour output is right&quot;,
+      &quot;gate&quot;: &quot;Gate 5&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F6&quot;,
+      &quot;claim&quot;: &quot;4-up + outside option beats best-worst&quot;,
+      &quot;gate&quot;: &quot;Gate 4&quot;
+    },
+    {
+      &quot;id&quot;: &quot;F7&quot;,
+      &quot;claim&quot;: &quot;preference is stable enough to be worth learning&quot;,
+      &quot;gate&quot;: &quot;Gate 2&quot;,
+      &quot;priority&quot;: &quot;would kill the part rather than adjust it&quot;
+    }
+  ],
+  &quot;smoke&quot;: &quot;pending&quot;,
+  &quot;boundaries&quot;: {
+    &quot;research_only&quot;: true,
+    &quot;implementation_authorized&quot;: false,
+    &quot;execution_status&quot;: &quot;UNEXECUTED&quot;,
+    &quot;admission_status&quot;: &quot;NOT_ADMITTED&quot;,
+    &quot;admitted_blocks&quot;: 0,
+    &quot;promotion_status&quot;: &quot;unpromoted&quot;
+  },
+  &quot;note_on_supersession&quot;: &quot;The lane owner authored a placeholder packet at ~16:35 while the first delegated worker had produced no output, then corrected lane-state to match files on disk. This run&#39;s packet supersedes research-report.md, first-principles.md, decision-ledger.json, top-repos.jsonl, top-companies.jsonl and innovation-register.jsonl. The owner&#39;s source-register.jsonl rows (SR-001..SR-014) are PRESERVED with SR-012/013/014 updated in place; SR-015..SR-026 are new. The owner&#39;s D01 best-worst choice is preserved as a recorded divergence rather than overwritten.&quot;
+}</pre></div></main></body></html>

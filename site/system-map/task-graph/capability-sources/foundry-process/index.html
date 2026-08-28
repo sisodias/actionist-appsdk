@@ -1,0 +1,245 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Canonical Actionist source-to-module process, state axes and automation boundary."><link rel="icon" href="../../../favicon.svg"><title>Actionist repo-to-module foundry process · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../">System map</a> / <a href="../../">Task graph</a> / <a href="../">Capability sources</a> / Foundry process</div><div class="node-actions"><a class="button" href="FOUNDRY-PROCESS.md" download>Download process</a><a class="button" href="foundry-state-machine.json" download>Download state machine</a></div></div><div class="artifact-view"><div class="artifact-view-head"><div class="node-kicker">Eleven stages · four independent axes · no global blocked-repository state</div><h1>Actionist repo-to-module foundry</h1><p>The canonical process from source nomination through capability mapping, reuse-shape choice, bounded adaptation, qualification, scoped admission and production learning.</p></div><pre class="artifact-source"># Actionist repo-to-module foundry process
+
+Date: 2026-08-28  
+Status: canonical process v1; implementation and automation remain to be built
+
+## The decision unit
+
+The foundry never assigns one universal verdict to a repository. Its decision unit is:
+
+```text
+source repository
+  × named capability
+  × target product/use case
+  × target Actionist host
+  × reuse shape
+```
+
+Teable may be reusable as an intact data service for one host, too expensive to transplant for another, and still have an incomplete historical browser proof. Those statements are compatible.
+
+## The four independent axes
+
+1. **Source reusability** — discovery, source-read, reusable candidate, rejected for this capability.
+2. **Adaptation status** — unplanned, surgery planned, adapted, upstream-sync model declared.
+3. **Proof status** — unexecuted, partial local proof, locally proven, qualified for a named host.
+4. **Admission status** — not considered, held for decision, admitted for an exact scope, retired.
+
+`blocked` is allowed only on a named gate or experiment. It is never a global repository class.
+
+## Stage 0 — intake and identity
+
+**Input:** URL, operator nomination, Foundry result, corpus hit or client precedent.  
+**Automatic:** canonical owner/repository identity, redirects, duplicate aliases, revision availability, existing evidence joins.  
+**Output:** `SourceRecord` in the permanent registry.  
+**Stop:** identity cannot be resolved or the record is a list/boilerplate rather than the claimed source.
+
+## Stage 1 — product bar and capability map
+
+Read the product and enough source to answer:
+
+- What complete user outcome exists?
+- What entities and durable states does it own?
+- Which authority decisions does it make?
+- Is it a product, framework, engine, primitive, template or pattern?
+- Which subsystems are independent enough to reuse?
+
+**Output:** `CapabilityMap` with explicit inclusions and exclusions.  
+**Human gate:** confirm that the capability label is not inflated. A signing library is not an e-sign product; a public booking page is not a client portal.
+
+## Stage 2 — target context
+
+Join the capability to a real requirement:
+
+- `OutcomeSpec`
+- `ProductSpec`
+- target industry/workflow
+- target `HostContract`
+- required authority and side effects
+- acceptance fixture
+
+**Output:** `TargetContext`.  
+**Rule:** no autonomous conversion begins from a repository alone.
+
+## Stage 3 — reuse-shape decision
+
+Choose one:
+
+- intact service;
+- embedded module/microfrontend;
+- transplanted subsystem;
+- extracted package;
+- adapter around an external system;
+- generated pattern/template;
+- engine plus Actionist-owned product surface;
+- reference only;
+- custom delta.
+
+**Automatic evidence:** architecture, deploy topology, public APIs, UI mount, dependency closure, data ownership, migrations and upstream cadence.  
+**Human decision:** reuse shape. The machine produces the decision packet; it does not silently choose the irreversible ownership route.
+
+## Stage 4 — normalization-surgery prediction
+
+Predict work across fourteen concerns:
+
+1. branding;
+2. onboarding;
+3. identity;
+4. tenancy;
+5. settings;
+6. navigation;
+7. data ownership;
+8. migrations;
+9. events;
+10. connectors;
+11. token mapping;
+12. runtime;
+13. upstream upgrades;
+14. rollback.
+
+Classify every surgery as cosmetic, boundary or architectural, and mark irreversible changes.  
+**Output:** `SurgeryPlan` with deterministic tasks, AI-assisted tasks and named human decisions.
+
+## Stage 5 — seven linked module records
+
+Generate, but do not fuse:
+
+1. `CapabilityContract`
+2. `PackagingProfile`
+3. `HostContract`
+4. `BindingPlan`
+5. `QualificationDossier`
+6. `RegistryRecord`
+7. `ReleaseManifest`
+
+Missing consequential fields return `UNDERDETERMINED` with the field, owner and next gate. They do not become model confidence or guessed defaults.
+
+## Stage 6 — deterministic compatibility pass
+
+Run the 22 ordered composer rules. The result is exactly:
+
+- `FEASIBLE`
+- `INFEASIBLE`
+- `UNDERDETERMINED`
+
+The solver applies zero relaxations. The first failed rule names the next work. No adaptation is authorized while identity, tenancy, authority, migration ownership, runtime or rollback is contradictory.
+
+## Stage 7 — bounded adaptation
+
+Create an isolated adaptation workspace pinned to source identity. Apply only the accepted `SurgeryPlan`:
+
+- host identity/session adapter;
+- tenant binding;
+- route/navigation contribution;
+- settings placement;
+- data/event adapters;
+- token bridge;
+- runtime wrapper;
+- upstream-sync mechanism.
+
+Every changed file maps to one surgery. Unplanned donor edits fail the gate. Preserve the donor whenever the selected reuse shape permits it.
+
+## Stage 8 — qualification
+
+Prove the capability for the named host and scope:
+
+- build/start/health;
+- authenticated path;
+- positive workflow;
+- negative authority cases;
+- tenant isolation;
+- persistence across restart;
+- desktop/mobile surface where applicable;
+- observability attribution;
+- rollback objects and recovery horizon;
+- upstream revision and changed-code receipt.
+
+Qualification is minimum-gated across required evidence families. A missing family cannot be averaged away.
+
+## Stage 9 — scoped admission and release
+
+Admission always states:
+
+- capability and version;
+- host and tenant scope;
+- allowed operations;
+- runtime profile;
+- exact bindings;
+- qualification evidence;
+- release objects;
+- rollback plan;
+- owner and support boundary.
+
+“Reusable on the internet” is never the admission claim. The claim is “this capability/version/reuse shape is admitted for this host scope.”
+
+## Stage 10 — production learning
+
+Return attributed evidence to the registry:
+
+- accepted or rejected client outcome;
+- adaptation effort by surgery class;
+- defects by source/binding/runtime;
+- upgrade cost;
+- rollback and incident evidence;
+- maintenance burden;
+- operator/client feedback.
+
+Only attributed quality evidence changes candidate ranking. Environment failures, revoked credentials and missing contract fields remain separate signal classes.
+
+## Automation boundary
+
+### Deterministic automation owns
+
+- identity/deduplication;
+- revision pinning;
+- dependency and file inventories;
+- schema validation;
+- declared port/route conflicts;
+- generated contract completeness;
+- build/test/smoke execution;
+- diff and surgery accounting;
+- release and rollback manifests.
+
+### AI assistance owns
+
+- product/capability interpretation;
+- source architecture explanation;
+- subsystem boundary proposals;
+- reuse-shape alternatives;
+- semantic field and event mapping;
+- bounded adapter/glue proposals;
+- evidence comparison.
+
+### Named humans own
+
+- product equivalence;
+- reuse shape;
+- data/migration authority;
+- irreversible surgery;
+- admission and release.
+
+## First calibration set
+
+Use the existing client evidence before synthetic examples:
+
+| Source | Calibration role |
+|---|---|
+| Chatwoot | Same-origin proxied complete product with bounded host-session patches |
+| AFFiNE | Native framed workspace with companion runtime and persistence proof |
+| Plane | Complete product with same-origin proxy and bounded runtime repair |
+| Umami | Clean intact-service baseline with isolated database |
+| Listmonk | Local runtime success with explicit production gates |
+| Hi.Events | Framed local-service precedent |
+| Teable | Reusable candidate with data/build/isolation proof and incomplete historical authenticated-UI proof |
+| Flowable | Engine-plus-Actionist-owned-surface control case; still requires a real foundry trace |
+
+## Immediate implementation sequence
+
+1. Reconstruct the seven records for Chatwoot, AFFiNE and Plane from existing receipts.
+2. Add Teable as the partial-proof counterexample and Flowable as the engine case.
+3. Run the 22 composer rules against all five.
+4. Compare predicted surgeries with the changes Bykonz actually required.
+5. Turn mismatches into foundry fixtures and automation requirements.
+6. Only then automate source reading and adaptation generation at scale.
+
+This sequence converts prior client work into training/evaluation truth for the foundry instead of discarding it or treating every repository as a fresh experiment.
+</pre></div></main></body></html>

@@ -1,0 +1,142 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P01",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "lane": "S1-L1",
+  "observed": "2026-08-27",
+  "status": "research_only_unpromoted",
+  "decisions": [
+    {
+      "id": "D-P01-01",
+      "decision": "Model discovery as resource allocation across three currencies (compute, client attention, client trust) rather than as an interview script.",
+      "confidence": "inferred",
+      "rationale": "Reframing makes the failure modes visible and directly generates the invasiveness ladder and question-budget design. Supported by convergent precompute-vs-ask evidence across four independent commercial products.",
+      "falsifier": "If, across 10 engagements, question count and client effort do not vary meaningfully with precompute availability, the allocation frame adds nothing over a fixed script.",
+      "depends_on": ["P03 supply reality", "P12 input contract"],
+      "evidence": ["com-a-013", "com-a-002", "local-003"]
+    },
+    {
+      "id": "D-P01-02",
+      "decision": "Adopt the six-rung invasiveness ladder as the organising architecture for evidence acquisition; every fact records the rung that produced it. Govern escalation by TWO independent scores — access_persistence and content_sensitivity — not by rung order alone.",
+      "confidence": "inferred_with_correction",
+      "rationale": "OSS survey sorted cleanly into six rungs by required client grant. CORRECTION applied at verification: the ladder is monotonic in ongoing access granted, NOT in sensitivity of data exposed. A rung-1 HAR needs no standing access yet contains live cookies, bearer tokens and customer records; rung-4 telemetry needs an installed agent yet captures only window titles. Conflating the two axes would have produced an unsafe control that under-protects the cheap-looking rungs.",
+      "falsifier": "If clients accept rung-4/5 grants as readily as rung-0/1 in practice, the ordering is wrong and escalation logic is ceremony. Separately: if content_sensitivity and access_persistence turn out to correlate strongly across real sources, the two-score model collapses back to one and the extra machinery is unjustified.",
+      "depends_on": ["P11 connector plane for integration reads"],
+      "evidence": ["oss-b-016", "oss-b-024", "oss-b-011", "oss-b-010", "oss-b-009"]
+    },
+    {
+      "id": "D-P01-03",
+      "decision": "Build the ADAPTIVE, LLM-driven half of the discovery-dialog layer; adopt permissive prior art for the DETERMINISTIC question-graph half.",
+      "confidence": "observed_absence_qualified",
+      "rationale": "The dialog segment returned 5 rows across three search angles (research artifacts, abandoned toys, licence-blocked platforms). QUALIFIED at verification by a cross-segment audit: the form-engine segment contains maintained, genuinely permissive questionnaire engines with real conditional logic (SurveyKing MIT, xiaoju-survey Apache-2.0, Formily, FormKit, uniforms, formio.js). What is absent is an engine combining declarative question machinery WITH LLM-conducted adaptive interviewing. The original unqualified 'build-not-adopt' would have discarded usable permissive prior art.",
+      "falsifier": "A maintained permissive engine combining declarative question graphs with LLM-driven adaptive interviewing is found; residual uncertainty is real since absence-of-evidence searches can fail. Conversely, if the permissive form engines prove unusable as a question-graph substrate on inspection, the deterministic half reverts to build.",
+      "depends_on": [],
+      "evidence": ["oss-a-027", "oss-a-028", "oss-a-030"]
+    },
+    {
+      "id": "D-P01-04",
+      "decision": "Question state, eligibility and validation are server-owned declarative data; the model supplies phrasing and follow-ups only.",
+      "confidence": "inferred",
+      "rationale": "Makes discovery sessions replayable, auditable and unit-testable without an LLM in the loop, which is impossible if branching lives in a prompt. Directly borrowed from survey-mcp-server's inversion.",
+      "falsifier": "If declarative eligibility cannot express the branching real client conversations require, and escapes to model judgement exceed a material share of turns, the split fails.",
+      "depends_on": [],
+      "evidence": ["oss-a-027", "oss-a-032"]
+    },
+    {
+      "id": "D-P01-05",
+      "decision": "Ship adaptive questioning in shadow mode before it is allowed to ask anything live.",
+      "confidence": "inferred",
+      "rationale": "OASIS's non-acting-by-default policy converts 'trust our AI' into an inspectable record. For client-facing discovery this is how the right to adapt is earned.",
+      "falsifier": "If shadow-mode review capacity becomes the bottleneck and never converges to live enablement, the gate is theatre.",
+      "depends_on": [],
+      "evidence": ["oss-a-028"]
+    },
+    {
+      "id": "D-P01-06",
+      "decision": "Every precomputed fact carries a per-field source citation; unresolvable facts halt and emit a gap rather than being interpolated.",
+      "confidence": "inferred",
+      "rationale": "Without citation, precomputed context is a confident guess and the first error destroys trust in the whole dossier; with it, an error is a bad source. OpenAdapt's halt-don't-guess discipline is the correct posture.",
+      "falsifier": "If clients ignore citations entirely and value only the answer, the citation cost buys nothing (measure via engagement telemetry).",
+      "depends_on": [],
+      "evidence": ["oss-b-016", "oss-b-009"]
+    },
+    {
+      "id": "D-P01-07",
+      "decision": "Define explicit terminal states for a discovery session: qualify, prototype, disqualify, escalate-to-human.",
+      "confidence": "inferred",
+      "rationale": "One surface in 55 publishes explicit configurable named terminal states (13 of 55 mention any termination-adjacent mechanism such as qualification, completion, escalation, routing or coverage). A discovery agent without terminal states either stops arbitrarily or never stops, and a published defensible rule remains rare enough to be differentiating.",
+      "falsifier": "If sessions in practice terminate on a state outside the four, the enumeration is wrong.",
+      "depends_on": ["P02 acceptance of the handoff contract"],
+      "evidence": ["com-a-003", "com-a-002"]
+    },
+    {
+      "id": "D-P01-08",
+      "decision": "ClientContext is a bi-temporal, provenance-carrying fact store; facts are invalidated rather than overwritten.",
+      "confidence": "inferred",
+      "rationale": "Client circumstances change; a store that overwrites loses what it used to believe and when that stopped being true, and cannot answer 'what changed since we last spoke'. Content decay is independently attested commercially.",
+      "falsifier": "If no engagement ever queries historical belief state, bi-temporality is unused complexity.",
+      "depends_on": ["P09 data plane"],
+      "evidence": ["oss-b-044", "com-a-007"]
+    },
+    {
+      "id": "D-P01-09",
+      "decision": "Write the question-value function from scratch, including an intrusiveness penalty; adopt only the stream-based active-learning loop from libraries.",
+      "confidence": "observed_limitation",
+      "rationale": "Surveyed libraries rank by model uncertainty, a proxy for question value. None models the cost of asking, intrusiveness, or answerability. A maximally informative question may be completely unaskable in a first call.",
+      "falsifier": "If uncertainty-only ranking performs indistinguishably from the cost-aware function in practice, the extra modelling is unjustified.",
+      "depends_on": [],
+      "evidence": ["oss-b-036", "oss-b-037"]
+    },
+    {
+      "id": "D-P01-10",
+      "decision": "Preserve all 17 industry priors machine-readably and give regulated industries a distinct discovery profile that never ingests regulated content.",
+      "confidence": "observed",
+      "rationale": "Phase-2 bounded specs give entities, authority boundaries and terminal owners per industry. Healthcare, law and mortgage bar evidence-mining, so discovery must ask about categories rather than records and record the exclusion as evidence.",
+      "falsifier": "If a client within an industry systematically contradicts the prior, the prior is mis-specified for that segment.",
+      "depends_on": ["S3-L1 pilot industry scoring"],
+      "evidence": ["local-001", "local-002"]
+    }
+  ],
+  "rejected": [
+    {
+      "id": "R-P01-01",
+      "rejected": "Adopt pm4py for process-mining-based discovery.",
+      "reason": "AGPL-3.0 with a paid commercial licence for closed-source use; the network clause plausibly reaches a hosted Actionist service. Separately, most SMB clients have no case/activity/timestamp event log, so the input barrier is decisive regardless of licence.",
+      "evidence": ["oss-b-001"]
+    },
+    {
+      "id": "R-P01-02",
+      "rejected": "Use screenrpa as the screen-based task-mining reference implementation.",
+      "reason": "CC BY-NC 4.0 — non-commercial, therefore unusable for paid Action Model client work despite reading as open source at a glance.",
+      "evidence": ["oss-b-013"]
+    },
+    {
+      "id": "R-P01-03",
+      "rejected": "Treat star counts as a quality or fitness signal when ranking discovery tooling.",
+      "reason": "Usefulness inverted at both ends: 34.6k stars revealed nothing about internal client operation, while a 3-star tool answered a question nothing else could. Independent confirmation of assumption A22.",
+      "evidence": ["oss-b-024", "oss-b-030"]
+    },
+    {
+      "id": "R-P01-04",
+      "rejected": "Cite SISOCRM, Great Library and the 21st stores in the P01 local-estate join.",
+      "reason": "They carry supply, registry and UI evidence consumed by P03/P05/P06/P09/P15 and contain no client-discovery signal. Citing them would pad the join without adding demand-side evidence.",
+      "evidence": ["local-005", "local-007"]
+    }
+  ],
+  "open_questions": [
+    "What is the canonical ClientContext field set? Blocked on P02's minimum-spec answer for sufficiency and P12's inputs for necessity.",
+    "What may be scraped automatically? This is a policy-owner question, not a research question; the lane can supply an auditable scrape log but not permission.",
+    "Can the Actionist account itself serve as a rung-0 source? Blocked on the unknown Actionist data contract (U).",
+    "What is the real per-rung, per-industry acceptance rate? Unmeasurable without engagements.",
+    "Does precompute build trust or unsettle clients? Held open; the survey gives no evidence either way."
+  ],
+  "boundaries": {
+    "research_only": true,
+    "client_data_used": false,
+    "authenticated_access": false,
+    "repositories_cloned_or_executed": 0,
+    "validated_demand_established": false,
+    "admitted_blocks": 0,
+    "schema_committed": false
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://actionist.local/schemas/repository-value-score.v1.json",
+  "title": "Actionist Repository Value Matrix score",
+  "description": "One shape-specific score for one source, block, recipe and workflow. Unknown evidence is explicit and never imputed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "source_identity",
+    "scoring_context",
+    "dimensions",
+    "shape_scores",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "actionist.repository-value-score.v1"
+    },
+    "candidate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_identity": {
+      "$ref": "#/$defs/source_identity"
+    },
+    "scoring_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recipe_id",
+        "block_id",
+        "workflow_id",
+        "evidence_level",
+        "observed_at"
+      ],
+      "properties": {
+        "recipe_id": {"type":"string","minLength":1},
+        "block_id": {"type":"string","minLength":1},
+        "workflow_id": {"type":"string","minLength":1},
+        "evidence_level": {"$ref":"#/$defs/evidence_level"},
+        "observed_at": {"type":"string","minLength":1},
+        "evaluator_version": {"type":"string"},
+        "target_shapes": {
+          "type":"array",
+          "items":{"$ref":"#/$defs/score_shape"},
+          "uniqueItems":true
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product_completeness",
+        "ui_quality",
+        "out_of_box_operability",
+        "architecture_quality",
+        "integration_seams",
+        "adaptation_burden",
+        "runtime_burden",
+        "maintenance_burden",
+        "reuse_breadth",
+        "evidence_confidence",
+        "rights_reimplementation_cost"
+      ],
+      "properties": {
+        "product_completeness": {"$ref":"#/$defs/dimension"},
+        "ui_quality": {"$ref":"#/$defs/dimension"},
+        "out_of_box_operability": {"$ref":"#/$defs/dimension"},
+        "architecture_quality": {"$ref":"#/$defs/dimension"},
+        "integration_seams": {"$ref":"#/$defs/dimension"},
+        "adaptation_burden": {"$ref":"#/$defs/dimension"},
+        "runtime_burden": {"$ref":"#/$defs/dimension"},
+        "maintenance_burden": {"$ref":"#/$defs/dimension"},
+        "reuse_breadth": {"$ref":"#/$defs/dimension"},
+        "evidence_confidence": {"$ref":"#/$defs/dimension"},
+        "rights_reimplementation_cost": {"$ref":"#/$defs/dimension"}
+      }
+    },
+    "shape_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "complete_product",
+        "surface_module",
+        "engine",
+        "package",
+        "pattern"
+      ],
+      "properties": {
+        "complete_product": {"$ref":"#/$defs/shape_score"},
+        "surface_module": {"$ref":"#/$defs/shape_score"},
+        "engine": {"$ref":"#/$defs/shape_score"},
+        "package": {"$ref":"#/$defs/shape_score"},
+        "pattern": {"$ref":"#/$defs/shape_score"}
+      }
+    },
+    "discovery_priority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum":["available","unknown"]},
+        "score": {"type":["number","null"],"minimum":0,"maximum":100},
+        "signals": {"type":"array","items":{"type":"string"}}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observed_at",
+        "score_algorithm_version",
+        "evidence_refs"
+      ],
+      "properties": {
+        "observed_at": {"type":"string","minLength":1},
+        "score_algorithm_version": {"const":"rvm-v1"},
+        "evidence_refs": {"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+        "capture_manifest_ref": {"type":["string","null"]},
+        "human_review_ref": {"type":["string","null"]}
+      }
+    },
+    "research_only": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "score_shape": {
+      "type": "string",
+      "enum": ["complete_product","surface_module","engine","package","pattern"]
+    },
+    "evidence_level": {
+      "type": "string",
+      "enum": ["T0","T1","T2","T3","T4"]
+    },
+    "source_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purl","immutable_revision","source_digest","identity_status"],
+      "properties": {
+        "purl": {"type":"string","minLength":1},
+        "immutable_revision": {"type":"string","minLength":1},
+        "source_digest": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+        "identity_status": {"enum":["pinned","unpinnable","NOT_CAPTURED"]}
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status","normalized_score","evidence_refs"],
+      "properties": {
+        "status": {"enum":["observed","inferred","unknown","not_applicable","rejected"]},
+        "normalized_score": {"type":["number","null"],"minimum":0,"maximum":100},
+        "raw_measure": {"type":["number","string","object","array","null"]},
+        "raw_cost_points": {"type":["number","null"],"minimum":0},
+        "normalization_version": {"type":["string","null"]},
+        "evidence_refs": {"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+        "notes": {"type":"string"}
+      }
+    },
+    "shape_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "verdict",
+        "evidence_level",
+        "applicable_dimensions",
+        "weights_used",
+        "gate_failures",
+        "missing_evidence"
+      ],
+      "properties": {
+        "status": {"enum":["SCORED","UNDERDETERMINED","INELIGIBLE"]},
+        "verdict": {"enum":["SCORED","UNDERDETERMINED","INELIGIBLE"]},
+        "diamond_score": {"type":["number","null"],"minimum":0,"maximum":100},
+        "evidence_level": {"$ref":"#/$defs/evidence_level"},
+        "applicable_dimensions": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "weights_used": {"type":"object","additionalProperties":{"type":"number","minimum":0}},
+        "minimum_critical_dimension": {
+          "type":["object","null"],
+          "additionalProperties":false,
+          "required":["name","normalized_score"],
+          "properties": {
+            "name":{"type":"string"},
+            "normalized_score":{"type":"number","minimum":0,"maximum":100}
+          }
+        },
+        "gate_failures": {
+          "type":"array",
+          "items":{
+            "type":"object",
+            "additionalProperties":false,
+            "required":["code","message"],
+            "properties":{"code":{"type":"string"},"message":{"type":"string"}}
+          }
+        },
+        "missing_evidence": {
+          "type":"array",
+          "items":{
+            "type":"object",
+            "additionalProperties":false,
+            "required":["dimension","reason"],
+            "properties":{"dimension":{"type":"string"},"reason":{"type":"string"},"next_gate":{"type":"string"}}
+          }
+        },
+        "calibration_fixture_ref": {"type":["string","null"]}
+      }
+    }
+  },
+  "x-actionist-value-matrix": {
+    "version": "rvm-v1",
+    "dimensions": [
+      "product_completeness",
+      "ui_quality",
+      "out_of_box_operability",
+      "architecture_quality",
+      "integration_seams",
+      "adaptation_burden",
+      "runtime_burden",
+      "maintenance_burden",
+      "reuse_breadth",
+      "evidence_confidence",
+      "rights_reimplementation_cost"
+    ],
+    "score_direction": {
+      "product_completeness":"higher_is_better",
+      "ui_quality":"higher_is_better",
+      "out_of_box_operability":"higher_is_better",
+      "architecture_quality":"higher_is_better",
+      "integration_seams":"higher_is_better",
+      "adaptation_burden":"higher_is_better_after_cost_inversion",
+      "runtime_burden":"higher_is_better_after_cost_inversion",
+      "maintenance_burden":"higher_is_better_after_cost_inversion",
+      "reuse_breadth":"higher_is_better",
+      "evidence_confidence":"higher_is_better",
+      "rights_reimplementation_cost":"higher_is_better_after_cost_inversion"
+    },
+    "epsilon": 0.0001,
+    "equation": "D(shape) = 100 * exp(sum(w_i(shape) * ln(max(s_i / 100, epsilon))) / sum(w_i(shape) for applicable dimensions)); hard gates run before D.",
+    "shape_weights": {
+      "complete_product": {
+        "product_completeness":0.20,"ui_quality":0.12,"out_of_box_operability":0.15,"architecture_quality":0.10,"integration_seams":0.08,"adaptation_burden":0.05,"runtime_burden":0.05,"maintenance_burden":0.08,"reuse_breadth":0.05,"evidence_confidence":0.08,"rights_reimplementation_cost":0.04
+      },
+      "surface_module": {
+        "product_completeness":0.08,"ui_quality":0.22,"out_of_box_operability":0.10,"architecture_quality":0.08,"integration_seams":0.18,"adaptation_burden":0.10,"runtime_burden":0.05,"maintenance_burden":0.06,"reuse_breadth":0.05,"evidence_confidence":0.06,"rights_reimplementation_cost":0.02
+      },
+      "engine": {
+        "product_completeness":0.04,"ui_quality":0.02,"out_of_box_operability":0.14,"architecture_quality":0.20,"integration_seams":0.20,"adaptation_burden":0.08,"runtime_burden":0.10,"maintenance_burden":0.10,"reuse_breadth":0.05,"evidence_confidence":0.05,"rights_reimplementation_cost":0.02
+      },
+      "package": {
+        "product_completeness":0.05,"ui_quality":0.08,"out_of_box_operability":0.12,"architecture_quality":0.16,"integration_seams":0.22,"adaptation_burden":0.12,"runtime_burden":0.07,"maintenance_burden":0.08,"reuse_breadth":0.04,"evidence_confidence":0.04,"rights_reimplementation_cost":0.02
+      },
+      "pattern": {
+        "product_completeness":0.02,"ui_quality":0.24,"out_of_box_operability":0.06,"architecture_quality":0.10,"integration_seams":0.16,"adaptation_burden":0.14,"runtime_burden":0.03,"maintenance_burden":0.05,"reuse_breadth":0.12,"evidence_confidence":0.06,"rights_reimplementation_cost":0.02
+      }
+    },
+    "shape_applicability": {
+      "engine": {"ui_quality":"not_applicable_when_no_user_visible_surface"},
+      "complete_product": {"ui_quality":"required"},
+      "surface_module": {"ui_quality":"required"},
+      "package": {"ui_quality":"required_when_package_exports_ui"},
+      "pattern": {"ui_quality":"required_for_visual_pattern"}
+    },
+    "hard_gates": {
+      "complete_product":["pinned_identity","rights_not_ambiguous_or_incompatible","minimum_evidence_T2","identity_tenancy_authority_when_applicable","runtime_smoke","product_surface_gate"],
+      "surface_module":["pinned_identity","rights_not_ambiguous_or_incompatible","minimum_evidence_T2","host_identity_tenancy_and_mount","visual_state_responsive_gate"],
+      "engine":["pinned_identity","rights_or_clean_room_route","minimum_evidence_T1","typed_authority_and_data_owner","integration_or_runtime_boundary"],
+      "package":["pinned_identity","rights_not_ambiguous_or_incompatible","minimum_evidence_T1","closed_dependency_boundary","host_contract_smoke"],
+      "pattern":["pinned_reference","explicit_reimplementation_route","minimum_evidence_T1","authority_preservation","reproducible_pattern_replay"]
+    },
+    "evidence_ladder": [
+      {"tier":"T0","label":"metadata","supports":"discovery and query routing"},
+      {"tier":"T1","label":"pinned source read","supports":"architecture, closure and shape proposal"},
+      {"tier":"T2","label":"runtime smoke","supports":"out-of-box operability and basic workflow states"},
+      {"tier":"T3","label":"host integration proof","supports":"identity, tenancy, ports, data, visual and negative-path binding"},
+      {"tier":"T4","label":"maintained production evidence","supports":"upgrade, recovery and attributed outcome ranking"}
+    ],
+    "visual_protocol": "VSCP-1: pinned browser/runtime, synthetic fixture, five viewports, light/dark, declared states, immutable screenshot/ARIA/style/DOM/network hashes, identical-first diff and post-binding property comparison.",
+    "cost_normalization": "raw_adaptation_points = 1*cosmetic + 3*boundary + 5*architectural + 4*irreversible; adaptation_score = 100*clamp(1 - raw_adaptation_points/100, 0, 1); hours are forbidden until measured.",
+    "calibration_anchors": [
+      {"id":"AFFiNE","source":"toeverything/AFFiNE","score_status":"protocol_defined_not_run","evidence_paths":["knowledge/capability-shelf/source-registry.jsonl"]},
+      {"id":"Twenty","source":"twentyhq/twenty","score_status":"protocol_defined_not_run","evidence_paths":["knowledge/capability-shelf/source-registry.jsonl"]},
+      {"id":"Chatwoot","source":"chatwoot/chatwoot","score_status":"protocol_defined_not_run","evidence_paths":["knowledge/capability-shelf/source-registry.jsonl"]},
+      {"id":"Plane","source":"makeplane/plane","score_status":"protocol_defined_not_run","evidence_paths":["knowledge/capability-shelf/source-registry.jsonl"]}
+    ],
+    "missing_evidence_policy": "Required unknown dimensions produce UNDERDETERMINED with null diamond_score; a measured zero remains a score of zero; not_applicable is permitted only by shape applicability policy."
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "schema_version": "actionist.agency-os-pilot.module-supply-lane.v3",
+  "lane_id": "02-module-supply",
+  "workstream": "2026-08-28-agency-os-pilot",
+  "updated_at": "2026-08-28",
+  "status": "done",
+  "boundary": {
+    "research_only": true,
+    "blueprint_only": true,
+    "cloning": false,
+    "source_execution": false,
+    "implementation": false,
+    "build": false,
+    "deployment": false,
+    "admission": false,
+    "product_pilot_assumed": false
+  },
+  "course_correction": {
+    "from": "Agency OS module supply across 12 named areas",
+    "to": "machine-usable repository Value Matrix and confidence-adjusted Diamond Score for highest-priority universal and vertical-spine blocks across SaaS, ecommerce, marketing_agency and course_creator",
+    "preserved_original_packet": true,
+    "owned_path_unchanged": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/research/workstreams/2026-08-28-agency-os-pilot/lanes/02-module-supply",
+    "note": "The prior Agency OS joins and local receipts are retained in supply-decisions.md; the corrected funnel adds a central matrix and does not rewrite or delete prior evidence."
+  },
+  "artifacts": {
+    "value_matrix": "value-matrix.json",
+    "module_shortlist": "module-shortlist.jsonl",
+    "decisions": "supply-decisions.md",
+    "lane_state": "lane-state.json",
+    "verification": "verify.sh"
+  },
+  "inputs": {
+    "source_registry": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/knowledge/capability-shelf/source-registry.jsonl",
+    "source_registry_summary": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/knowledge/capability-shelf/registry-summary.json",
+    "block_register": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/knowledge/block-hub/block-register.json",
+    "composition_recipes": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/knowledge/block-hub/composition-recipes.json",
+    "registry_source_count": 191,
+    "block_count": 80,
+    "recipe_count": 5,
+    "block_coverage_counts": {
+      "seeded_candidate_supply": 66,
+      "thin_existing_supply": 2,
+      "actionist_owned_or_targeted_gap": 12
+    }
+  },
+  "funnel": {
+    "decision_count": 10,
+    "universal_decision_count": 6,
+    "vertical_decision_count": 4,
+    "covered_block_count": 14,
+    "candidate_edge_count": 30,
+    "unique_source_count": 28,
+    "candidate_roles": {
+      "primary": 10,
+      "backup": 10,
+      "pattern_reference": 10
+    },
+    "source_read_top_five_count": 5,
+    "current_github_gap_read_count": 5,
+    "local_runtime_precedent_count_in_funnel": 3,
+    "all_candidates_qualified": false,
+    "qualified_sources": 0,
+    "admitted_sources": 0
+  },
+  "diamond_score": {
+    "matrix_id": "agency-os-pilot-2026-08-28-module-supply",
+    "equation": "For profile s with weights w_i and dimension scores d_i: G_s = 100 × exp(Σ_i w_i × ln(max(d_i/100, 0.01))); C = 0.5 + 0.5 × (evidence_confidence/100); m_s = min_i min(1, d_i/(gate_i+20)); DiamondScore_s = G_s × C × m_s when every hard gate passes, otherwise 0 with gate_status=BLOCKED.",
+    "profiles": {
+      "intact_service": {
+        "weights": {
+          "functional_product_completeness": 0.17,
+          "visual_ui_quality": 0.03,
+          "out_of_box_operability": 0.14,
+          "architecture_source_quality": 0.14,
+          "integration_seams": 0.15,
+          "adaptation_normalization_cost": 0.1,
+          "runtime_burden": 0.08,
+          "maintenance_upstream_model": 0.1,
+          "evidence_confidence": 0.07,
+          "cross_recipe_reuse": 0.02
+        },
+        "hard_gates": {
+          "functional_product_completeness": 60,
+          "out_of_box_operability": 50,
+          "architecture_source_quality": 50,
+          "integration_seams": 50,
+          "adaptation_normalization_cost": 40,
+          "runtime_burden": 25,
+          "maintenance_upstream_model": 45,
+          "evidence_confidence": 55
+        }
+      },
+      "transplant_or_embedded_module": {
+        "weights": {
+          "functional_product_completeness": 0.16,
+          "visual_ui_quality": 0.08,
+          "out_of_box_operability": 0.1,
+          "architecture_source_quality": 0.14,
+          "integration_seams": 0.16,
+          "adaptation_normalization_cost": 0.12,
+          "runtime_burden": 0.07,
+          "maintenance_upstream_model": 0.09,
+          "evidence_confidence": 0.06,
+          "cross_recipe_reuse": 0.02
+        },
+        "hard_gates": {
+          "functional_product_completeness": 55,
+          "visual_ui_quality": 40,
+          "out_of_box_operability": 45,
+          "architecture_source_quality": 50,
+          "integration_seams": 60,
+          "adaptation_normalization_cost": 40,
+          "runtime_burden": 35,
+          "maintenance_upstream_model": 45,
+          "evidence_confidence": 55
+        }
+      },
+      "engine_plus_owned_surface": {
+        "weights": {
+          "functional_product_completeness": 0.18,
+          "visual_ui_quality": 0,
+          "out_of_box_operability": 0.09,
+          "architecture_source_quality": 0.14,
+          "integration_seams": 0.18,
+          "adaptation_normalization_cost": 0.12,
+          "runtime_burden": 0.08,
+          "maintenance_upstream_model": 0.08,
+          "evidence_confidence": 0.1,
+          "cross_recipe_reuse": 0.03
+        },
+        "hard_gates": {
+          "functional_product_completeness": 55,
+          "out_of_box_operability": 40,
+          "architecture_source_quality": 50,
+          "integration_seams": 60,
+          "adaptation_normalization_cost": 40,
+          "runtime_burden": 30,
+          "maintenance_upstream_model": 45,
+          "evidence_confidence": 55
+        }
+      },
+      "pattern_reference": {
+        "weights": {
+          "functional_product_completeness": 0.13,
+          "visual_ui_quality": 0.12,
+          "out_of_box_operability": 0.1,
+          "architecture_source_quality": 0.17,
+          "integration_seams": 0.13,
+          "adaptation_normalization_cost": 0.08,
+          "runtime_burden": 0.07,
+          "maintenance_upstream_model": 0.1,
+          "evidence_confidence": 0.07,
+          "cross_recipe_reuse": 0.03
+        },
+        "hard_gates": {
+          "functional_product_completeness": 35,
+          "architecture_source_quality": 45,
+          "integration_seams": 35,
+          "adaptation_normalization_cost": 25,
+          "runtime_burden": 20,
+          "maintenance_upstream_model": 35,
+          "evidence_confidence": 40
+        }
+      }
+    },
+    "score_bands": [
+      {
+        "range": "80-100",
+        "band": "anchor_grade",
+        "meaning": "Strong calibrated anchor for the selected shape; still requires named-host qualification."
+      },
+      {
+        "range": "70-79.99",
+        "band": "strong_candidate",
+        "meaning": "Prioritized source-read/qualification candidate."
+      },
+      {
+        "range": "55-69.99",
+        "band": "conditional_candidate",
+        "meaning": "Usable only with explicit open gates and shape/authority limits."
+      },
+      {
+        "range": "40-54.99",
+        "band": "watch_or_pattern",
+        "meaning": "Pattern/watchlist or low-confidence candidate; not a default product surface."
+      },
+      {
+        "range": "0-39.99",
+        "band": "gap_or_blocked",
+        "meaning": "Do not rank for the selected shape; build/reference gap remains."
+      },
+      {
+        "range": "null",
+        "band": "underdetermined",
+        "meaning": "Required evidence missing; no numeric rank."
+      }
+    ],
+    "missing_evidence_behavior": [
+      "Missing or contradictory source identity/URL: reject the row, do not score.",
+      "Missing hard-gate evidence: gate_status=UNDERDETERMINED, diamond_score=null, role_filter_pass=false.",
+      "Unqualified but scored metadata is a provisional funnel input, never a qualification or admission claim.",
+      "Rights/SBOM uncertainty is a separate rights_gate and can disallow transplant/module while leaving intact-service or pattern evaluation open.",
+      "Local runtime receipts are shape/host-specific; they raise evidence confidence only for the exercised boundary."
+    ]
+  },
+  "foundry_dry_runs": [
+    {
+      "shape": "intact_service",
+      "source_id": "SRC-0001",
+      "repo": "chatwoot/chatwoot",
+      "role": "service calibration",
+      "status": "candidate_with_local_runtime_precedent",
+      "receipt": "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json"
+    },
+    {
+      "shape": "transplant",
+      "source_id": "SRC-0111",
+      "repo": "marmelab/atomic-crm",
+      "role": "small product transplant calibration",
+      "status": "source_read_candidate_not_qualified"
+    },
+    {
+      "shape": "embedded_module",
+      "source_id": "SRC-0010",
+      "repo": "activepieces/activepieces",
+      "role": "piece/connector/approval module calibration",
+      "status": "source_read_candidate_not_qualified"
+    },
+    {
+      "shape": "engine_plus_owned_surface",
+      "source_id": "SRC-0053",
+      "repo": "flowable/flowable-engine",
+      "role": "engine-plus-owned-surface calibration",
+      "status": "source_read_candidate_not_qualified"
+    }
+  ],
+  "operator_positive_anchors": [
+    {
+      "source_id": "SRC-0002",
+      "repo": "toeverything/AFFiNE",
+      "profile": "transplant_or_embedded_module",
+      "diamond_score": 65.39,
+      "score_band": "conditional_candidate",
+      "anchor_type": "operator_positive_native_runtime_anchor",
+      "local_receipts": [
+        "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json"
+      ],
+      "evidence_paths": [],
+      "note": "Local receipt proves native framed workspace, authenticated handoff and document create/reload persistence; P03 keeps it as pattern because frontend/backend rights and runtime are mixed."
+    },
+    {
+      "source_id": "SRC-0064",
+      "repo": "twentyhq/twenty",
+      "profile": "intact_service",
+      "diamond_score": 56.61,
+      "score_band": "conditional_candidate",
+      "anchor_type": "operator_positive_architecture_anchor",
+      "local_receipts": [],
+      "evidence_paths": [
+        "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-1-fable/sisocrm-donor-absorption.md"
+      ],
+      "note": "Operator-positive SISOCRM architecture precedent; no local runtime, so confidence penalty remains."
+    },
+    {
+      "source_id": "SRC-0001",
+      "repo": "chatwoot/chatwoot",
+      "profile": "intact_service",
+      "diamond_score": 79.45,
+      "score_band": "strong_candidate",
+      "anchor_type": "operator_positive_runtime_anchor",
+      "local_receipts": [
+        "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json"
+      ],
+      "evidence_paths": [],
+      "note": "Local receipt proves same-origin handoff and protected Inbox/Conversation runtime for one host."
+    },
+    {
+      "source_id": "SRC-0005",
+      "repo": "makeplane/plane",
+      "profile": "intact_service",
+      "diamond_score": 79.2,
+      "score_band": "strong_candidate",
+      "anchor_type": "operator_positive_runtime_anchor",
+      "local_receipts": [
+        "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/plane-runtime-receipt.json"
+      ],
+      "evidence_paths": [],
+      "note": "Local receipt proves authenticated Projects service/proxy, CRUD and restart persistence for one host."
+    }
+  ],
+  "explicit_gaps": [
+    {
+      "block_id": "B005",
+      "name": "Collective settings registry",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B006",
+      "name": "Application shell and navigation registry",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B034",
+      "name": "Entitlements and feature access",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B035",
+      "name": "Trials and customer provisioning",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B039",
+      "name": "Feature flags and controlled rollout",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B043",
+      "name": "API keys, webhooks and developer access",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B050",
+      "name": "Tax, duties and pricing calculation",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B051",
+      "name": "Fraud and payment risk",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B054",
+      "name": "Returns, exchanges and refunds",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B055",
+      "name": "Discounts, loyalty and promotions",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B056",
+      "name": "Reviews and user-generated proof",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B077",
+      "name": "Affiliate and referral management",
+      "status": "actionist_owned_or_targeted_gap"
+    },
+    {
+      "block_id": "B004",
+      "name": "Employee onboarding and offboarding",
+      "status": "thin_existing_supply"
+    },
+    {
+      "block_id": "B040",
+      "name": "Customer success and account health",
+      "status": "thin_existing_supply"
+    }
+  ],
+  "retained_agency_os_area_count": 12,
+  "retained_local_receipt_count": 4,
+  "retained_local_receipts": [
+    "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json",
+    "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/plane-runtime-receipt.json",
+    "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json",
+    "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/fahmy-2026-08/docs/client-platform/implementation-manager/evidence/umami-final/RECEIPT.json"
+  ],
+  "verification": {
+    "required": [
+      "JSONL parse",
+      "unique block/source identities",
+      "primary/backup/pattern constraints",
+      "source URL resolution",
+      "owned-path boundary"
+    ],
+    "status": "PASS",
+    "command": "zsh /Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/research/workstreams/2026-08-28-agency-os-pilot/lanes/02-module-supply/verify.sh",
+    "exit_code": 0,
+    "summary": "JSONL parse, matrix equation, unique block/source, primary/backup/pattern constraints, 28 URL resolutions, and owned-path boundary passed."
+  }
+}

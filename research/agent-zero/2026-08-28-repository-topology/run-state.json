@@ -1,0 +1,75 @@
+{
+  "$schema": "actionist.agent-zero-run-state.v1",
+  "schema_version": "actionist.agent-zero-run-state.v1",
+  "run_id": "2026-08-28-repository-topology",
+  "lane": "ACTIONIST-REPO-TOPOLOGY",
+  "status": "done",
+  "result": "Read-only repository topology and publication plan completed with a verified artifact set.",
+  "scope": {
+    "owned_run_directory": "research/agent-zero/2026-08-28-repository-topology",
+    "allowed_writes": "owned_run_directory_only",
+    "read_only_inputs": ["ORIGINAL-PROMPT.md", "DISPATCH.md"],
+    "external_writes_performed": false
+  },
+  "artifacts": [
+    "repository-topology.md",
+    "repository-manifest.json",
+    "actionist-index-contract.md",
+    "great-library-join.md",
+    "large-asset-strategy.md",
+    "publication-plan.md",
+    "current-remote-receipt.json",
+    "run-state.json",
+    "verify.mjs"
+  ],
+  "evidence": [
+    "Actionist-AppSDK is a private Sinamun checkout and is treated as a client-facing index/control plane.",
+    "Great Library is the existing public Work/Release/Snapshot identity and lineage catalogue.",
+    "SISO Foundry and SISO UI Base remain separate engine/data boundaries.",
+    "The current framework registry is research_only with 24 records, 0 measured and 0 operational.",
+    "Teable and AFFiNE local packages remain prototype/not-admitted evidence.",
+    "The 21st corpus is multi-gigabyte local staging with unresolved rights/publication gates."
+  ],
+  "outside_write_baseline": {
+    "method": "metadata digest of file path, modification time and size; .git/node_modules excluded; owned run directory excluded from the actionmodel root",
+    "workspace_activity_observed": true,
+    "workspace_activity_note": "The actionmodel workspace root changed in non-owned research/workstream paths during the lane; sibling checkout metadata remained unchanged. The root comparison is retained as a warning rather than attributed to this lane.",
+    "roots": {
+      ".": {"file_count": 2658, "sha256": "f915b08c5262d1ce788d13a95256ec36b3ecc42eae00f5ddc5305f86c716af00"},
+      "Actionist-AppSDK": {"file_count": 987, "sha256": "f3c916fefa868a874204a8c7ef4b466dd61c8ec96f9213de754190ae8dabace3"},
+      "SISO_Workspace/Great_Library_of_SISO": {"file_count": 411, "sha256": "52f2d0cb5fe38989b299b531dc906943a6fad509b21cc9dbde3ec087ff14193b"},
+      "SISO_Workspace/siso-ui-base": {"file_count": 38580, "sha256": "1cd63ecd2c776c1e9329678825e96ccb2f2b15854a595fcbf49be9a4c16151bf"},
+      "SISO_Workspace/SISO_Knowledge": {"file_count": 36753, "sha256": "87765d0a309ffd0bdd1708585f7aa9cd5fafa123a691a394f7fe02aed29cf851"}
+    }
+  },
+  "verification": {
+    "command": "node research/agent-zero/2026-08-28-repository-topology/verify.mjs",
+    "exit_code": 0,
+    "verified_at": "2026-08-28",
+    "hashes_excluding_run_state_and_verifier": {
+      "repository-topology.md": "5f0f255bf0e6c1c5ce07877ee64d26b897895aeb54cbcba52eec13138a64574d",
+      "repository-manifest.json": "b015bc5387394ffa90b9c3b856afcdb9b301641c8c8614524320c0ec9d322c4c",
+      "actionist-index-contract.md": "12c07cce5f64660091267377a55c9f6bdf2fc5e5a53ed647faf0568b01431f3b",
+      "great-library-join.md": "e1bfc03816ac0024df82b124f4bc9f3c11216ca0e7e0316f9396f83f3f3bb18e",
+      "large-asset-strategy.md": "d9cae12e1bb6796f8722f53b7de46e84535901527c093bfadd34e4c8c5139534",
+      "publication-plan.md": "8e1219a769f387a96f6b7e203b59ff916510c813e635524f6ed0ef74f5a741d5",
+      "current-remote-receipt.json": "c31945aa581ecd0d112fd6ff026e4065f8b82ecf8a00eb0014bfc13fe4d7a383"
+    }
+  },
+  "callback_protocol": {
+    "requested_by_dispatch": "send a concise completion message to CENA through Herdr",
+    "status": "skipped_by_user_boundary",
+    "message_sent": false,
+    "reason": "The controlling request explicitly forbids messaging or spawning workers.",
+    "herdr_interaction": false
+  },
+  "mutations": {
+    "repositories_created": false,
+    "remotes_changed": false,
+    "commits_created": false,
+    "pushes_performed": false,
+    "publication_performed": false,
+    "data_moved_or_deleted": false,
+    "workers_messaged_or_spawned": false
+  }
+}

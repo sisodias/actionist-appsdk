@@ -1,0 +1,173 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "part": "P02",
+  "lane": "S1-L1",
+  "agent": "ACTIONIST-S1-L1-DEMAND",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "observed": "2026-08-27",
+  "status": "packet_complete_unpromoted",
+  "sprint_complete": false,
+  "promotion_status": "unpromoted",
+  "parent_goal_status": "active",
+  "model": {
+    "lane_owner": "fable-5-1m for checkpoints 1-3, continued on opus-5-1m from checkpoint 3 onward at operator direction",
+    "subagent_policy": "opus_only",
+    "subagents_dispatched": [
+      {
+        "name": "s1l1-com-b",
+        "model": "opus",
+        "scope": "P02 commercial survey",
+        "status": "complete"
+      },
+      {
+        "name": "s1l1-oss-a",
+        "model": "opus",
+        "scope": "P02 OSS survey",
+        "status": "complete"
+      },
+      {
+        "name": "s1l1-adversary",
+        "model": "opus",
+        "scope": "independent challenge",
+        "status": "dispatched_no_verdict_returned_before_close",
+        "note": "Independent challenge did not return before lane close. Both corrections applied to this packet (disjointness overreach; invasiveness-ladder axis conflation) came from the LANE OWNER's own audit, not from this agent. Claims 2/3/5 \u2014 no maintained permissive OSS interview engine, 1-of-55 stopping rules, evidence-attribution hygiene \u2014 are SELF-ASSESSED ONLY and have NOT been independently reviewed. Coordinator should treat them accordingly."
+      }
+    ],
+    "policy_violations": 0
+  },
+  "counts": {
+    "commercial_surfaces": 51,
+    "oss_surfaces": 60,
+    "local_sources": 10,
+    "source_register_rows": 121,
+    "external_denominator": 111,
+    "fetch_verified_external": 36,
+    "search_only_external": 75,
+    "fetch_verified_pct": 32,
+    "top_companies": 10,
+    "top_repos": 10,
+    "innovation_hypotheses": 50,
+    "decisions": 12,
+    "rejected_decisions": 5,
+    "duplicate_ids": 0,
+    "invalid_json_rows": 0,
+    "licence_badge_traps_caught": 9
+  },
+  "segment_breakdown": {
+    "commercial": {
+      "builder-intake": 13,
+      "req-mgmt": 11,
+      "scoping": 10,
+      "ai-prd": 9,
+      "acceptance": 8
+    },
+    "oss": {
+      "spec-driven": 18,
+      "executable-spec": 16,
+      "form-engine": 13,
+      "prd-agent": 8,
+      "dialog": 5
+    }
+  },
+  "checkpoints": [
+    {
+      "id": 1,
+      "name": "prior-evidence-audit",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp1-prior-evidence-audit.md"
+    },
+    {
+      "id": 2,
+      "name": "commercial-survey",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp2-commercial-survey.md"
+    },
+    {
+      "id": 3,
+      "name": "oss-local-estate-survey",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp3-oss-local-estate-survey.md"
+    },
+    {
+      "id": 4,
+      "name": "first-principles-synthesis-and-verification",
+      "status": "complete",
+      "note": "first-principles.md + decision-ledger.json + post-write smoke + self-falsification correction"
+    }
+  ],
+  "smoke": {
+    "verdict": "PASS",
+    "checks": [
+      "all 7 required packet files present and non-empty",
+      "all JSONL rows parse; 0 invalid",
+      "decision-ledger.json parses before and after correction",
+      "0 duplicate IDs across registers",
+      "all top-N IDs resolve into source-register",
+      "top-N ranks contiguous 1..10",
+      "writes confined to owned directories (git status verified)"
+    ]
+  },
+  "self_falsification": {
+    "performed": true,
+    "finding": "The lane's headline claim ('elicitation and falsifiability are disjoint across all 111 surfaces; nothing does both') was FALSIFIED by the lane's own check against raw rows. github/spec-kit mandates NEEDS-CLARIFICATION markers AND Given/When/Then acceptance scenarios in one template; Fission-AI/OpenSpec pairs a clarify-before-code flow with SHALL/WHEN/THEN scenarios.",
+    "correction": "Narrowed to: no commercial surface (0 of 51) does both; the two OSS projects that do combine them by convention with NO enforcing engine, so the combination is asserted rather than computed. The design consequence strengthens rather than weakens: enforce mechanically, because convention without an engine is what the OSS half already proves insufficient.",
+    "files_corrected": [
+      "research-report.md",
+      "first-principles.md",
+      "decision-ledger.json (D-P02-01)",
+      "../../../2026-08-27-sprint-1/lanes/S1-L1/lane-synthesis.md"
+    ],
+    "status": "corrected_and_recorded"
+  },
+  "blockers": [
+    "Minimum ProductSpec cannot be closed while P12's contract is unsettled; derived backwards from anticipated P12 inputs and S2-L4 may revise it.",
+    "Five-workflow EARS proving harness is SPECIFIED BUT UNRUN \u2014 the lane's primary falsifier for its central recommendation.",
+    "Jama Advisor ambiguity-detection mechanism UNCONFIRMED; page enumerates zero INCOSE rules, zero EARS patterns, no scoring mechanism.",
+    "EARS six patterns should be re-verified against Mavin's original IEEE RE09 paper; the fetched source is Jama-published with placeholder-stripped template text.",
+    "Fetch-verified fraction is 32% of external rows; the commercial agent hit a usage limit mid-sweep.",
+    "Scoping segment is genuinely weak evidence (10 rows, 1 fetched, 7 weak/adjacent)."
+  ],
+  "unexecuted_falsifiers": [
+    "Five-workflow EARS encoding: count statements that resist the grammar",
+    "Generated-Gherkin fidelity: human-review correction rate",
+    "Marker-integrity check: does marker count fall from resolution or from confident guessing",
+    "Accept/Revise gate load-bearing test: revision rate near zero means ceremonial",
+    "12-atom coverage: how often the escape hatch is needed"
+  ],
+  "boundaries": {
+    "research_only": true,
+    "client_data_used": false,
+    "authenticated_vendor_access": false,
+    "repositories_cloned": 0,
+    "repositories_executed": 0,
+    "schema_committed": false,
+    "contract_promoted": false,
+    "validated_demand_established": false,
+    "admitted_blocks": 0,
+    "implementation_authorized": false,
+    "files_written_outside_owned_dirs": 0
+  },
+  "callback": {
+    "target": "CENA",
+    "channel": "herdr",
+    "note": "Coordinator override applied: callback goes to CENA, not ACTIONIST-S1-L2-SUPPLY as the dispatch file states. Dispatch re-read before applying.",
+    "status": "staged_and_queued_to_CENA_pane_w659e02f80e5bb1-1"
+  },
+  "hashes_sha256_prefix16_final": {
+    "research-report.md": "ffe4771d9e3bd12f",
+    "source-register.jsonl": "a6b35cda55c022e1",
+    "top-companies.jsonl": "a3a5b044d5a06e9f",
+    "top-repos.jsonl": "fedafd8c7231535c",
+    "innovation-register.jsonl": "440b19cdac880766",
+    "first-principles.md": "b2578422e2eb30cf",
+    "decision-ledger.json": "5d778cbff704297d",
+    "hash_note": "Final hashes, recomputed after the disjointness and ladder corrections were applied. These supersede any earlier set."
+  },
+  "independent_review": {
+    "status": "not_completed",
+    "verdict_received": false,
+    "self_audit_substituted": true,
+    "self_audit_findings": 2,
+    "caveat": "Depth-contract item 8 (independently challenge the lane's headline claims) is PARTIALLY met: the challenge was dispatched to an Opus agent and the lane owner ran its own falsification pass which caught and corrected two real errors, but no independent verdict was returned."
+  }
+}

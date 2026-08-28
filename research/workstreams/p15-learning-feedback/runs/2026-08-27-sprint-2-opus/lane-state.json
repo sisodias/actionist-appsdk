@@ -1,0 +1,49 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane": "S2-L5",
+  "part": "P15",
+  "agent": "ACTIONIST-S2-L5-RUNTIME-LEARNING",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "model": "opus-5[1m]",
+  "subagent_model_policy": "opus_5_only",
+  "subagents_dispatched": 0,
+  "status": "complete",
+  "parent_goal_status": "active",
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "promotion_status": "unpromoted",
+  "artifacts": [
+    "learning-contract.md",
+    "evidence-signal.schema.json",
+    "capability-evidence-state.schema.json",
+    "decision-ledger.json",
+    "lane-state.json"
+  ],
+  "depth_contract": {
+    "first_principles_stated": true,
+    "consumed_sprint1_without_repeating_survey": true,
+    "machine_readable_contracts": 2,
+    "worked_traces": "4, shared with P14 at ../../../p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/worked-traces.md",
+    "deterministic_vs_judgment_vs_human_separated": true,
+    "contradictions_recorded": 3,
+    "rejected_alternatives_recorded": 6,
+    "falsifiers_specified": true,
+    "post_write_smoke": "smoke.sh"
+  },
+  "unresolved": [
+    "AP15-5 cross-client aggregation consent \u2014 unknown, gates the cross-client premise (E-P15-5)",
+    "AP15-7 min-gating degeneracy \u2014 untested (E-P15-1)",
+    "AP15-3 archetype prior transfer \u2014 untested (E-P15-3)",
+    "A37 production learning improves reuse decisions \u2014 remains a hypothesis",
+    "A20/A21 corpus path \u2014 unknown",
+    "upgrade-burden evidence has no declared source until S2-L1 upstream_sync_model is consumed; vendored_no_upstream capabilities emit no upgrade-break signal ever"
+  ],
+  "refuses_to_claim": [
+    "No learning loop exists; nothing has been ranked or reranked",
+    "Zero transitions of the promote/demote/retire state machine have been executed",
+    "Min-gating is not demonstrated to be informative"
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": "actionist.three-candidate.contract-projection.v1",
+  "projection_id": "projection.teable-data-grid.v1",
+  "candidate_id": "actionist/teable-data-grid@0.1.0",
+  "source_id": "SRC-0003",
+  "display_name": "Teable",
+  "projection_status": "normalized_without_source_mutation",
+  "projection_basis": {
+    "source_records_unchanged": true,
+    "source_record_paths": [
+      "blocks/teable-data-grid/actionist-block.json",
+      "blocks/teable-data-grid/records/capability.json",
+      "blocks/teable-data-grid/records/packaging.json",
+      "blocks/teable-data-grid/records/host-requirements.json",
+      "blocks/teable-data-grid/records/binding-plan.json",
+      "blocks/teable-data-grid/records/qualification.json",
+      "blocks/teable-data-grid/records/registry.json",
+      "blocks/teable-data-grid/records/release.json",
+      "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json"
+    ],
+    "normalization_note": "Canonical field names are a comparison projection; the Teable seven-record package remains read-only and its qualification, rights, UI, attachment and restore holds are copied below as explicit evidence state."
+  },
+  "records": {
+    "CapabilityContract": {
+      "record_type": "CapabilityContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "capability_kind": "surface",
+      "outcome_statement": "A tenant-authorized operator can view and edit dense operational tables, filter and sort records, and use donor views while the donor service keeps its own product workflow and data authority.",
+      "supported_atoms": ["report_digest", "extract_structure"],
+      "provides": [
+        { "port_id": "teable.grid.query.v1", "port_kind": "query", "schema_ref": "schemas/ports/grid-query.v1.json", "external_effect": "read_external" },
+        { "port_id": "teable.grid.mutate.v1", "port_kind": "action", "schema_ref": "schemas/ports/grid-mutate.v1.json", "external_effect": "write_external", "idempotency_key_source": "request.idempotency_key" },
+        { "port_id": "teable.attachment.read.v1", "port_kind": "query", "schema_ref": "schemas/ports/attachment-read.v1.json", "external_effect": "read_external" },
+        { "port_id": "teable.record.events.v1", "port_kind": "event", "schema_ref": "schemas/ports/record-event.v1.json", "external_effect": "none" }
+      ],
+      "requires_host": ["identity", "tenant", "settings", "navigation", "data", "files", "events", "secrets", "jobs", "audit"],
+      "requires_capabilities": [],
+      "state_semantics": {
+        "state_classes": ["donor_owned_intact", "files_objects", "events", "cache_ephemeral_local"],
+        "authoritative_owner": "donor",
+        "tenant_model": "tenant_id",
+        "tenant_key": "tenant_id",
+        "tenant_bridge": "host_verified_tenant_to_allowlisted_base",
+        "resource_names": ["teable_metadata", "teable_base_data", "teable_attachment_objects"]
+      },
+      "authority_class": "tenant_scoped_write"
+    },
+    "PackagingProfile": {
+      "record_type": "PackagingProfile",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "reuse_shape": "intact_service",
+      "runtime_profile": "sidecar_service",
+      "rights_exposure": "none_network_only",
+      "source_identity": {
+        "purl": "pkg:github/sisodias/teable@b245a987f8bfb7411d4e2423907b9cbb0a1c9b6b",
+        "immutable_revision": "b245a987f8bfb7411d4e2423907b9cbb0a1c9b6b",
+        "source_digest": "sha256:e41fe62b54c1d0c077a9c5a036f1b4e04016dcd0203396f943411e89e6e09fc6",
+        "identity_status": "pinned"
+      },
+      "rights_state": "declared",
+      "dependency_closure_state": "unresolved",
+      "normalization_applied": ["NS-IDENT-01", "NS-TENANT-02", "NS-SETTINGS-02", "NS-NAV-01", "NS-NAV-02", "NS-DATA-01", "NS-EVENT-01", "NS-RUNTIME-01", "NS-RUNTIME-02", "NS-UPGRADE-01", "NS-ROLLBACK-01", "NS-ROLLBACK-02"],
+      "upstream_sync_model": "downstream_service"
+    },
+    "HostContract": {
+      "record_type": "HostContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "source_host_contract_version": "actionist.host/v0.1.0",
+      "identity": {
+        "identity_source": "host_verified_context",
+        "token_model": "two_token",
+        "assertion_lifetime_seconds": 120,
+        "audience_bound": true,
+        "single_use": true,
+        "query_parameter_identity": "forbidden",
+        "donor_login_route": "forbidden",
+        "long_lived_credential_client_side": false
+      },
+      "tenancy": {
+        "tenant_key": "tenant_id",
+        "resource_key": "base_id",
+        "selection_authority": "host",
+        "explicit_bridge": "host tenant allowlist to donor base",
+        "client_supplied_headers_trusted": false
+      },
+      "settings": {
+        "combination_rule": "REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS",
+        "scopes": ["global", "tenant", "application", "capability", "user"],
+        "donor_settings_policy": "donor_rendered_behind_host_nav"
+      },
+      "navigation": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "permission_and_entitlement_separate": true,
+        "cascading_emptiness": true
+      },
+      "data": {
+        "data_mode": "read_only_external",
+        "cross_owner_reads": "event_fed_read_model",
+        "cross_owner_writes": "forbidden",
+        "migration_owners": { "teable_metadata": "teable-prisma", "teable_base_data": "teable-data-plane-migrator", "teable_attachments": "teable-storage-adapter", "host_application_data": "actionist-host" }
+      },
+      "files": {
+        "owner": "teable-storage-adapter",
+        "namespace": "tenant/{tenantId}/base/{baseId}",
+        "host_authorization_before_access": true
+      },
+      "events": {
+        "envelope": "actionist.capability-event.v1",
+        "capability_id": "actionist/teable-data-grid@0.1.0",
+        "tenant_field": "tenant_id"
+      },
+      "observability": {
+        "capability_identifier": "actionist/teable-data-grid@0.1.0",
+        "per_capability_release_correlation": true,
+        "trace_propagation": true,
+        "failure_cause_group_id": true
+      },
+      "url_authority": "host_owns_url_space_guest_owns_internal_router"
+    },
+    "BindingPlan": {
+      "record_type": "BindingPlan",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "binding_id": "binding.teable-data-grid.synthetic-host.v0.1.0",
+      "application_id": "pilot.marketing-social-agency",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "lifecycle_state": "planned",
+      "port_wiring": [
+        { "from_port": "host.identity.verified_context", "to_port": "teable.session.exchange", "schema_compatibility": "adapter_required" },
+        { "from_port": "host.tenant.verified_claim", "to_port": "teable.proxy.tenant_scope", "schema_compatibility": "adapter_required" },
+        { "from_port": "teable.record.events", "to_port": "host.events.capability_envelope", "schema_compatibility": "adapter_required" }
+      ],
+      "data_binding": {
+        "resources": [
+          { "resource": "teable_metadata", "owner": "teable-prisma", "migration_owner": "teable-prisma", "tenant_key": "tenant_id" },
+          { "resource": "teable_base_data", "owner": "teable-data-plane-migrator", "migration_owner": "teable-data-plane-migrator", "tenant_key": "tenant_id" },
+          { "resource": "teable_attachment_objects", "owner": "teable-storage-adapter", "migration_owner": "teable-storage-adapter", "tenant_key": "tenant_id" }
+        ],
+        "migration_authority": "named_per_resource",
+        "cross_owner_reads": "event_fed_read_model",
+        "cross_owner_mutations": "forbidden"
+      },
+      "identity_binding": {
+        "host_is_single_issuer": true,
+        "assertion_transport": "server_side_exchange_or_http_only_cookie",
+        "assertion_query_parameter": false,
+        "audience_bound": true,
+        "single_use": true,
+        "maximum_lifetime_seconds": 120,
+        "donor_login_route": "forbidden",
+        "implementation_status": "planned_not_proven"
+      },
+      "tenant_binding": {
+        "tenant_model": "tenant_id",
+        "tenant_key": "tenant_id",
+        "base_key": "base_id",
+        "cross_tenant_policy": "deny_by_default",
+        "isolation_proof": "partial_historical_only"
+      },
+      "navigation_binding": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "route_guard": "role_and_tenant_entitlement",
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "entitlement_and_permission_separate": true,
+        "deep_link_rewrite": true
+      },
+      "token_binding": {
+        "ui_bearing": true,
+        "token_paths": [],
+        "resolver_context_id": null,
+        "cross_origin_isolated": true
+      },
+      "owned_namespaces": {
+        "routes": ["/data-grid"],
+        "tables": ["teable_metadata", "teable_base_data", "teable_attachment_objects"],
+        "migration_lineages": ["teable-prisma", "teable-data-plane-migrator"],
+        "environment_variables": ["ACTIONIST_TEABLE_BASE_URL", "ACTIONIST_TEABLE_CREDENTIAL_REF"],
+        "event_streams": ["actionist/teable-data-grid@0.1.0"],
+        "file_namespaces": ["tenant/{tenantId}/base/{baseId}"]
+      },
+      "external_effects": [
+        { "port_id": "teable.grid.query.v1", "external_effect": "read_external", "idempotency_class": "naturally_idempotent", "consent_grade": "read", "account_ref": "teable-host-bound" },
+        { "port_id": "teable.grid.mutate.v1", "external_effect": "write_external", "idempotency_class": "idempotent_with_key", "consent_grade": "reversible", "account_ref": "teable-host-bound", "approval_step": "operator_approval" },
+        { "port_id": "teable.attachment.read.v1", "external_effect": "read_external", "idempotency_class": "naturally_idempotent", "consent_grade": "read", "account_ref": "teable-host-bound" }
+      ],
+      "glue_budget": {
+        "declared_max_changed_files": 18,
+        "declared_max_changed_lines": 420,
+        "source_class_limits": { "cosmetic": { "files": 0, "lines": 0 }, "boundary": { "files": 12, "lines": 240 }, "architectural": { "files": 6, "lines": 180 } },
+        "predicted_changed_files": 0,
+        "predicted_changed_lines": null,
+        "predicted_cost_class": "boundary",
+        "exceeded_action": "escalate_human_review"
+      }
+    },
+    "QualificationDossier": {
+      "record_type": "QualificationDossier",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "artifact_digest": "sha256:e41fe62b54c1d0c077a9c5a036f1b4e04016dcd0203396f943411e89e6e09fc6",
+      "environment_digest": null,
+      "evidence_tier": "T0",
+      "qualification_status": "NOT_QUALIFIED",
+      "required_families": ["F1_source_identity", "F2_shape_and_rights", "F3_contract_and_ports", "F4_runtime_and_mount", "F5_workflow_and_persistence", "F6_authority_and_tenancy", "F7_security_and_egress", "F8_observability_and_operations", "F9_rollback_and_human_admission"],
+      "families_reported": {
+        "F1_source_identity": "pass",
+        "F2_shape_and_rights": "deferred",
+        "F3_contract_and_ports": "pass",
+        "F4_runtime_and_mount": "not_run",
+        "F5_workflow_and_persistence": "pass",
+        "F6_authority_and_tenancy": "deferred",
+        "F7_security_and_egress": "deferred",
+        "F8_observability_and_operations": "not_run",
+        "F9_rollback_and_human_admission": "deferred"
+      },
+      "receipts": [
+        { "receipt_id": "teable-source-archive-digest-v0.1", "receipt_type": "source_identity", "status": "pass", "source_path": "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json" },
+        { "receipt_id": "teable-authenticated-native-ui-hold-v0.1", "receipt_type": "ui_accessibility", "status": "deferred", "source_path": "blocks/teable-data-grid/records/qualification.json" },
+        { "receipt_id": "teable-attachment-proof-hold-v0.1", "receipt_type": "security_egress", "status": "deferred", "source_path": "blocks/teable-data-grid/records/qualification.json" },
+        { "receipt_id": "teable-independent-isolation-hold-v0.1", "receipt_type": "tenancy_isolation", "status": "deferred", "source_path": "blocks/teable-data-grid/records/qualification.json" }
+      ]
+    },
+    "RegistryRecord": {
+      "record_type": "RegistryRecord",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "scope_id": "actionist-teable-data-grid-prototype",
+      "lifecycle_status": "held_for_qualification",
+      "admission_status": "NOT_ADMITTED",
+      "admission_scope": { "tenants": [], "applications": [], "environments": ["synthetic_fixture_only"] },
+      "admitted_for_host_scope": false,
+      "projection_policy": { "lossy_flagged": true, "refuse_projection_when": ["rights_state:ambiguous", "rights_state:incompatible"] },
+      "revocation_propagation": "reopen_all_composing_assemblies_to_held"
+    },
+    "ReleaseManifest": {
+      "record_type": "ReleaseManifest",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/teable-data-grid@0.1.0",
+      "release_id": "actionist-teable-data-grid-prototype-v0.1.0",
+      "status": "not_released",
+      "release_status": "not_released",
+      "pinned_bindings": ["binding.teable-data-grid.synthetic-host.v0.1.0"],
+      "upstream_sync_model": "downstream_service",
+      "rollback_plan": {
+        "rehearsed": false,
+        "objects": [
+          { "object_kind": "code_artifact", "restore_procedure": "Restore host package and proxy artifact by content digest.", "recovery_horizon_seconds": 0, "owner": "actionist-host" },
+          { "object_kind": "configuration", "restore_procedure": "Restore prior validated host configuration snapshot.", "recovery_horizon_seconds": 0, "owner": "actionist-host" },
+          { "object_kind": "secrets", "restore_procedure": "Restore host secret references through the secret manager.", "recovery_horizon_seconds": 0, "owner": "host-operator" },
+          { "object_kind": "database_schema", "restore_procedure": "Use donor-approved metadata/data-plane rollback procedure.", "recovery_horizon_seconds": 0, "owner": "teable-runtime-owner" },
+          { "object_kind": "data", "restore_procedure": "Restore the pre-change donor backup and compare IDs in a disposable drill.", "recovery_horizon_seconds": 0, "owner": "teable-runtime-owner" },
+          { "object_kind": "donor_revision", "restore_procedure": "Re-select the pinned donor revision and verify archive digest before restart.", "recovery_horizon_seconds": 0, "owner": "teable-runtime-owner" },
+          { "object_kind": "surface_route", "restore_procedure": "Switch the host route to the last validated binding or disable its entitlement.", "recovery_horizon_seconds": 0, "owner": "actionist-host" },
+          { "object_kind": "connector_credential_state", "restore_procedure": "Revoke or restore connector state through the host credential boundary if enabled.", "recovery_horizon_seconds": 0, "owner": "host-operator" }
+        ]
+      },
+      "recovery_horizon_seconds": 0,
+      "donor_revision_recovery_declared": false,
+      "artifact_retention": { "pinned_by_digest": true, "retained_in_actionist_storage": false },
+      "deployment_performed": false,
+      "admission_claimed": false
+    }
+  },
+  "preserved_holds": [
+    { "hold_id": "H-TEABLE-UI", "status": "OPEN", "statement": "Authenticated native desktop CRUD proof incomplete.", "owner": "experiment" },
+    { "hold_id": "H-TEABLE-MOBILE", "status": "OPEN", "statement": "Authenticated native mobile CRUD proof incomplete.", "owner": "experiment" },
+    { "hold_id": "H-TEABLE-ATTACHMENTS", "status": "OPEN", "statement": "Attachment upload/read authorization proof incomplete.", "owner": "experiment" },
+    { "hold_id": "H-TEABLE-IDENTITY", "status": "OPEN", "statement": "Host identity handoff and donor-login direct-denial proof not reproduced.", "owner": "experiment" },
+    { "hold_id": "H-TEABLE-RESTORE", "status": "OPEN", "statement": "Independent role/schema/restore boundary incomplete.", "owner": "experiment" },
+    { "hold_id": "H-TEABLE-RIGHTS", "status": "OPEN", "statement": "AGPL corresponding-source and Section 7 attestation incomplete.", "owner": "operator" },
+    { "hold_id": "H-TEABLE-HORIZON", "status": "OPEN", "statement": "No release artifact retention; recovery horizon is 0.", "owner": "release-owner" }
+  ],
+  "evidence_refs": [
+    "knowledge/capability-shelf/source-registry.jsonl",
+    "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json",
+    "../../apps/SISOCRM/verticals/business-broker/TEABLE-ABSORPTION-BRIEF.md",
+    "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+  ]
+}

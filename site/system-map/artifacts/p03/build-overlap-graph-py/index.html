@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P03 research artifact build-overlap-graph.py"><link rel="icon" href="../../../favicon.svg"><title>P03 · build-overlap-graph.py · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p03/">P03</a> / Research artifact / build-overlap-graph.py</div><div class="node-actions"><a class="button" href="../raw/build-overlap-graph.py" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>build-overlap-graph.py</h1><p><code>research/workstreams/p03-curated-capability-shelf/runs/2026-08-27-sprint-1-fable/build-overlap-graph.py</code></p></div><pre class="artifact-source">#!/usr/bin/env python3
+&quot;&quot;&quot;Build the P03 capability overlap graph from the two survey files.
+
+Nodes: repos/vendors + capability kinds. Edges: supplies(source, kind).
+Emits overlap-graph.json and prints the stats the lane report quotes.
+Run from the run directory.
+&quot;&quot;&quot;
+import json, collections, sys
+
+def load(path):
+    out = []
+    for line in open(path):
+        line = line.strip()
+        if not line:
+            continue
+        r = json.loads(line)
+        if str(r.get(&quot;id&quot;, &quot;&quot;)).upper() in (&quot;SUMMARY&quot;, &quot;COM-SUMMARY&quot;) or r.get(&quot;record_type&quot;) == &quot;summary&quot;:
+            continue
+        out.append(r)
+    return out
+
+repos = load(&quot;top-repos.jsonl&quot;)
+coms = load(&quot;top-companies.jsonl&quot;)
+
+# Normalise commercial kind labels onto the OSS snake_case vocabulary so the
+# two denominators can be compared. Unmapped labels are reported, never dropped.
+KIND_MAP = {
+    &quot;low-code data platform&quot;: &quot;admin_data&quot;,
+    &quot;auth/identity&quot;: &quot;auth_identity&quot;,
+    &quot;messaging/notifications&quot;: &quot;messaging_notifications&quot;,
+    &quot;connectors/iPaaS&quot;: &quot;connectors&quot;,
+    &quot;spreadsheet-database&quot;: &quot;airtable_data&quot;,
+    &quot;analytics/BI embeds&quot;: &quot;analytics_bi&quot;,
+    &quot;chat/comments/collaboration&quot;: &quot;chat_collaboration&quot;,
+    &quot;file storage/management&quot;: &quot;files_documents&quot;,
+    &quot;AI-agent platform&quot;: &quot;ai_agent_platform&quot;,
+    &quot;approvals/workflow&quot;: &quot;approvals_workflow&quot;,
+    &quot;notes/docs editing&quot;: &quot;notes_docs&quot;,
+    &quot;support desk/helpdesk&quot;: &quot;support_desk&quot;,
+    &quot;search&quot;: &quot;search&quot;,
+    &quot;video/meetings embed&quot;: &quot;video_meetings&quot;,
+    &quot;billing/payments&quot;: &quot;billing&quot;,
+    &quot;email infra&quot;: &quot;email_infra&quot;,
+    &quot;forms/surveys&quot;: &quot;forms&quot;,
+    &quot;document generation/PDF&quot;: &quot;doc_generation&quot;,
+    &quot;project/case management&quot;: &quot;project_management&quot;,
+    &quot;calendar/scheduling&quot;: &quot;calendar_scheduling&quot;,
+    &quot;CRM&quot;: &quot;crm&quot;,
+    &quot;e-signature&quot;: &quot;e_sign&quot;,
+    &quot;client portals&quot;: &quot;portal&quot;,
+    &quot;inventory/commerce headless&quot;: &quot;inventory&quot;,
+    &quot;LMS&quot;: &quot;lms&quot;,
+}
+
+unmapped = set()
+edges = []          # (source_id, source_label, lane, kind, reuse_shape, license_class, disposition)
+
+for r in repos:
+    for k in (r.get(&quot;capability_kinds&quot;) or []):
+        edges.append({
+            &quot;source_id&quot;: r.get(&quot;id&quot;), &quot;source&quot;: r.get(&quot;repo&quot;), &quot;lane&quot;: &quot;oss&quot;,
+            &quot;kind&quot;: k, &quot;reuse_shape&quot;: r.get(&quot;reuse_shape_recommendation&quot;),
+            &quot;license_class&quot;: r.get(&quot;license_class&quot;), &quot;disposition&quot;: r.get(&quot;disposition&quot;),
+        })
+
+for r in coms:
+    for k in (r.get(&quot;capability_kinds&quot;) or []):
+        nk = KIND_MAP.get(k)
+        if nk is None:
+            unmapped.add(k)
+            nk = k
+        edges.append({
+            &quot;source_id&quot;: r.get(&quot;id&quot;), &quot;source&quot;: r.get(&quot;vendor&quot;), &quot;lane&quot;: &quot;commercial&quot;,
+            &quot;kind&quot;: nk, &quot;reuse_shape&quot;: &quot;commercial_&quot; + str(r.get(&quot;embed_mode&quot;, &quot;unknown&quot;)).split()[0],
+            &quot;license_class&quot;: &quot;commercial&quot;, &quot;disposition&quot;: r.get(&quot;disposition&quot;),
+            &quot;whitelabel&quot;: r.get(&quot;whitelabel&quot;), &quot;pricing_class&quot;: r.get(&quot;pricing_class&quot;),
+        })
+
+kinds_per_source = collections.Counter()
+for e in edges:
+    kinds_per_source[(e[&quot;lane&quot;], e[&quot;source_id&quot;])] += 1
+sources_per_kind = collections.defaultdict(lambda: {&quot;oss&quot;: 0, &quot;commercial&quot;: 0})
+for e in edges:
+    sources_per_kind[e[&quot;kind&quot;]][e[&quot;lane&quot;]] += 1
+
+# &quot;Clean&quot; OSS supply = permissive-ish AND disposition candidate. This is the
+# number that actually decides build-vs-borrow, not the raw row count.
+clean = collections.Counter()
+for e in edges:
+    if e[&quot;lane&quot;] == &quot;oss&quot; and e[&quot;license_class&quot;] in (&quot;permissive&quot;, &quot;permissive-open-core&quot;) \
+       and e[&quot;disposition&quot;] == &quot;candidate&quot;:
+        clean[e[&quot;kind&quot;]] += 1
+
+# Commercial supply usable for resale: white-label yes, not per-end-user priced.
+resale_ok = collections.Counter()
+for e in edges:
+    if e[&quot;lane&quot;] == &quot;commercial&quot; and e.get(&quot;whitelabel&quot;) == &quot;yes&quot; \
+       and &quot;end-user&quot; not in str(e.get(&quot;pricing_class&quot;, &quot;&quot;)).lower() \
+       and &quot;end user&quot; not in str(e.get(&quot;pricing_class&quot;, &quot;&quot;)).lower():
+        resale_ok[e[&quot;kind&quot;]] += 1
+
+dist = collections.Counter(kinds_per_source.values())
+composite = {k: v for k, v in kinds_per_source.items() if v &gt;= 3}
+
+# Kinds outside the 24-kind CLIENT-capability taxonomy are tracked but never
+# classified — a developer-facing kind with no supply is not a client supply gap.
+NON_CLIENT_KINDS = {&quot;developer_docs_rendering&quot;}
+
+all_kinds = sorted(k for k in sources_per_kind if k not in NON_CLIENT_KINDS)
+excluded_kinds = sorted(k for k in sources_per_kind if k in NON_CLIENT_KINDS)
+rows = []
+for k in all_kinds:
+    rows.append({
+        &quot;kind&quot;: k,
+        &quot;oss_sources&quot;: sources_per_kind[k][&quot;oss&quot;],
+        &quot;commercial_sources&quot;: sources_per_kind[k][&quot;commercial&quot;],
+        &quot;clean_oss_candidates&quot;: clean.get(k, 0),
+        &quot;resale_ok_commercial&quot;: resale_ok.get(k, 0),
+    })
+
+def classify(r):
+    &quot;&quot;&quot;commodity / scarce / missing — must cite BOTH denominators (invariant 4).&quot;&quot;&quot;
+    if r[&quot;clean_oss_candidates&quot;] &gt;= 3 or (r[&quot;clean_oss_candidates&quot;] &gt;= 1 and r[&quot;resale_ok_commercial&quot;] &gt;= 3):
+        return &quot;commodity&quot;
+    if r[&quot;clean_oss_candidates&quot;] == 0 and r[&quot;resale_ok_commercial&quot;] == 0:
+        return &quot;missing&quot;
+    if r[&quot;oss_sources&quot;] == 0 or r[&quot;commercial_sources&quot;] == 0:
+        return &quot;UNDERDETERMINED_one_sided&quot;
+    return &quot;scarce&quot;
+
+for r in rows:
+    r[&quot;classification&quot;] = classify(r)
+
+out = {
+    &quot;schema&quot;: &quot;actionist.p03.overlap-graph.v1&quot;,
+    &quot;observed_date&quot;: &quot;2026-08-27&quot;,
+    &quot;nodes&quot;: {
+        &quot;oss_sources&quot;: len({e[&quot;source_id&quot;] for e in edges if e[&quot;lane&quot;] == &quot;oss&quot;}),
+        &quot;commercial_sources&quot;: len({e[&quot;source_id&quot;] for e in edges if e[&quot;lane&quot;] == &quot;commercial&quot;}),
+        &quot;capability_kinds&quot;: len(all_kinds),
+    },
+    &quot;edges_total&quot;: len(edges),
+    &quot;kinds_per_source_distribution&quot;: dict(sorted(dist.items())),
+    &quot;composite_sources_3plus_kinds&quot;: len(composite),
+    &quot;max_kinds_on_one_source&quot;: max(kinds_per_source.values()) if kinds_per_source else 0,
+    &quot;unmapped_commercial_kind_labels&quot;: sorted(unmapped),
+    &quot;excluded_non_client_kinds&quot;: excluded_kinds,
+    &quot;per_kind&quot;: rows,
+    &quot;classification_counts&quot;: dict(collections.Counter(r[&quot;classification&quot;] for r in rows)),
+    &quot;method_note&quot;: &quot;Edges are supplies(source, kind) claims from the two survey files. &quot;
+                   &quot;clean_oss_candidates counts permissive/permissive-open-core rows with disposition=candidate. &quot;
+                   &quot;resale_ok_commercial counts white-label vendors without per-end-user pricing. &quot;
+                   &quot;Classification requires BOTH denominators; one-sided kinds return UNDERDETERMINED. &quot;
+                   &quot;Kinds outside the 24-kind client-capability taxonomy are tracked in &quot;
+                   &quot;excluded_non_client_kinds and never classified: a developer-facing kind with no &quot;
+                   &quot;supply is not a client supply gap.&quot;,
+}
+
+json.dump(out, open(&quot;overlap-graph.json&quot;, &quot;w&quot;), indent=1)
+
+print(f&quot;nodes: {out[&#39;nodes&#39;]}&quot;)
+print(f&quot;edges: {out[&#39;edges_total&#39;]}&quot;)
+print(f&quot;kinds-per-source distribution: {out[&#39;kinds_per_source_distribution&#39;]}&quot;)
+print(f&quot;composite sources (&gt;=3 kinds): {out[&#39;composite_sources_3plus_kinds&#39;]}, max kinds on one source: {out[&#39;max_kinds_on_one_source&#39;]}&quot;)
+if unmapped:
+    print(f&quot;UNMAPPED commercial kind labels (kept verbatim): {sorted(unmapped)}&quot;)
+print(f&quot;classification: {out[&#39;classification_counts&#39;]}&quot;)
+print()
+print(f&quot;{&#39;kind&#39;:&lt;26}{&#39;oss&#39;:&gt;5}{&#39;clean&#39;:&gt;7}{&#39;com&#39;:&gt;5}{&#39;resale&#39;:&gt;8}  class&quot;)
+for r in sorted(rows, key=lambda x: (x[&quot;classification&quot;], -x[&quot;clean_oss_candidates&quot;])):
+    print(f&quot;{r[&#39;kind&#39;]:&lt;26}{r[&#39;oss_sources&#39;]:&gt;5}{r[&#39;clean_oss_candidates&#39;]:&gt;7}&quot;
+          f&quot;{r[&#39;commercial_sources&#39;]:&gt;5}{r[&#39;resale_ok_commercial&#39;]:&gt;8}  {r[&#39;classification&#39;]}&quot;)
+</pre></div></main></body></html>

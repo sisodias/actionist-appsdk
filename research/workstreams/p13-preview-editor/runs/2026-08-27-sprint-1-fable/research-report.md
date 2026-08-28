@@ -1,0 +1,180 @@
+# P13 — Preview, editor and change loop: research report
+
+Part: P13 · Lane: S1-L5 · Run: 2026-08-27-sprint-1-fable
+Author: ACTIONIST-S1-L5-RUNTIME · Recorded 2026-08-27
+Status: research only · DESIGN_ONLY · UNEXECUTED · NOT_ADMITTED · admitted_blocks 0
+Depth contract: **partially met** — see §2 for exact denominators and the shortfall.
+
+---
+
+## 1. Result in one paragraph
+
+Bounded visual editing over a governed composition is not limited by the edit operations a system
+offers — those are near-universal across the market — but by what happens at the boundary of the
+bounded surface, and by whether the system stored the client's *intent* or merely the resulting
+*mutation*. The census found exactly three boundary postures, only one of which is architecturally
+sound (make the out-of-bounds edit unrepresentable), and found that **no surveyed surface durably
+records why an edit was made**. Because upgrade safety is a property of what was stored rather than
+of upgrade discipline, intent capture is the load-bearing mechanism for P13's core thesis, and it is
+also the clearest white space. A verified production case — Shopify's settings layer, the industry's
+canonical example of upgrade-safe separation, reportedly failing to survive a theme update in March
+2026 — establishes that layer separation alone is necessary but not sufficient, and that the failure
+mode is silent.
+
+## 2. Denominators — exact, and honestly short
+
+| Survey | Achieved | Target | Met? |
+|---|---:|---|---|
+| Commercial surfaces | **30 distinct** (40 records: 30 surfaces + 6 production-evidence + 2 format/engine + 1 excluded namesake + 1 governance sub-record) | ~100 | **No** |
+| OSS projects | see `oss-survey-notes.md` (wave-2; wave-1 produced zero) | ~100 | **See notes** |
+| Innovations | **100** (10 ranked) | ~100 | Yes |
+
+Cause of the commercial shortfall: an account-wide model usage limit terminated the research lane
+mid-sweep. Four calls were in flight when the limit hit. **No padding was performed** — every record
+is a surface for which a page was actually read on 2026-08-27.
+
+Named in the dispatch and not reached: Wix Studio proper, Wix ADI, Appsmith, Canva brand kits, Figma
+variables, hosted WordPress.com, all email builders. Highest-value unreached surfaces, all four of
+which make composition governance an explicit product surface: **AEM Universal Editor, Sitecore XM
+Cloud Pages, Uniform, Webstudio**.
+
+Commercial evidence classes: first_party_docs 24, secondary 13, observed_behavior 3.
+
+## 3. The edit-operation taxonomy
+
+The dispatch asked for separation of add / remove / replace / reorder / theme / text / data-binding.
+The census result is that all seven are supported by nearly every surface, so the taxonomy's value is
+not in classifying products but in giving each operation a distinct **upgrade-safety class** and a
+distinct **authority requirement**:
+
+| Verb | Upgrade safety | Authority | Notes |
+|---|---|---|---|
+| Text/content | Safe — content layer, no build | Low | Highest frequency, lowest risk; should never trigger a rebuild |
+| Theme/token | Safe by construction if tokens resolve from one context and no literals are emitted | Low | Survives any capability upgrade |
+| Reorder | Safe only within an order-independent slot | Low | Otherwise an escalation |
+| Add | Safe if the slot type enumerates permitted capabilities | Medium | The insertion point is the control |
+| Remove | Safe; inverse must be recorded for undo | Medium | Removal may orphan bindings |
+| Replace | Safe only among port-compatible candidates | Medium | Solver must filter before the client chooses |
+| Data-binding | **Highest risk** | High — capability scope | May only target resources already in the release's declared scope |
+
+Data-binding is routinely presented in market UIs with the same weight as a style change, which is a
+category error: it is the only verb that can alter what data the application touches.
+
+## 4. The three boundary postures (primary finding)
+
+1. **Denial by construction.** The disallowed edit has no encoding. *Storyblok component whitelists*
+   restrict which components may occupy a slot; *Power Apps managed solution layering* makes an
+   override a distinct addressable object over an unmodified base. The client cannot express the
+   out-of-bounds change.
+2. **Graduated permission.** The edit is expressible, gated by role or flag. *Builder.io
+   `styleStrictMode`*, *Webflow* role gating.
+3. **Unbounded fallthrough.** Expressible and ungated — **every AI app builder surveyed**. The same
+   prompt box that performs a bounded edit can rewrite anything.
+
+Lovable is the instructive case: its binding is the best observed (compile-time stable component IDs,
+line-scoped diffs), and its escape hatch dissolves the composition regardless. **Good binding does
+not survive an ungated channel** — the editor is only as bounded as its least-bounded channel.
+
+## 5. Intent capture — the white space
+
+Nothing surveyed durably records *why*. Closest approximations:
+
+| Surface | Mechanism | Limit |
+|---|---|---|
+| Contentful Patterns | A reusable decision becomes a named object | Captures the what-to-reuse, not the why |
+| Power Apps layers | The override is a distinct object; the system knows a deliberate change occurred | Knows *that*, not *why* |
+| OpenDesign DESIGN.md | Prose rationale alongside the design | Not machine-checkable |
+| Figma Make annotations | Reported in-context annotations anchoring intent to location, separate from mutation | **UNVERIFIED** — strongest lead |
+
+Why this is load-bearing: a mutation ("set padding at node X to 24px") cannot survive an upgrade that
+moves node X. An intent ("this card should be denser than default because operators scan it at a
+glance") can be re-resolved against the new version. Upgrade safety is a property of what you stored.
+
+## 6. Production evidence — verified, and corrected
+
+**Shopify theme-update settings wipe.** Verified directly by the lane owner from
+`community.shopify.dev/t/theme-updates-not-working/32603` (full receipt in
+`verification-shopify-theme-settings-wipe.md`):
+
+- Thread opened 2026-03-24 by a merchant dating onset to "around 20th March 2026".
+- Symptom verbatim: "all previous global customizations are getting wiped (logo file wiped and all
+  settings reset)".
+- Independently corroborated same day by a second theme developer, whose workaround was retrying the
+  update — "eventually one update works. It may take 5-10 attempts though".
+- Shopify staff response 2026-03-24 16:29: "Hi folks - thanks for flagging. I'm digging into this on
+  our side now."
+- **No formal bug acknowledgement on record; no visible resolution.**
+
+**Correction applied:** wave-1 recorded this as "acknowledged, unfixed." That is overstated. The
+"known internal Shopify issue" phrasing is a merchant's account of a private support conversation,
+not an on-record Shopify statement, and must not be quoted as one.
+
+Why it matters: OS 2.0's separation of `settings_data.json` from theme code *is* the industry's
+canonical upgrade-safety guarantee, and it is the same guarantee Actionist must make. Observed
+failing, in production, on a mature platform, silently.
+
+## 7. Local-estate join
+
+The full join is at `../../2026-08-27-sprint-1/lanes/S1-L5/local-estate-join.md`. P13-relevant items:
+
+- **Donor anti-slicing rule** — "Do not transplant a partial component tree unless the donor
+  explicitly supports that embedding." For intact donors the editor must expose only host-side seams.
+- **`deferred` receipt status** — from `siso-ui-base/batteries/gates/principles-grep.mjs`, where a
+  DNA-governed value "is reported as `deferred`, naming the DNA rule that overrides it, and does not
+  fail the run". Imported as P13's fourth edit outcome.
+- **Eight declared UI states** (G5) — the editor must preview all eight, not the happy path only.
+- **Staged writes + approval binds to artifact hash** — a visual edit produces a staged, hash-bound
+  ChangePlan, never a live mutation.
+- **No numeric visual threshold exists locally** (contradiction X-3) — P13 must not claim automated
+  visual gating.
+- **Pack-gallery research** — simultaneous presentation within an axis, style-before-structure
+  ordering, non-destructive pack swap, mandatory stress panel.
+
+## 8. Open Design — identity resolved
+
+Verified: the `opendesigndev` GitHub org (owner of opendesign.dev, home of the Open Design Engine and
+the Octopus format spec) shows most recent activity **3 September 2024**, most repositories untouched
+since 2023, nothing in 2025–2026. `open-design.ai` is an unrelated 2026 Powerformer agent wrapper.
+The Open Design Alliance is an unrelated CAD/BIM nonprofit. The Animaall/Ceros lineage named in the
+dispatch is **unresolved**.
+
+**Consequence:** the dispatch's instruction to census "Open Design and comparable systems" rests on a
+dormant project. The Octopus format may retain value as a design-file interchange reference, but any
+downstream document treating Open Design as a live foundation must be corrected.
+
+## 9. Top 10 commercial surfaces
+
+Ranked for informativeness on bounded-edits-over-governed-composition, not by market size. Bubble,
+Notion, Squarespace and Base44 are all larger and all ranked out.
+
+1. **Builder.io Visual Editor** — registry-bound components with `styleStrictMode`; graduated permission.
+2. **Lovable Visual Edits** — best observed binding (stable component IDs, line-scoped diffs), then unbounded fallthrough.
+3. **Plasmic** — code-component registration with declared editable props.
+4. **Shopify Online Store 2.0** — the canonical settings/code separation, plus the verified failure.
+5. **Contentful Studio Experiences** — Patterns as named reusable decisions; closest to intent capture.
+6. **Storyblok** — component whitelists: denial by construction.
+7. **Power Apps / Dataverse solution layering** — managed layers; the override as a distinct object.
+8. **Webflow** — components, properties, variables, role gating.
+9. **WordPress Gutenberg** — block locking + `theme.json`; OSS-adjacent governance primitives.
+10. **Sanity Presentation / Visual Editing** — overlay editing bound to schema'd content.
+
+## 10. Verification debt carried forward
+
+| Item | Status |
+|---|---|
+| Shopify settings-wipe | **CLOSED** by lane owner — see §6; framing corrected |
+| Figma Make in-context annotations | Open — strongest intent-capture lead |
+| Lovable April 2026 incident post | Open — first-party URL known, contents unread |
+| Framer 3.0 / Agents claims | Open — secondary only |
+| Replit Agent 4 / Design Canvas 2026 | Open — secondary only |
+| Animaall/Ceros ↔ Open Design lineage | Open — unresolved |
+| `upgrade_safety` / `intent_capture` on census-tier records | Mostly `unknown` — genuine evidence gap, usually needs hands-on use |
+
+## 11. What this report does not establish
+
+- No editor exists; no edit has been applied, previewed, upgraded or rolled back.
+- Whether clients accept a bounded surface is **unknown** and is the part's largest commercial risk
+  (X-P13-2): every AI builder chose unbounded fallthrough, which is either an industry failure of
+  nerve or evidence that clients reject bounds. Desk research cannot distinguish these.
+- The commercial denominator is 30, not ~100. The depth contract is **unmet** for this survey.
+- No first-party postmortem was retrieved for any surface.

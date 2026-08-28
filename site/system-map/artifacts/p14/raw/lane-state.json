@@ -1,0 +1,105 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "part": "P14",
+  "title": "Runtime, verification and release",
+  "lane": "S1-L5",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "owner_agent": "ACTIONIST-S1-L5-RUNTIME",
+  "parent_model_at_report": "opus-5[1m]",
+  "parent_model_at_wave1": "fable-5[1m]",
+  "subagent_model_policy": "opus_only",
+  "subagent_policy_violations": 0,
+  "recorded": "2026-08-27",
+  "waves": 2,
+  "counts": {
+    "commercial_records": 49,
+    "commercial_top10": 10,
+    "oss_records": 80,
+    "oss_top10": 10,
+    "innovations": 100,
+    "innovations_ranked": 10,
+    "source_register_records": 26,
+    "decisions": 13
+  },
+  "denominator_targets": {
+    "commercial": 100,
+    "oss": 100,
+    "innovations": 100
+  },
+  "denominator_met": {
+    "commercial": false,
+    "oss": false,
+    "innovations": true
+  },
+  "denominator_notes": {},
+  "files": {
+    "research-report.md": {
+      "bytes": 15438,
+      "sha256_16": "f2f01bd354c8c933"
+    },
+    "source-register.jsonl": {
+      "bytes": 10426,
+      "sha256_16": "656af0d617f0b293",
+      "records": 26,
+      "parse_failures": 0
+    },
+    "top-companies.jsonl": {
+      "bytes": 94446,
+      "sha256_16": "a00a3aac66aff995",
+      "records": 49,
+      "parse_failures": 0
+    },
+    "top-repos.jsonl": {
+      "bytes": 102741,
+      "sha256_16": "5068dbb3c9a19508",
+      "records": 80,
+      "parse_failures": 0
+    },
+    "innovation-register.jsonl": {
+      "bytes": 45728,
+      "sha256_16": "0e8dd70a87fc632b",
+      "records": 100,
+      "parse_failures": 0
+    },
+    "first-principles.md": {
+      "bytes": 17864,
+      "sha256_16": "50084998706435f6"
+    },
+    "decision-ledger.json": {
+      "bytes": 6947,
+      "sha256_16": "88c14f6891ebc1ad"
+    },
+    "lane-state.json": {
+      "bytes": 2709,
+      "sha256_16": "0e13afe319842562"
+    }
+  },
+  "missing_required_files": [],
+  "checkpoints": [
+    "checkpoint-1-prior-evidence-audit.md",
+    "checkpoint-2-3-survey-wave-1.md",
+    "checkpoint-4-verification-and-callback.md",
+    "local-estate-join.md",
+    "cross-lane-inputs-S1-L4.md"
+  ],
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "implementation_authorized": false,
+    "client_data_used": false,
+    "vendor_login_used": false,
+    "repository_code_copied": false,
+    "external_side_effects": "none",
+    "production_deployment": false,
+    "executed_rollback": false,
+    "wrote_only_owned_paths": true,
+    "sprint_promotion": "unpromoted",
+    "parent_goal_status": "active"
+  },
+  "blockers": [
+    "Account-wide usage limit terminated survey wave 1 across all six subagents; BLOCKED not FAIL.",
+    "Commercial/OSS denominator shortfalls recorded per survey; no padding."
+  ]
+}

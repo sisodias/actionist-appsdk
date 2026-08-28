@@ -1,0 +1,2325 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://actionist.local/framework-register.v1.json",
+  "schema_version": "actionist.framework-register.v1",
+  "title": "Actionist Framework Registry",
+  "observed_at": "2026-08-28",
+  "status": "research_only",
+  "research_only": true,
+  "owner": "ACTIONIST-FRAMEWORK-REGISTRY",
+  "canonical_page": "/task-graph/frameworks/",
+  "maturity_enum": [
+    "idea",
+    "specified",
+    "machine_readable",
+    "dry_run",
+    "measured",
+    "operational"
+  ],
+  "category_enum": [
+    "demand_product",
+    "supply_discovery",
+    "selection_valuation",
+    "conversion_contracts",
+    "composition_experience",
+    "runtime_release",
+    "learning_governance"
+  ],
+  "registry_summary": {
+    "framework_count": 24,
+    "maturity_counts": {
+      "idea": 0,
+      "specified": 9,
+      "machine_readable": 14,
+      "dry_run": 1,
+      "measured": 0,
+      "operational": 0
+    },
+    "category_counts": {
+      "demand_product": 2,
+      "supply_discovery": 2,
+      "selection_valuation": 2,
+      "conversion_contracts": 4,
+      "composition_experience": 7,
+      "runtime_release": 5,
+      "learning_governance": 2
+    },
+    "gap_count": 10,
+    "admitted_frameworks": 0,
+    "operational_frameworks": 0
+  },
+  "frameworks": [
+    {
+      "framework_id": "FW-DEMAND-PRODUCTSPEC",
+      "name": "Outcome discovery and ProductSpec",
+      "category": "demand_product",
+      "problem_owned": "Turn a client conversation into an implementation-independent outcome, workflow and acceptance specification.",
+      "reusable_framework_reason": "The same discovery invariants apply across industries: terminal owner, measurable outcome, actors, entities, state transitions, authority, non-goals and acceptance must be explicit before source selection.",
+      "inputs": [
+        "client context and observed pain",
+        "workflow actors and entities",
+        "economic or operational outcome",
+        "authority ceiling and non-goals",
+        "known systems and open questions"
+      ],
+      "outputs": [
+        "ProductSpec",
+        "workflow acceptance fixtures",
+        "coverage markers",
+        "client accept/revise decision"
+      ],
+      "method": {
+        "kind": "gated_decision_protocol",
+        "ordered_rules": [
+          "Name the outcome, terminal owner and metric without naming a donor.",
+          "Enumerate actors, entities, state transitions and authority boundaries.",
+          "Mark each requirement COVERED, UNCOVERED or NEEDS_CLARIFICATION with provenance.",
+          "Separate non-goals and the authority ceiling from implementation choices.",
+          "Generate executable acceptance examples for the complete workflow.",
+          "Hold planning behind a client Accept or Revise gate."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/2026-08-27-sprint-1/convergence/s1-contract-handoff.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/2026-08-27-sprint-1/convergence/S1-CONVERGENCE.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "Sprint 1 records ProductSpec evidence, explicit holds and a client acceptance boundary; the five-workflow proving harness remains unrun."
+        },
+        {
+          "path": "knowledge/05-EXPERIMENT-ROADMAP.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The roadmap keeps requirements independent of implementations and makes acceptance a separate experiment gate."
+        }
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "FW-BLOCK-HUB-LIFECYCLE",
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-EXPERIMENT-GATE-LOOPS"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "coverage marker validation",
+          "open-marker and uncovered-requirement gates",
+          "acceptance fixture shape"
+        ],
+        "model_judgment": [
+          "phrasing observed pain as a bounded outcome",
+          "proposing entities and workflow questions"
+        ],
+        "human_authority": [
+          "client acceptance or revision",
+          "scope, trade-off and authority decisions"
+        ]
+      },
+      "falsifiers": [
+        "A representative workflow cannot be expressed without donor-specific implementation fields.",
+        "The authorized five-workflow harness shows the minimum spec omits a field needed for safe composition."
+      ],
+      "next_gate": "Create a ProductSpec schema and run the five-workflow acceptance harness with an explicit client gate.",
+      "current_owner": "D03 / P02",
+      "canonical_page": "/task-graph/frameworks/#FW-DEMAND-PRODUCTSPEC"
+    },
+    {
+      "framework_id": "FW-BLOCK-HUB-LIFECYCLE",
+      "name": "Business lifecycle and Block Hub decomposition",
+      "category": "demand_product",
+      "problem_owned": "Map business outcomes into reusable block requirements, recipe membership and source-candidate edges without collapsing different abstraction levels.",
+      "reusable_framework_reason": "The lifecycle and six-level vocabulary can organize every future recipe while preserving the distinction between a UI component, surface, capability, product, engine and composition recipe.",
+      "inputs": [
+        "ProductSpec outcomes",
+        "industry and atom vocabulary",
+        "business lifecycle stages",
+        "recipe requirements",
+        "candidate source registry"
+      ],
+      "outputs": [
+        "block register",
+        "composition recipes",
+        "block-to-source edges",
+        "universal, vertical, optional and deferred priorities"
+      ],
+      "method": {
+        "kind": "hierarchical_decomposition",
+        "ordered_rules": [
+          "Place the job in acquire, sell, activate, deliver, support, retain, operate, measure or govern.",
+          "Classify the requirement at one of six levels: component, surface, capability, product, engine or recipe.",
+          "Preserve domain vocabulary, state and authority as a recipe overlay rather than a new universal stack.",
+          "Join requirements to candidates without treating membership as qualification.",
+          "Mark thin, gap-heavy and deferred rows explicitly."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/block-hub/block-register.json",
+        "knowledge/block-hub/composition-recipes.json",
+        "knowledge/block-hub/block-source-edges.jsonl"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "knowledge/block-hub/README.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The hub defines six levels, the acquire-to-govern lifecycle, a shared foundation and four overlays, with qualification kept separate."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/01-demand-product/block-dependency-priority-map.json",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The pilot packet provides a machine-readable dependency and priority map, while explicitly making no product or admission decision."
+        }
+      ],
+      "dependencies": [
+        "FW-DEMAND-PRODUCTSPEC"
+      ],
+      "downstream_consumers": [
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-CAPABILITY-CLASSIFICATION",
+        "FW-SURFACE-ROLE-MAPPING",
+        "FW-ARCHETYPE-SHELL",
+        "FW-DETERMINISTIC-COMPOSER"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "stable block identity and recipe membership",
+          "dependency edge validation",
+          "coverage and thin/gap state projection"
+        ],
+        "model_judgment": [
+          "mapping language to a canonical block",
+          "proposing candidate source edges"
+        ],
+        "human_authority": [
+          "choosing a pilot outcome",
+          "accepting a recipe scope or deferral"
+        ]
+      },
+      "falsifiers": [
+        "New recipes cannot reuse the lifecycle and level vocabulary without silently changing ownership semantics.",
+        "A requirement classified at one level repeatedly needs two conflicting levels to be safe."
+      ],
+      "next_gate": "Run the 17-block representative foundry set and verify that hard dependencies remain closed without promoting candidates.",
+      "current_owner": "D01-D03 / Block Hub",
+      "canonical_page": "/task-graph/frameworks/#FW-BLOCK-HUB-LIFECYCLE"
+    },
+    {
+      "framework_id": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "name": "Source discovery and candidate funnel",
+      "category": "supply_discovery",
+      "problem_owned": "Turn a broad source universe into a small, evidence-labelled candidate set for one block and workflow.",
+      "reusable_framework_reason": "The funnel prevents another shallow denominator sweep by fixing the row grain, evidence depth and primary/backup/reference roles for every source family.",
+      "inputs": [
+        "block and workflow requirement",
+        "local source registry",
+        "source identity and access state",
+        "candidate evidence class",
+        "unresolved specialist gap"
+      ],
+      "outputs": [
+        "20-30 credible candidate set when supply is thin",
+        "five strongest source reads",
+        "primary, backup and reference candidates",
+        "seven linked module records for selected candidates"
+      ],
+      "method": {
+        "kind": "funnel",
+        "ordered_rules": [
+          "Join existing local evidence and retain its evidence class.",
+          "Add only enough discovery candidates to cover the block, not an arbitrary global quota.",
+          "Read the strongest candidates at product and architecture level.",
+          "Separate product, framework, primitive, engine and reference supply.",
+          "Select a primary, backup and pattern/reference candidate only after the reuse shape is considered.",
+          "Search again only for a named unresolved specialist gap."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/capability-shelf/source-registry.jsonl",
+        "knowledge/capability-shelf/foundry-state-machine.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "knowledge/block-hub/README.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The candidate funnel defines 20-30 credible candidates, five deep reads and primary/backup/reference roles rather than a universal shallow list."
+        },
+        {
+          "path": "knowledge/capability-shelf/README.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The permanent shelf separates source identity, evidence classes, foundry stage, client precedents and admission state."
+        }
+      ],
+      "dependencies": [
+        "FW-BLOCK-HUB-LIFECYCLE"
+      ],
+      "downstream_consumers": [
+        "FW-CAPABILITY-CLASSIFICATION",
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-REGISTRY-LIFECYCLE"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "deduplication by stable source identity",
+          "evidence-class and access-state preservation",
+          "funnel counts and candidate roles"
+        ],
+        "model_judgment": [
+          "finding a relevant source",
+          "summarizing capability and seams"
+        ],
+        "human_authority": [
+          "authorizing any source execution",
+          "choosing the source to bind"
+        ]
+      },
+      "falsifiers": [
+        "A bounded candidate funnel misses a needed capability more often than a broad corpus sweep while consuming more qualified evidence.",
+        "The source registry cannot preserve separate discovery, qualification and admission states."
+      ],
+      "next_gate": "Add a machine-readable row contract for `(source, block, recipe, workflow, shape)` and run it against one thin and one well-supplied block.",
+      "current_owner": "D04-D05 / P03",
+      "canonical_page": "/task-graph/frameworks/#FW-SOURCE-CANDIDATE-FUNNEL"
+    },
+    {
+      "framework_id": "FW-CAPABILITY-CLASSIFICATION",
+      "name": "Product, framework, primitive, surface and engine classification",
+      "category": "supply_discovery",
+      "problem_owned": "Split a source container into the capability level that can actually be reused, without calling a framework, engine or visual primitive a complete product.",
+      "reusable_framework_reason": "Every source portfolio contains mixed abstraction levels; a controlled classifier prevents product completeness and engine leverage from being averaged into one misleading repository label.",
+      "inputs": [
+        "source identity and read evidence",
+        "runnable product behavior",
+        "framework or platform mechanisms",
+        "user-visible surface evidence",
+        "engine/API/workflow evidence"
+      ],
+      "outputs": [
+        "capability kind",
+        "product/framework/primitive split",
+        "surface versus engine distinction",
+        "underdetermined classification when evidence is insufficient"
+      ],
+      "method": {
+        "kind": "ordered_classification",
+        "ordered_rules": [
+          "Preserve source identity before splitting the source container.",
+          "Classify as product only when a runnable user outcome and product surface are evidenced.",
+          "Classify reusable infrastructure as framework or engine when its product surface is not the value unit.",
+          "Classify bounded UI or utility supply as surface, package or primitive.",
+          "Split composite repositories into multiple capability candidates when ownership and seams differ.",
+          "Return UNDERDETERMINED rather than infer a product level from metadata alone."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/block-hub/block-register.json",
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/repo-to-module-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P04 treats the repository as a source container and adds surface and engine kinds because product/framework/primitive distinctions change reuse decisions."
+        },
+        {
+          "path": "knowledge/block-hub/README.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The hub preserves six levels from UI component through composition recipe."
+        }
+      ],
+      "dependencies": [
+        "FW-SOURCE-CANDIDATE-FUNNEL"
+      ],
+      "downstream_consumers": [
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-MODULE-CONTRACT-FAMILY"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "allowed capability-kind vocabulary",
+          "required evidence fields for each class",
+          "separate source identity from capability identity"
+        ],
+        "model_judgment": [
+          "reading the source to propose capability boundaries",
+          "classifying ambiguous product/framework boundaries"
+        ],
+        "human_authority": [
+          "accepting a product-level reuse claim",
+          "choosing to split or preserve a composite source"
+        ]
+      },
+      "falsifiers": [
+        "A single source-level classification predicts reuse value as well as a capability-level split across ten sources.",
+        "The classifier repeatedly labels engines as products and causes incorrect selection."
+      ],
+      "next_gate": "Encode three P03 candidates at product, surface and engine levels and compare their shape-specific decisions.",
+      "current_owner": "D05 / P03-P04",
+      "canonical_page": "/task-graph/frameworks/#FW-CAPABILITY-CLASSIFICATION"
+    },
+    {
+      "framework_id": "FW-REUSE-SHAPE-SELECTION",
+      "name": "Reuse-shape and ownership selection",
+      "category": "conversion_contracts",
+      "problem_owned": "Choose the correct delivery and ownership shape for a capability before adaptation so mature code is preserved without creating a false fork.",
+      "reusable_framework_reason": "Shape is a repeatable architectural decision across donors; it predicts identity, data, token, runtime and upgrade surgery while remaining distinct from rights exposure.",
+      "inputs": [
+        "capability boundary and outcome",
+        "session and cascade coupling",
+        "state and migration ownership",
+        "source identity and rights state",
+        "runtime and recovery requirements"
+      ],
+      "outputs": [
+        "reuse_shape",
+        "rights_exposure",
+        "shape decision receipt with rejected alternatives",
+        "ownership and adaptation plan"
+      ],
+      "method": {
+        "kind": "human_confirmed_routing",
+        "ordered_rules": [
+          "Pin source identity before evaluating rights or adaptation.",
+          "Prefer the least copied shape that preserves the client outcome: service/coordinate before slice or specification-only reimplementation.",
+          "If the capability must share host cascade or session, rule out a cross-origin frame.",
+          "If it owns durable state or migrations, preserve the donor boundary unless a named authority decision accepts absorption.",
+          "Keep reuse_shape (product architecture) separate from rights_exposure (how much source is copied).",
+          "Record rejected alternatives; an unrecorded default is not a shape decision."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json",
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/normalization-surgery-taxonomy.jsonl"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/repo-to-module-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P04 separates ten architecture shapes from four rights-exposure values and names shape, migration authority and admission as human decisions."
+        },
+        {
+          "path": "research/workstreams/p07-token-theme-harmonization/runs/2026-08-27-sprint-2-opus/design-harmonization-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P07 makes cascade and session coupling a feasibility input to shape selection and bounds cross-origin framing."
+        }
+      ],
+      "dependencies": [
+        "FW-CAPABILITY-CLASSIFICATION",
+        "FW-SOURCE-CANDIDATE-FUNNEL"
+      ],
+      "downstream_consumers": [
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-NORMALIZATION-SURGERY",
+        "FW-HOST-AUTHORITY",
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-REPOSITORY-VALUE-MATRIX"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "source identity and rights-state representation",
+          "shape-to-runtime eligibility checks",
+          "theming and session hard incompatibilities"
+        ],
+        "model_judgment": [
+          "proposing a shape from source and host facts",
+          "estimating the surgery set"
+        ],
+        "human_authority": [
+          "final shape choice",
+          "migration/data authority assignment",
+          "admission and rights obligation acceptance"
+        ]
+      },
+      "falsifiers": [
+        "Reuse shape fails to predict the surgery set across five representative donors.",
+        "A human and deterministic policy reach the same shape and migration decisions at parity across ten donors."
+      ],
+      "next_gate": "Encode three real shelf candidates into the seven-record family and hand-run the shape decision with alternatives recorded.",
+      "current_owner": "D06-D07 / P04",
+      "canonical_page": "/task-graph/frameworks/#FW-REUSE-SHAPE-SELECTION"
+    },
+    {
+      "framework_id": "FW-REPOSITORY-VALUE-MATRIX",
+      "name": "Repository Value Matrix and shape-specific Diamond Score",
+      "category": "selection_valuation",
+      "problem_owned": "Value one source separately for complete-product, surface/module, engine, package and pattern reuse without letting a fatal weakness disappear inside an average.",
+      "reusable_framework_reason": "A repository can be valuable in one reuse shape and unusable in another; a fixed row grain and shape-specific score make that distinction comparable at corpus scale.",
+      "inputs": [
+        "source identity and evidence ladder",
+        "block, recipe and workflow context",
+        "selected reuse shape",
+        "eleven normalized value dimensions",
+        "hard-gate and screenshot receipts"
+      ],
+      "outputs": [
+        "one shape-specific score row",
+        "Diamond Score or explicit UNDERDETERMINED/INELIGIBLE verdict",
+        "dimension vector and blockers",
+        "calibration and falsifier receipt"
+      ],
+      "method": {
+        "kind": "min_sensitive_geometric_score",
+        "equation": "D(shape) = 100 * exp(sum(w_i(shape) * ln(max(s_i / 100, epsilon))) / sum(w_i(shape) for applicable dimensions)); hard gates run before D and unknown required dimensions return UNDERDETERMINED.",
+        "ordered_rules": [
+          "Hold `(source, shape, recipe, block, workflow)` constant; never publish a repository-wide score.",
+          "Require pinned identity and classify missing evidence as unknown, never zero or not_applicable.",
+          "Apply shape-specific hard gates for rights, identity, tenancy, authority, closure, runtime and recovery.",
+          "Mark genuinely irrelevant dimensions not_applicable only from the shape policy, then renormalize weights.",
+          "Invert raw cost dimensions into higher-is-better normalized scores while retaining raw costs.",
+          "Compute the weighted geometric Diamond Score and retain the minimum critical dimension and gate failures.",
+          "Use the evidence ladder and controlled screenshot protocol before comparing product-surface rows.",
+          "Keep AFFiNE, Twenty, Chatwoot and Plane as unscored calibration fixtures."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/frameworks/repository-value-score.schema.json",
+        "knowledge/frameworks/framework-register.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "hypothesis",
+      "evidence": [
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/01-demand-product/block-dependency-priority-map.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The pilot packet fixes the row grain, five demand/reuse inputs, shape-specific valuation and the four positive anchors without selecting or admitting them."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/04-experience-editor/experience-map.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The experience packet defines measurable surface dimensions, the VSCP-1 capture protocol and policy thresholds explicitly marked for calibration."
+        }
+      ],
+      "dependencies": [
+        "FW-CAPABILITY-CLASSIFICATION",
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-SOURCE-CANDIDATE-FUNNEL"
+      ],
+      "downstream_consumers": [
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-EXPERIMENT-GATE-LOOPS",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "dimension normalization and cost inversion",
+          "geometric equation and weight renormalization",
+          "hard gates, evidence states and screenshot manifest integrity"
+        ],
+        "model_judgment": [
+          "extracting dimension signals from source and controlled captures",
+          "proposing a shape-specific candidate comparison"
+        ],
+        "human_authority": [
+          "accepting professional coherence",
+          "accepting a bounded donor ceiling",
+          "approving any exception to a hard gate"
+        ]
+      },
+      "falsifiers": [
+        "A weighted arithmetic or the Diamond Score ranks a candidate with a fatal gate failure above a clean candidate.",
+        "Repeated controlled captures are not reproducible from the same manifest.",
+        "Shape-specific scores do not distinguish a product, surface, engine, package and pattern on held-out fixtures."
+      ],
+      "next_gate": "Run the VSCP-1 protocol on the four calibration anchors and a small held-out donor sample; publish scores only with capture, evidence and blocker vectors.",
+      "current_owner": "D06-D09 / ACTIONIST-FRAMEWORK-REGISTRY",
+      "canonical_page": "/task-graph/frameworks/#FW-REPOSITORY-VALUE-MATRIX"
+    },
+    {
+      "framework_id": "FW-MODULE-CONTRACT-FAMILY",
+      "name": "Seven-record module contract family",
+      "category": "conversion_contracts",
+      "problem_owned": "Keep capability semantics, packaging, host facilities, per-application binding, qualification, registry governance and release recovery linked but independently owned.",
+      "reusable_framework_reason": "The seven records change on different clocks and let a qualification rerun or deployment change without mutating the semantic interface a composer reads.",
+      "inputs": [
+        "capability meaning and ports",
+        "reuse shape and source identity",
+        "host facilities",
+        "application binding",
+        "qualification and release evidence"
+      ],
+      "outputs": [
+        "CapabilityContract",
+        "PackagingProfile",
+        "HostContract",
+        "BindingPlan",
+        "QualificationDossier",
+        "RegistryRecord",
+        "ReleaseManifest"
+      ],
+      "method": {
+        "kind": "linked_contract_family",
+        "ordered_rules": [
+          "Put a field in the record whose owner can change it without invalidating the others.",
+          "Keep capability semantics free of runtime, proof, rights and host details.",
+          "Require source identity, dependency closure, rights state and upstream sync in packaging.",
+          "Make BindingPlan the only record where one module meets one host/application.",
+          "Min-gate qualification across orthogonal evidence families.",
+          "Scope registry admission explicitly and enumerate release rollback objects."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json",
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/decision-ledger.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/repo-to-module-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P04 records seven owners on seven clocks, five invariants and the split from the monolithic Block Contract."
+        },
+        {
+          "path": "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "Sprint 2 convergence adopts the seven-record family and preserves its research-only, unexecuted boundary."
+        }
+      ],
+      "dependencies": [
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-DATA-OWNERSHIP",
+        "FW-HOST-AUTHORITY"
+      ],
+      "downstream_consumers": [
+        "FW-NORMALIZATION-SURGERY",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-RELEASE-RECOVERY"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "required fields and enum provenance",
+          "record ownership and cross-record links",
+          "scope and evidence fail-closed behavior"
+        ],
+        "model_judgment": [
+          "proposing capability boundaries and port semantics",
+          "mapping donor facts into a draft record"
+        ],
+        "human_authority": [
+          "accepting semantic ownership",
+          "admission and irreversible contract changes"
+        ]
+      },
+      "falsifiers": [
+        "A composition needs proof or rights fields inside CapabilityContract to decide semantic fit.",
+        "A qualification update changes a previously valid capability meaning without a contract revision."
+      ],
+      "next_gate": "Run Loop 0 with an intact service, transplanted surface, extracted package, owned capability and connector record set.",
+      "current_owner": "D08-D09 / P04",
+      "canonical_page": "/task-graph/frameworks/#FW-MODULE-CONTRACT-FAMILY"
+    },
+    {
+      "framework_id": "FW-NORMALIZATION-SURGERY",
+      "name": "Normalization surgery taxonomy and glue planning",
+      "category": "conversion_contracts",
+      "problem_owned": "Predict and govern the branding, onboarding, identity, tenancy, settings, navigation, data, token, runtime, upgrade and rollback changes needed to bind a source.",
+      "reusable_framework_reason": "The surgery categories and determinism/cost classes provide a common planning vocabulary across donors while exposing boundary and architectural work hidden by line-count optimism.",
+      "inputs": [
+        "PackagingProfile and reuse shape",
+        "HostContract facilities",
+        "donor source seams",
+        "normalization policy",
+        "glue cost budget"
+      ],
+      "outputs": [
+        "surgery set across 14 concern categories",
+        "DET/SEMI/HUM classification",
+        "cosmetic/boundary/architectural cost class",
+        "reversibility and falsifier receipts"
+      ],
+      "method": {
+        "kind": "taxonomy_and_budget",
+        "ordered_rules": [
+          "Route the source by reuse shape before listing edits.",
+          "Enumerate affected concern categories rather than quoting a percentage.",
+          "Classify each surgery as deterministic, semi-automatic or human judgment.",
+          "Classify cost as cosmetic, boundary or architectural and mark irreversibility.",
+          "Apply shape-specific glue budgets; overflow routes to reject, reshape or human review.",
+          "Record settings and migration authority as named gates, not cosmetic tasks."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/normalization-surgery-taxonomy.jsonl",
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/worked-traces.md"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "observed",
+      "evidence": [
+        {
+          "path": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/repo-to-module-framework.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The current taxonomy contains 28 surgeries across 14 categories with a 7/17/4 determinism split and 3/13/12 cost split."
+        },
+        {
+          "path": "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "Three worked traces touch different surgery sets for service, transplant and engine-plus-owned-delta shapes; they remain unexecuted."
+        }
+      ],
+      "dependencies": [
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-REUSE-SHAPE-SELECTION"
+      ],
+      "downstream_consumers": [
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "category and cost-class accounting",
+          "changed-file/line arithmetic once source is pinned",
+          "reversibility flag propagation"
+        ],
+        "model_judgment": [
+          "source seam reading",
+          "proposing semi-automatic surgery and affected boundaries"
+        ],
+        "human_authority": [
+          "settings remount",
+          "migration authority",
+          "runtime shape and admission"
+        ]
+      },
+      "falsifiers": [
+        "A representative absorption is dominated by cosmetic rather than boundary/architectural work.",
+        "The taxonomy cannot predict the different surgery sets for three reuse shapes.",
+        "A cross-tenant result is treated as recoverable work rather than a kill condition."
+      ],
+      "next_gate": "Measure surgery categories, changed boundaries and repair loops during the first authorized host-absorption pilot.",
+      "current_owner": "D07 / P04",
+      "canonical_page": "/task-graph/frameworks/#FW-NORMALIZATION-SURGERY"
+    },
+    {
+      "framework_id": "FW-HOST-AUTHORITY",
+      "name": "Host identity, tenancy, settings and navigation authority",
+      "category": "composition_experience",
+      "problem_owned": "Make heterogeneous capabilities behave as one product by centralizing identity, tenant authority, URL space, settings provenance, navigation registration and donor chrome boundaries.",
+      "reusable_framework_reason": "Every assembled product needs the same authority boundary even when each capability retains different implementation, state or router ownership.",
+      "inputs": [
+        "host-verified session context",
+        "tenant/workspace/principal scope",
+        "capability navigation and settings declarations",
+        "reuse shape and donor chrome constraints",
+        "host route and policy registry"
+      ],
+      "outputs": [
+        "HostContract",
+        "two-token or host-native identity binding",
+        "settings definition and provenance",
+        "navigation registration and route guard",
+        "authority context and unavailable fallback"
+      ],
+      "method": {
+        "kind": "authority_intersection_and_registry",
+        "ordered_rules": [
+          "Trust only host-verified identity and tenant context; reject client-supplied authority headers.",
+          "Use host-owned identity and an audience-bound short-lived handoff for federated donors, or delete donor auth only when the code is owned.",
+          "Assign one URL owner; let the guest retain only its internal router below a host-assigned basename.",
+          "Resolve settings from broad to narrow scopes with explicit combination rule and provenance.",
+          "Evaluate entitlement and permission separately; apply cascading emptiness to stripped navigation.",
+          "Suppress donor login, tenant switching and top-level chrome through declared, auditable boundaries.",
+          "Intersect authority scopes; never union member privileges."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json",
+        "research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-2-opus/navigation-ownership-matrix.json",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/host-runtime-blueprint.md"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p10-identity-settings-navigation/runs/2026-08-27-sprint-1-fable/first-principles.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P10 separates identity, navigation and settings into strong, partial and unprecedented tiers and assigns URL/authority ownership to the host."
+        },
+        {
+          "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The local identity handoff protocol is audience-bound, short-lived, single-use and safe-return-path constrained; adapters remain separate from the protocol proof."
+        }
+      ],
+      "dependencies": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-REUSE-SHAPE-SELECTION"
+      ],
+      "downstream_consumers": [
+        "FW-DATA-OWNERSHIP",
+        "FW-ARCHETYPE-SHELL",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-CONNECTOR-ACTION-AUTHORITY",
+        "FW-BOUNDED-EDITING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "tenant and principal context validation",
+          "route ownership and visibility predicates",
+          "settings precedence and provenance resolution",
+          "authority intersection"
+        ],
+        "model_judgment": [
+          "mapping donor identity and settings seams",
+          "proposing navigation declarations"
+        ],
+        "human_authority": [
+          "accepting a settings absorption exception",
+          "granting authority ceilings",
+          "approving donor chrome and route transitions"
+        ]
+      },
+      "falsifiers": [
+        "A donor can safely mint a session or retain a reachable login/tenant switch without violating the host invariant.",
+        "A declarative navigation registry cannot express a real donor without per-donor shell edits.",
+        "A settings remount survives a donor upgrade with full parity and no bespoke surgery."
+      ],
+      "next_gate": "Build the host settings/navigation registry contract and test identity, route, scope and settings negative paths in Loop 0/3.",
+      "current_owner": "D11 / P10 + P08",
+      "canonical_page": "/task-graph/frameworks/#FW-HOST-AUTHORITY"
+    },
+    {
+      "framework_id": "FW-DATA-OWNERSHIP",
+      "name": "Typed data ownership and migration authority",
+      "category": "conversion_contracts",
+      "problem_owned": "Bind owned, absorbed, federated, event-derived, file and external state without hidden dual writes or a universal-database fiction.",
+      "reusable_framework_reason": "State classification, one-owner rules and typed ports recur across every capability while allowing donors to keep native stores and migrations.",
+      "inputs": [
+        "state class and source of truth",
+        "tenant/workspace/client keys",
+        "read/write/event ports",
+        "migration and backup ownership",
+        "reuse shape and cross-owner read needs"
+      ],
+      "outputs": [
+        "DataResourceContract",
+        "one-owner/schema map",
+        "typed adapter and read model plan",
+        "migration and rollback authority"
+      ],
+      "method": {
+        "kind": "state_classification_and_ownership",
+        "ordered_rules": [
+          "Classify each resource as owned transactional, donor-native, event read model, mapping, cache/search, object, external API or secret material.",
+          "Assign exactly one authority owner, writer and migration/producer owner for mutable state.",
+          "Put tenant identity on every owned resource from the first migration and negative-test isolation.",
+          "Use Postgres as the default only for new Actionist-owned transactional state.",
+          "Keep donor-native stores behind APIs/adapters; use event-fed read models for cross-owner views.",
+          "Keep ORM, physical placement and database-specific behavior inside adapters."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/2026-08-27-sprint-1/convergence/s1-contract-handoff.json",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/resource-budget.schema.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p09-data-plane/runs/2026-08-27-sprint-1-fable/first-principles.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P09 defines one owner per stateful resource, workload-first store choice, typed data ports, event-fed read models and tenant keys from day one."
+        },
+        {
+          "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "SISOCRM provides the local service-versus-own and migration-authority precedent behind the one-owner rule."
+        }
+      ],
+      "dependencies": [
+        "FW-HOST-AUTHORITY",
+        "FW-REUSE-SHAPE-SELECTION"
+      ],
+      "downstream_consumers": [
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-CONNECTOR-ACTION-AUTHORITY",
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-RELEASE-RECOVERY"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "one writer and migration-owner checks",
+          "tenant-key and resource-scope validation",
+          "typed port and read-model ownership"
+        ],
+        "model_judgment": [
+          "classifying donor state and required consistency",
+          "proposing adapter and event boundaries"
+        ],
+        "human_authority": [
+          "migration authority assignment",
+          "eventual-versus-synchronous consistency exception",
+          "backup/deletion policy acceptance"
+        ]
+      },
+      "falsifiers": [
+        "A pilot workflow requires two authoritative writers on one resource.",
+        "A thin data port repeatedly leaks ORM or storage semantics across three reuse shapes.",
+        "A tenant key and negative test do not prevent cross-tenant reads or writes."
+      ],
+      "next_gate": "Specify DataResourceContract and run the four-state-class Loop 2 bake-off with dual-write and tenant-leak probes.",
+      "current_owner": "D10-D11 / P09",
+      "canonical_page": "/task-graph/frameworks/#FW-DATA-OWNERSHIP"
+    },
+    {
+      "framework_id": "FW-DESIGN-GRAMMAR-TOKENS",
+      "name": "Closed design grammar and semantic token harmonization",
+      "category": "composition_experience",
+      "problem_owned": "Make owned UI, extracted code, native donors and framed services express one validated design language without raw-value or namespace leakage.",
+      "reusable_framework_reason": "A finite valid grammar and five binding classes can be reused across recipes while respecting the different physics of native CSS, donor variables, selectors and origin boundaries.",
+      "inputs": [
+        "immutable DesignDNA/token pack",
+        "donor mount topology and encoding",
+        "semantic role contract",
+        "source token/literal evidence",
+        "light/dark and state requirements"
+      ],
+      "outputs": [
+        "semantic-token contract",
+        "B1-B5 donor binding",
+        "conversion and scope map",
+        "resolved-property, encoding, visual and mode gate receipts"
+      ],
+      "method": {
+        "kind": "structural_binding_router",
+        "ordered_rules": [
+          "Route owned/native UI to B1 and extracted/source-owned code to B2.",
+          "Route a natively mounted token-driven donor to B3 only when encoding and consumption are known.",
+          "Use B4 only for selector-coupled fallback and record upgrade fragility.",
+          "Use B5 for hard-origin boundaries and declare its bounded coherence ceiling.",
+          "Scope donor variables to the mount container, convert encodings rather than aliasing, and require explicit dark mirrors.",
+          "Run identical-first, resolved-property, encoding, visual-coherence and mode-transition gates."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p07-token-theme-harmonization/runs/2026-08-27-sprint-2-opus/semantic-token-contract.json",
+        "research/workstreams/p07-token-theme-harmonization/runs/2026-08-27-sprint-2-opus/donor-token-binding.schema.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p07-token-theme-harmonization/runs/2026-08-27-sprint-2-opus/design-harmonization-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P07 defines five binding classes, conversion and scope invariants, and runtime gates K-N; all donor experiments remain unexecuted."
+        },
+        {
+          "path": "knowledge/06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The current grammar requires a closed valid pack, explicit modes, semantic roles and no arbitrary interpolation."
+        }
+      ],
+      "dependencies": [
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-HOST-AUTHORITY"
+      ],
+      "downstream_consumers": [
+        "FW-SURFACE-ROLE-MAPPING",
+        "FW-ARCHETYPE-SHELL",
+        "FW-BOUNDED-EDITING",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-REPOSITORY-VALUE-MATRIX"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "binding-class routing from structural facts",
+          "namespace/scope and encoding validation",
+          "resolved-style and mode gates"
+        ],
+        "model_judgment": [
+          "donor variable enumeration and role mapping",
+          "failure-class classification for source components"
+        ],
+        "human_authority": [
+          "professional coherence",
+          "accepting B4 fragility or B5 bounded ceiling",
+          "choosing a reuse-shape change"
+        ]
+      },
+      "falsifiers": [
+        "A planted encoding alias passes the rendered encoding-correctness gate.",
+        "A single binding mechanism reaches acceptable coherence across native, compiled and cross-origin donors.",
+        "B4 selector overrides survive representative donor upgrades without material breakage."
+      ],
+      "next_gate": "Run the three cross-donor experiments and the closed-pack proof against controlled light/dark states.",
+      "current_owner": "D13-D14 / P07",
+      "canonical_page": "/task-graph/frameworks/#FW-DESIGN-GRAMMAR-TOKENS"
+    },
+    {
+      "framework_id": "FW-PREFERENCE-LEARNING",
+      "name": "Adaptive preference learning and DesignDNA",
+      "category": "composition_experience",
+      "problem_owned": "Learn a client's visual preference efficiently from realistic rendered alternatives while shipping only a complete, valid and reproducible token pack.",
+      "reusable_framework_reason": "The comparison, uncertainty, stopping and re-entry rules apply to every design grammar and keep preference selection separate from accessibility and implementation validity.",
+      "inputs": [
+        "constraint intake",
+        "valid candidate packs",
+        "controlled realistic screens",
+        "per-dimension responses and timing",
+        "later approvals and rejections"
+      ],
+      "outputs": [
+        "posterior by design dimension",
+        "versioned DesignDNA",
+        "nearest valid token pack and alternatives",
+        "preference transcript and confidence"
+      ],
+      "method": {
+        "kind": "adaptive_gallery_protocol",
+        "ordered_rules": [
+          "Prune the valid design grammar with brand, accessibility, archetype and device constraints.",
+          "Show complete realistic screens with only the target dimension varied.",
+          "Use four-up plus an explicit outside option as the primary starting arm.",
+          "Target the least-resolved dimension or highest-information candidate set.",
+          "Stop on confidence/information gain, a five-round floor, a 15-round ceiling or explicit acceptance.",
+          "Learn continuous preference coordinates internally but select a closed validated pack.",
+          "Re-enter and update DesignDNA from later approvals/rejections rather than treating onboarding as permanent."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p06-preference-science/runs/2026-08-27-sprint-1-fable/decision-ledger.json",
+        "research/workstreams/2026-08-27-sprint-1/convergence/s1-contract-handoff.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "knowledge/06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The current protocol defines controlled screens, an outside option, per-dimension confidence, adaptive targeting, closed packs and experiments still required."
+        },
+        {
+          "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L3/lane-synthesis.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "P06 derives a 4.04-bit tolerance target and a 5-15 round envelope but records the product choice as unexecuted."
+        }
+      ],
+      "dependencies": [
+        "FW-DESIGN-GRAMMAR-TOKENS"
+      ],
+      "downstream_consumers": [
+        "FW-ARCHETYPE-SHELL",
+        "FW-SURFACE-ROLE-MAPPING",
+        "FW-BOUNDED-EDITING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "candidate validity gates",
+          "duplicate/diversity and transcript integrity",
+          "stopping and confidence calculations"
+        ],
+        "model_judgment": [
+          "candidate generation inside the closed grammar",
+          "interpreting a response and proposing the next comparison"
+        ],
+        "human_authority": [
+          "accepting a final pack",
+          "choosing a context offset or returning to a dimension"
+        ]
+      },
+      "falsifiers": [
+        "Adjacent grammar levels are not reliably discriminable in the perturbation test.",
+        "A static default beats the adaptive protocol on approval, revision count and held-out preference prediction.",
+        "A valid pack cannot render representative components and donor surfaces without raw literals or missing roles."
+      ],
+      "next_gate": "Normalize the local grammar inventory and run the outside-option, batch-format, correlation, test-retest and static-default experiments.",
+      "current_owner": "D13 / P06",
+      "canonical_page": "/task-graph/frameworks/#FW-PREFERENCE-LEARNING"
+    },
+    {
+      "framework_id": "FW-SURFACE-ROLE-MAPPING",
+      "name": "Surface and component role mapping",
+      "category": "composition_experience",
+      "problem_owned": "Convert raw component tags, previews and donor surfaces into controlled roles with anatomy, states, tokens, responsive behavior and recipe scope.",
+      "reusable_framework_reason": "The same role vocabulary can retrieve visual supply across industries while keeping business capability, data authority and donor provenance separate from appearance.",
+      "inputs": [
+        "component/source identity",
+        "raw tags and preview artifacts",
+        "controlled role catalogue",
+        "token family and state contract",
+        "recipe and audience context"
+      ],
+      "outputs": [
+        "canonical role and aliases",
+        "anatomy and allowed states",
+        "recipe slot and responsive profile",
+        "provenance and qualification requirement"
+      ],
+      "method": {
+        "kind": "controlled_role_normalization",
+        "ordered_rules": [
+          "Preserve source identity and artifact kind before deduplication.",
+          "Use raw tags only as retrieval hints, never as canonical roles.",
+          "Separate visual role from business capability and data authority.",
+          "Map anatomy, semantic tokens, responsive behavior and required states.",
+          "Use source-bearing entries as gated supply and bundle-only entries as reference/preview supply.",
+          "Promote a role mapping only after provenance, state and fit review."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/01-demand-product/block-dependency-priority-map.json",
+        "knowledge/block-hub/block-register.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L3/lane-synthesis.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "P05 demotes the 75-tag vocabulary to retrieval hints, preserves canonical entities and recommends owning the shell and core primitives."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/04-experience-editor/experience-map.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The experience packet states the raw-tag-to-controlled-role pipeline and separates visual roles from business capabilities."
+        }
+      ],
+      "dependencies": [
+        "FW-BLOCK-HUB-LIFECYCLE",
+        "FW-DESIGN-GRAMMAR-TOKENS"
+      ],
+      "downstream_consumers": [
+        "FW-ARCHETYPE-SHELL",
+        "FW-BOUNDED-EDITING",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-DETERMINISTIC-COMPOSER"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "identity preservation and alias normalization",
+          "role schema, state and token reference validation",
+          "provenance and recipe-scope checks"
+        ],
+        "model_judgment": [
+          "anatomy and role proposal",
+          "visual similarity and semantic fit review"
+        ],
+        "human_authority": [
+          "promoting a source-bearing role",
+          "accepting a role mapping for a client-facing surface"
+        ]
+      },
+      "falsifiers": [
+        "Canonical roles cannot reduce tag ambiguity without hiding important surface differences.",
+        "A raw tag match predicts business capability or authority as well as a role contract."
+      ],
+      "next_gate": "Create a labeled role sample with state/viewport review and measure perceptual duplicate rate before admitting mappings.",
+      "current_owner": "D13-D14 / P05 + pilot experience lane",
+      "canonical_page": "/task-graph/frameworks/#FW-SURFACE-ROLE-MAPPING"
+    },
+    {
+      "framework_id": "FW-ARCHETYPE-SHELL",
+      "name": "Archetype shell and navigation topology",
+      "category": "composition_experience",
+      "problem_owned": "Choose a workflow-appropriate product shell and responsive destination topology without turning the inherited five-area layout into a universal constraint.",
+      "reusable_framework_reason": "Case consoles, portals, schedules, field operations and learning products need different destination sets but share host-frame, state, responsive and donor-chrome rules.",
+      "inputs": [
+        "ProductSpec and audience",
+        "recipe and vertical spine",
+        "capability navigation intent",
+        "host route/authority contract",
+        "responsive and state profiles"
+      ],
+      "outputs": [
+        "ArchetypeTemplate",
+        "NavigationPlan",
+        "layered shell topology",
+        "responsive/state profile"
+      ],
+      "method": {
+        "kind": "layered_topology_selection",
+        "ordered_rules": [
+          "Separate L0 host frame, L1 archetype shell, L2 capability navigation and L3 donor chrome.",
+          "Select the destination set from the workflow; do not require five areas.",
+          "Keep identity, tenant, URL basename and ordering primitives host-owned.",
+          "Let donors declare navigation intent while the host assigns route and order.",
+          "Preserve destination meaning and primary actions across wide, compact, tablet and mobile profiles.",
+          "Use explicit state profiles for rest, loading, empty, error, denied, success, invalid and stale."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-2-opus/navigation-ownership-matrix.json",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/01-demand-product/block-dependency-priority-map.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-2-opus/shell-contract.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The shell packet provides the host/archetype/capability/donor ownership boundary and rejects a universal five-area shell."
+        },
+        {
+          "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L3/lane-synthesis.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "P08 found cross-rail vocabulary pressure under the fixed five-area shell and retained five starting spines as a coverage heuristic, not a schema."
+        }
+      ],
+      "dependencies": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-BLOCK-HUB-LIFECYCLE",
+        "FW-HOST-AUTHORITY",
+        "FW-SURFACE-ROLE-MAPPING"
+      ],
+      "downstream_consumers": [
+        "FW-BOUNDED-EDITING",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-REPOSITORY-VALUE-MATRIX"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "route/launcher ownership",
+          "responsive meaning-preservation checks",
+          "state catalog and donor-nav prohibitions"
+        ],
+        "model_judgment": [
+          "mapping workflow to archetype",
+          "proposing destination hierarchy and context surfaces"
+        ],
+        "human_authority": [
+          "accepting product information architecture",
+          "accepting portal or field-operation exceptions"
+        ]
+      },
+      "falsifiers": [
+        "A fixed five-area shell improves task success across the representative archetype set.",
+        "The layered contract cannot host a donor without adopting donor top-level navigation.",
+        "Responsive collapse changes permissions, destination meaning or approval reachability."
+      ],
+      "next_gate": "Compare SaaS, ecommerce, agency and course-creator shell fixtures with the 17-block representative foundry set.",
+      "current_owner": "D14 / P08 + pilot experience lane",
+      "canonical_page": "/task-graph/frameworks/#FW-ARCHETYPE-SHELL"
+    },
+    {
+      "framework_id": "FW-BOUNDED-EDITING",
+      "name": "Bounded editing and upgrade-safe intent replay",
+      "category": "composition_experience",
+      "problem_owned": "Let clients and operators request useful changes without reopening arbitrary code, authority, data or donor-chrome mutation.",
+      "reusable_framework_reason": "Typed edits, semantic anchors, authority cells and replayable intent apply across visual controls, chat, APIs and upgrades while preserving the same safety boundary.",
+      "inputs": [
+        "AssemblyPlan and binding records",
+        "typed edit intent",
+        "semantic slots and token roles",
+        "authority/denial rules",
+        "new capability version"
+      ],
+      "outputs": [
+        "EditRecord",
+        "accepted/refused/deferred/escalated outcome",
+        "version-specific resolution",
+        "upgrade replay and orphan receipt"
+      ],
+      "method": {
+        "kind": "typed_operation_algebra",
+        "ordered_rules": [
+          "Accept only text, theme, reorder, add, remove, replace and scoped data-binding verbs.",
+          "Anchor by contract slot, semantic role, bridge token, host seam or explicitly priced donor export; forbid coordinates and raw literals.",
+          "Resolve through the same authority table as chat, API, migration and upgrade channels.",
+          "Return a named refusal with the violated constraint and nearest supported alternative.",
+          "Persist version-independent intent separately from disposable version-specific resolution.",
+          "Replay intent after upgrade; retain DEGRADED/ORPHANED resolutions and block auto-publish."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p13-preview-editor/runs/2026-08-27-sprint-2-opus/edit-operation.schema.json",
+        "research/workstreams/p13-preview-editor/runs/2026-08-27-sprint-2-opus/authority-rules.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p13-preview-editor/runs/2026-08-27-sprint-2-opus/edit-model.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P13 defines semantic edit intent, denial-by-construction, typed outcomes and upgrade-safe replay; no editor runtime was implemented."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/04-experience-editor/experience-map.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The pilot experience contract carries the same seven verbs and explicitly refuses raw CSS, unregistered components, donor login and out-of-scope data binding."
+        }
+      ],
+      "dependencies": [
+        "FW-DESIGN-GRAMMAR-TOKENS",
+        "FW-ARCHETYPE-SHELL",
+        "FW-HOST-AUTHORITY",
+        "FW-DETERMINISTIC-COMPOSER"
+      ],
+      "downstream_consumers": [
+        "FW-PRODUCTION-LEARNING",
+        "FW-RELEASE-RECOVERY",
+        "FW-EXPERIMENT-GATE-LOOPS"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "operation schema and anchor legality",
+          "authority and denial outcomes",
+          "upgrade replay and orphan blocking"
+        ],
+        "model_judgment": [
+          "mapping natural language to a typed operation",
+          "proposing a bounded alternative"
+        ],
+        "human_authority": [
+          "composition changes and escalations",
+          "destructive data operations",
+          "approval of a donor or contract transition"
+        ]
+      },
+      "falsifiers": [
+        "Representative client requests leave a large residue that cannot be explained by supported verbs or priced escalation.",
+        "Intent replay after a donor upgrade silently changes meaning or authority.",
+        "Clients consistently reject bounded edits even when refusal alternatives are clear."
+      ],
+      "next_gate": "Compile a real request sample into the seven-verb algebra, then run N edits through an upgrade replay fixture.",
+      "current_owner": "D13 / P13",
+      "canonical_page": "/task-graph/frameworks/#FW-BOUNDED-EDITING"
+    },
+    {
+      "framework_id": "FW-DETERMINISTIC-COMPOSER",
+      "name": "Deterministic composition and UNDERDETERMINED protocol",
+      "category": "composition_experience",
+      "problem_owned": "Eliminate incompatible assemblies mechanically, expose missing contract fields and give models only a small set of feasible choices.",
+      "reusable_framework_reason": "The same fixed rules can protect any recipe while separating deterministic compatibility from model selection and human authority.",
+      "inputs": [
+        "five-field ProductSpec minimum",
+        "seven module records",
+        "HostContract and bindings",
+        "candidate/value evidence",
+        "authority and recovery ceilings"
+      ],
+      "outputs": [
+        "AssemblyPlan",
+        "FEASIBLE, INFEASIBLE or UNDERDETERMINED verdict",
+        "first failing constraint and routing gate",
+        "bounded candidate set and glue budget"
+      ],
+      "method": {
+        "kind": "ordered_constraint_solver",
+        "ordered_rules": [
+          "Evaluate eligibility: scope, rights and evidence.",
+          "Evaluate host fit: host version, runtime, data mode and tenancy.",
+          "Evaluate closure: port closure, version intersection and port types.",
+          "Evaluate exclusivity: namespace, migration owner, identity, navigation, token and observability identity.",
+          "Evaluate authority: scope intersection, idempotency and consent.",
+          "Evaluate recoverability: rollback object coverage and minimum horizon.",
+          "Evaluate shape-specific glue budget.",
+          "Return the first named failure; missing meaning-bearing fields return UNDERDETERMINED and zero relaxations are allowed."
+        ],
+        "equation": "effective_authority = intersection(host_scope, capability_scopes, resource_scope, approval_scope); recovery_horizon = min(object_horizons)."
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/compatibility-and-authority-rules.json",
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/assembly-plan.schema.json",
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/composition-fixtures.json"
+      ],
+      "maturity": "dry_run",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/deterministic-composer.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P12 specifies 22 ordered rules across seven phases, the three verdicts and the model boundary; no solver implementation exists."
+        },
+        {
+          "path": "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/solver-dry-run.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The hand dry-run found and repaired an evidence-family defect; the fixtures remain synthetic and unexecuted by a solver."
+        }
+      ],
+      "dependencies": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-HOST-AUTHORITY",
+        "FW-DATA-OWNERSHIP",
+        "FW-DESIGN-GRAMMAR-TOKENS",
+        "FW-ARCHETYPE-SHELL",
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RUNTIME-PROFILES-BUDGETS"
+      ],
+      "downstream_consumers": [
+        "FW-RELEASE-RECOVERY",
+        "FW-PRODUCTION-LEARNING",
+        "FW-EXPERIMENT-GATE-LOOPS"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "all 19 named constraints",
+          "candidate filtering, scope intersection and version closure",
+          "verdict selection, first-failure naming and glue arithmetic"
+        ],
+        "model_judgment": [
+          "interpreting demand into typed slots",
+          "choosing among no more than five pre-verified feasible sets",
+          "proposing bounded glue and a reuse shape"
+        ],
+        "human_authority": [
+          "licence obligation acceptance",
+          "authority grants and constraint relaxation",
+          "product equivalence, client acceptance and promotion beyond staging"
+        ]
+      },
+      "falsifiers": [
+        "More than 30% of the fixture checks return UNDERDETERMINED due to contract defects.",
+        "Identical inputs produce different verdicts or selected sets across three repeat runs.",
+        "The authority-class/session-ladder mapping cannot be derived without a hidden sixth axis."
+      ],
+      "next_gate": "Encode three real P03 shelf candidates into the seven records and hand-execute all 22 rules before any model run.",
+      "current_owner": "D15 / P12",
+      "canonical_page": "/task-graph/frameworks/#FW-DETERMINISTIC-COMPOSER"
+    },
+    {
+      "framework_id": "FW-EVIDENCE-QUALIFICATION",
+      "name": "Evidence qualification and minimum-family gating",
+      "category": "runtime_release",
+      "problem_owned": "Qualify a capability and complete workflow without averaging away absent rights, tenancy, security, state or recovery evidence.",
+      "reusable_framework_reason": "Orthogonal receipt families and minimum gating apply to every reuse shape, with profile-specific proof requirements and a workflow gate above the build gate.",
+      "inputs": [
+        "pinned artifact and environment",
+        "profile-specific receipt requirements",
+        "nine evidence families",
+        "tenant/authority negative paths",
+        "complete workflow acceptance"
+      ],
+      "outputs": [
+        "QualificationDossier",
+        "T0-T4 evidence tier",
+        "family-level receipts and missing evidence",
+        "qualification/admission hold or pass"
+      ],
+      "method": {
+        "kind": "orthogonal_min_gate",
+        "ordered_rules": [
+          "Pin artifact and environment before interpreting a receipt.",
+          "Require separate rights, tenancy, security, adaptation, workflow, incident, upgrade, fit and instrumentability families.",
+          "Treat absent required families as not_run/unknown; never as not_applicable or zero without a shape rule.",
+          "Set tier to the minimum across the required families.",
+          "Apply zero-tolerance tenancy/security failures as NO_SHIP.",
+          "Run complete workflow acceptance after individual capability checks and keep binding defects separate from capability quality."
+        ],
+        "equation": "evidence_tier = min(required_family_tiers); absent_required_family = not_run -> UNDERDETERMINED."
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/capability-evidence-state.schema.json",
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/release-manifest.schema.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profile-contracts.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P14 assigns profile-specific receipt families, orthogonality, minimum gating and a workflow gate above build."
+        },
+        {
+          "path": "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/learning-contract.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P15 carries the same weakest-family rule and zero-tolerance boundary; no live transition has executed."
+        }
+      ],
+      "dependencies": [
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-RUNTIME-PROFILES-BUDGETS"
+      ],
+      "downstream_consumers": [
+        "FW-REGISTRY-LIFECYCLE",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-RELEASE-RECOVERY",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "receipt schema and evidence-family completeness",
+          "minimum-tier calculation",
+          "zero-tolerance and workflow gate routing"
+        ],
+        "model_judgment": [
+          "collecting and classifying source evidence",
+          "proposing the applicable profile receipt set"
+        ],
+        "human_authority": [
+          "rights and product acceptance",
+          "admission and promotion beyond staging"
+        ]
+      },
+      "falsifiers": [
+        "A capability raises its tier by omitting a weak required family.",
+        "An individual capability passes while the complete workflow fails and the system attributes the failure to the wrong capability.",
+        "A cross-tenant leak is represented as a tiered quality defect rather than NO_SHIP."
+      ],
+      "next_gate": "Run profile-specific qualification receipts for the five Loop 0 synthetic records, then add an explicit complete-workflow fixture.",
+      "current_owner": "D17 / P14-P15",
+      "canonical_page": "/task-graph/frameworks/#FW-EVIDENCE-QUALIFICATION"
+    },
+    {
+      "framework_id": "FW-CONNECTOR-ACTION-AUTHORITY",
+      "name": "Tenant-safe connector and external-action authority",
+      "category": "runtime_release",
+      "problem_owned": "Reuse provider catalogues and OAuth/action mechanics without inheriting unsafe connection storage or allowing ambient external side effects.",
+      "reusable_framework_reason": "Catalogue, connection, secret, approval, executor, idempotency and receipt concerns recur for every external provider and must remain separate.",
+      "inputs": [
+        "provider/action catalogue",
+        "host-verified tenant and actor context",
+        "secret reference and connection record",
+        "requested action and approval",
+        "egress and idempotency policy"
+      ],
+      "outputs": [
+        "tenant-keyed Connection",
+        "scoped action execution",
+        "idempotency and retry receipt",
+        "approval/denial/egress audit"
+      ],
+      "method": {
+        "kind": "separated_authority_pipeline",
+        "ordered_rules": [
+          "Own the tenant-keyed connection store before importing catalogue breadth.",
+          "Keep provider definitions, OAuth mechanics, secrets, executor and action ledger separate.",
+          "Pass identity and intended action to the executor; never pass raw provider secrets through the caller.",
+          "Check auth and rate limits before idempotency replay and make failure caching an explicit policy.",
+          "Require idempotency for writes/side-effecting jobs and a host approval at the declared authority level.",
+          "Emit tenant, actor, source, action, receipt, freshness and correlation evidence."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p11-connectors-integration-runtime/runs/2026-08-27-sprint-1-fable/source-register.jsonl",
+        "research/openconnector-spike-2026-08-27.md"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/2026-08-27-sprint-1/convergence/S1-CONVERGENCE.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The host foundation converges on host-owned tenant connections, action receipts and explicit external authority while borrowing catalogue/OAuth mechanics."
+        },
+        {
+          "path": "research/openconnector-spike-2026-08-27.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The spike exercised provider/action/OAuth mechanics but exposed global connection storage and tenancy failure."
+        }
+      ],
+      "dependencies": [
+        "FW-HOST-AUTHORITY",
+        "FW-DATA-OWNERSHIP"
+      ],
+      "downstream_consumers": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-RELEASE-RECOVERY",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "tenant/connection scope",
+          "idempotency and egress policy",
+          "secret-reference and action-receipt shape"
+        ],
+        "model_judgment": [
+          "mapping a requested outcome to a provider action",
+          "proposing a safe adapter and retry policy"
+        ],
+        "human_authority": [
+          "external write/message/payment approval",
+          "provider and credential obligation acceptance"
+        ]
+      },
+      "falsifiers": [
+        "Two tenant scopes can observe or reuse a connection under the same host authority.",
+        "A side-effecting action can run without an idempotency key, approval or receipt.",
+        "A borrowed catalogue cannot be separated from its unsafe storage layer."
+      ],
+      "next_gate": "Run one tenant-safe API-key connector flow with denial, retry, idempotency and read-back receipts before OAuth breadth work.",
+      "current_owner": "D12 / P11",
+      "canonical_page": "/task-graph/frameworks/#FW-CONNECTOR-ACTION-AUTHORITY"
+    },
+    {
+      "framework_id": "FW-RUNTIME-PROFILES-BUDGETS",
+      "name": "Runtime profiles and resource budgets",
+      "category": "runtime_release",
+      "problem_owned": "Select an explicit runtime and budget for each capability based on ownership and lifecycle rather than convenience or a one-process fiction.",
+      "reusable_framework_reason": "The five current profiles and resource accounting units apply across every composed product while allowing host-linked packages, browser mounts, donors, workers and schedulers to differ.",
+      "inputs": [
+        "reuse shape and state/migration ownership",
+        "lifecycle: browser, service, queue or timer",
+        "host facilities and isolation requirements",
+        "CPU/RAM/storage/connection/queue capacity",
+        "health and attribution requirements"
+      ],
+      "outputs": [
+        "package-in-host, microfrontend, sidecar-service, worker or scheduled-job profile",
+        "runtime unit allocation",
+        "connection/queue/resource budget",
+        "capacity/refusal/review verdict"
+      ],
+      "method": {
+        "kind": "profile_lookup_and_budget_arithmetic",
+        "ordered_rules": [
+          "Choose sidecar-service for durable donor-owned state/migrations.",
+          "Choose scheduled-job for timer-driven work and worker for queue-driven work.",
+          "Choose microfrontend for independently built browser surfaces and package-in-host otherwise.",
+          "Assign explicit runtime units, managed dependencies, pools and queues.",
+          "Check capacity inequalities with reserve and retain raw factors plus confidence.",
+          "Refuse dual writers, unknown tenancy, unbounded side effects, missing rollback or capacity overflow; route soft unknowns to review."
+        ],
+        "equation": "service_burden = clamp(sidecar_process_count + managed_dependency_count / 2); connection_burden = clamp(5 * peak_connections / capacity.max_connections); decision = refuse if any hard condition, review if soft unknown, otherwise eligible."
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profiles.json",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/resource-budget.schema.json",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/worked-compositions.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profile-contracts.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P14 defines five profiles, profile-specific ownership/health/rollback requirements and a deterministic profile lookup; no profile has been executed."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/host-runtime-blueprint.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The pilot host blueprint adds resource arithmetic and refusal conditions while labelling fixtures as design estimates."
+        }
+      ],
+      "dependencies": [
+        "FW-REUSE-SHAPE-SELECTION",
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-DATA-OWNERSHIP",
+        "FW-HOST-AUTHORITY"
+      ],
+      "downstream_consumers": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RELEASE-RECOVERY",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "profile lookup from declared ownership/lifecycle",
+          "budget equations and capacity inequalities",
+          "hard refusal and soft review conditions"
+        ],
+        "model_judgment": [
+          "proposing ownership/lifecycle facts from source evidence",
+          "estimating resource factors before measurement"
+        ],
+        "human_authority": [
+          "accepting a short recovery horizon",
+          "accepting non-recoverable external effects",
+          "admission and capacity exceptions"
+        ]
+      },
+      "falsifiers": [
+        "A representative capability needs a sixth runtime profile or the current lookup over-grants ownership.",
+        "Measured p95/p99 resources exceed the declared budget after reserve.",
+        "Process count or operational cost grows one-for-one with every logical capability despite pooling."
+      ],
+      "next_gate": "Replace the resource fixtures with pinned process, RAM, CPU, storage, pool and queue receipts for one mixed-shape composition.",
+      "current_owner": "D16 / P14 + pilot host lane",
+      "canonical_page": "/task-graph/frameworks/#FW-RUNTIME-PROFILES-BUDGETS"
+    },
+    {
+      "framework_id": "FW-RELEASE-RECOVERY",
+      "name": "Release, rollback and recovery horizons",
+      "category": "runtime_release",
+      "problem_owned": "Release an exact composition with independently named recovery objects and refuse releases whose minimum recoverability does not meet the declared support window.",
+      "reusable_framework_reason": "Every composition changes code, config, data, routes, donors, secrets, connectors or work in flight; enumerating those objects prevents a boolean rollback claim from hiding an unrecoverable boundary.",
+      "inputs": [
+        "pinned bindings and host version",
+        "runtime profiles and resource budget",
+        "schema/API/event/read-model versions",
+        "object retention and rehearsal receipts",
+        "declared support/recovery window"
+      ],
+      "outputs": [
+        "ReleaseManifest",
+        "eight canonical rollback object classes",
+        "minimum recovery horizon",
+        "object-level restore/forward-fix/disable/manual verdicts"
+      ],
+      "method": {
+        "kind": "multi_object_release_protocol",
+        "ordered_rules": [
+          "Pin capability, binding, artifact, configuration, data and donor revisions by digest/version.",
+          "Retain Actionist-owned artifacts for the declared recovery horizon.",
+          "Enumerate code_artifact, configuration, secrets, database_schema, data, donor_revision, surface_route and connector_credential_state objects.",
+          "Compute composition horizon as the minimum known object horizon; uncomputable is zero/refuse.",
+          "Separate non-recoverable external effects from horizon arithmetic and require compensation or explicit human acceptance.",
+          "Rehearse every required object class and never call a partially restored release rolled back."
+        ],
+        "equation": "composition_recovery_horizon = min(required_object_horizon_seconds); if support_window > horizon or horizon is uncomputable, release is refused unless a named human override is recorded."
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/release-manifest.schema.json",
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profiles.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/release-rollback-contract.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P14 defines the eight-object rollback vocabulary, minimum horizon and object-level rehearsal requirement; it records no executed rollback."
+        },
+        {
+          "path": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/packaging-runtime-reconciliation.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The P14/P04 reconciliation agrees on digest pinning, retention, minimum horizons and the need to add correlated rollback grouping."
+        }
+      ],
+      "dependencies": [
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-MODULE-CONTRACT-FAMILY",
+        "FW-EVIDENCE-QUALIFICATION"
+      ],
+      "downstream_consumers": [
+        "FW-BOUNDED-EDITING",
+        "FW-PRODUCTION-LEARNING",
+        "FW-DETERMINISTIC-COMPOSER"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "digest/version pinning",
+          "object enumeration and minimum horizon",
+          "partial-restore and retention refusals"
+        ],
+        "model_judgment": [
+          "proposing migration and compensation paths",
+          "mapping donor mechanisms to rollback objects"
+        ],
+        "human_authority": [
+          "support-window override",
+          "non-recoverable effect acceptance",
+          "release approval and promotion"
+        ]
+      },
+      "falsifiers": [
+        "Artifact rollback leaves a required object unknown while the release is labelled rolled back.",
+        "A composed release needs an object class not represented by the canonical vocabulary.",
+        "The minimum horizon does not predict the first unrecoverable object in an induced rollback."
+      ],
+      "next_gate": "Run a staged, read-only multi-object rollback rehearsal with one sidecar, one host package and one side-effecting job fixture.",
+      "current_owner": "D18 / P14",
+      "canonical_page": "/task-graph/frameworks/#FW-RELEASE-RECOVERY"
+    },
+    {
+      "framework_id": "FW-OBSERVABILITY-ATTRIBUTION",
+      "name": "Per-capability observability and attribution",
+      "category": "runtime_release",
+      "problem_owned": "Attribute health, incidents, cost and changes at the finest granularity the runtime boundary can actually observe.",
+      "reusable_framework_reason": "Stable identity, release correlation and trace propagation are required for every profile, while the declared attribution ceiling prevents false learning from coarse telemetry.",
+      "inputs": [
+        "capability and runtime-unit identity",
+        "release and environment version",
+        "trace/correlation context",
+        "ownership metadata",
+        "health, incident and cost signals"
+      ],
+      "outputs": [
+        "minimum instrumentation contract",
+        "attribution class dependency/service/endpoint/deploy/none",
+        "capability-scoped health and fallback",
+        "cause-grouped incident receipt"
+      ],
+      "method": {
+        "kind": "attribution_ceiling_protocol",
+        "ordered_rules": [
+          "Emit stable capability id, version, environment, owner and health assertion.",
+          "Propagate trace, correlation, tenant and release context through requests, events, jobs and actions.",
+          "Assign the observed attribution class from the boundary, not from a desired dashboard.",
+          "Require cause_group_id for correlated rollbacks or shared failures.",
+          "Never demote a capability on a signal finer than its attribution ceiling.",
+          "Give unhealthy capabilities a typed user-facing degraded/unavailable surface."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/evidence-signal.schema.json",
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profiles.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/observability-attribution-contract.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P14 defines stable capability identity, trace/release context, ownership metadata and a declared attribution ceiling; no production attribution has run."
+        },
+        {
+          "path": "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/host-runtime-blueprint.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The host blueprint requires block/runtime/resource/release correlation and redacted tenant context across required signals."
+        }
+      ],
+      "dependencies": [
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-RELEASE-RECOVERY"
+      ],
+      "downstream_consumers": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "identifier and context propagation",
+          "attribution ceiling and cause-group collapse",
+          "health/fallback and signal routing"
+        ],
+        "model_judgment": [
+          "mapping a donor boundary to an instrumentation class",
+          "diagnosing a causal group from receipts"
+        ],
+        "human_authority": [
+          "accepting coarse attribution for a client outcome",
+          "incident and privacy policy exceptions"
+        ]
+      },
+      "falsifiers": [
+        "A capability cannot emit stable identity without a fork even when the selected shape promises no fork.",
+        "Correlated rollback signals still produce multiple independent demotions.",
+        "A green host metric hides a failed capability without a typed degraded state."
+      ],
+      "next_gate": "Instrument one mixed-shape staged composition and induce dependency, binding and environmental failures with explicit cause groups.",
+      "current_owner": "D16-D18 / P14-P15",
+      "canonical_page": "/task-graph/frameworks/#FW-OBSERVABILITY-ATTRIBUTION"
+    },
+    {
+      "framework_id": "FW-REGISTRY-LIFECYCLE",
+      "name": "Registry identity, version, scope and lifecycle",
+      "category": "selection_valuation",
+      "problem_owned": "Maintain durable capability identity and scoped lifecycle state from source nomination through qualification, admission, supersession and revocation.",
+      "reusable_framework_reason": "Every source/capability needs the same identity-first and fail-closed lifecycle regardless of its packaging shape or client recipe.",
+      "inputs": [
+        "purl, immutable revision and content digest",
+        "capability and packaging records",
+        "qualification and rights state",
+        "admission scope",
+        "upstream/version and revocation events"
+      ],
+      "outputs": [
+        "stable RegistryRecord",
+        "version and dependency resolution",
+        "scoped lifecycle status",
+        "supersession/revocation propagation"
+      ],
+      "method": {
+        "kind": "identity_first_state_machine",
+        "ordered_rules": [
+          "Create a durable identity only from a pinned source coordinate, revision and digest.",
+          "Keep source, capability, package, binding and release versions distinct.",
+          "Record lifecycle and admission scope by tenant, application and environment.",
+          "Refuse ambiguous or incompatible rights projection instead of downgrading it to pending.",
+          "Resolve dependencies and compatibility against exact versions.",
+          "On revocation or supersession, reopen every dependent assembly to held/review."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/capability-shelf/source-registry.jsonl",
+        "knowledge/capability-shelf/foundry-state-machine.json",
+        "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "knowledge/capability-shelf/README.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "The permanent capability shelf keeps source identity, evidence classes, foundry stage, client precedents and admission separate."
+        },
+        {
+          "path": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/repo-to-module-framework.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P04 makes identity the first blocker, structured admission scope mandatory and ambiguous/incompatible rights non-projectable."
+        }
+      ],
+      "dependencies": [
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-EVIDENCE-QUALIFICATION"
+      ],
+      "downstream_consumers": [
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-RELEASE-RECOVERY",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "identity/digest/version and dependency resolution",
+          "scope, status and revocation propagation",
+          "rights-state projection refusal"
+        ],
+        "model_judgment": [
+          "mapping source artifacts to capability identity",
+          "proposing supersession and upstream sync relationships"
+        ],
+        "human_authority": [
+          "admission scope",
+          "rights obligation acceptance",
+          "revocation or retirement override"
+        ]
+      },
+      "falsifiers": [
+        "A branch/tag reference is sufficient to reproduce the same source bytes across a release.",
+        "Revocation does not reopen dependent assemblies.",
+        "Scoped admission is not needed to prevent one tenant or environment from consuming another's capability."
+      ],
+      "next_gate": "Join the new registry to one staged BindingPlan and test version, scope, supersession and revocation transitions without execution.",
+      "current_owner": "D09 / capability shelf and registry",
+      "canonical_page": "/task-graph/frameworks/#FW-REGISTRY-LIFECYCLE"
+    },
+    {
+      "framework_id": "FW-PRODUCTION-LEARNING",
+      "name": "Production attribution, promotion and retirement",
+      "category": "learning_governance",
+      "problem_owned": "Learn from edits, qualification, runtime, incidents, upgrades and client outcomes without rewarding unsafe exploration or misclassifying shared/environmental failures.",
+      "reusable_framework_reason": "The same signal classes, minimum evidence rule and lifecycle transitions can update any capability, recipe or contract while preserving sparse-data honesty.",
+      "inputs": [
+        "P13 operation and offer logs",
+        "P14 qualification/runtime/release receipts",
+        "attributed incidents and cause groups",
+        "client outcomes and consent scope",
+        "falsified assumptions"
+      ],
+      "outputs": [
+        "capability evidence state",
+        "observed ranking and adaptation cost",
+        "falsified-belief records",
+        "promotion, demotion, retirement and contract backlog"
+      ],
+      "method": {
+        "kind": "signal_classified_lifecycle",
+        "ordered_rules": [
+          "Classify every observation as quality, environmental, contract_defect, binding_defect or correlated.",
+          "Only quality signals with sufficient attribution class may rank or demote a capability.",
+          "Collapse correlated observations by cause_id and preserve one shared event.",
+          "Keep unknown and no-observation capabilities unproven; never retire on silence.",
+          "Promote only after independent observations and minimum critical evidence.",
+          "Retire immediately on rights, tenancy or security zero-tolerance breach or explicit operator decision.",
+          "Record which assumption a result falsified and route contract defects to the owning framework."
+        ],
+        "equation": "rankable_signal = signal_class == quality AND attribution_granularity <= declared_attribution_class; independent_observations collapse by cause_id before thresholds."
+      },
+      "machine_readable_artifacts": [
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/evidence-signal.schema.json",
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/capability-evidence-state.schema.json"
+      ],
+      "maturity": "machine_readable",
+      "evidence_class": "hypothesis",
+      "evidence": [
+        {
+          "path": "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/learning-contract.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "P15 specifies signal classes, min-gated ranking, cause grouping, no-silence retirement and promotion transitions; the current system has zero live observations."
+        },
+        {
+          "path": "knowledge/05-EXPERIMENT-ROADMAP.md",
+          "kind": "local",
+          "evidence_class": "hypothesis",
+          "claim": "The roadmap requires observed adaptation cost, workflow success, runtime burden, maintenance and client outcome contribution before ranking is trusted."
+        }
+      ],
+      "dependencies": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-OBSERVABILITY-ATTRIBUTION",
+        "FW-BOUNDED-EDITING",
+        "FW-REGISTRY-LIFECYCLE"
+      ],
+      "downstream_consumers": [
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-EXPERIMENT-GATE-LOOPS"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "signal classification and routing",
+          "cause-group collapse and attribution ceiling",
+          "promotion/demotion/retirement transition rules"
+        ],
+        "model_judgment": [
+          "summarizing an outcome or failure for review",
+          "proposing a contract or retrieval change"
+        ],
+        "human_authority": [
+          "cross-client consent and aggregation policy",
+          "promotion/admission and retirement overrides",
+          "interpreting client outcome value"
+        ]
+      },
+      "falsifiers": [
+        "Environmental credential failures consistently demote otherwise sound capabilities.",
+        "Min-gating makes every asset indistinguishable and a calibrated alternative selects better safely.",
+        "Cross-client aggregation cannot be authorized, eliminating the proposed learning advantage."
+      ],
+      "next_gate": "Run the retrospective min-gated ranking and settle cross-client aggregation consent before consuming any production signal.",
+      "current_owner": "D18 / P15",
+      "canonical_page": "/task-graph/frameworks/#FW-PRODUCTION-LEARNING"
+    },
+    {
+      "framework_id": "FW-EXPERIMENT-GATE-LOOPS",
+      "name": "Evidence-producing experiment and stop-gate loop",
+      "category": "learning_governance",
+      "problem_owned": "Convert architectural hypotheses into bounded experiments with exact receipts, falsifiers, stop rules and updated decisions instead of restarting broad research.",
+      "reusable_framework_reason": "Every uncertain Actionist seam can use the same six-output loop and explicit proceed, narrow, redesign or stop decision.",
+      "inputs": [
+        "assumption ledger",
+        "framework and contract hypothesis",
+        "falsifier and stop rule",
+        "privacy-safe fixture and measurement plan",
+        "operator authorization boundary"
+      ],
+      "outputs": [
+        "experiment receipt",
+        "confirmed/rejected/unknown assumptions",
+        "contract changes",
+        "adaptation recipe and failure mode",
+        "proceed/narrow/redesign/stop decision"
+      ],
+      "method": {
+        "kind": "bounded_evidence_loop",
+        "ordered_rules": [
+          "State the assumption and what observation would falsify it.",
+          "Choose the smallest authorized experiment that separates the alternatives.",
+          "Keep synthetic, source-read, runtime, client and production evidence classes distinct.",
+          "Record exact measures, receipts and negative results; do not fill denominators from memory.",
+          "Update the contract, adaptation recipe and assumption ledger from the result.",
+          "Apply a pre-registered stop/kill rule and choose proceed, narrow, redesign or stop."
+        ]
+      },
+      "machine_readable_artifacts": [
+        "knowledge/02-ASSUMPTION-LEDGER.md",
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/composition-fixtures.json"
+      ],
+      "maturity": "specified",
+      "evidence_class": "inferred",
+      "evidence": [
+        {
+          "path": "knowledge/05-EXPERIMENT-ROADMAP.md",
+          "kind": "local",
+          "evidence_class": "inferred",
+          "claim": "The roadmap defines Loop 0-5, exact measures, stop/kill rules and the required learning outputs for each loop."
+        },
+        {
+          "path": "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md",
+          "kind": "local",
+          "evidence_class": "observed",
+          "claim": "Sprint 2 recommends a three-candidate contract-and-solver pilot and explicitly stops before implementation."
+        }
+      ],
+      "dependencies": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "downstream_consumers": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-REPOSITORY-VALUE-MATRIX",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "boundaries": {
+        "deterministic": [
+          "fixture and receipt schema",
+          "falsifier/stop-rule evaluation",
+          "evidence-class and denominator accounting"
+        ],
+        "model_judgment": [
+          "forming a testable hypothesis",
+          "proposing a minimal experiment and interpretation"
+        ],
+        "human_authority": [
+          "authorization to execute source/client/production tests",
+          "scope and stop decisions",
+          "operator trade-offs"
+        ]
+      },
+      "falsifiers": [
+        "Experiments repeatedly produce no decision-relevant measurement or contract change.",
+        "A stop rule can be bypassed by relabelling a blocked or unknown result.",
+        "Broad research produces more decision value than the smallest depth experiment for the same question."
+      ],
+      "next_gate": "Attach a machine-readable experiment receipt to the first Value Matrix calibration and composer dry-run gates.",
+      "current_owner": "CENA / all framework owners",
+      "canonical_page": "/task-graph/frameworks/#FW-EXPERIMENT-GATE-LOOPS"
+    }
+  ],
+  "load_bearing_coverage": {
+    "client_discovery_and_product_spec": "FW-DEMAND-PRODUCTSPEC",
+    "business_lifecycle_and_block_hub": "FW-BLOCK-HUB-LIFECYCLE",
+    "source_discovery_and_candidate_funnel": "FW-SOURCE-CANDIDATE-FUNNEL",
+    "product_framework_primitive_classification": "FW-CAPABILITY-CLASSIFICATION",
+    "reuse_shape_selection": "FW-REUSE-SHAPE-SELECTION",
+    "repository_value_matrix_and_shape_specific_diamond_score": "FW-REPOSITORY-VALUE-MATRIX",
+    "seven_record_module_contract_family": "FW-MODULE-CONTRACT-FAMILY",
+    "normalization_surgery_taxonomy": "FW-NORMALIZATION-SURGERY",
+    "host_identity_tenancy_settings_navigation": "FW-HOST-AUTHORITY",
+    "data_ownership_and_migration_authority": "FW-DATA-OWNERSHIP",
+    "design_grammar_and_semantic_token_harmonization": "FW-DESIGN-GRAMMAR-TOKENS",
+    "preference_learning": "FW-PREFERENCE-LEARNING",
+    "surface_component_role_mapping": "FW-SURFACE-ROLE-MAPPING",
+    "bounded_editing": "FW-BOUNDED-EDITING",
+    "deterministic_composition_and_underdetermined": "FW-DETERMINISTIC-COMPOSER",
+    "evidence_qualification_and_min_gating": "FW-EVIDENCE-QUALIFICATION",
+    "runtime_profiles_and_resource_budgets": "FW-RUNTIME-PROFILES-BUDGETS",
+    "release_rollback_and_recovery_horizons": "FW-RELEASE-RECOVERY",
+    "production_attribution": "FW-OBSERVABILITY-ATTRIBUTION",
+    "registry_lifecycle": "FW-REGISTRY-LIFECYCLE",
+    "learning_promotion_and_retirement": "FW-PRODUCTION-LEARNING"
+  },
+  "gaps": [
+    {
+      "gap_id": "G-01",
+      "title": "Host authority registry implementation contract",
+      "rank": 1,
+      "dependency_centrality": 10,
+      "consequence": "Without a host-owned settings/navigation/identity registry, every composed surface can reintroduce donor login, route or scope ambiguity; the single-product premise cannot be tested.",
+      "gap_kind": "genuinely_missing_framework",
+      "current_state": "P10 specifies the tiers and P04 carries a HostContract shape, but no portable settings-schema or navigation-contribution framework exists and no host registry has been exercised.",
+      "action": "Define HostRegistryContract, settings precedence/provenance, route-ref contribution, two-gate visibility and negative tests for donor chrome.",
+      "owner": "D11/D14 · P10/P08",
+      "framework_refs": [
+        "FW-HOST-AUTHORITY",
+        "FW-ARCHETYPE-SHELL"
+      ],
+      "evidence_paths": [
+        "research/workstreams/p10-identity-settings-navigation/runs/2026-08-27-sprint-1-fable/first-principles.md",
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/host-runtime-blueprint.md"
+      ]
+    },
+    {
+      "gap_id": "G-02",
+      "title": "Complete workflow outcome and attribution contract",
+      "rank": 2,
+      "dependency_centrality": 10,
+      "consequence": "The system can qualify parts but cannot prove that a selected composition delivered the client's economic or operational outcome, so selection and learning remain ungrounded.",
+      "gap_kind": "genuinely_missing_framework",
+      "current_state": "ProductSpec has acceptance and P15 has evidence signals, but no canonical outcome receipt joins workflow, client metric, release, capability and consent scope.",
+      "action": "Define OutcomeReceipt with terminal owner, metric window, workflow fixture, capability attribution, binding/release IDs, counterfactual/comparison context and privacy scope.",
+      "owner": "D03/D18 · P02/P15",
+      "framework_refs": [
+        "FW-DEMAND-PRODUCTSPEC",
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "evidence_paths": [
+        "knowledge/05-EXPERIMENT-ROADMAP.md",
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/learning-contract.md"
+      ]
+    },
+    {
+      "gap_id": "G-03",
+      "title": "Candidate funnel machine-readable row and query contract",
+      "rank": 3,
+      "dependency_centrality": 8,
+      "consequence": "Discovery remains a mixture of source registry rows and prose, making shape-specific retrieval, reproducible candidate sets and evidence completeness difficult to automate.",
+      "gap_kind": "existing_framework_lacks_machine_readable_form",
+      "current_state": "The funnel is specified in Block Hub prose and a permanent source registry exists, but the `(source, block, recipe, workflow, shape)` row and query contract are not canonical.",
+      "action": "Add a versioned candidate-query/edge schema with evidence class, source identity, shape, block, recipe, workflow, blockers and next gate.",
+      "owner": "D04/D09 · P03",
+      "framework_refs": [
+        "FW-SOURCE-CANDIDATE-FUNNEL",
+        "FW-REGISTRY-LIFECYCLE"
+      ],
+      "evidence_paths": [
+        "knowledge/block-hub/README.md",
+        "knowledge/capability-shelf/source-registry.jsonl"
+      ]
+    },
+    {
+      "gap_id": "G-04",
+      "title": "Closed design-grammar candidate catalogue and pack compiler",
+      "rank": 4,
+      "dependency_centrality": 8,
+      "consequence": "Preference learning can be described but cannot reliably produce controlled, complete, light/dark candidate packs or render the same pack across donor classes.",
+      "gap_kind": "existing_framework_lacks_machine_readable_form",
+      "current_state": "Knowledge/06 specifies the grammar and protocol; P07 supplies semantic/binding contracts; the candidate register, compiler and valid-pack corpus remain absent.",
+      "action": "Normalize palette, typography, spacing, shape, motion and component seeds into a versioned grammar register, compiler and gate receipt.",
+      "owner": "D13/D14 · P06/P07",
+      "framework_refs": [
+        "FW-PREFERENCE-LEARNING",
+        "FW-DESIGN-GRAMMAR-TOKENS",
+        "FW-SURFACE-ROLE-MAPPING"
+      ],
+      "evidence_paths": [
+        "knowledge/06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md",
+        "research/workstreams/p07-token-theme-harmonization/runs/2026-08-27-sprint-2-opus/semantic-token-contract.json"
+      ]
+    },
+    {
+      "gap_id": "G-05",
+      "title": "Value Matrix calibration and falsifier run",
+      "rank": 5,
+      "dependency_centrality": 8,
+      "consequence": "The shape-specific score is a defensible design but cannot yet select or reject a source; a fabricated calibration score would turn anchors into unsupported recommendations.",
+      "gap_kind": "machine_readable_but_untested",
+      "current_state": "The score schema, weights, equation and unscored anchors are now machine-readable; VSCP-1 and held-out shape comparisons have not run.",
+      "action": "Capture AFFiNE, Twenty, Chatwoot and Plane under the same protocol, then test a small held-out set and the planted-failure controls.",
+      "owner": "D06-D09 · ACTIONIST-FRAMEWORK-REGISTRY",
+      "framework_refs": [
+        "FW-REPOSITORY-VALUE-MATRIX"
+      ],
+      "evidence_paths": [
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/04-experience-editor/experience-map.md",
+        "knowledge/frameworks/repository-value-score.schema.json"
+      ]
+    },
+    {
+      "gap_id": "G-06",
+      "title": "Composer execution against real contract records",
+      "rank": 6,
+      "dependency_centrality": 9,
+      "consequence": "The system cannot yet demonstrate that its 22-rule elimination layer exposes contract defects and blocks incompatible assemblies before model choice.",
+      "gap_kind": "tested_but_not_operational",
+      "current_state": "P12 has schemas, 24 synthetic fixtures, hand dry-run traces and smoke receipts, but no executable solver or real P03 candidate record set.",
+      "action": "Encode three real shelf candidates, execute all rules three times, report first-failure accuracy, UNDERDETERMINED rate, determinism and vocabulary drift.",
+      "owner": "D15 · P12",
+      "framework_refs": [
+        "FW-DETERMINISTIC-COMPOSER",
+        "FW-MODULE-CONTRACT-FAMILY"
+      ],
+      "evidence_paths": [
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/solver-dry-run.md",
+        "research/workstreams/p12-deterministic-composer/runs/2026-08-27-sprint-2-opus/composition-fixtures.json"
+      ]
+    },
+    {
+      "gap_id": "G-07",
+      "title": "Qualification, admission and complete-workflow run",
+      "rank": 7,
+      "dependency_centrality": 10,
+      "consequence": "All current source and capability rows remain unqualified and unadmitted; the framework cannot show that individual gates plus a whole workflow produce a safe release.",
+      "gap_kind": "machine_readable_but_untested",
+      "current_state": "T0-T4, profile receipt requirements and release schemas exist, but no source was executed, no workflow passed and admitted modules remain zero.",
+      "action": "Authorize one staged read-only binding only after the three-candidate contract pilot; run orthogonal evidence families, negative paths and whole-workflow acceptance.",
+      "owner": "D17-D18 · P14/P15",
+      "framework_refs": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RELEASE-RECOVERY",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "evidence_paths": [
+        "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md",
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/runtime-profile-contracts.md"
+      ]
+    },
+    {
+      "gap_id": "G-08",
+      "title": "Runtime density and recovery-cost measurement",
+      "rank": 8,
+      "dependency_centrality": 8,
+      "consequence": "The stacking model may look efficient on paper while process, RAM, CPU, connections, queues, managed limits and donor recovery burden grow linearly or exceed client support windows.",
+      "gap_kind": "machine_readable_but_untested",
+      "current_state": "Runtime profiles and a resource-budget schema exist; pilot arithmetic is explicitly a design fixture and runtime density is unmeasured.",
+      "action": "Measure a mixed composition in preview/staging with pinned process, memory, CPU, storage, pool, queue, managed-dependency and object-horizon receipts.",
+      "owner": "D16-D18 · P14 + host runtime lane",
+      "framework_refs": [
+        "FW-RUNTIME-PROFILES-BUDGETS",
+        "FW-RELEASE-RECOVERY"
+      ],
+      "evidence_paths": [
+        "research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/resource-budget.schema.json",
+        "knowledge/07-DECISION-TIMELINE.md"
+      ]
+    },
+    {
+      "gap_id": "G-09",
+      "title": "Cross-client consent and privacy governance for learning",
+      "rank": 9,
+      "dependency_centrality": 7,
+      "consequence": "If anonymised cross-client aggregation is not contractually available, the sparse-data learning premise degrades to per-tenant observations and the ranking design changes materially.",
+      "gap_kind": "genuinely_missing_framework",
+      "current_state": "P15 represents single-client versus aggregated-consented scope, but the operator/client consent policy and aggregation contract are unknown.",
+      "action": "Settle contractually permitted aggregation, regulated-workload exclusions, anonymization, retention, deletion and opt-out semantics before live learning.",
+      "owner": "D18 / operator decision",
+      "framework_refs": [
+        "FW-PRODUCTION-LEARNING",
+        "FW-OBSERVABILITY-ATTRIBUTION"
+      ],
+      "evidence_paths": [
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/learning-contract.md",
+        "research/workstreams/2026-08-27-sprint-1/convergence/S1-CONVERGENCE.md"
+      ]
+    },
+    {
+      "gap_id": "G-10",
+      "title": "Release rehearsal and operational promotion loop",
+      "rank": 10,
+      "dependency_centrality": 7,
+      "consequence": "A static registry page can be searchable while the underlying framework remains unable to promote, revoke, recover or learn from a maintained composition.",
+      "gap_kind": "machine_readable_but_untested",
+      "current_state": "Release, rollback, attribution and learning schemas are machine-readable; no complete staged release/recovery/promotion cycle has executed.",
+      "action": "Run a staged read-only composition through qualification, release lock, induced failure, object-level recovery, revocation and learning receipt checks.",
+      "owner": "D16-D18 / CENA gate",
+      "framework_refs": [
+        "FW-EVIDENCE-QUALIFICATION",
+        "FW-RELEASE-RECOVERY",
+        "FW-OBSERVABILITY-ATTRIBUTION",
+        "FW-PRODUCTION-LEARNING"
+      ],
+      "evidence_paths": [
+        "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-2-opus/release-manifest.schema.json",
+        "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-2-opus/evidence-signal.schema.json"
+      ]
+    }
+  ]
+}

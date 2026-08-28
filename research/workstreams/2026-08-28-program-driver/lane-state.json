@@ -1,0 +1,206 @@
+{
+  "schema_version": "actionist.program-driver.lane-state.v1",
+  "lane": "ACTIONIST-PROGRAM-DRIVER",
+  "observed_at": "2026-08-28",
+  "status": "reconciled_with_verified_refusal",
+  "incidents": [
+    {
+      "id": "INC-PD-001",
+      "recorded_at": "2026-08-28",
+      "cause": "Coordinator mistakenly retired the prior Program Driver tab after Herdr tab IDs compacted during cleanup.",
+      "impact": "No artifact loss; owned program-driver artifacts remained on disk.",
+      "recovery_terminal_id": "term_65a172d4585c516",
+      "recovery": "Replacement terminal started from disk.",
+      "contained": true
+    }
+  ],
+  "counts": {
+    "domains_total": 18,
+    "domains_research_complete_with_holds": 18,
+    "domains_active": 0,
+    "moving_parts_total": 15,
+    "moving_parts_reconciled": 15,
+    "sprints_converged_with_holds": 2,
+    "external_active_lanes": 0,
+    "tracked_lanes_including_self": 1,
+    "tracked_named_lanes_including_cena": 6,
+    "operator_decisions": 3,
+    "outstanding_operator_decisions": 0,
+    "coordinator_defaults": 3,
+    "verified_research_packets": 1,
+    "verified_prototypes_with_holds": 2,
+    "complete_verified_support_lanes": 1,
+    "verified_refusals": 1,
+    "program_blockers": 3,
+    "admitted_blocks": 0,
+    "admitted_modules": 0,
+    "released_compositions": 0
+  },
+  "blockers": [
+    {
+      "id": "B-PD-01",
+      "status": "blocked_dependency",
+      "statement": "Agent Brain is unreachable; siso-brain health/tasks returned connection refused, so shared task state was not fetched or mutated.",
+      "evidence": "command output captured during reconciliation",
+      "owner": "agency.pm / infrastructure",
+      "next_gate": "Service availability receipt or explicit CENA direction to use another read-only source."
+    },
+    {
+      "id": "B-PD-03",
+      "status": "blocked_dependency",
+      "statement": "The measured product path remains unexecuted; staged binding, application implementation, qualification and admission remain separately unauthorized after the verified solver refusal.",
+      "evidence": "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md; master-task-graph.json",
+      "owner": "authorized pilot owners after the sequencing defect is corrected",
+      "next_gate": "Resolve SEQ-PD-001 before any PD-008 through PD-010 work; no broad research restart."
+    },
+    {
+      "id": "B-PD-04",
+      "status": "blocked_dependency",
+      "statement": "Pre-admission contract evaluation lacks a candidate-evaluation scope distinct from production admission scope; R-SCOPE correctly refuses all four scenarios.",
+      "evidence": "research/workstreams/2026-08-28-three-candidate-solver-pilot/pilot-report.md; research/workstreams/2026-08-28-three-candidate-solver-pilot/solver-results.json",
+      "owner": "framework and composition owners",
+      "next_gate": "Define the separate candidate-evaluation scope and rerun without weakening R-SCOPE."
+    }
+  ],
+  "open_gates": [],
+  "gate_history": [
+    {
+      "id": "G-PD-01",
+      "status": "COMPLETE_VERIFIED_REFUSAL",
+      "title": "Contract-only AFFiNE+Teable+Chatwoot solver pilot",
+      "workflow": "marketing/social-agency client approval and asset delivery",
+      "verified_prerequisites": ["PD-003", "PD-004", "PD-005"],
+      "scope": ["contract records", "surgery derivation", "hand-run composer"],
+      "exclusions": ["clone", "source execution", "staged binding", "deployment", "qualification", "admission", "client data"],
+      "result": "PD-007 COMPLETE_VERIFIED_REFUSAL"
+    }
+  ],
+  "sequencing_defects": [
+    {
+      "id": "SEQ-PD-001",
+      "status": "open",
+      "title": "Candidate evaluation scope is conflated with production admission scope",
+      "required_correction": "Add a candidate_evaluation_scope for research-only contract comparison while retaining production admission scope as a separate gate.",
+      "invariant": "Do not weaken R-SCOPE or convert NOT_ADMITTED records into admitted records."
+    }
+  ],
+  "verified_receipts": {
+    "framework_registry": {
+      "verdict": "VERIFIED_RESEARCH_PACKET",
+      "frameworks": 24,
+      "edges": 62,
+      "gaps": 10,
+      "maturity": {"idea": 0, "specified": 9, "machine_readable": 14, "dry_run": 1, "measured": 0, "operational": 0},
+      "checks": {"registry": "PASS", "system_map": "PASS", "block_hub": "PASS", "spine": "PASS", "diff": "PASS"}
+    },
+    "affine": {
+      "verdict": "VERIFIED_PROTOTYPE_WITH_HOLDS",
+      "records": 7,
+      "evidence_sources": 13,
+      "package_files": 20,
+      "source_copied": false,
+      "donor_repository_vendored": false,
+      "qualification_status": "NOT_QUALIFIED",
+      "admission_status": "NOT_ADMITTED",
+      "tests": {"total": 5, "pass": 5, "fail": 0, "identity_fail_closed": true},
+      "holds": ["H-THEME", "H-SETTINGS", "H-UPGRADE", "H-DENSITY", "H-CE-WEB"]
+    },
+    "teable": {
+      "verdict": "VERIFIED_PROTOTYPE_WITH_HOLDS",
+      "records": 7,
+      "smoke_checks": 13,
+      "qualification_status": "NOT_QUALIFIED",
+      "admission_status": "NOT_ADMITTED",
+      "holds": 7
+    },
+    "repository_topology": {
+      "verdict": "COMPLETE_VERIFIED",
+      "checks": 399,
+      "warning_count": 1,
+      "warning_attribution": "concurrent sibling activity",
+      "headline": "Sinamun/Actionist-AppSDK private client index; Great Library public lineage; proposed small framework/block registries; per-block implementation repos; siso-ui-base engine with 3.0G corpus in private content-addressed data plane.",
+      "external_writes": false,
+      "repositories_created": false,
+      "remotes_changed": false,
+      "commits_created": false,
+      "pushes_performed": false,
+      "publication_performed": false,
+      "data_moved_or_deleted": false
+    },
+    "three_candidate_solver": {
+      "verdict": "COMPLETE_VERIFIED_REFUSAL",
+      "status": "PASS",
+      "artifact_count": 14,
+      "candidate_count": 3,
+      "records_per_candidate": 7,
+      "ordered_rules": 22,
+      "distinct_constraints": 19,
+      "repeated_runs": 3,
+      "digest_parity": "PASS",
+      "relaxations": 0,
+      "first_non_pass": "R-SCOPE",
+      "scope_reason": "Every RegistryRecord is intentionally NOT_ADMITTED with an empty target scope.",
+      "later_failures": {"AFFiNE": ["R-AUTHORITY"], "Teable": ["R-AUTHORITY"], "Chatwoot": ["R-TENANCY", "R-AUTHORITY", "R-IDEMPOTENCY", "R-CONSENT"]},
+      "later_unknowns": ["all UI token mappings", "evidence", "rollback horizons", "glue budgets"],
+      "sequencing_defect_id": "SEQ-PD-001"
+    }
+  },
+  "boundary": {
+    "mainline_research_only": true,
+    "scoped_package_prototype_lanes": true,
+    "application_implementation_authorized": false,
+    "source_cloned": false,
+    "source_executed": false,
+    "client_data_accessed": false,
+    "deployment_run": false,
+    "qualification_run": false,
+    "contract_only_solver_pilot_authorized": true,
+    "contract_only_solver_pilot_status": "COMPLETE_VERIFIED_REFUSAL",
+    "measured_frameworks": 0,
+    "operational_frameworks": 0,
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "admitted_modules": 0,
+    "shared_canonical_files_modified_by_this_lane": false,
+    "workers_spawned_or_messaged_by_this_lane": false
+  },
+  "evidence_paths": [
+    "research/workstreams/2026-08-27-sprint-1/convergence/S1-CONVERGENCE.md",
+    "research/workstreams/2026-08-27-sprint-2/convergence/S2-CONVERGENCE.md",
+    "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json",
+    "research/workstreams/2026-08-28-affine-block/run/COMPLETION-PACKET.md",
+    "research/workstreams/2026-08-28-affine-block/run/verification.json",
+    "research/agent-zero/2026-08-28-repository-topology/run-state.json",
+    "research/agent-zero/2026-08-28-repository-topology/repository-topology.md",
+    "research/agent-zero/2026-08-28-repository-topology/repository-manifest.json",
+    "research/agent-zero/2026-08-28-repository-topology/verify.mjs",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/DISPATCH.md",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/candidate-set.json",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/solver-results.json",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/missing-field-ledger.jsonl",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/normalization-surgeries.jsonl",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/host-contract-delta.json",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/pilot-report.md",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/lane-state.json",
+    "research/workstreams/2026-08-28-three-candidate-solver-pilot/verify.mjs",
+    "knowledge/frameworks/framework-register.json",
+    "knowledge/frameworks/framework-dependency-graph.json",
+    "knowledge/scripts/verify-framework-registry.mjs",
+    "research/workstreams/2026-08-28-program-driver/program-status.md",
+    "research/workstreams/2026-08-28-program-driver/master-task-graph.json",
+    "research/workstreams/2026-08-28-program-driver/live-lanes.json"
+  ],
+  "verification": {
+    "command": "node research/workstreams/2026-08-28-program-driver/smoke.mjs",
+    "status": "pass",
+    "exit_code": 0,
+    "checks": 50
+  },
+  "callback": {
+    "target": "CENA",
+    "session": "herdr-2",
+    "must_re_resolve_pane": true,
+    "message_max_lines": 6,
+    "file_first": true
+  }
+}

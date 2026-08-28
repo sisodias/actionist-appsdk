@@ -1,0 +1,258 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P03 research artifact smoke.py"><link rel="icon" href="../../../favicon.svg"><title>P03 · smoke.py · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p03/">P03</a> / Research artifact / smoke.py</div><div class="node-actions"><a class="button" href="../raw/smoke.py" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>smoke.py</h1><p><code>research/workstreams/p03-curated-capability-shelf/runs/2026-08-27-sprint-1-fable/smoke.py</code></p></div><pre class="artifact-source">#!/usr/bin/env python3
+&quot;&quot;&quot;S1-L2 / P03 post-write structural smoke.
+
+Checks STRUCTURE and INTERNAL CONSISTENCY, not truth. Exit 0 = PASS, 1 = FAIL.
+Run from the run directory:  python3 smoke.py
+&quot;&quot;&quot;
+import json, os, sys, collections
+
+FAIL = []
+WARN = []
+
+
+def fail(msg):
+    FAIL.append(msg)
+
+
+def warn(msg):
+    WARN.append(msg)
+
+
+def load_jsonl(path):
+    rows = []
+    with open(path) as f:
+        for i, line in enumerate(f, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except Exception as e:
+                fail(f&quot;{path}:{i} JSON parse error: {e}&quot;)
+    return rows
+
+
+REQUIRED_FILES = [
+    &quot;research-report.md&quot;,
+    &quot;source-register.jsonl&quot;,
+    &quot;top-companies.jsonl&quot;,
+    &quot;top-repos.jsonl&quot;,
+    &quot;innovation-register.jsonl&quot;,
+    &quot;first-principles.md&quot;,
+    &quot;decision-ledger.json&quot;,
+    &quot;lane-state.json&quot;,
+]
+
+# 1. required packet present
+for fn in REQUIRED_FILES:
+    if not os.path.exists(fn):
+        fail(f&quot;required packet file missing: {fn}&quot;)
+
+# 2. every JSONL record carries the program-mandated fields
+REQ_FIELDS = [&quot;id&quot;, &quot;evidence_class&quot;, &quot;observed_date&quot;, &quot;claim&quot;, &quot;limitations&quot;, &quot;disposition&quot;]
+IDENTITY_FIELDS = [&quot;source_identity&quot;, &quot;repo&quot;, &quot;vendor&quot;, &quot;url&quot;, &quot;source&quot;]
+
+for fn in [&quot;source-register.jsonl&quot;, &quot;top-companies.jsonl&quot;, &quot;top-repos.jsonl&quot;, &quot;innovation-register.jsonl&quot;]:
+    if not os.path.exists(fn):
+        continue
+    rows = load_jsonl(fn)
+    if not rows:
+        fail(f&quot;{fn}: no records&quot;)
+        continue
+    data = [r for r in rows if str(r.get(&quot;id&quot;, &quot;&quot;)).upper() not in (&quot;SUMMARY&quot;, &quot;COM-SUMMARY&quot;)
+            and r.get(&quot;record_type&quot;) != &quot;summary&quot;]
+    summ = [r for r in rows if r not in data]
+    if len(summ) != 1:
+        fail(f&quot;{fn}: expected exactly 1 summary record, found {len(summ)}&quot;)
+    ids = [r.get(&quot;id&quot;) for r in data]
+    dupes = [k for k, v in collections.Counter(ids).items() if v &gt; 1]
+    if dupes:
+        fail(f&quot;{fn}: duplicate ids {dupes[:5]}&quot;)
+    if any(i is None for i in ids):
+        fail(f&quot;{fn}: record(s) with no id&quot;)
+    for r in data:
+        missing = [k for k in REQ_FIELDS if k not in r]
+        if missing:
+            fail(f&quot;{fn}:{r.get(&#39;id&#39;)}: missing required fields {missing}&quot;)
+            break
+    for r in data:
+        if not any(k in r for k in IDENTITY_FIELDS):
+            fail(f&quot;{fn}:{r.get(&#39;id&#39;)}: no source identity/URL/path field&quot;)
+            break
+    # summary counts must reconcile with the actual file
+    if summ:
+        s = summ[0]
+        for key in (&quot;total_records&quot;, &quot;verified_records_written&quot;, &quot;total_vendor_records&quot;):
+            if key in s and isinstance(s[key], int) and s[key] != len(data):
+                fail(f&quot;{fn}: summary {key}={s[key]} but file holds {len(data)} data records&quot;)
+
+# 3. cross-file consistency: lane-state counts must match the files
+if os.path.exists(&quot;lane-state.json&quot;):
+    ls = json.load(open(&quot;lane-state.json&quot;))
+    counts = ls.get(&quot;exact_counts&quot;, {})
+    actual = {}
+    for key, fn in [(&quot;top_repos_records&quot;, &quot;top-repos.jsonl&quot;),
+                    (&quot;top_companies_records&quot;, &quot;top-companies.jsonl&quot;),
+                    (&quot;innovation_records&quot;, &quot;innovation-register.jsonl&quot;),
+                    (&quot;source_register_records&quot;, &quot;source-register.jsonl&quot;)]:
+        if os.path.exists(fn):
+            rows = load_jsonl(fn)
+            actual[key] = len([r for r in rows if str(r.get(&quot;id&quot;, &quot;&quot;)).upper() not in (&quot;SUMMARY&quot;, &quot;COM-SUMMARY&quot;)
+                               and r.get(&quot;record_type&quot;) != &quot;summary&quot;])
+    for k, v in actual.items():
+        if k in counts and counts[k] != v:
+            fail(f&quot;lane-state.json {k}={counts[k]} but {k.replace(&#39;_records&#39;,&#39;&#39;)} file holds {v}&quot;)
+        if k not in counts:
+            warn(f&quot;lane-state.json missing exact_counts.{k}&quot;)
+    # boundary invariants must be declared and correct
+    b = ls.get(&quot;boundaries&quot;, {})
+    for k, expected in [(&quot;research_only&quot;, True), (&quot;implementation_authorized&quot;, False),
+                        (&quot;admitted_blocks&quot;, 0), (&quot;execution_status&quot;, &quot;UNEXECUTED&quot;),
+                        (&quot;admission_status&quot;, &quot;NOT_ADMITTED&quot;)]:
+        if k not in b:
+            fail(f&quot;lane-state.json boundaries.{k} not declared&quot;)
+        elif b[k] != expected:
+            fail(f&quot;lane-state.json boundaries.{k}={b[k]!r}, expected {expected!r}&quot;)
+    if ls.get(&quot;subagent_model_policy&quot;) != &quot;opus_only&quot;:
+        fail(&quot;lane-state.json does not declare subagent_model_policy=opus_only&quot;)
+    if ls.get(&quot;promotion_status&quot;) == &quot;promoted&quot;:
+        fail(&quot;lane-state.json claims promotion; lane may not self-promote&quot;)
+
+# 4. decision ledger structure
+if os.path.exists(&quot;decision-ledger.json&quot;):
+    dl = json.load(open(&quot;decision-ledger.json&quot;))
+    ds = dl.get(&quot;decisions&quot;, [])
+    if not ds:
+        fail(&quot;decision-ledger.json has no decisions&quot;)
+    for d in ds:
+        for k in (&quot;id&quot;, &quot;decision&quot;, &quot;rationale&quot;, &quot;evidence&quot;, &quot;falsifier&quot;, &quot;status&quot;):
+            if k not in d:
+                fail(f&quot;decision-ledger.json {d.get(&#39;id&#39;,&#39;?&#39;)}: missing {k}&quot;)
+                break
+
+# 5. provenance lanes must stay distinct — no record may claim two lanes,
+#    and the user_provided lane must never be silently backfilled from a survey
+for fn in [&quot;top-repos.jsonl&quot;, &quot;top-companies.jsonl&quot;, &quot;source-register.jsonl&quot;]:
+    if not os.path.exists(fn):
+        continue
+    for r in load_jsonl(fn):
+        pl = r.get(&quot;provenance_lane&quot;)
+        if isinstance(pl, list) and len(pl) &gt; 1:
+            fail(f&quot;{fn}:{r.get(&#39;id&#39;)}: multiple provenance lanes {pl}&quot;)
+        if pl == &quot;user_provided&quot; and fn != &quot;source-register.jsonl&quot;:
+            fail(f&quot;{fn}:{r.get(&#39;id&#39;)}: survey record claims user_provided lane&quot;)
+
+# 6. forbidden-claim scan: this lane may not assert admission/execution/promotion.
+#    Matches POSITIVE claims only — &quot;admitted blocks 0&quot; and &quot;NOT_ADMITTED&quot; are the
+#    required boundary declarations, not violations.
+import re as _re
+FORBIDDEN_PATTERNS = [
+    r&quot;\badmitted\s+blocks?\s*[:=]?\s*(?!0\b)[1-9]&quot;,   # admitted blocks: 3
+    r&quot;\b(is|are|has been|have been)\s+admitted\b&quot;,
+    r&quot;\bsprint\s*1?\s+(is\s+)?complete\b&quot;,
+    r&quot;\bpromoted\s+to\s+\w+&quot;,
+    r&quot;\bproduction[- ]ready\b&quot;,
+    r&quot;\bcleared\s+for\s+production\b&quot;,
+]
+for fn in sorted(set([f for f in REQUIRED_FILES if f.endswith(&quot;.md&quot;)] + [&quot;research-report.md&quot;])):
+    if not os.path.exists(fn):
+        continue
+    text = open(fn).read().lower()
+    for pat in FORBIDDEN_PATTERNS:
+        m = _re.search(pat, text)
+        if m:
+            fail(f&quot;{fn}: positive admission/promotion claim matched {pat!r} -&gt; {m.group(0)!r}&quot;)
+
+import re as _re2
+
+# 7. product-vs-primitive split (only checked once the pass has run)
+if os.path.exists(&quot;product-primitive-split.json&quot;):
+    pp = json.load(open(&quot;product-primitive-split.json&quot;))
+    repos = load_jsonl(&quot;top-repos.jsonl&quot;)
+    data = [r for r in repos if str(r.get(&quot;id&quot;, &quot;&quot;)).upper() != &quot;SUMMARY&quot;]
+    VALID_TIERS = {&quot;product&quot;, &quot;framework&quot;, &quot;primitive&quot;}
+    missing_tier = [r.get(&quot;id&quot;) for r in data if r.get(&quot;supply_tier&quot;) not in VALID_TIERS]
+    if missing_tier:
+        fail(f&quot;top-repos.jsonl: {len(missing_tier)} rows lack a valid supply_tier (first: {missing_tier[:3]})&quot;)
+    no_ev = [r.get(&quot;id&quot;) for r in data if r.get(&quot;supply_tier&quot;) and not r.get(&quot;supply_tier_evidence&quot;)]
+    if no_ev:
+        fail(f&quot;top-repos.jsonl: {len(no_ev)} rows have supply_tier with no supply_tier_evidence&quot;)
+    # per-kind arithmetic must tie out internally
+    for k in pp.get(&quot;per_kind&quot;, []):
+        tot = k.get(&quot;total_rows&quot;)
+        parts = (k.get(&quot;product_rows&quot;, 0) + k.get(&quot;framework_rows&quot;, 0) + k.get(&quot;primitive_rows&quot;, 0))
+        if tot is not None and parts != tot:
+            fail(f&quot;product-primitive-split {k.get(&#39;kind&#39;)}: tiers sum to {parts} but total_rows={tot}&quot;)
+        # the classification rule must match its own numbers
+        cp = k.get(&quot;clean_products&quot;)
+        rc = k.get(&quot;revised_classification&quot;)
+        if cp is not None and rc == &quot;commodity&quot; and cp &lt; 2:
+            fail(f&quot;product-primitive-split {k.get(&#39;kind&#39;)}: classified commodity with clean_products={cp}&quot;)
+        if cp is not None and cp == 0 and k.get(&quot;product_rows&quot;, 0) &gt; 0 \
+           and rc not in (&quot;product_layer_missing_under_permissive_terms&quot;, &quot;UNDERDETERMINED&quot;):
+            fail(f&quot;product-primitive-split {k.get(&#39;kind&#39;)}: 0 clean products but classified {rc!r}&quot;)
+    # 7b. PROSE-VS-COUNTER: any number stated in a note must match its own counters.
+    #     Added after a verifier found e_sign.note asserting &quot;6 runnable products&quot;
+    #     while product_rows=5. Prose drifts when counters are recomputed; this binds them.
+    # Longest-qualifier-first: &quot;clean permissive product&quot; must win over bare &quot;product&quot;.
+    NUM_WORD = _re2.compile(
+        r&quot;\b(\d+)\s+(&quot;
+        r&quot;clean\s+permissive\s+products?&quot;
+        r&quot;|clean\s+permissive\s+rows?&quot;
+        r&quot;|runnable\s+products?&quot;
+        r&quot;|products?&quot;
+        r&quot;|primitives?&quot;
+        r&quot;|frameworks?&quot;
+        r&quot;|rows?&quot;
+        r&quot;)\b&quot;)
+    for k in pp.get(&quot;per_kind&quot;, []):
+        note = k.get(&quot;note&quot;) or &quot;&quot;
+        for m in NUM_WORD.finditer(note):
+            stated = int(m.group(1))
+            noun = _re2.sub(r&quot;s$&quot;, &quot;&quot;, m.group(2).lower().replace(&quot;  &quot;, &quot; &quot;))
+            if noun.startswith(&quot;clean permissive product&quot;):
+                expected, label = k.get(&quot;clean_products&quot;), &quot;clean permissive product&quot;
+            elif noun.startswith(&quot;clean permissive row&quot;):
+                # &quot;the N clean permissive row(s) ... are primitives&quot;
+                expected, label = k.get(&quot;clean_primitives&quot;), &quot;clean permissive row&quot;
+            elif noun.startswith(&quot;runnable product&quot;) or noun.startswith(&quot;product&quot;):
+                expected, label = k.get(&quot;product_rows&quot;), &quot;product&quot;
+            elif noun.startswith(&quot;primitive&quot;):
+                expected, label = k.get(&quot;primitive_rows&quot;), &quot;primitive&quot;
+            elif noun.startswith(&quot;framework&quot;):
+                expected, label = k.get(&quot;framework_rows&quot;), &quot;framework&quot;
+            else:
+                expected, label = k.get(&quot;total_rows&quot;), &quot;row&quot;
+            if expected is not None and stated != expected:
+                fail(f&quot;product-primitive-split {k.get(&#39;kind&#39;)}: note says {stated} {label}(s) &quot;
+                     f&quot;but counter is {expected} — prose/counter drift&quot;)
+        # a note must not claim clean supply when clean_products is 0
+        if k.get(&quot;clean_products&quot;) == 0 and _re2.search(r&quot;\bdeploy one and ship\b&quot;, note):
+            fail(f&quot;product-primitive-split {k.get(&#39;kind&#39;)}: note claims deployable supply with clean_products=0&quot;)
+
+    # summary tier counts must match the file
+    s = pp.get(&quot;summary&quot;, {})
+    actual_tiers = collections.Counter(r.get(&quot;supply_tier&quot;) for r in data)
+    for tier in (&quot;product&quot;, &quot;framework&quot;, &quot;primitive&quot;):
+        if tier in s and s[tier] != actual_tiers.get(tier, 0):
+            fail(f&quot;product-primitive-split summary {tier}={s[tier]} but file holds {actual_tiers.get(tier, 0)}&quot;)
+else:
+    warn(&quot;product-primitive-split.json not present yet (pass still running or not run)&quot;)
+
+print(&quot;=&quot; * 60)
+print(&quot;S1-L2 / P03 POST-WRITE STRUCTURAL SMOKE&quot;)
+print(&quot;=&quot; * 60)
+for w in WARN:
+    print(f&quot;  WARN  {w}&quot;)
+for f_ in FAIL:
+    print(f&quot;  FAIL  {f_}&quot;)
+print(&quot;-&quot; * 60)
+if FAIL:
+    print(f&quot;VERDICT: FAIL ({len(FAIL)} failures, {len(WARN)} warnings)&quot;)
+    sys.exit(1)
+print(f&quot;VERDICT: PASS (0 failures, {len(WARN)} warnings)&quot;)
+print(&quot;Note: this checks structure and internal consistency only. It does not&quot;)
+print(&quot;verify that any claim is true, that any licence reading is correct, or&quot;)
+print(&quot;that any capability exists as described.&quot;)
+sys.exit(0)
+</pre></div></main></body></html>

@@ -1,0 +1,476 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://actionist.local/framework-dependency-graph.v1.json",
+  "schema_version": "actionist.framework-dependency-graph.v1",
+  "title": "Actionist Framework Dependency Graph",
+  "observed_at": "2026-08-28",
+  "status": "research_only",
+  "research_only": true,
+  "edge_semantics": "from is a prerequisite framework; to consumes it. Dependency does not transfer ownership or maturity.",
+  "node_count": 24,
+  "edge_count": 62,
+  "nodes": [
+    {
+      "framework_id": "FW-DEMAND-PRODUCTSPEC",
+      "name": "Outcome discovery and ProductSpec",
+      "category": "demand_product",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-BLOCK-HUB-LIFECYCLE",
+      "name": "Business lifecycle and Block Hub decomposition",
+      "category": "demand_product",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "name": "Source discovery and candidate funnel",
+      "category": "supply_discovery",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-CAPABILITY-CLASSIFICATION",
+      "name": "Product, framework, primitive, surface and engine classification",
+      "category": "supply_discovery",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-REUSE-SHAPE-SELECTION",
+      "name": "Reuse-shape and ownership selection",
+      "category": "conversion_contracts",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-REPOSITORY-VALUE-MATRIX",
+      "name": "Repository Value Matrix and shape-specific Diamond Score",
+      "category": "selection_valuation",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-MODULE-CONTRACT-FAMILY",
+      "name": "Seven-record module contract family",
+      "category": "conversion_contracts",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-NORMALIZATION-SURGERY",
+      "name": "Normalization surgery taxonomy and glue planning",
+      "category": "conversion_contracts",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-HOST-AUTHORITY",
+      "name": "Host identity, tenancy, settings and navigation authority",
+      "category": "composition_experience",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-DATA-OWNERSHIP",
+      "name": "Typed data ownership and migration authority",
+      "category": "conversion_contracts",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-DESIGN-GRAMMAR-TOKENS",
+      "name": "Closed design grammar and semantic token harmonization",
+      "category": "composition_experience",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-PREFERENCE-LEARNING",
+      "name": "Adaptive preference learning and DesignDNA",
+      "category": "composition_experience",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-SURFACE-ROLE-MAPPING",
+      "name": "Surface and component role mapping",
+      "category": "composition_experience",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-ARCHETYPE-SHELL",
+      "name": "Archetype shell and navigation topology",
+      "category": "composition_experience",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-BOUNDED-EDITING",
+      "name": "Bounded editing and upgrade-safe intent replay",
+      "category": "composition_experience",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-DETERMINISTIC-COMPOSER",
+      "name": "Deterministic composition and UNDERDETERMINED protocol",
+      "category": "composition_experience",
+      "maturity": "dry_run"
+    },
+    {
+      "framework_id": "FW-EVIDENCE-QUALIFICATION",
+      "name": "Evidence qualification and minimum-family gating",
+      "category": "runtime_release",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-CONNECTOR-ACTION-AUTHORITY",
+      "name": "Tenant-safe connector and external-action authority",
+      "category": "runtime_release",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-RUNTIME-PROFILES-BUDGETS",
+      "name": "Runtime profiles and resource budgets",
+      "category": "runtime_release",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-RELEASE-RECOVERY",
+      "name": "Release, rollback and recovery horizons",
+      "category": "runtime_release",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-OBSERVABILITY-ATTRIBUTION",
+      "name": "Per-capability observability and attribution",
+      "category": "runtime_release",
+      "maturity": "specified"
+    },
+    {
+      "framework_id": "FW-REGISTRY-LIFECYCLE",
+      "name": "Registry identity, version, scope and lifecycle",
+      "category": "selection_valuation",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-PRODUCTION-LEARNING",
+      "name": "Production attribution, promotion and retirement",
+      "category": "learning_governance",
+      "maturity": "machine_readable"
+    },
+    {
+      "framework_id": "FW-EXPERIMENT-GATE-LOOPS",
+      "name": "Evidence-producing experiment and stop-gate loop",
+      "category": "learning_governance",
+      "maturity": "specified"
+    }
+  ],
+  "edges": [
+    {
+      "from": "FW-DEMAND-PRODUCTSPEC",
+      "to": "FW-BLOCK-HUB-LIFECYCLE",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-BLOCK-HUB-LIFECYCLE",
+      "to": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "to": "FW-CAPABILITY-CLASSIFICATION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-CAPABILITY-CLASSIFICATION",
+      "to": "FW-REUSE-SHAPE-SELECTION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "to": "FW-REUSE-SHAPE-SELECTION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-CAPABILITY-CLASSIFICATION",
+      "to": "FW-REPOSITORY-VALUE-MATRIX",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-REPOSITORY-VALUE-MATRIX",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "to": "FW-REPOSITORY-VALUE-MATRIX",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-MODULE-CONTRACT-FAMILY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DATA-OWNERSHIP",
+      "to": "FW-MODULE-CONTRACT-FAMILY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-MODULE-CONTRACT-FAMILY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-MODULE-CONTRACT-FAMILY",
+      "to": "FW-NORMALIZATION-SURGERY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-NORMALIZATION-SURGERY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DEMAND-PRODUCTSPEC",
+      "to": "FW-HOST-AUTHORITY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-HOST-AUTHORITY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-DATA-OWNERSHIP",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-DATA-OWNERSHIP",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-DESIGN-GRAMMAR-TOKENS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-DESIGN-GRAMMAR-TOKENS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DESIGN-GRAMMAR-TOKENS",
+      "to": "FW-PREFERENCE-LEARNING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-BLOCK-HUB-LIFECYCLE",
+      "to": "FW-SURFACE-ROLE-MAPPING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DESIGN-GRAMMAR-TOKENS",
+      "to": "FW-SURFACE-ROLE-MAPPING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DEMAND-PRODUCTSPEC",
+      "to": "FW-ARCHETYPE-SHELL",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-BLOCK-HUB-LIFECYCLE",
+      "to": "FW-ARCHETYPE-SHELL",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-ARCHETYPE-SHELL",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-SURFACE-ROLE-MAPPING",
+      "to": "FW-ARCHETYPE-SHELL",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DESIGN-GRAMMAR-TOKENS",
+      "to": "FW-BOUNDED-EDITING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-ARCHETYPE-SHELL",
+      "to": "FW-BOUNDED-EDITING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-BOUNDED-EDITING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DETERMINISTIC-COMPOSER",
+      "to": "FW-BOUNDED-EDITING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DEMAND-PRODUCTSPEC",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-MODULE-CONTRACT-FAMILY",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DATA-OWNERSHIP",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DESIGN-GRAMMAR-TOKENS",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-ARCHETYPE-SHELL",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-EVIDENCE-QUALIFICATION",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-RUNTIME-PROFILES-BUDGETS",
+      "to": "FW-DETERMINISTIC-COMPOSER",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-MODULE-CONTRACT-FAMILY",
+      "to": "FW-EVIDENCE-QUALIFICATION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-RUNTIME-PROFILES-BUDGETS",
+      "to": "FW-EVIDENCE-QUALIFICATION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-CONNECTOR-ACTION-AUTHORITY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DATA-OWNERSHIP",
+      "to": "FW-CONNECTOR-ACTION-AUTHORITY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REUSE-SHAPE-SELECTION",
+      "to": "FW-RUNTIME-PROFILES-BUDGETS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-MODULE-CONTRACT-FAMILY",
+      "to": "FW-RUNTIME-PROFILES-BUDGETS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DATA-OWNERSHIP",
+      "to": "FW-RUNTIME-PROFILES-BUDGETS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-HOST-AUTHORITY",
+      "to": "FW-RUNTIME-PROFILES-BUDGETS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-RUNTIME-PROFILES-BUDGETS",
+      "to": "FW-RELEASE-RECOVERY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-MODULE-CONTRACT-FAMILY",
+      "to": "FW-RELEASE-RECOVERY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-EVIDENCE-QUALIFICATION",
+      "to": "FW-RELEASE-RECOVERY",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-RUNTIME-PROFILES-BUDGETS",
+      "to": "FW-OBSERVABILITY-ATTRIBUTION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-RELEASE-RECOVERY",
+      "to": "FW-OBSERVABILITY-ATTRIBUTION",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-SOURCE-CANDIDATE-FUNNEL",
+      "to": "FW-REGISTRY-LIFECYCLE",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-EVIDENCE-QUALIFICATION",
+      "to": "FW-REGISTRY-LIFECYCLE",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-EVIDENCE-QUALIFICATION",
+      "to": "FW-PRODUCTION-LEARNING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-OBSERVABILITY-ATTRIBUTION",
+      "to": "FW-PRODUCTION-LEARNING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-BOUNDED-EDITING",
+      "to": "FW-PRODUCTION-LEARNING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REGISTRY-LIFECYCLE",
+      "to": "FW-PRODUCTION-LEARNING",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DEMAND-PRODUCTSPEC",
+      "to": "FW-EXPERIMENT-GATE-LOOPS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-REPOSITORY-VALUE-MATRIX",
+      "to": "FW-EXPERIMENT-GATE-LOOPS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-DETERMINISTIC-COMPOSER",
+      "to": "FW-EXPERIMENT-GATE-LOOPS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-EVIDENCE-QUALIFICATION",
+      "to": "FW-EXPERIMENT-GATE-LOOPS",
+      "kind": "requires"
+    },
+    {
+      "from": "FW-PRODUCTION-LEARNING",
+      "to": "FW-EXPERIMENT-GATE-LOOPS",
+      "kind": "requires"
+    }
+  ],
+  "roots": [
+    "FW-DEMAND-PRODUCTSPEC"
+  ],
+  "terminal_frameworks": [
+    "FW-EXPERIMENT-GATE-LOOPS"
+  ]
+}

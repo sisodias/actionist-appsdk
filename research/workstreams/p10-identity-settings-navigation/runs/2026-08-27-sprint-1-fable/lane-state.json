@@ -1,0 +1,98 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane": "S1-L4",
+  "agent": "ACTIONIST-S1-L4-HOST",
+  "part": "P10",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "date": "2026-08-27",
+  "model": {
+    "orchestrator_at_dispatch": "fable-5-1m",
+    "orchestrator_at_consolidation": "opus-5-1m",
+    "subagent_policy": "opus_only",
+    "subagent_policy_violations": 0,
+    "note": "Both the original OSS survey agent and its backfill ran on Opus."
+  },
+  "boundaries": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "promotion_status": "unpromoted",
+    "parent_goal_status": "active",
+    "cloned_sources": 0,
+    "client_private_data_used": false,
+    "authenticated_vendor_access": false,
+    "signup_performed": false,
+    "files_written_outside_owned_paths": 0
+  },
+  "counts": {
+    "commercial_surfaces": 33,
+    "commercial_top10": 10,
+    "commercial_observed": 31,
+    "commercial_inferred": 2,
+    "oss_projects": 35,
+    "oss_top10": 10,
+    "oss_first_pass": 31,
+    "oss_backfilled": 4,
+    "combined_denominator": 68,
+    "targeted_doc_reads": 9,
+    "local_sources_registered": 9,
+    "innovation_candidates_generated": 39,
+    "innovation_register_rows": 24,
+    "innovation_top10": 10,
+    "absorption_patterns_named": 5,
+    "invariants_proposed": 8,
+    "open_decisions": 5
+  },
+  "denominator_note": "The OSS packet stopped at 31 rows under a hard usage limit and named its four unfetched repos rather than inventing them. A targeted Opus backfill fetched exactly those four, resolved the three highest-value open questions by direct doc read, and trimmed top10 from 12 to 10. No row was padded.",
+  "checkpoints": [
+    {"n": 1, "name": "prior-evidence-audit", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/checkpoints/cp1-prior-evidence-audit.md"},
+    {"n": 2, "name": "commercial-survey", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/checkpoints/cp2-external-survey.md"},
+    {"n": 3, "name": "oss-and-local-estate-survey", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/local-estate-join.md"},
+    {"n": 4, "name": "first-principles-synthesis-and-verification", "status": "complete", "path": "first-principles.md"}
+  ],
+  "smoke": {
+    "verdict": "PASS",
+    "run_at": "2026-08-27",
+    "method": "Structural validation over every packet file: JSONL parsed line by line, required fields asserted, duplicate and mis-prefixed IDs checked, top10 re-derived from disposition, decision-ledger JSON parsed after manual edits.",
+    "results": {"jsonl_parse_failures": 0, "missing_required_fields": 0, "duplicate_ids": 0, "bad_id_prefixes": 0, "top10_exact": true, "json_valid": true}
+  },
+  "headline_finding": {
+    "statement": "No observed commercial surface renders a third party's settings inside host-owned chrome",
+    "denominator": 33,
+    "evidence_class": "observed_absence",
+    "consequence": "A34 must be split into three tiers with different precedent strength: identity (strong precedent), navigation (two proven halves, neither shipped whole), settings (none found, commercial or OSS)."
+  },
+  "headline_claims_challenged": [
+    {"claim": "No commercial precedent for third-party settings in host chrome", "challenge": "Is this a real absence or an artefact of which 33 surfaces were chosen?", "resolution": "Recorded explicitly as absence of evidence after a deliberate sweep, not proof of absence. The consequence stated is a reclassification of A34, not a claim of impossibility."},
+    {"claim": "The navigation registry is near-greenfield", "challenge": "Luigi was flagged as possibly closing the gap; asserting greenfield without reading it would have been the exact failure this project guards against.", "resolution": "Backfill read Luigi's navigation docs directly. Verdict: it supplies a genuine declarative node contract with ~45 parameters and async children resolution, but has NO contribution model - nodes are authored in the host's single JS config. Backstage supplies contribution and route refs but outputs opaque React elements and welds discovery to its CLI. Gap confirmed as real, and now with two proven halves rather than none."},
+    {"claim": "Authorization should not be built", "challenge": "Is oversupply real or just familiar names?", "resolution": "Five Apache-2.0 engines across four genuinely different deployment shapes, zero source-available traps in the category. Building custom would be indefensible."}
+  ],
+  "blockers": [],
+  "unresolved": [
+    "No commit-recency evidence anywhere in the OSS packet: the GitHub REST API was blocked in that agent's sandbox and returned null for every field, so all maintenance judgements there are inferred from secondary signals",
+    "Budibase licence read from a competitor's blog, not the LICENSE body",
+    "Permit.io pricing disputed across secondary sources",
+    "Piral's hosted feed service commercial terms unread and a possible adoption blocker",
+    "Salesforce Canvas current status vs LWC steering not established",
+    "Wix classic iframe extension end-of-life date and instance-param survival unknown",
+    "ZITADEL directory-level Apache/MIT carve-outs not read at file level",
+    "Shopify nav behaviour on direct URL visit reported by community, unconfirmed in reference docs",
+    "Frontegg hierarchy depth beyond sub-account not established"
+  ],
+  "licence_flags": [
+    {"project": "SuperTokens", "finding": "Split: Apache-2.0 outside ee/, but ee/LICENSE.md requires a paid Enterprise licence for the correct seat count for production use and forbids copying, distributing or sublicensing. GitHub API reports NOASSERTION.", "verified": "body"},
+    {"project": "NocoBase", "finding": "Apache badge misleading; LICENSE.txt is a custom Singapore-entity agreement prohibiting offering it as a public no-code/low-code/AI SaaS or PaaS. Not OSI open source.", "verified": "body"},
+    {"project": "Logto", "finding": "MPL-2.0 verbatim, uniform across the repo, no ee/ carve-out. Weak file-level copyleft with no network-service source duty, making it the most absorbable multi-tenant IdP surveyed - but not permissive.", "verified": "body"},
+    {"project": "Unleash", "finding": "AGPL-3.0-or-later, not Apache-2.0 as commonly assumed", "verified": "readme"},
+    {"project": "ZITADEL core, ToolJet", "finding": "AGPL", "verified": "readme"},
+    {"project": "Budibase", "finding": "Three-way split GPL-3.0 core / MPL-2.0 client libs / BSL pro", "verified": "secondary"},
+    {"project": "Appsmith", "finding": "Verified genuinely clean: raw LICENSE read end to end, unmodified Apache-2.0, no Commons Clause", "verified": "body"},
+    {"project": "SpiceDB", "finding": "Explicitly verified Apache-2.0 and NOT BSL", "verified": "body"},
+    {"project": "oauth2-proxy, panva/jose", "finding": "Verbatim MIT, no added conditions", "verified": "body"},
+    {"project": "Auth.js / NextAuth", "finding": "README states it has joined Better Auth and recommends Better Auth for new projects, inverting the default TypeScript auth recommendation. Lucia confirmed deprecated.", "verified": "readme"}
+  ],
+  "feeds": ["Loop 3 host absorption pilot, which must measure the settings tier specifically", "Loop 0 HostContract sufficiency across both identity lanes"],
+  "cross_lane": {"cited_read_only": ["P07 theming", "P08 archetypes and shells", "P13 editor"], "wrote_to_other_lane_files": false}
+}

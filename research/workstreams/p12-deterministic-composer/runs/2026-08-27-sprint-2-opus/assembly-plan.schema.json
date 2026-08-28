@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "actionist:p12:assembly-plan:v1",
+  "title": "Actionist AssemblyPlan",
+  "assembly_plan_version": "1.0.0",
+  "observed_at": "2026-08-27",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "lane": "S2-L4",
+  "owner_domain": "D15",
+  "status": "DESIGN_ONLY; UNEXECUTED; NOT_ADMITTED; admitted_modules=0; implementation_authorized=false",
+
+  "design_note": "The AssemblyPlan is the output of the deterministic composer for ONE application revision. It is NOT a new contract family. It CONSUMES the S2-L1 (P04) module contract family `actionist:p04:module-contract-family:v1` by reference and adds exactly three things that family does not own: (1) the solver verdict and its named unsatisfied constraint, (2) the ordered set of BindingPlans selected from a pre-verified feasible set, and (3) the composition-level budgets and residues. Every enum below that also appears in P04 is imported verbatim; a divergence is a defect, not a dialect. The AssemblyPlan never edits a CapabilityContract, never mints authority, and never records a compatibility judgement a model made.",
+
+  "vocabulary_provenance": {
+    "imported_verbatim_from_p04": [
+      "PackagingProfile.reuse_shape",
+      "CapabilityContract.capability_kind",
+      "CapabilityContract.authority_class",
+      "CapabilityContract.state_semantics.state_classes",
+      "CapabilityContract.state_semantics.authoritative_owner",
+      "CapabilityContract.provides.port_kind",
+      "CapabilityContract.provides.external_effect",
+      "CapabilityContract.requires_host",
+      "PackagingProfile.rights_state",
+      "PackagingProfile.dependency_closure_state",
+      "PackagingProfile.upstream_sync_model",
+      "BindingPlan.port_wiring.schema_compatibility",
+      "BindingPlan.data_binding.cross_owner_reads",
+      "BindingPlan.glue_budget.exceeded_action",
+      "BindingPlan.unresolved.must_be_supplied_by",
+      "HostContract.navigation.contribution_model",
+      "HostContract.settings.donor_settings_policy",
+      "ReleaseManifest.rollback_plan.objects.object_kind",
+      "QualificationDossier.evidence_tier",
+      "QualificationDossier.receipts.status",
+      "QualificationDossier.receipts.evidence_class"
+    ],
+    "imported_from_p14": ["runtime_profile"],
+    "imported_from_p11": ["idempotency_class", "consent_grade"],
+    "defined_here_because_no_other_lane_owns_it": [
+      "solver_verdict",
+      "unsatisfied_constraint",
+      "feasibility_class",
+      "candidate_disposition",
+      "underdetermined_channel"
+    ],
+    "renamed_to_avoid_collision": {
+      "p03_supply_verdict_UNDERDETERMINED": "P03 uses the string UNDERDETERMINED as a SUPPLY-CENSUS verdict about a capability kind (e.g. `portal`). The solver's UNDERDETERMINED is a per-composition CONTRACT-DEFECT verdict. They are different objects with the same spelling. This schema never reads a P03 supply verdict into `solver_verdict`; the shelf-side value travels as `candidate.supply_census_verdict` and is advisory only."
+    }
+  },
+
+  "type": "object",
+  "required": [
+    "assembly_id",
+    "application_id",
+    "revision",
+    "product_spec_ref",
+    "host_contract_version",
+    "solver",
+    "authority_ceiling",
+    "selected_set",
+    "bindings",
+    "glue_budget",
+    "underdetermined",
+    "provenance"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+    "assembly_id": {
+      "type": "string",
+      "pattern": "^asm_[a-z0-9-]{4,64}$",
+      "description": "Stable identity for this assembly attempt, including rejected attempts. An INFEASIBLE result still mints an assembly_id: a refusal is a recorded result, not an absence."
+    },
+    "application_id": { "type": "string", "minLength": 1 },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Composition revision. A new revision never mutates a prior AssemblyPlan; prior revisions are retained because the eval suite scores verdict stability across identical inputs (K6 determinism kill)."
+    },
+
+    "product_spec_ref": {
+      "type": "object",
+      "description": "P02 explicitly deferred the minimum ProductSpec to this lane: 'The minimum cannot be closed until S2-L4 defines what the composer consumes.' These are the ONLY ProductSpec fields the solver reads. Everything else in a ProductSpec is for humans and for acceptance, not for feasibility.",
+      "required": ["spec_id", "baseline_revision", "consumed_fields", "open_markers", "uncovered_requirements"],
+      "additionalProperties": false,
+      "properties": {
+        "spec_id": { "type": "string", "minLength": 1 },
+        "baseline_revision": { "type": "integer", "minimum": 0 },
+        "consumed_fields": {
+          "type": "object",
+          "description": "The composer-consumed minimum. Stated as a closed list so P02 can freeze its schema against a real consumer.",
+          "required": ["requirements", "entities", "authority_ceiling", "data_mode", "non_goals"],
+          "additionalProperties": false,
+          "properties": {
+            "requirements": {
+              "type": "array",
+              "description": "EARS-slotted requirements. The solver reads only `atom`, `authority` and `coverage`; it does NOT parse response prose.",
+              "items": {
+                "type": "object",
+                "required": ["requirement_id", "atom", "authority", "coverage"],
+                "properties": {
+                  "requirement_id": { "type": "string" },
+                  "atom": { "type": "string", "description": "One of the 12 solution atoms. Free-text atoms are a spec defect, not a composer problem." },
+                  "authority": { "$ref": "#/$defs/authority_level" },
+                  "coverage": { "enum": ["UNCOVERED", "COVERED"] }
+                }
+              }
+            },
+            "entities": {
+              "type": "array",
+              "items": { "type": "object", "required": ["entity_id", "client_vocabulary_term"] },
+              "description": "Client vocabulary is preserved verbatim. The solver uses entities only to detect identity/data conflicts, never to rename donor tables."
+            },
+            "authority_ceiling": { "$ref": "#/$defs/authority_level" },
+            "data_mode": {
+              "enum": ["ui_only", "read_only_external", "api_only", "owned_postgres"],
+              "description": "Phase 8 §6.1 monotonic ladder, retained verbatim. Ordering: ui_only < read_only_external < api_only < owned_postgres."
+            },
+            "non_goals": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "open_markers": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "P02 promotion gate. The composer REFUSES to plan against a spec with open_markers > 0 unless a recorded waiver exists; it does not silently resolve a marker."
+        },
+        "uncovered_requirements": { "type": "integer", "minimum": 0 },
+        "waiver_ref": { "type": ["string", "null"], "default": null }
+      }
+    },
+
+    "host_contract_version": {
+      "type": "string",
+      "description": "Pinned P04 HostContract version. A module declaring requires_host against a different version is a `host_version` conflict, not a warning."
+    },
+
+    "solver": {
+      "type": "object",
+      "description": "The deterministic result. This object is produced with NO model in the loop. If any field here was produced by a model, the plan is void.",
+      "required": ["verdict", "solver_version", "input_digest", "checks_run", "determinism"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": { "$ref": "#/$defs/solver_verdict" },
+        "solver_version": { "type": "string" },
+        "input_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "Digest over the canonicalised (candidate pool + host contract + consumed spec fields). Two runs with the same input_digest MUST yield the same verdict, or K6 fires."
+        },
+        "checks_run": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Every constraint evaluated, in order, with its outcome. A check that did not run is `not_run`, never absent — silence must not read as a pass.",
+          "items": {
+            "type": "object",
+            "required": ["constraint", "outcome"],
+            "properties": {
+              "constraint": { "$ref": "#/$defs/unsatisfied_constraint" },
+              "outcome": { "enum": ["pass", "fail", "underdetermined", "not_run", "not_applicable"] },
+              "conflict": {
+                "type": "array",
+                "maxItems": 2,
+                "items": { "type": "string" },
+                "description": "The conflicting pair: [capability_id, capability_id] or [capability_id, 'host']."
+              },
+              "missing_field": {
+                "type": ["string", "null"],
+                "description": "Required when outcome=underdetermined. Names the contract field whose absence made the check undecidable. This is the mechanism that turns a solver failure into a P04 contract bug report."
+              }
+            }
+          }
+        },
+        "infeasible_reason": {
+          "type": ["object", "null"],
+          "description": "Required and non-null when verdict=INFEASIBLE. EXACTLY ONE named constraint. Reaching INFEASIBLE with the wrong reason scores as a failure because the reason selects the next gate.",
+          "required": ["constraint", "conflict", "suggested_gate"],
+          "properties": {
+            "constraint": { "$ref": "#/$defs/unsatisfied_constraint" },
+            "conflict": { "type": "array", "items": { "type": "string" } },
+            "suggested_gate": {
+              "enum": ["discovery", "direct_source_review", "human_legal", "human_authority", "human_product", "reshape", "experiment"]
+            }
+          }
+        },
+        "determinism": {
+          "type": "object",
+          "required": ["relaxations_applied", "tie_break_rule"],
+          "properties": {
+            "relaxations_applied": {
+              "const": 0,
+              "description": "Solver honesty rule (Phase 8 §6.3): the solver may NEVER relax a constraint to be helpful. A solver that degrades gracefully is indistinguishable from a broken one. Any value other than 0 voids the plan."
+            },
+            "tie_break_rule": {
+              "type": "string",
+              "description": "Named, stable, total ordering used when two feasible sets are otherwise equal. Must be deterministic (e.g. lexicographic capability_id). Random or timestamp tie-breaks void determinism."
+            }
+          }
+        }
+      }
+    },
+
+    "authority_ceiling": {
+      "allOf": [{ "$ref": "#/$defs/authority_level" }],
+      "description": "Session ceiling declared at spec time. P04 C4: the composition's authority scope is the INTERSECTION of member scopes, never the union."
+    },
+
+    "candidate_pool": {
+      "type": "array",
+      "description": "Every candidate considered, INCLUDING those eliminated. Silent truncation reads as full coverage, so drops are recorded, not omitted.",
+      "items": {
+        "type": "object",
+        "required": ["capability_id", "disposition"],
+        "properties": {
+          "capability_id": { "type": "string" },
+          "disposition": { "$ref": "#/$defs/candidate_disposition" },
+          "eliminated_by": { "$ref": "#/$defs/unsatisfied_constraint" },
+          "supply_census_verdict": {
+            "type": ["string", "null"],
+            "description": "Advisory P03 shelf verdict (commodity | scarce | product_layer_missing_under_permissive_terms | UNDERDETERMINED). NEVER read into solver.verdict."
+          },
+          "retrieval_layer": {
+            "enum": ["L1", "L2", "L3", "L4"],
+            "description": "L4 (lexical/embedding) is advisory ONLY: it may widen the pool, may never satisfy a port and may never remove a candidate."
+          }
+        }
+      }
+    },
+    "candidates_dropped_at_cap": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count truncated by the top-k cap. Recorded always, including when zero."
+    },
+
+    "feasible_sets": {
+      "type": "array",
+      "maxItems": 5,
+      "description": "Pre-verified alternatives handed to the model plane. The model chooses AMONG these and may not add to them. Empty when verdict != FEASIBLE.",
+      "items": {
+        "type": "object",
+        "required": ["set_id", "capability_ids", "feasibility_class", "residual_glue_ports"],
+        "properties": {
+          "set_id": { "type": "string" },
+          "capability_ids": { "type": "array", "items": { "type": "string" } },
+          "feasibility_class": { "$ref": "#/$defs/feasibility_class" },
+          "residual_glue_ports": { "type": "array", "items": { "type": "string" } },
+          "predicted_changed_files": { "type": "integer", "minimum": 0 },
+          "predicted_changed_lines": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "sets_dropped_at_cap": { "type": "integer", "minimum": 0 },
+
+    "selected_set": {
+      "type": ["object", "null"],
+      "description": "Null unless verdict=FEASIBLE and a chooser ran. `chosen_by` records WHO chose, so a model choice is never mistaken for a deterministic one.",
+      "required": ["set_id", "chosen_by"],
+      "properties": {
+        "set_id": { "type": "string" },
+        "chosen_by": { "enum": ["deterministic_single_option", "model_bounded_choice", "human"] },
+        "rationale_ref": { "type": ["string", "null"] },
+        "escalation_trigger": {
+          "type": ["string", "null"],
+          "enum": [null, "sets_within_tolerance", "empty_port", "invented_business_rule", "repair_cap", "unclean_receipt", "authority_exceeded", "regulated_data"],
+          "description": "Named triggers only. Discretionary escalation is forbidden because it makes cost unpredictable and eval results uninterpretable."
+        }
+      }
+    },
+
+    "bindings": {
+      "type": "array",
+      "description": "Ordered BindingPlan references. The BindingPlan OBJECT is owned by P04; this plan holds references plus composition-level ordering and the checks that only make sense across bindings.",
+      "items": {
+        "type": "object",
+        "required": ["binding_id", "capability_id", "order", "runtime_profile"],
+        "properties": {
+          "binding_id": { "type": "string" },
+          "capability_id": { "type": "string" },
+          "order": { "type": "integer", "minimum": 0 },
+          "runtime_profile": { "$ref": "#/$defs/runtime_profile" },
+          "migration_authority": {
+            "type": ["string", "null"],
+            "description": "Exactly one named owner per resource (P04 C6, INV-P09-1). Two bindings claiming one resource is `namespace`, not a merge."
+          },
+          "external_effects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["port_id", "external_effect", "idempotency_class", "consent_grade"],
+              "properties": {
+                "port_id": { "type": "string" },
+                "external_effect": { "enum": ["none", "read_external", "write_external", "irreversible_external"] },
+                "idempotency_class": { "$ref": "#/$defs/idempotency_class" },
+                "consent_grade": { "$ref": "#/$defs/consent_grade" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "glue_budget": {
+      "type": "object",
+      "description": "Composition-level budget. P04 owns the per-binding glue_budget; this is the sum plus the composition ceiling. Overflow is a named INFEASIBLE constraint, not a warning, because 'a change set exceeding the ratio is a rewrite wearing a codemod's clothes'.",
+      "required": ["declared_max_changed_files", "declared_max_changed_lines", "predicted_changed_files", "predicted_changed_lines", "exceeded_action"],
+      "properties": {
+        "declared_max_changed_files": { "type": "integer", "minimum": 0 },
+        "declared_max_changed_lines": { "type": "integer", "minimum": 0 },
+        "predicted_changed_files": { "type": "integer", "minimum": 0 },
+        "predicted_changed_lines": { "type": "integer", "minimum": 0 },
+        "exceeded_action": { "enum": ["escalate_human_review", "reshape", "reject"] }
+      }
+    },
+
+    "underdetermined": {
+      "type": "array",
+      "description": "The UNDERDETERMINED channel. A15: unknown compatibility returns UNDERDETERMINED; it never becomes model confidence. Each entry is simultaneously a blocker for THIS plan and a defect report against the named contract field.",
+      "items": {
+        "type": "object",
+        "required": ["field", "reason", "must_be_supplied_by", "blocks_promotion"],
+        "properties": {
+          "field": { "type": "string", "description": "Dotted path of the missing/undecidable contract field, e.g. `PackagingProfile.rights_state`." },
+          "owning_record": {
+            "enum": ["CapabilityContract", "PackagingProfile", "HostContract", "BindingPlan", "QualificationDossier", "RegistryRecord", "ReleaseManifest", "ProductSpec"]
+          },
+          "reason": { "type": "string" },
+          "must_be_supplied_by": { "enum": ["client", "operator", "donor_upstream", "another_capability", "experiment"] },
+          "blocks_promotion": { "type": "boolean" }
+        }
+      }
+    },
+
+    "provenance": {
+      "type": "object",
+      "required": ["boundary", "consumes"],
+      "properties": {
+        "boundary": {
+          "type": "object",
+          "required": ["research_only", "implementation_authorized", "execution_status", "admission_status", "admitted_blocks"],
+          "properties": {
+            "research_only": { "const": true },
+            "implementation_authorized": { "const": false },
+            "execution_status": { "const": "UNEXECUTED" },
+            "admission_status": { "const": "NOT_ADMITTED" },
+            "admitted_blocks": { "const": 0 }
+          }
+        },
+        "consumes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Contract family / spec ids this plan was solved against, pinned by version."
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "solver_verdict": {
+      "enum": ["FEASIBLE", "INFEASIBLE", "UNDERDETERMINED"],
+      "description": "Three verdicts, retained verbatim from Phase 8 §6.2. FEASIBLE = at least one set satisfies every check. INFEASIBLE = a declared constraint is violated (the contracts were sufficient to decide NO). UNDERDETERMINED = the declared contracts are insufficient to decide either way; this is a CONTRACT DEFECT and is reported to S2-L1, not resolved by guessing."
+    },
+    "feasibility_class": {
+      "enum": ["fully_determined", "determined_with_adapter", "determined_with_human_gate"],
+      "description": "A set can be feasible yet still require a named human gate (e.g. licence obligation review). Collapsing these would let a human-gated set look automatic."
+    },
+    "candidate_disposition": {
+      "enum": ["selected", "feasible_not_selected", "eliminated", "dropped_at_cap", "quarantined"],
+      "description": "Every candidate ends in exactly one disposition. `quarantined` is distinct from `eliminated`: it means rights or security state forbids consideration at all."
+    },
+    "unsatisfied_constraint": {
+      "enum": [
+        "port_closure",
+        "version",
+        "runtime",
+        "namespace",
+        "data_mode",
+        "token",
+        "authority",
+        "license",
+        "scope",
+        "idempotency",
+        "identity",
+        "navigation",
+        "migration_owner",
+        "tenancy",
+        "rollback",
+        "host_version",
+        "glue_budget",
+        "observability_identity",
+        "evidence_tier"
+      ],
+      "description": "Phase 8 defined the first ten. This lane adds nine, each because a Sprint 1 packet proved a real failure the original ten could not name: `identity` (INV-P10-1 sole identity authority), `navigation` (INV-P10-4/5/6), `migration_owner` (P04 C6 / INV-P09-1 — distinct from `namespace`, which is about collision; this is about contested AUTHORITY), `tenancy` (INV-P09-7 / INV-P11-3 tenant key from first migration), `rollback` (I-P14-1 multi-object, I-P14-2 horizon), `host_version` (P04 requires_host pinning), `glue_budget` (adaptation_unbounded), `observability_identity` (P04 C7 stable capability id), `evidence_tier` (I-P15-2 min-gate, never averaged)."
+    },
+    "authority_level": {
+      "enum": ["read", "stage", "write", "message", "deploy"],
+      "description": "Phase 8 §7.1 authority ladder, retained verbatim and strictly ordered. P04's CapabilityContract.authority_class (read_only | tenant_scoped_write | external_effecting | privileged) is a CAPABILITY-shaped classification; this is a SESSION-shaped ceiling. The mapping between them is given in compatibility-and-authority-rules.json and must not be assumed."
+    },
+    "runtime_profile": {
+      "enum": ["package_in_host", "microfrontend", "sidecar_service", "worker", "scheduled_job"],
+      "description": "P14 §6, five profiles derived from reuse shape rather than chosen. sidecar_service is the only profile where a third party owns migrations and therefore the only one whose recovery horizon is not ours to set."
+    },
+    "idempotency_class": {
+      "enum": ["naturally_idempotent", "idempotent_with_key", "unsafe"],
+      "description": "INV-P11-4. The runtime REFUSES to auto-retry the unsafe class. Default is `unsafe` — the safe failure direction — when the catalogue cannot determine the class."
+    },
+    "consent_grade": {
+      "enum": ["read", "reversible", "irreversible_or_financial"],
+      "description": "INV-P11-6: consent is graded by CONSEQUENCE, not by resource, defaulting to the middle tier."
+    }
+  }
+}

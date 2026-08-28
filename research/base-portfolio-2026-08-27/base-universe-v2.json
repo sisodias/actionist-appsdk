@@ -1,0 +1,1109 @@
+{
+  "schema_version": "actionist.base-universe.v2",
+  "observed_date": "2026-08-27",
+  "status": "provisional_expanded_universe_not_qualified",
+  "correction": "Supersedes the 23-family compression as the current portfolio taxonomy; preserves the prior 100-repository bench as evidence.",
+  "inclusion_rule": "Create a distinct family when the candidate owns a materially different durable state model, authority boundary, workflow lifecycle, or runtime/integration boundary. Cosmetic variants remain overlays.",
+  "counts": {
+    "families": 68,
+    "horizontal_product": 38,
+    "shared_capability": 15,
+    "vertical_operating_system": 15,
+    "seed_assignments": 167,
+    "unique_seed_repositories": 144,
+    "thin_families": 8,
+    "prior_deep_bench": 100
+  },
+  "families": [
+    {
+      "id": "U01",
+      "group": "horizontal_product",
+      "slug": "crm-pipeline",
+      "name": "CRM and revenue pipeline",
+      "inclusion_criterion": "Accounts, contacts, opportunities and stage ownership form the durable product state.",
+      "anchors": [
+        "twentyhq/twenty",
+        "SuiteCRM/SuiteCRM",
+        "frappe/crm"
+      ],
+      "evidence_basis": [
+        "P03",
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U02",
+      "group": "horizontal_product",
+      "slug": "case-workflow-product",
+      "name": "Case and workflow product",
+      "inclusion_criterion": "Cases have configurable states, parties, deadlines, evidence and human authority—not merely tasks.",
+      "anchors": [
+        "open-formulieren/open-forms",
+        "ArkCase/arkcase-ce"
+      ],
+      "evidence_basis": [
+        "P03",
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U03",
+      "group": "horizontal_product",
+      "slug": "external-client-portal",
+      "name": "External client portal",
+      "inclusion_criterion": "Untrusted external identities can see scoped records, submit requests and track their own history.",
+      "anchors": [
+        "open-formulieren/open-forms",
+        "nextcloud/server"
+      ],
+      "evidence_basis": [
+        "P03-corrected",
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U04",
+      "group": "horizontal_product",
+      "slug": "project-work-management",
+      "name": "Project and work management",
+      "inclusion_criterion": "Projects, tasks, dependencies, milestones and workload are first-class durable state.",
+      "anchors": [
+        "makeplane/plane",
+        "opf/openproject",
+        "kanboard/kanboard"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U05",
+      "group": "horizontal_product",
+      "slug": "collaborative-workspace",
+      "name": "Collaborative workspace (Notion-like)",
+      "inclusion_criterion": "Documents and structured databases/views coexist in one collaborative workspace.",
+      "anchors": [
+        "AppFlowy-IO/AppFlowy",
+        "toeverything/AFFiNE",
+        "anyproto/anytype-ts"
+      ],
+      "evidence_basis": [
+        "P03",
+        "operator-correction"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U06",
+      "group": "horizontal_product",
+      "slug": "knowledge-wiki",
+      "name": "Knowledge base and wiki",
+      "inclusion_criterion": "Authored, versioned, searchable knowledge with audience and review state.",
+      "anchors": [
+        "BookStackApp/BookStack",
+        "docmost/docmost",
+        "requarks/wiki"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U07",
+      "group": "horizontal_product",
+      "slug": "support-service-desk",
+      "name": "Customer support desk",
+      "inclusion_criterion": "Tickets, channels, SLA clocks, ownership, replies and customer history form the product.",
+      "anchors": [
+        "chatwoot/chatwoot",
+        "zammad/zammad",
+        "freescout-help-desk/freescout"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U08",
+      "group": "horizontal_product",
+      "slug": "shared-inbox",
+      "name": "Shared inbox and email operations",
+      "inclusion_criterion": "Conversations, assignment, collision control, queues and reply state are independent of general ticketing.",
+      "anchors": [
+        "chatwoot/chatwoot",
+        "freescout-help-desk/freescout"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U09",
+      "group": "horizontal_product",
+      "slug": "scheduling-booking",
+      "name": "Scheduling and booking",
+      "inclusion_criterion": "Availability, resources, booking rules, attendees and cancellation state are first-class.",
+      "anchors": [
+        "calcom/cal.com",
+        "alextselegidis/easyappointments",
+        "thunderbird/appointment"
+      ],
+      "evidence_basis": [
+        "P03",
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U10",
+      "group": "horizontal_product",
+      "slug": "events-ticketing",
+      "name": "Events, registration and ticketing",
+      "inclusion_criterion": "Events, sessions, capacity, tickets, check-in and attendee communication form a lifecycle.",
+      "anchors": [
+        "pretix/pretix",
+        "alfio-event/alf.io",
+        "eventschedule/eventschedule"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "live-github"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U11",
+      "group": "horizontal_product",
+      "slug": "forms-surveys",
+      "name": "Forms, surveys and intake",
+      "inclusion_criterion": "Schema, conditional questions, submissions, review and response analytics form the product.",
+      "anchors": [
+        "formbricks/formbricks",
+        "heyform/heyform",
+        "LimeSurvey/LimeSurvey"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U12",
+      "group": "horizontal_product",
+      "slug": "document-management",
+      "name": "Document management system",
+      "inclusion_criterion": "Capture, indexing, versions, retention, permissions and filing state exceed raw file storage.",
+      "anchors": [
+        "paperless-ngx/paperless-ngx",
+        "mayan-edms/Mayan-EDMS",
+        "eikek/docspell"
+      ],
+      "evidence_basis": [
+        "P03",
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U13",
+      "group": "horizontal_product",
+      "slug": "esign-workflow",
+      "name": "E-signature workflow",
+      "inclusion_criterion": "Signer identity, routing, consent, evidence and audit—not only cryptographic signing—form the product.",
+      "anchors": [
+        "documenso/documenso",
+        "docusealco/docuseal",
+        "OpenSignLabs/OpenSign"
+      ],
+      "evidence_basis": [
+        "P03-corrected"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U14",
+      "group": "horizontal_product",
+      "slug": "contract-lifecycle",
+      "name": "Contract lifecycle management",
+      "inclusion_criterion": "Counterparties, clauses, versions, approval, obligation and renewal state are first-class.",
+      "anchors": [
+        "Open-Source-Legal/OpenContracts",
+        "documenso/documenso"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "template-sweep"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U15",
+      "group": "horizontal_product",
+      "slug": "proposal-cpq",
+      "name": "Proposal, quote and CPQ",
+      "inclusion_criterion": "Products, pricing rules, quote versions, approvals and acceptance form a distinct revenue lifecycle.",
+      "anchors": [
+        "frappe/erpnext",
+        "odoo/odoo"
+      ],
+      "evidence_basis": [
+        "72-ideas",
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U16",
+      "group": "horizontal_product",
+      "slug": "subscription-billing",
+      "name": "Subscription and usage billing",
+      "inclusion_criterion": "Plans, meters, invoices, credits, dunning and subscription lifecycle form the product.",
+      "anchors": [
+        "getlago/lago",
+        "killbill/killbill",
+        "openmeterio/openmeter"
+      ],
+      "evidence_basis": [
+        "P03",
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U17",
+      "group": "horizontal_product",
+      "slug": "accounting-ledger",
+      "name": "Accounting and general ledger",
+      "inclusion_criterion": "Journal authority, chart of accounts, reconciliation, close and reporting form a governed system.",
+      "anchors": [
+        "bigcapitalhq/bigcapital",
+        "akaunting/akaunting",
+        "frappe/erpnext"
+      ],
+      "evidence_basis": [
+        "P03",
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U18",
+      "group": "horizontal_product",
+      "slug": "expense-management",
+      "name": "Expense and receipt management",
+      "inclusion_criterion": "Spend requests, receipts, policy, approval, reimbursement and audit form a lifecycle.",
+      "anchors": [
+        "midday-ai/midday",
+        "firefly-iii/firefly-iii"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "template-sweep"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U19",
+      "group": "horizontal_product",
+      "slug": "inventory-warehouse",
+      "name": "Inventory and warehouse management",
+      "inclusion_criterion": "Stock identity, locations, movements, reservations, counts and replenishment form durable authority.",
+      "anchors": [
+        "inventree/InvenTree",
+        "openboxes/openboxes",
+        "frappe/erpnext"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U20",
+      "group": "horizontal_product",
+      "slug": "commerce-order-management",
+      "name": "Commerce and order management",
+      "inclusion_criterion": "Catalogue, cart, order, fulfilment, returns and customer state form the product.",
+      "anchors": [
+        "saleor/saleor",
+        "medusajs/medusa",
+        "bagisto/bagisto"
+      ],
+      "evidence_basis": [
+        "P03",
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U21",
+      "group": "horizontal_product",
+      "slug": "procurement-vendors",
+      "name": "Procurement and vendor management",
+      "inclusion_criterion": "Requisitions, suppliers, bids, purchase orders, receipts and approvals form a lifecycle.",
+      "anchors": [
+        "frappe/erpnext",
+        "odoo/odoo"
+      ],
+      "evidence_basis": [
+        "17-industries",
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U22",
+      "group": "horizontal_product",
+      "slug": "hris-people-ops",
+      "name": "HRIS and people operations",
+      "inclusion_criterion": "Worker records, organization, leave, payroll inputs, policy and lifecycle authority form the product.",
+      "anchors": [
+        "frappe/hrms",
+        "orangehrm/orangehrm",
+        "ever-co/ever-gauzy"
+      ],
+      "evidence_basis": [
+        "P03",
+        "template-sweep"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U23",
+      "group": "horizontal_product",
+      "slug": "ats-recruiting",
+      "name": "Applicant tracking and recruiting",
+      "inclusion_criterion": "Roles, candidates, applications, stages, interviews, feedback and offers form a distinct lifecycle.",
+      "anchors": [
+        "opencats/OpenCATS",
+        "frappe/hrms"
+      ],
+      "evidence_basis": [
+        "17-industries",
+        "template-sweep"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U24",
+      "group": "horizontal_product",
+      "slug": "employee-lifecycle",
+      "name": "Employee onboarding and offboarding",
+      "inclusion_criterion": "Provisioning checklists, documents, access handoffs and completion evidence span systems.",
+      "anchors": [
+        "frappe/hrms"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U25",
+      "group": "horizontal_product",
+      "slug": "learning-management",
+      "name": "Learning management and course delivery",
+      "inclusion_criterion": "Courses, cohorts, enrollment, progress, assessment and credentials form the product.",
+      "anchors": [
+        "moodle/moodle",
+        "frappe/lms",
+        "oppia/oppia"
+      ],
+      "evidence_basis": [
+        "P03",
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U26",
+      "group": "horizontal_product",
+      "slug": "marketing-automation",
+      "name": "Marketing automation",
+      "inclusion_criterion": "Contacts, segments, campaigns, journeys, lead scoring and attribution form the product.",
+      "anchors": [
+        "mautic/mautic",
+        "dittofeed/dittofeed"
+      ],
+      "evidence_basis": [
+        "P03",
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U27",
+      "group": "horizontal_product",
+      "slug": "social-media-operations",
+      "name": "Social media planning and publishing",
+      "inclusion_criterion": "Brands, channels, content calendar, approval, publishing and engagement state form the product.",
+      "anchors": [
+        "gitroomhq/postiz-app",
+        "inovector/mixpost",
+        "brightbeanxyz/brightbean-studio"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "live-github"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U28",
+      "group": "horizontal_product",
+      "slug": "newsletter-publishing",
+      "name": "Newsletter and audience publishing",
+      "inclusion_criterion": "Subscribers, segments, editions, delivery and engagement form the product.",
+      "anchors": [
+        "knadh/listmonk",
+        "TryGhost/Ghost"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U29",
+      "group": "horizontal_product",
+      "slug": "community-membership",
+      "name": "Community and membership",
+      "inclusion_criterion": "Members, roles, spaces, discussions, moderation and paid access form the product.",
+      "anchors": [
+        "discourse/discourse",
+        "NodeBB/NodeBB",
+        "forem/forem"
+      ],
+      "evidence_basis": [
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U30",
+      "group": "horizontal_product",
+      "slug": "customer-success",
+      "name": "Customer success and account health",
+      "inclusion_criterion": "Accounts, onboarding, health signals, renewals, playbooks and outcomes form a post-sale lifecycle.",
+      "anchors": [
+        "twentyhq/twenty"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U31",
+      "group": "horizontal_product",
+      "slug": "feedback-roadmap",
+      "name": "Customer feedback and product roadmap",
+      "inclusion_criterion": "Feedback, voters, themes, prioritization, roadmap and release loop form the product.",
+      "anchors": [
+        "getfider/fider",
+        "logchimp/logchimp",
+        "makeplane/plane"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U32",
+      "group": "horizontal_product",
+      "slug": "website-cms-builder",
+      "name": "Website, CMS and site builder",
+      "inclusion_criterion": "Pages, navigation, content models, publishing, themes and domains form a managed product surface.",
+      "anchors": [
+        "WordPress/wordpress-develop",
+        "strapi/strapi",
+        "payloadcms/payload"
+      ],
+      "evidence_basis": [
+        "72-ideas",
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U33",
+      "group": "horizontal_product",
+      "slug": "data-admin-platform",
+      "name": "Data and internal admin platform",
+      "inclusion_criterion": "Typed records, relations, views, permissions and internal CRUD workflows form a general substrate.",
+      "anchors": [
+        "Budibase/budibase",
+        "ToolJet/ToolJet",
+        "teableio/teable"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U34",
+      "group": "horizontal_product",
+      "slug": "itsm-cmdb",
+      "name": "ITSM, service catalogue and CMDB",
+      "inclusion_criterion": "Incidents, requests, changes, problems, services, configuration items and SLAs form an ITIL lifecycle.",
+      "anchors": [
+        "glpi-project/glpi",
+        "RotherOSS/otobo",
+        "edmozley/freeitsm"
+      ],
+      "evidence_basis": [
+        "17-industries",
+        "live-github"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U35",
+      "group": "horizontal_product",
+      "slug": "asset-cmms",
+      "name": "Asset, maintenance and CMMS",
+      "inclusion_criterion": "Assets, custody, work orders, inspections, maintenance plans and history form the product.",
+      "anchors": [
+        "snipe/snipe-it",
+        "SuperCMMS/Open-Source-CMMS",
+        "Shelf-nu/shelf.nu"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U36",
+      "group": "horizontal_product",
+      "slug": "observability-incident",
+      "name": "Observability, incident and on-call",
+      "inclusion_criterion": "Signals, alerts, incidents, responders, runbooks, status and postmortems form an operational lifecycle.",
+      "anchors": [
+        "OneUptime/oneuptime",
+        "grafana/oncall",
+        "netdata/netdata"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "Sprint-1-P14"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U37",
+      "group": "horizontal_product",
+      "slug": "voice-contact-center",
+      "name": "Voice, contact centre and AI receptionist",
+      "inclusion_criterion": "Numbers, queues, calls, routing, recordings, dispositions and handoff state form the product.",
+      "anchors": [
+        "fonoster/fonoster",
+        "wazo-platform/wazo-platform",
+        "ictinnovations/ictcore"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U38",
+      "group": "horizontal_product",
+      "slug": "digital-asset-media",
+      "name": "Digital asset and media production management",
+      "inclusion_criterion": "Media identity, metadata, renditions, approvals, rights notes and distribution form the product.",
+      "anchors": [
+        "pimcore/pimcore",
+        "ResourceSpace/ResourceSpace",
+        "phraseanet/phraseanet"
+      ],
+      "evidence_basis": [
+        "72-ideas"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U39",
+      "group": "shared_capability",
+      "slug": "identity-authorization",
+      "name": "Identity, tenancy and authorization",
+      "inclusion_criterion": "Authentication, sessions, organizations, roles and policy are supplied through a host-owned authority boundary.",
+      "anchors": [
+        "keycloak/keycloak",
+        "better-auth/better-auth",
+        "ory/kratos"
+      ],
+      "evidence_basis": [
+        "P03",
+        "Sprint-2-P04"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U40",
+      "group": "shared_capability",
+      "slug": "relational-data",
+      "name": "Relational data capability",
+      "inclusion_criterion": "Owned transactional data binds through typed resources while preserving one migration owner.",
+      "anchors": [
+        "supabase/supabase",
+        "appwrite/appwrite",
+        "pocketbase/pocketbase"
+      ],
+      "evidence_basis": [
+        "P03",
+        "master-synthesis"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U41",
+      "group": "shared_capability",
+      "slug": "object-file-storage",
+      "name": "Object and file storage capability",
+      "inclusion_criterion": "Files, metadata, access, versions and retention bind without forcing a document product.",
+      "anchors": [
+        "minio/minio",
+        "owncloud/ocis"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U42",
+      "group": "shared_capability",
+      "slug": "search-retrieval",
+      "name": "Search and retrieval engine",
+      "inclusion_criterion": "Indexing, filtering, ranking and retrieval are supplied behind a typed search port.",
+      "anchors": [
+        "meilisearch/meilisearch",
+        "opensearch-project/OpenSearch",
+        "typesense/typesense"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U43",
+      "group": "shared_capability",
+      "slug": "notifications-delivery",
+      "name": "Notification delivery",
+      "inclusion_criterion": "Templates, preferences, routing, delivery and receipts are reusable beneath multiple products.",
+      "anchors": [
+        "novuhq/novu",
+        "knadh/listmonk"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U44",
+      "group": "shared_capability",
+      "slug": "payments",
+      "name": "Payments and money movement",
+      "inclusion_criterion": "Payment intents, methods, settlement events, refunds and disputes stay behind explicit financial authority.",
+      "anchors": [
+        "juspay/hyperswitch",
+        "solidusio/solidus"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U45",
+      "group": "shared_capability",
+      "slug": "connector-catalogue",
+      "name": "Connector and OAuth catalogue",
+      "inclusion_criterion": "Provider schemas, credentials, actions and triggers are reusable while tenant connection ownership remains host-owned.",
+      "anchors": [
+        "activepieces/activepieces",
+        "nangoHQ/nango",
+        "openintegrationhub/openintegrationhub"
+      ],
+      "evidence_basis": [
+        "P03",
+        "connector-spike"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U46",
+      "group": "shared_capability",
+      "slug": "workflow-engine",
+      "name": "Workflow, rules and orchestration engine",
+      "inclusion_criterion": "State machines, timers, jobs and human tasks are reusable beneath product-specific surfaces.",
+      "anchors": [
+        "flowable/flowable-engine",
+        "kestra-io/kestra",
+        "temporalio/temporal"
+      ],
+      "evidence_basis": [
+        "P03-corrected",
+        "Sprint-2-P04"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U47",
+      "group": "shared_capability",
+      "slug": "analytics-bi",
+      "name": "Analytics and BI engine",
+      "inclusion_criterion": "Semantic models, queries, dashboards and embedded visualisation bind beneath products.",
+      "anchors": [
+        "apache/superset",
+        "metabase/metabase",
+        "cube-js/cube"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U48",
+      "group": "shared_capability",
+      "slug": "document-generation",
+      "name": "Document and PDF generation",
+      "inclusion_criterion": "Templates, merge data, rendering and immutable output receipts form a reusable capability.",
+      "anchors": [
+        "CarboneIO/carbone",
+        "gotenberg/gotenberg",
+        "bpampuch/pdfmake"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U49",
+      "group": "shared_capability",
+      "slug": "ocr-extraction",
+      "name": "OCR and document extraction",
+      "inclusion_criterion": "Capture, OCR, layout parsing, structured extraction and provenance form a reusable pipeline.",
+      "anchors": [
+        "Unstructured-IO/unstructured",
+        "PaddlePaddle/PaddleOCR",
+        "docling-project/docling"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U50",
+      "group": "shared_capability",
+      "slug": "realtime-communications",
+      "name": "Realtime chat and collaboration",
+      "inclusion_criterion": "Channels, presence, messages, threads and delivery state can bind beneath several products.",
+      "anchors": [
+        "zulip/zulip",
+        "mattermost/mattermost",
+        "RocketChat/Rocket.Chat"
+      ],
+      "evidence_basis": [
+        "P03"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U51",
+      "group": "shared_capability",
+      "slug": "maps-routing",
+      "name": "Maps, geospatial and routing",
+      "inclusion_criterion": "Places, geometries, routes, travel time and geospatial views form a shared capability for field products.",
+      "anchors": [
+        "project-osrm/osrm-backend",
+        "valhalla/valhalla",
+        "maplibre/maplibre-gl-js"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U52",
+      "group": "shared_capability",
+      "slug": "rpa-browser-automation",
+      "name": "RPA and browser automation",
+      "inclusion_criterion": "Observed UI workflows, credentials, retries and audit receipts provide a fallback where APIs are absent.",
+      "anchors": [
+        "Skyvern-AI/skyvern",
+        "browser-use/browser-use",
+        "aisingapore/TagUI"
+      ],
+      "evidence_basis": [
+        "66-use-cases",
+        "live-github"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U53",
+      "group": "shared_capability",
+      "slug": "ai-assistant-rag",
+      "name": "AI assistant and grounded retrieval",
+      "inclusion_criterion": "Model routing, retrieval, citations, tool bounds and conversation state form a reusable host capability.",
+      "anchors": [
+        "open-webui/open-webui",
+        "langgenius/dify",
+        "FlowiseAI/Flowise"
+      ],
+      "evidence_basis": [
+        "66-use-cases"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U54",
+      "group": "vertical_operating_system",
+      "slug": "accounting-practice",
+      "name": "Accounting practice operations",
+      "inclusion_criterion": "Clients, engagements, close checklists, evidence requests, reconciliation and partner review are linked.",
+      "anchors": [
+        "frappe/erpnext",
+        "bigcapitalhq/bigcapital"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U55",
+      "group": "vertical_operating_system",
+      "slug": "construction-operations",
+      "name": "Construction operations",
+      "inclusion_criterion": "Jobs, schedules, RFIs, change orders, subcontractors, progress claims and site evidence form the core.",
+      "anchors": [
+        "opf/openproject"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U56",
+      "group": "vertical_operating_system",
+      "slug": "healthcare-practice",
+      "name": "Healthcare practice management",
+      "inclusion_criterion": "Patients, appointments, encounters, clinical records, billing and consent form a governed system.",
+      "anchors": [
+        "openemr/openemr",
+        "Bahmni/bahmni-core",
+        "medplum/medplum"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U57",
+      "group": "vertical_operating_system",
+      "slug": "hospitality-pms",
+      "name": "Hospitality property management system",
+      "inclusion_criterion": "Reservations, rooms, stays, housekeeping, rates, night audit and guest issues form the product.",
+      "anchors": [
+        "Qloapps/QloApps",
+        "peeraseepat-cell/open-hotel-pms"
+      ],
+      "evidence_basis": [
+        "17-industries",
+        "live-github"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U58",
+      "group": "vertical_operating_system",
+      "slug": "msp-operations",
+      "name": "MSP service operations",
+      "inclusion_criterion": "Client tenancy, tickets, assets, monitoring, backups, agreements and privileged handoffs form one operating model.",
+      "anchors": [
+        "glpi-project/glpi",
+        "RotherOSS/otobo"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U59",
+      "group": "vertical_operating_system",
+      "slug": "insurance-operations",
+      "name": "Insurance agency, policy and claims operations",
+      "inclusion_criterion": "Parties, policies, coverages, claims, evidence, renewals and regulated decisions form the core.",
+      "anchors": [
+        "openimis/openimis-be_py"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U60",
+      "group": "vertical_operating_system",
+      "slug": "legal-practice",
+      "name": "Legal practice and matter management",
+      "inclusion_criterion": "Clients, conflicts, matters, time, documents, deadlines, trust boundaries and billing form the system.",
+      "anchors": [
+        "ArkCase/arkcase-ce"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U61",
+      "group": "vertical_operating_system",
+      "slug": "logistics-fleet",
+      "name": "Logistics, TMS and fleet operations",
+      "inclusion_criterion": "Loads, shipments, carriers, stops, tracking events, POD, fleet and exceptions form the product.",
+      "anchors": [
+        "openboxes/openboxes",
+        "traccar/traccar"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U62",
+      "group": "vertical_operating_system",
+      "slug": "mortgage-los",
+      "name": "Mortgage and loan origination",
+      "inclusion_criterion": "Applicants, applications, products, conditions, documents, underwriting and closing form a governed lifecycle.",
+      "anchors": [
+        "apache/fineract"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U63",
+      "group": "vertical_operating_system",
+      "slug": "property-management",
+      "name": "Property and tenancy management",
+      "inclusion_criterion": "Properties, units, tenants, leases, rent, work orders, vendors and inspections form the product.",
+      "anchors": [
+        "microrealestate/microrealestate",
+        "open-condo-software/condo"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U64",
+      "group": "vertical_operating_system",
+      "slug": "real-estate-brokerage",
+      "name": "Real-estate brokerage and listings",
+      "inclusion_criterion": "Properties, listings, leads, viewings, offers, agents and documents form a specialised sales system.",
+      "anchors": [
+        "etewiah/property_web_builder"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U65",
+      "group": "vertical_operating_system",
+      "slug": "staffing-agency",
+      "name": "Staffing and recruiting agency operations",
+      "inclusion_criterion": "Candidates, clients, jobs, submissions, placements, timesheets and commissions exceed a generic ATS.",
+      "anchors": [
+        "opencats/OpenCATS"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "thin_or_missing"
+    },
+    {
+      "id": "U66",
+      "group": "vertical_operating_system",
+      "slug": "field-service",
+      "name": "Field service management",
+      "inclusion_criterion": "Customers, assets, jobs, dispatch, technicians, parts, offline evidence and completion form the product.",
+      "anchors": [
+        "odoo/odoo",
+        "frappe/erpnext"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U67",
+      "group": "vertical_operating_system",
+      "slug": "education-sis",
+      "name": "Education administration and SIS",
+      "inclusion_criterion": "Learners, guardians, courses, enrollment, attendance, grades and credentials form institutional authority.",
+      "anchors": [
+        "GibbonEdu/core",
+        "frappe/education"
+      ],
+      "evidence_basis": [
+        "17-industries"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    },
+    {
+      "id": "U68",
+      "group": "vertical_operating_system",
+      "slug": "restaurant-pos",
+      "name": "Restaurant, reservation and POS operations",
+      "inclusion_criterion": "Menus, tables, reservations, orders, kitchen state, payments and shifts form a vertical system.",
+      "anchors": [
+        "tastyigniter/TastyIgniter",
+        "opensourcepos/opensourcepos"
+      ],
+      "evidence_basis": [
+        "72-ideas",
+        "hospitality-adjacent"
+      ],
+      "coverage_status": "seeded_not_qualified"
+    }
+  ],
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_bases": 0
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "$schema": "actionist.repository-topology-manifest.v1",
+  "schema_version": "actionist.repository-topology-manifest.v1",
+  "manifest_id": "actionist.repository-topology.2026-08-28",
+  "observed_at": "2026-08-28",
+  "status": "research_only",
+  "scope": "read-only repository topology and publication planning",
+  "source_of_truth": [
+    "research/agent-zero/2026-08-28-repository-topology/ORIGINAL-PROMPT.md",
+    "research/agent-zero/2026-08-28-repository-topology/DISPATCH.md"
+  ],
+  "policy": {
+    "existing_repositories_are_observed": true,
+    "proposed_repositories_are_not_created": true,
+    "remote_mutation_performed": false,
+    "publication_performed": false,
+    "submodules_recommended": false,
+    "absolute_machine_paths_allowed": false,
+    "credentials_or_raw_client_data_allowed": false
+  },
+  "repositories": [
+    {
+      "repository_id": "actionist.client-index",
+      "kind": "repository",
+      "state": "existing",
+      "locator": {
+        "url": "https://github.com/Sinamun/Actionist-AppSDK",
+        "owner_account": "Sinamun",
+        "default_branch": "main",
+        "observed_branch": "research/actionmodel-snapshot-20260827",
+        "observed_revision": "87dbfc544da022c958ef2838483ca4bf97cad200",
+        "visibility_observed": "private",
+        "visibility_recommendation": "client_private"
+      },
+      "ownership": {
+        "account_observed": "Sinamun",
+        "ownership_status": "observed_account",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Confirm Sina's index/control-plane ownership and allowed change surface."
+      },
+      "purpose": "Client-facing Actionist index and control-plane projection.",
+      "source_paths": [
+        {"path": "Actionist-AppSDK/knowledge/", "locality": "workspace", "evidence_class": "observed", "role": "canonical snapshot knowledge"},
+        {"path": "Actionist-AppSDK/SNAPSHOT-MANIFEST.md", "locality": "workspace", "evidence_class": "observed", "role": "snapshot inclusion/exclusion boundary"},
+        {"path": "Actionist-AppSDK/site/", "locality": "workspace", "evidence_class": "observed", "role": "static projection"}
+      ],
+      "artifact_classes": ["client-facing-index", "documentation", "generated-projection", "join-pointers"],
+      "upstream_links": ["siso.great-library", "siso.foundry", "siso.ui-base"],
+      "downstream_links": ["actionist.framework-registry", "actionist.block-registry", "actionist.block.teable", "actionist.block.affine", "actionist.ui-corpus-data-plane"],
+      "relationships": [
+        {"target": "siso.great-library", "kind": "indexes"},
+        {"target": "siso.foundry", "kind": "links_to"},
+        {"target": "siso.ui-base", "kind": "links_to"},
+        {"target": "actionist.framework-registry", "kind": "projects"},
+        {"target": "actionist.block-registry", "kind": "projects"},
+        {"target": "actionist.block.teable", "kind": "indexes"},
+        {"target": "actionist.block.affine", "kind": "indexes"},
+        {"target": "actionist.ui-corpus-data-plane", "kind": "indexes"}
+      ],
+      "publication_method": {
+        "mode": "client_approved_index_commit",
+        "release_unit": "small index projection with immutable artifact pointers",
+        "current_lane_action": "read_only_no_change"
+      },
+      "lifecycle": {
+        "current": "observed_snapshot",
+        "next": "owner-approved index contract adoption",
+        "release_cadence": "client-controlled"
+      },
+      "exclusions": ["SISO monorepo source", "raw client communications", "credentials", "machine-local runtime state", "multi-gigabyte corpus payloads"]
+    },
+    {
+      "repository_id": "siso.great-library",
+      "kind": "repository",
+      "state": "existing",
+      "locator": {
+        "url": "https://github.com/sisodias/great-library-of-siso",
+        "owner_account": "sisodias",
+        "default_branch": "main",
+        "observed_revision": "4ce8da029c90e272e3fe26374c1fb4d2d5c5c86e",
+        "visibility_observed": "public",
+        "visibility_recommendation": "public"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "observed_account",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Use existing Work/Release/Snapshot workflow for any future publication."
+      },
+      "purpose": "Public identity, lineage, release, snapshot, assembly and source-inventory catalogue.",
+      "source_paths": [
+        {"path": "SISO_Workspace/Great_Library_of_SISO/README.md", "locality": "sibling_workspace", "evidence_class": "observed", "role": "registry model"},
+        {"path": "SISO_Workspace/Great_Library_of_SISO/schemas/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "record contracts"},
+        {"path": "SISO_Workspace/Great_Library_of_SISO/registry/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "accepted public records"}
+      ],
+      "artifact_classes": ["work-registry", "release-registry", "snapshot-registry", "assembly-registry", "source-inventory"],
+      "upstream_links": [],
+      "downstream_links": ["actionist.client-index", "actionist.framework-registry", "actionist.block-registry", "actionist.block.teable", "actionist.block.affine", "siso.ui-base"],
+      "relationships": [
+        {"target": "actionist.client-index", "kind": "publishes_to"},
+        {"target": "actionist.framework-registry", "kind": "releases"},
+        {"target": "actionist.block-registry", "kind": "releases"},
+        {"target": "actionist.block.teable", "kind": "releases"},
+        {"target": "actionist.block.affine", "kind": "releases"},
+        {"target": "siso.ui-base", "kind": "catalogues"}
+      ],
+      "publication_method": {
+        "mode": "work_release_snapshot",
+        "release_unit": "immutable Release with exact locator/revision/license/integrity",
+        "current_lane_action": "read_only_no_change"
+      },
+      "lifecycle": {
+        "current": "public_registry",
+        "next": "future authorized Work/Release/Snapshot joins",
+        "release_cadence": "registry-controlled"
+      },
+      "exclusions": ["private payloads", "credentials", "raw client data", "unverified source redistribution"]
+    },
+    {
+      "repository_id": "siso.foundry",
+      "kind": "repository",
+      "state": "existing",
+      "locator": {
+        "url": "https://github.com/sisodias/siso-foundry",
+        "owner_account": "sisodias",
+        "default_branch": "main",
+        "observed_revision": "6cf02e0fb4611ffbeebf9f4c4967626a662b14ef",
+        "visibility_observed": "public",
+        "visibility_recommendation": "public"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "observed_account",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Keep raw Foundry data in its separately authorized external data plane."
+      },
+      "purpose": "Source discovery, provenance, ranking and evidence transformation engine.",
+      "source_paths": [
+        {"path": "remote:README.md", "locality": "remote", "evidence_class": "observed", "role": "engine boundary"},
+        {"path": "remote:PROVENANCE.md", "locality": "remote", "evidence_class": "observed", "role": "Git versus FOUNDRY_DATA boundary"}
+      ],
+      "artifact_classes": ["source-code", "contracts", "schemas", "small-fixtures", "provenance"],
+      "upstream_links": ["siso.foundry-data-plane"],
+      "downstream_links": ["actionist.client-index", "actionist.framework-registry", "actionist.block-registry", "siso.foundry-data-plane"],
+      "relationships": [
+        {"target": "siso.foundry-data-plane", "kind": "generated_from"},
+        {"target": "actionist.client-index", "kind": "links_to"},
+        {"target": "actionist.framework-registry", "kind": "feeds"},
+        {"target": "actionist.block-registry", "kind": "feeds"}
+      ],
+      "publication_method": {
+        "mode": "source_repository_plus_data_manifest",
+        "release_unit": "source release; external data manifest for large observations",
+        "current_lane_action": "read_only_no_change"
+      },
+      "lifecycle": {
+        "current": "public_engine",
+        "next": "reconcile Great Library locator/release metadata",
+        "release_cadence": "engine-controlled"
+      },
+      "exclusions": ["raw databases", "transcripts", "generated browsers", "caches", "run artifacts"]
+    },
+    {
+      "repository_id": "siso.ui-base",
+      "kind": "repository",
+      "state": "existing",
+      "locator": {
+        "url": "https://github.com/sisodias/siso-ui-base",
+        "owner_account": "sisodias",
+        "default_branch": "main",
+        "observed_revision": "24b85423220dd5b3730975155f89b4558f1859c3",
+        "visibility_observed": "private",
+        "visibility_recommendation": "private"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "observed_account",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Resolve candidate Work, rights and corpus publication route before exposing metadata."
+      },
+      "purpose": "Private UI engine/core, design grammar and compact corpus indexes.",
+      "source_paths": [
+        {"path": "SISO_Workspace/siso-ui-base/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "engine checkout"},
+        {"path": "SISO_Workspace/siso-ui-base/registry/21st/catalog.json", "locality": "sibling_workspace", "evidence_class": "observed", "role": "compact corpus index"},
+        {"path": "SISO_Workspace/siso-ui-base/registry/21st/harvest/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "large local corpus staging"}
+      ],
+      "artifact_classes": ["source-code", "design-tokens", "compact-index", "corpus-manifest", "private-engine"],
+      "upstream_links": ["siso.design-system", "actionist.ui-corpus-data-plane"],
+      "downstream_links": ["actionist.client-index", "siso.great-library", "actionist.ui-corpus-data-plane"],
+      "relationships": [
+        {"target": "siso.design-system", "kind": "references"},
+        {"target": "actionist.ui-corpus-data-plane", "kind": "materializes"},
+        {"target": "actionist.client-index", "kind": "indexed_by"},
+        {"target": "siso.great-library", "kind": "candidate_for"}
+      ],
+      "publication_method": {
+        "mode": "private_source_release_plus_external_data_manifest",
+        "release_unit": "engine source release; corpus shard manifests outside ordinary Git",
+        "current_lane_action": "read_only_no_change"
+      },
+      "lifecycle": {
+        "current": "private_candidate_engine",
+        "next": "separate engine release from corpus rights decision",
+        "release_cadence": "engine/corpus independently versioned"
+      },
+      "exclusions": ["3.0G harvest payloads in ordinary Git", "unreviewed third-party source", "machine-local paths", "private client material"]
+    },
+    {
+      "repository_id": "siso.design-system",
+      "kind": "repository",
+      "state": "existing_candidate",
+      "locator": {
+        "url": "https://github.com/sisodias/siso-design-system",
+        "owner_account": "sisodias",
+        "default_branch": "main",
+        "observed_revision": "2bd4ad0646c92633efcb1ee84b28d7122139bcd0",
+        "visibility_observed": "public",
+        "visibility_recommendation": "public_after_review"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "observed_account",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Review license/provenance before making it the home of any promoted implementation."
+      },
+      "purpose": "Candidate public home for sanitized first-party design-system implementations.",
+      "source_paths": [
+        {"path": "remote:README.md", "locality": "remote", "evidence_class": "observed", "role": "component-bank description"},
+        {"path": "remote:PROVENANCE.md", "locality": "remote", "evidence_class": "observed", "role": "source/provenance boundary"}
+      ],
+      "artifact_classes": ["design-tokens", "primitives", "composites", "systems", "adapters", "provenance"],
+      "upstream_links": ["siso.ui-base"],
+      "downstream_links": ["siso.ui-base", "actionist.client-index"],
+      "relationships": [
+        {"target": "siso.ui-base", "kind": "candidate_source"},
+        {"target": "actionist.client-index", "kind": "links_to"}
+      ],
+      "publication_method": {
+        "mode": "public_source_release_after_provenance_review",
+        "release_unit": "sanitized first-party source release",
+        "current_lane_action": "read_only_no_change"
+      },
+      "lifecycle": {
+        "current": "public_candidate_no_license_observed",
+        "next": "rights/provenance review",
+        "release_cadence": "independent"
+      },
+      "exclusions": ["unreviewed 21st payloads", "client-private material", "machine-local source paths"]
+    },
+    {
+      "repository_id": "actionist.framework-registry",
+      "kind": "repository",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "public_after_review"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Approve name, owner and public scrub boundary before creation."
+      },
+      "purpose": "Small public-after-review registry of framework methods, schemas, dependency graph and verifier.",
+      "source_paths": [
+        {"path": "knowledge/frameworks/", "locality": "workspace", "evidence_class": "observed", "role": "current canonical framework records"},
+        {"path": "site/system-map/task-graph/frameworks/", "locality": "workspace", "evidence_class": "observed", "role": "current generated local projection"}
+      ],
+      "artifact_classes": ["framework-records", "schemas", "dependency-graph", "value-matrix", "verifier", "generated-metadata"],
+      "upstream_links": ["actionist.client-index", "siso.foundry"],
+      "downstream_links": ["siso.great-library", "actionist.client-index"],
+      "relationships": [
+        {"target": "actionist.client-index", "kind": "indexed_by"},
+        {"target": "siso.foundry", "kind": "uses"},
+        {"target": "siso.great-library", "kind": "candidate_for"}
+      ],
+      "publication_method": {
+        "mode": "future_source_release_plus_registry_metadata",
+        "release_unit": "small registry source/release",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "local_research_only",
+        "next": "owner-approved extraction and scrub",
+        "release_cadence": "framework-controlled"
+      },
+      "exclusions": ["client context", "raw evidence payloads", "absolute machine paths", "donor source"]
+    },
+    {
+      "repository_id": "actionist.block-registry",
+      "kind": "repository",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "public_after_review"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Approve schema owner and public/private metadata boundary before creation."
+      },
+      "purpose": "Small registry of block identities, seven linked contract records, lifecycle, qualification and release pointers.",
+      "source_paths": [
+        {"path": "knowledge/block-hub/", "locality": "workspace", "evidence_class": "observed", "role": "current block and recipe records"},
+        {"path": "blocks/teable-data-grid/", "locality": "workspace", "evidence_class": "observed", "role": "Teable prototype contract"},
+        {"path": "blocks/affine-workspace/", "locality": "workspace", "evidence_class": "observed", "role": "AFFiNE prototype contract"}
+      ],
+      "artifact_classes": ["block-records", "contract-pointers", "qualification-receipts", "release-pointers", "lifecycle-metadata"],
+      "upstream_links": ["actionist.client-index", "siso.foundry"],
+      "downstream_links": ["siso.great-library", "actionist.block.teable", "actionist.block.affine", "actionist.client-index"],
+      "relationships": [
+        {"target": "actionist.client-index", "kind": "indexed_by"},
+        {"target": "siso.foundry", "kind": "candidate_input"},
+        {"target": "siso.great-library", "kind": "candidate_for"},
+        {"target": "actionist.block.teable", "kind": "describes"},
+        {"target": "actionist.block.affine", "kind": "describes"}
+      ],
+      "publication_method": {
+        "mode": "future_registry_metadata_release",
+        "release_unit": "small metadata release; no donor source or client data",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "local_research_and_prototype_only",
+        "next": "owner-approved extraction after qualification boundaries are clear",
+        "release_cadence": "block-registry-controlled"
+      },
+      "exclusions": ["donor source", "client data", "runtime payloads", "unqualified admission claims"]
+    },
+    {
+      "repository_id": "actionist.block.teable",
+      "kind": "repository",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "private_until_cleared"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Complete Teable rights, host, tenancy, runtime, rollback and admission gates."
+      },
+      "purpose": "Independent Teable intact-service/proxy implementation boundary if qualified.",
+      "source_paths": [
+        {"path": "blocks/teable-data-grid/", "locality": "workspace", "evidence_class": "observed", "role": "local prototype"},
+        {"path": "research/workstreams/2026-08-28-teable-block/", "locality": "workspace", "evidence_class": "observed", "role": "qualification/runbook evidence"},
+        {"path": "remote:https://github.com/sisodias/teable", "locality": "remote", "evidence_class": "observed", "role": "donor locator"}
+      ],
+      "artifact_classes": ["host-adapter", "sidecar-service", "typed-binding", "qualification-receipts", "release-manifest"],
+      "upstream_links": ["actionist.block-registry", "siso.great-library"],
+      "downstream_links": ["actionist.client-index", "siso.great-library"],
+      "relationships": [
+        {"target": "actionist.block-registry", "kind": "registered_by"},
+        {"target": "siso.great-library", "kind": "candidate_for"},
+        {"target": "actionist.client-index", "kind": "indexed_by"}
+      ],
+      "publication_method": {
+        "mode": "future_independent_source_runtime_release",
+        "release_unit": "Teable-specific source/runtime release plus seven-record dossier",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "prototype_not_admitted",
+        "next": "qualification and rights review",
+        "release_cadence": "independent_block"
+      },
+      "exclusions": ["copied donor source", "client data", "credentials", "deployment", "admission claim before proof"]
+    },
+    {
+      "repository_id": "actionist.block.affine",
+      "kind": "repository",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "private_until_cleared"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Clear AFFiNE theme, settings, upgrade, density and cross-environment holds."
+      },
+      "purpose": "Independent AFFiNE cross-origin iframe/sidecar host-adapter boundary if qualified.",
+      "source_paths": [
+        {"path": "blocks/affine-workspace/", "locality": "workspace", "evidence_class": "observed", "role": "local synthetic prototype"},
+        {"path": "research/workstreams/2026-08-28-affine-block/", "locality": "workspace", "evidence_class": "observed", "role": "qualification/runbook evidence"},
+        {"path": "remote:https://github.com/toeverything/AFFiNE", "locality": "remote", "evidence_class": "observed", "role": "donor locator"}
+      ],
+      "artifact_classes": ["host-adapter", "iframe-binding", "typed-binding", "qualification-receipts", "release-manifest"],
+      "upstream_links": ["actionist.block-registry", "siso.great-library"],
+      "downstream_links": ["actionist.client-index", "siso.great-library"],
+      "relationships": [
+        {"target": "actionist.block-registry", "kind": "registered_by"},
+        {"target": "siso.great-library", "kind": "candidate_for"},
+        {"target": "actionist.client-index", "kind": "indexed_by"}
+      ],
+      "publication_method": {
+        "mode": "future_independent_adapter_runtime_release",
+        "release_unit": "AFFiNE-specific adapter/runtime release plus seven-record dossier",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "LOCAL_SYNTHETIC_ONLY_NOT_ADMITTED",
+        "next": "clear holds and qualify",
+        "release_cadence": "independent_block"
+      },
+      "exclusions": ["copied donor source", "client data", "credentials", "deployment", "admission claim before proof"]
+    },
+    {
+      "repository_id": "actionist.ui-corpus-data-plane",
+      "kind": "object_store",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "private"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Choose provider, authorization, retention and recovery policy."
+      },
+      "purpose": "Private content-addressed store for 21st harvest/bundles/previews/extras and rights-held corpus shards.",
+      "source_paths": [
+        {"path": "SISO_Workspace/siso-ui-base/registry/21st/harvest/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "3.0G local corpus"},
+        {"path": "SISO_Workspace/siso-ui-base/registry/21st/previews/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "preview payloads"},
+        {"path": "SISO_Workspace/siso-ui-base/registry/21st/extras/", "locality": "sibling_workspace", "evidence_class": "observed", "role": "extra payloads"}
+      ],
+      "artifact_classes": ["object-shards", "corpus-manifest", "compiled-reference", "preview-payload", "rights-quarantine"],
+      "upstream_links": ["siso.ui-base", "siso.design-system"],
+      "downstream_links": ["actionist.client-index", "siso.great-library"],
+      "relationships": [
+        {"target": "siso.ui-base", "kind": "materializes"},
+        {"target": "siso.design-system", "kind": "candidate_source"},
+        {"target": "actionist.client-index", "kind": "indexed_by"},
+        {"target": "siso.great-library", "kind": "metadata_receipt_for"}
+      ],
+      "publication_method": {
+        "mode": "private_object_manifest_and_shards",
+        "release_unit": "content digest manifest plus independently retrievable object shards",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "local_staging_rights_hold",
+        "next": "authorized data-plane design and rights review",
+        "release_cadence": "corpus-versioned"
+      },
+      "exclusions": ["ordinary Git payloads", "unreviewed redistribution", "machine-local paths in public metadata", "client-private material"]
+    },
+    {
+      "repository_id": "siso.foundry-data-plane",
+      "kind": "object_store",
+      "state": "proposed",
+      "locator": {
+        "url": null,
+        "owner_account": "sisodias",
+        "default_branch": null,
+        "observed_revision": null,
+        "visibility_observed": "not_created",
+        "visibility_recommendation": "private"
+      },
+      "ownership": {
+        "account_observed": "sisodias",
+        "ownership_status": "proposed_siso_owned",
+        "legal_ownership_status": "unknown",
+        "operator_action_required": "Use the Foundry FOUNDRY_DATA boundary and define a manifest/recovery route."
+      },
+      "purpose": "External data plane for Foundry databases, raw observations, transcripts, generated browsers, caches and run artifacts.",
+      "source_paths": [
+        {"path": "remote:FOUNDRY_DATA", "locality": "remote", "evidence_class": "observed", "role": "documented Foundry external-data boundary"}
+      ],
+      "artifact_classes": ["raw-observations", "database", "transcript", "generated-browser", "cache", "run-artifact"],
+      "upstream_links": ["siso.foundry"],
+      "downstream_links": ["actionist.client-index"],
+      "relationships": [
+        {"target": "siso.foundry", "kind": "data_plane_for"},
+        {"target": "actionist.client-index", "kind": "manifest_pointer"}
+      ],
+      "publication_method": {
+        "mode": "private_data_manifest",
+        "release_unit": "manifest/digest receipt; payload authorization separate",
+        "current_lane_action": "proposal_only"
+      },
+      "lifecycle": {
+        "current": "documented_external_boundary_not_located",
+        "next": "operator-authorized provider and retention design",
+        "release_cadence": "run/corpus-versioned"
+      },
+      "exclusions": ["regular Git history", "public raw observations", "credentials", "unbounded generated caches"]
+    }
+  ]
+}

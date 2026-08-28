@@ -1,0 +1,107 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P11",
+  "part_title": "Connector and external-action plane",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "lane": "S1-L4",
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "note": "The 27 Aug OpenConnector spike was EXECUTED_CLEANED under prior authorization; nothing was executed in this run"
+  },
+  "decision_table_component_ownership": {
+    "note": "Four separate governed components. The adopt/own split is the core P11 decision.",
+    "rows": [
+      {
+        "component": "provider_catalogue",
+        "disposition": "adopt",
+        "source": "OpenConnector Apache-2.0",
+        "receipt": "1,445 provider dirs verified in-repo via git trees API; local generator produced 1,445 providers and 15,156 actions from source with no network",
+        "second_source": "Activepieces MIT public catalogue API (761 pieces) and jentic CC0 (4,140 vendor OpenAPI specs) as complementary breadth",
+        "rationale": "Largest verified in-repo catalogue with no proprietary shell; forkable at 39.5MB if the vendor relicenses",
+        "risk": "Created 2026-06-29, vendor-controlled, commercial hosted product behind it. Apache-2.0 binds only future versions.",
+        "confidence": "observed"
+      },
+      {
+        "component": "oauth_credential_runtime",
+        "disposition": "adopt_as_library",
+        "source": "OpenConnector src/oauth/* and src/providers/*",
+        "receipt": "Correct Google Drive authorization URL generated with access_type=offline and encrypted state; real AES-256-GCM; fake token rejected by live verification before persistence",
+        "rationale": "The genuinely hard, well-tested part. Routes are thin over the modules, so the seam is realistic rather than wishful.",
+        "caveat": "Callback completion and refresh untested (needs an operator-owned OAuth app). Activepieces' equivalent MIT files import across the ee/ boundary, so reimplement ~200 lines rather than vendoring.",
+        "confidence": "observed_at_spike_level"
+      },
+      {
+        "component": "tenant_connection_store",
+        "disposition": "own_build",
+        "rationale": "Demonstrated unfit, not inferred: flat (service, connection_name) primary key with no tenant column, one global OAuth app per service, hardcoded key salt, silent plaintext degradation without the env key, two named tenants' connections returned together under one admin token",
+        "requirements": ["tenant key from the first migration", "per-tenant key derivation", "stable externalId as the reference", "envelope encryption with AAD asserting purpose and app"],
+        "confidence": "observed"
+      },
+      {
+        "component": "action_runtime",
+        "disposition": "own_build",
+        "rationale": "Idempotency, retry policy, approval, egress enforcement, receipts and rate limiting have no adoptable supply",
+        "confidence": "observed"
+      }
+    ]
+  },
+  "decision_table_connector_safety": {
+    "rows": [
+      {"concern": "credential_custody", "rule": "The caller passes an identity, never a secret; the broker injects server-side. Generated app code and model context never hold a third-party token.", "supply": "must_build_broker", "evidence": "most consistent finding across the commercial survey; no OSS runs this direction"},
+      {"concern": "tenant_isolation", "rule": "Tenant key on every connection from the first migration, per-tenant key derivation, stable externalId", "supply": "must_build", "evidence": "OpenConnector falsifier"},
+      {"concern": "idempotency", "rule": "Every action declares naturally-idempotent / idempotent-with-key / unsafe; the runtime refuses to auto-retry unsafe. Same key with a different payload is a hard error via request fingerprint. Replay returns the saved status and body with an explicit replay receipt header.", "supply": "no_production_oss_supply", "evidence": "most-starred idempotency-key middleware found is 14 stars; hono-idempotency is a specification to reimplement, not a dependency"},
+      {"concern": "idempotency_reference_contract", "rule": "Stripe is the positive control and the shape to copy", "supply": "documented_externally", "evidence_class": "observed", "source": "docs.stripe.com/api/idempotent_requests + error-low-level#idempotency + rate-limits", "contract": {"supply": "client-generated key in the Idempotency-Key header, up to 255 chars, UUIDv4 or derived from a user-attached object such as a cart ID", "lifetime": "pruned after at least 24 hours; a key reused after pruning generates a NEW request, so replay protection silently lapses rather than erroring", "replay_identical": "status code and body of the first request are saved regardless of success or failure and returned on retry, including cached 500s, with an Idempotent-Replayed: true header as the machine-readable receipt", "replay_different_params": "the layer compares incoming parameters against the original and errors when they differ", "methods": "all POST; GET and DELETE are idempotent by definition and keys have no effect", "concurrency": "HTTP 409 Conflict when two requests share a key", "save_boundary": "results are saved only after endpoint execution begins, so validation failures and concurrent conflicts save nothing and may be retried", "retry_signal": "Stripe-Should-Retry: true|false tells the client whether retrying is worthwhile; absent means undetermined", "five_hundreds": "treat as INDETERMINATE - the cached response will not change but Stripe may reconcile and fire webhooks for objects created during reconciliation, so a cached 500 is not proof nothing happened; mitigation is sending a local identifier in metadata for cross-referencing"}, "critical_caveat": "RATE LIMITERS RUN BEFORE THE IDEMPOTENCY LAYER. A request rate-limited with a 429 can produce a different result with the same idempotency key. The same applies to a 401 with a missing key and most 400s with invalid params. An idempotency key therefore does NOT make a request universally safe to replay - the safety window begins only once the request reaches the API's idempotency layer.", "actionist_consequence": "Actionist's own idempotency layer must sit INSIDE its rate limiter and auth check, not outside, or it inherits exactly this hazard at the host boundary"},
+      {"concern": "retry_backoff", "rule": "Honour Retry-After and observed 429 rates per connector rather than a fixed exponential curve; retry only what idempotency class permits", "supply": "partial", "note": "commercial norm is retry WITHOUT idempotency, i.e. the industry default is the unsafe one"},
+      {"concern": "rate_limiting", "rule": "Per-tenant-per-connector fair share so one tenant cannot exhaust a shared third-party quota", "supply": "gap", "evidence": "good per-process libraries, nothing shaped as per-tenant-per-connector quota"},
+      {"concern": "approval", "rule": "Consent graded by consequence not resource (read / reversible / irreversible-or-financial), defaulting to the middle tier, expressible as a composable workflow step", "supply": "pattern_only", "evidence": "OpenAI's three-tier consent; Workato is the only surface where approval is a workflow step rather than a platform modal"},
+      {"concern": "dry_run", "rule": "First-class action mode returning the exact resolved outbound request with no side effect, on by default, not tenant-disableable", "supply": "pattern_only", "evidence": "Zapier preview_only, the best primitive found; Zapier AI Actions itself is discontinued so study, do not depend"},
+      {"concern": "receipts_audit", "rule": "One queryable per-tenant ledger of every attempt, retry, replay, denial and approval; receipts deliberately exclude payload bodies", "supply": "must_build"},
+      {"concern": "egress_enforcement", "rule": "Allow-list derived from the connector manifest, bound to a proxy that can refuse the call", "supply": "unbuilt", "evidence": "OPA and Cerbos decide, neither enforces; no surveyed project ships the pairing for tool calls"},
+      {"concern": "account_selection", "rule": "When a tenant has multiple accounts for one provider the action must name which", "supply": "must_build", "evidence": "Pipedream silently selects the most-recently-created account, a documented ambient-authority defect class"},
+      {"concern": "browser_runtime_authority", "rule": "Browser connectors are a separate authority class from API connectors", "supply": "hazard", "evidence": "Browserbase Contexts replay cookies and tokens with MFA completed once and reused, a durable bearer blob outside any scope or revocation model, plus ToS exposure from stealth and IP-rotation features"}
+    ]
+  },
+  "build_order": {
+    "note": "Inverted from intuition by the auth-type mix: about 90 percent of every catalogue is API-key, which needs no callback URL, no per-vendor app registration and no refresh.",
+    "steps": [
+      {"n": 1, "step": "Tenant connection store with per-tenant key derivation", "covers": "the tenancy blocker, required before any credential is written"},
+      {"n": 2, "step": "API-key path end-to-end for one service", "covers": "the largest catalogue slice for the least machinery"},
+      {"n": 3, "step": "Server-side idempotency (key store, fingerprint, replay, lock, TTL)", "covers": "the highest-consequence must-build"},
+      {"n": 4, "step": "OAuth2 for one service with refresh under lock", "covers": "OC 103 / AP 96 / Nango 425 OAuth providers", "detail": "refresh 15 minutes early under a lock keyed by tenant+connection; discriminate invalid_grant (user's problem, mark connection ERROR) from invalid_client and invalid_scope (our bug, must NOT mark the connection bad)"},
+      {"n": 5, "step": "Action ledger, dry-run mode and approval tiers"},
+      {"n": 6, "step": "Egress allow-list enforcement bound to policy decisions"}
+    ]
+  },
+  "invariants": [
+    {"id": "INV-P11-1", "statement": "Catalogue, credential runtime, connection store and action runtime are four separate governed components", "state": "observed_principle"},
+    {"id": "INV-P11-2", "statement": "The caller passes an identity, never a secret", "state": "observed_commercially"},
+    {"id": "INV-P11-3", "statement": "Every connection is keyed by tenant from the first migration with per-tenant key derivation and a stable externalId", "state": "observed_by_falsifier", "note": "the lane's firmest invariant"},
+    {"id": "INV-P11-4", "statement": "Every action declares its idempotency class and the runtime refuses to auto-retry the unsafe class", "state": "proposed", "safe_failure_direction": "default to unsafe when undetermined"},
+    {"id": "INV-P11-5", "statement": "Replay with the same key and a different payload is a hard error, enforced by request fingerprint", "state": "observed_externally", "source": "Stripe docs read 2026-08-27: sending the same idempotency key with different parameters produces an error indicating the new request did not match the original", "correction": "An earlier draft of this invariant asserted 'non-2xx is not cached'. Stripe's actual documented behaviour is the OPPOSITE: it saves the status and body of the first request regardless of whether it succeeds or fails, and returns cached 500s. The claim originated in the hono-idempotency README's summary of the Stripe rule and did not survive reading Stripe's own docs. Actionist must decide this deliberately rather than inherit it: caching failures gives a stable replay answer but can pin a transient error, while not caching them permits a genuine retry to succeed."},
+    {"id": "INV-P11-11", "statement": "The idempotency layer sits inside the rate limiter and the auth check, never outside", "state": "proposed", "source": "Stripe documents that rate limiters run BEFORE its idempotency layer, so a 429 can produce a different result under the same key"},
+    {"id": "INV-P11-6", "statement": "Consent is graded by consequence, not by resource", "state": "observed_commercially"},
+    {"id": "INV-P11-7", "statement": "Dry-run is a first-class action mode and is not tenant-disableable", "state": "proposed"},
+    {"id": "INV-P11-8", "statement": "One per-tenant action ledger; receipts exclude payload", "state": "proposed"},
+    {"id": "INV-P11-9", "statement": "No ambient authority in account selection", "state": "proposed", "source": "Pipedream hazard"},
+    {"id": "INV-P11-10", "statement": "Egress is allow-listed from the connector manifest and bound to an enforcing proxy", "state": "proposed"}
+  ],
+  "open_decisions": [
+    {"id": "P11-D-01", "question": "Can the idempotency class be derived at catalogue-import time for a useful fraction of 1,445 providers, or is it per-action human judgement", "status": "open"},
+    {"id": "P11-D-02", "question": "Latency cost of the egress-enforcement proxy per action", "status": "open"},
+    {"id": "P11-D-03", "question": "Provider icon licensing", "status": "open", "severity": "gates any client-facing connector picker", "carried_from": "2026-08-27 connector research, still UNVERIFIED"},
+    {"id": "P11-D-04", "question": "Fork the OpenConnector catalogue or track upstream", "status": "open", "note": "Apache-2.0 makes forking viable; the risk is a young vendor-controlled project, and the mitigation is a fork commitment not a shrug"}
+  ],
+  "rejected_here": [
+    {"claim": "Adopt a connector catalogue with its storage layer", "reason": "A26 rejected; demonstrated by the tenancy falsifier"},
+    {"claim": "Nango or Airbyte can be embedded in a hosted Actionist", "reason": "ELv2 bars providing the software to third parties as a hosted or managed service"},
+    {"claim": "Composio's MIT badge makes it free OSS", "reason": "MIT covers the SDK; toolkits live behind a paid hosted API. A buy decision dressed as open source."},
+    {"claim": "728 connectors equals 728 connect-your-account buttons", "reason": "Auth mix is roughly 90 percent API-key; quote 113 OAuth (or the API's 96), never the headline"},
+    {"claim": "Convoy is the webhook answer", "reason": "Elastic License 2.0 behind a click-through preamble; best functional fit in its category, which is what makes it dangerous"},
+    {"claim": "Vault is the secrets answer", "reason": "BSL 1.1 with IBM as licensor; OpenBao is the MPL-2.0 LF fork"}
+  ],
+  "feeds_experiments": ["one tenant-safe connector flow end to end", "idempotency contract conformance fixtures", "Loop 4 mixed-shape composition with one connector"]
+}

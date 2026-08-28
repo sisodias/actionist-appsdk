@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P08 research artifact decision-ledger.json"><link rel="icon" href="../../../favicon.svg"><title>P08 · decision-ledger.json · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p08/">P08</a> / Research artifact / decision-ledger.json</div><div class="node-actions"><a class="button" href="../raw/decision-ledger.json" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>decision-ledger.json</h1><p><code>research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-1-fable/decision-ledger.json</code></p></div><pre class="artifact-source">{
+  &quot;part&quot;: &quot;P08&quot;,
+  &quot;run_id&quot;: &quot;2026-08-27-sprint-1-fable&quot;,
+  &quot;observed&quot;: &quot;2026-08-27&quot;,
+  &quot;mode&quot;: &quot;research-only&quot;,
+  &quot;status&quot;: &quot;UNEXECUTED / NOT_ADMITTED&quot;,
+  &quot;note&quot;: &quot;No decision here is authorized or admitted. &#39;recommended&#39; means recommended to a decision-maker, not taken.&quot;,
+  &quot;decisions&quot;: [
+    {
+      &quot;id&quot;: &quot;D-P08-01&quot;,
+      &quot;question&quot;: &quot;Verdict on A15, the inherited five-area ISSO shell&quot;,
+      &quot;verdict&quot;: &quot;Reject as a default; retain as one archetype-level rail variant. Reclassify A15 from &#39;unproven&#39; to &#39;partially falsified at the semantic level&#39;.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;sidebar-factory.tsx:19-25 types sections as a fixed five-element tuple (&#39;Must be exactly 5 sections&#39;)&quot;,
+        &quot;page-registry.tsx:6 freezes five product ids&quot;,
+        &quot;sidebar-factory.tsx:27-34 fixed hotkeys Cmd1-Cmd5&quot;,
+        &quot;agency vs model rails assign &#39;recon&#39; to both Team and Tasks, and &#39;content-gen&#39; to both Tools and Insights&quot;,
+        &quot;ISSO app has 8+ top-level route groups; portal/ alone holds 20+ routes no five-slot rail reaches&quot;,
+        &quot;autosaas-method.md:283 records &#39;no generic ISSO shell extraction&#39;&quot;
+      ],
+      &quot;what_survives&quot;: &quot;Five as a soft BUDGET CAP on top-level rail items, consistent with IBM Carbon&#39;s published &gt;5 rule. Not as a schema.&quot;,
+      &quot;gate&quot;: &quot;E1 card-sort / first-click test, 3 case_workflow industries, 15 practitioners, paper navs only&quot;,
+      &quot;falsifier&quot;: &quot;If the five-slot nav scores within noise of a spine-derived nav on first-click accuracy, keep five slots and spend the budget elsewhere.&quot;,
+      &quot;disposition&quot;: &quot;recommended&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-02&quot;,
+      &quot;question&quot;: &quot;Top shell option&quot;,
+      &quot;verdict&quot;: &quot;Option 1 - host-owned page shelf with donors as embedded surfaces (25/30). Runner-up: joint at 19/30 between Option 2 (host rail + donor nav registry injection) and Option 4 (archetype-native topology), which are complementary rather than competing - O2 is a mechanism, O4 is a topology.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;FROZEN-PAGE-SKELETON.md: 11 host-owned pages, ~20 donors folded beneath, zero donor-named nav entries, status FROZEN&quot;,
+        &quot;OWNERSHIP-AND-DATA-LAYER-DECISIONS.md:96 &#39;Shell / navigation rail -&gt; OWN. Already replaced Plane&#39;s launcher&#39;&quot;,
+        &quot;Luigi is the OSS embodiment: host declares every nav node, donor contributes no chrome&quot;
+      ],
+      &quot;limitations&quot;: &quot;Option 1&#39;s feasibility rests on donors rendering below full-page, which is UNTESTED. This is its weakest joint.&quot;,
+      &quot;gate&quot;: &quot;E3 donor admission test&quot;,
+      &quot;falsifier&quot;: &quot;If most donors cannot render below full-page, Option 1 collapses toward Option 5 (iframe) or Option 6 (headless) and P08&#39;s cost model changes materially.&quot;,
+      &quot;disposition&quot;: &quot;recommended&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-03&quot;,
+      &quot;question&quot;: &quot;Host-shell vs donor-chrome boundary&quot;,
+      &quot;verdict&quot;: &quot;Host MUST own eight surfaces: identity/session, tenant switch, the navigation rail, settings entry point, global search, notifications, cross-app navigation and the URL space, and theming tokens. Donor MAY keep internal below-the-fold nav, its own record routing under a host basename, its data model and migrations in its own schema, and its engine-shaped internals.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;TEABLE-ABSORPTION-BRIEF success criteria 1 and 4 require no donor login prompt and no reachable donor signup route&quot;,
+        &quot;Luigi: host holds the OIDC session, donor calls LuigiClient.getToken()&quot;,
+        &quot;Backstage RouteRef/ExternalRouteRef so donors never hardcode host URLs&quot;,
+        &quot;Grafana /a/&lt;id&gt;/* nesting lets a donor keep hierarchy below one host row&quot;,
+        &quot;OWNERSHIP-AND-DATA-LAYER-DECISIONS: one Postgres server, separate schemas, one owner per table&quot;
+      ],
+      &quot;rationale&quot;: &quot;A donor answering &#39;who am I here&#39; creates a second identity; a donor answering &#39;where do I go next&#39; creates a URL the host cannot honour. Both are correctness failures, not styling failures.&quot;,
+      &quot;disposition&quot;: &quot;recommended-as-contract&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-04&quot;,
+      &quot;question&quot;: &quot;Absorb-vs-preserve rule for donor navigation&quot;,
+      &quot;verdict&quot;: &quot;Absorb the navigation when the donor supplies a CAPABILITY; preserve it when the donor supplies a DESTINATION. At most one or two destinations per product. Governance corollary: donors declare intent (label, icon, routeRef); the host declares order - never a numeric position.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;TEABLE-ABSORPTION-BRIEF: &#39;Teable is NOT a page&#39;; &#39;The broker never clicks Tables&#39;; a separate page &#39;becomes a second silo nobody updates&#39;&quot;,
+        &quot;FROZEN-PAGE-SKELETON: exactly one whole-slice donor (Tasks = Plane) out of ~20&quot;,
+        &quot;WordPress $position integer produces silent collisions patched by an MD5 hash offset&quot;,
+        &quot;Grafana addToNav boolean and Shopify s-app-nav are declarative&quot;,
+        &quot;P08-SR-056/057 + sisocrm-donor-absorption.md: Teable is the purest data-model donor and got a NATIVE non-iframe mount \u2014 the opposite of the prediction, on the exact donor the prediction is about. The recorded reason is not semantic: THEMING-CONTRACT.md:94-102 states &#39;A cross-origin iframe is a hard CSS boundary \u2014 custom properties do not inherit across it... This is the concrete reason the iframe had to go.&#39; Teable-the-grid and Postiz-the-scheduler are both &#39;capabilities&#39; under the old vocabulary, yet one is absorbed and one iframed; capability-vs-destination does not discriminate them, cascade-and-session coupling does.&quot;
+      ],
+      &quot;absorb_signals&quot;: [
+        &quot;donor surface is product-defining&quot;,
+        &quot;donor nav names the vendor, not the work&quot;,
+        &quot;donor covers only part of one host page&quot;,
+        &quot;two donors would claim the same concept&quot;,
+        &quot;donor identity would create a second login&quot;,
+        &quot;donor is already headless or chrome-light&quot;
+      ],
+      &quot;preserve_signals&quot;: [
+        &quot;donor is a whole workflow users know by name and its internal nav IS the expertise&quot;,
+        &quot;donor nav sits below the host rail rather than beside it&quot;,
+        &quot;donor is security/legally critical and forking its UI forks its audit story&quot;,
+        &quot;the LICENCE forbids chrome removal&quot;,
+        &quot;donor is untrusted or multi-tenant-risky&quot;
+      ],
+      &quot;reframe&quot;: &quot;Navigation absorption is a data-integrity decision disguised as a layout decision - two nav entries over one concept produce two lists over one dataset.&quot;,
+      &quot;disposition&quot;: &quot;recommended-as-contract&quot;,
+      &quot;status&quot;: &quot;REVISED \u2014 original rule falsified by the SISOCRM estate&quot;,
+      &quot;chosen&quot;: &quot;SUPERSEDED. Original: &#39;absorb when the donor supplies a CAPABILITY, preserve when it supplies a DESTINATION; data-model nav preserved in-pane, workflow nav absorbed.&#39; REPLACEMENT, derived from the only built estate: ABSORB (native mount) when the surface must share the host&#39;s CSS CASCADE or its SESSION; PRESERVE (iframe) when the surface is self-contained and a hard boundary costs nothing. The axis is MECHANICAL, not semantic.&quot;,
+      &quot;confidence&quot;: &quot;medium \u2014 replacement rule is inferred from one built estate (n=1), but it is the only estate that has actually made these decisions under real constraints&quot;,
+      &quot;falsifier&quot;: &quot;Find a donor absorbed natively that needed NEITHER the host cascade NOR the host session, or one iframe-preserved despite requiring both. Either would break the mechanical rule.&quot;,
+      &quot;what_survives&quot;: &quot;The NAV half of the original rule holds unanimously: no donor&#39;s own navigation was ever adopted into the rail \u2014 it is 100% host-authored and donor chrome is actively suppressed via data-siso-hide patches. Narrowed to &#39;never inherit donor nav&#39;, the estate confirms it. It is the absorb/preserve MECHANISM choice that was mispredicted.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-05&quot;,
+      &quot;question&quot;: &quot;Verdict on the 20/80 host/app pane&quot;,
+      &quot;verdict&quot;: &quot;The concept is sound and precedented; the NUMBER is not evidenced. Specify a pixel width with a viewport-class collapse rule, never a percentage. Starting specification (hypothesis): 320px host rail at &gt;=1056px, icon rail ~48-80px below that, bottom bar or overlay below ~768px.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;Across 19 measured shells every rail is a fixed pixel constant; Carbon&#39;s 256px is 20% at 1280px and 13% at 1920px&quot;,
+        &quot;VS Code layout.ts:3026 min(300, viewport/4) is the only proportional rule in the corpus - and it is 25/75, capped&quot;,
+        &quot;320px corroborated three times within 4px: Zendesk 320, Grafana 320, Metabase 324&quot;,
+        &quot;Polaris and Primer both switch at 768px; Material 3 switches by window size class&quot;
+      ],
+      &quot;limitations&quot;: &quot;No vendor publishes a rationale for its width. IBM Carbon alone publishes a decision RULE (left panel when &gt;5 secondary items; no third tier).&quot;,
+      &quot;gate&quot;: &quot;E2 rail collapse-rate test, 3-4 weeks, per-user memory, no prompt&quot;,
+      &quot;falsifier&quot;: &quot;&gt;50% permanent collapse kills the wide rail in favour of an icon rail. If the only items ever clicked are settings and tenant-switch, the rail should be a puck.&quot;,
+      &quot;disposition&quot;: &quot;recommended&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-06&quot;,
+      &quot;question&quot;: &quot;Which archetypes cover 80% of the first 17 industries&quot;,
+      &quot;verdict&quot;: &quot;Under strict reading there is no cheap answer, and that is the finding. Primary-only: 5 archetypes reach 82.4% (case_workflow, field_operations, learning_content, scheduling, crm). Requiring BOTH primary and secondary: no subset of 7 or fewer reaches 80% (best 7 = 13/17, 76%); 8 give 15/17 (88%); 9 give 17/17. case_workflow + portal TOUCH 11/17 (65%) but SATISFY only 4/17 (24%).&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;Computed this run from the b2b shelf 17-industry primary/secondary mapping&quot;,
+        &quot;Six industries touch neither case_workflow nor portal: construction, ecommerce, hospitality, logistics_freight, real_estate, saas&quot;
+      ],
+      &quot;limitations&quot;: &quot;The arithmetic is exact; the inputs are I-class judgement from the b2b shelf, not measured demand.&quot;,
+      &quot;build_order&quot;: &quot;case_workflow first, portal second - justified by the demand/supply inversion (highest demand, thinnest clean-licence supply), NOT by a coverage argument. Do not build marketplace: primary for none, secondary for none.&quot;,
+      &quot;disposition&quot;: &quot;recommended&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-07&quot;,
+      &quot;question&quot;: &quot;Which nav absorption mechanisms are eliminated&quot;,
+      &quot;verdict&quot;: &quot;Reverse-proxy chrome stripping is rejected. iframe isolation is fallback-only. Any option premised on donor CSS surviving intact, donor modals covering the viewport, or one shared React tree is mispriced.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;qiankun v3: styleIsolation is &#39;a one-way boundary&#39; - stops donor CSS escaping, does not stop host CSS entering; JS sandbox &#39;not a security boundary for running untrusted code&#39;&quot;,
+        &quot;qiankun v3: a menu/dialog/tooltip portaled to document.body falls outside the scope root and its scoped selectors will not match&quot;,
+        &quot;wujie: in an iframe modals &#39;can only display inside the iframe and cannot cover the whole page&#39;&quot;,
+        &quot;Module Federation singleton defaults to false and ships a Bridge for framework isolation&quot;,
+        &quot;Apache &#39;will not rewrite URL references inside HTML pages&#39; by default; mod_proxy_html &#39;has no knowledge of what is a URL within an embedded script&#39;; runtime-generated URLs have no documented fix&quot;,
+        &quot;MDN: SameSite=Lax excludes iframe navigations; Firefox partitions since 103; Storage Access API requires transient user activation&quot;
+      ],
+      &quot;disposition&quot;: &quot;recommended&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-08&quot;,
+      &quot;question&quot;: &quot;Is licence a shell constraint&quot;,
+      &quot;verdict&quot;: &quot;Yes, and the gate belongs BEFORE design work. Stripping donor chrome is an engineering task until it is a licence violation. Read the LICENSE body, never the badge.&quot;,
+      &quot;evidence_class&quot;: &quot;observed&quot;,
+      &quot;evidence&quot;: [
+        &quot;NocoBase LICENSE.txt 5.2 forbids removing or changing NocoBase branding on the interface except the top-left logo&quot;,
+        &quot;Directus is MSCL-1.0-GPL, forbids circumventing the licence key, GPL-3.0 only on the fourth anniversary&quot;,
+        &quot;28 of 104 repos returned NOASSERTION; reading bodies moved verdicts in both directions - single-spa is plain MIT that GitHub failed to classify&quot;,
+        &quot;Directory-scoped open-core (ee/, enterprise/, premium/, x-pack) means a surface lifted from an ee/ path breaches regardless of the top-level licence&quot;
+      ],
+      &quot;disposition&quot;: &quot;recommended-as-contract&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D-P08-09&quot;,
+      &quot;question&quot;: &quot;Status of A34 (host can absorb donor identity/settings/navigation cleanly)&quot;,
+      &quot;verdict&quot;: &quot;Remains UNKNOWN. No donor was mounted in this run. A34 is now well-specified and gated behind E3, which is progress of a different kind but is not evidence.&quot;,
+      &quot;evidence_class&quot;: &quot;unknown&quot;,
+      &quot;gate&quot;: &quot;E3 donor admission test: six donors x four binary questions answered by real attempts, 1 day per donor&quot;,
+      &quot;disposition&quot;: &quot;open&quot;
+    },
+    {
+      &quot;id&quot;: &quot;P08-D10&quot;,
+      &quot;question&quot;: &quot;What does adaptation actually cost, and is assumption A07 (&#39;always only 1-2% of the work&#39;) true?&quot;,
+      &quot;options_considered&quot;: [
+        &quot;A07 true as stated&quot;,
+        &quot;A07 false as stated&quot;,
+        &quot;A07 true within a bounded region&quot;
+      ],
+      &quot;chosen&quot;: &quot;A07 is FALSE as a universal and roughly TRUE for iframe-preserved donors only. Cost splits by absorption depth, not by donor.&quot;,
+      &quot;evidence&quot;: [
+        &quot;P08-SR-057 (lane-owner verified): iframe preservation 17-62 patch lines; identity+data-layer absorption 273 lines across 9 files including a changed PUBLIC API validation regex&quot;,
+        &quot;ABSORPTION-STRATEGY.md:111-119 &#39;Rewriting a data layer per donor means their models onto our schema, their queries, their migrations, their background jobs, their file handling. Not a weekend each.&#39;&quot;
+      ],
+      &quot;confidence&quot;: &quot;medium-high on the gradient; low on absolute effort&quot;,
+      &quot;falsifier&quot;: &quot;Diff .teable-runtime against pinned upstream 06a4461e2bc53055182d4df0a72dffa26fd99210 for true total divergence; if it is close to 273 lines the patch files are the whole story, if far larger the gradient is steeper still&quot;,
+      &quot;note&quot;: &quot;NO hour or effort data exists anywhere in the estate. This team measured adaptation cost in DIFF SURFACE against upstream \u2014 arguably the better metric for upgrade friction. &#39;No hours were ever recorded&#39; is itself the finding.&quot;
+    }
+  ],
+  &quot;gates_in_order&quot;: [
+    {
+      &quot;id&quot;: &quot;E3&quot;,
+      &quot;name&quot;: &quot;Donor admission test&quot;,
+      &quot;rank&quot;: 1,
+      &quot;cost&quot;: &quot;6 engineer-days&quot;,
+      &quot;blocks&quot;: &quot;D-P08-02, A34&quot;
+    },
+    {
+      &quot;id&quot;: &quot;E1&quot;,
+      &quot;name&quot;: &quot;Five-area card sort&quot;,
+      &quot;rank&quot;: 2,
+      &quot;cost&quot;: &quot;15 practitioners, paper only&quot;,
+      &quot;blocks&quot;: &quot;D-P08-01, A15&quot;
+    },
+    {
+      &quot;id&quot;: &quot;E2&quot;,
+      &quot;name&quot;: &quot;Rail collapse-rate&quot;,
+      &quot;rank&quot;: 3,
+      &quot;cost&quot;: &quot;a toggle and an event, 3-4 weeks&quot;,
+      &quot;blocks&quot;: &quot;D-P08-05&quot;
+    },
+    {
+      &quot;id&quot;: &quot;E4&quot;,
+      &quot;name&quot;: &quot;Vocabulary-isomorphism test&quot;,
+      &quot;rank&quot;: 4,
+      &quot;cost&quot;: &quot;desk research + expert interviews&quot;,
+      &quot;blocks&quot;: &quot;per-industry template strategy&quot;
+    },
+    {
+      &quot;id&quot;: &quot;E5&quot;,
+      &quot;name&quot;: &quot;Licence gate&quot;,
+      &quot;rank&quot;: 5,
+      &quot;cost&quot;: &quot;near zero&quot;,
+      &quot;blocks&quot;: &quot;any donor chrome work&quot;
+    }
+  ],
+  &quot;not_established&quot;: [
+    &quot;No user was tested&quot;,
+    &quot;No donor was mounted&quot;,
+    &quot;No shell was built or measured&quot;,
+    &quot;No published evidence found linking nav topology or area count to task success in any surveyed product - absence reported, not filled&quot;,
+    &quot;87 of 111 commercial products are inferred, not verified this session&quot;,
+    &quot;Bykonz directory contents were not read&quot;,
+    &quot;SISOCRM shell read as documents, not running code&quot;,
+    &quot;Matrix scores are judgement, not measurement&quot;,
+    &quot;No accessibility, performance, i18n/RTL or security review&quot;
+  ]
+}</pre></div></main></body></html>

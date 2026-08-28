@@ -1,0 +1,111 @@
+# P02 — outcome and product specification: research report
+
+Run `2026-08-27-sprint-1-fable` · lane S1-L1 (`ACTIONIST-S1-L1-DEMAND`) · observed 2026-08-27
+Mode: research only. No implementation, no schema committed, no admission.
+Evidence classes: `E` inspected local artifact · `D` documented first-party claim · `I` inference · `U` unknown.
+
+## Executive result
+
+**Elicitation and falsifiability are disjoint across all 51 commercial surfaces, and are combined only without an enforcing engine in OSS.** AI-PRD tools and app-builder intake flows are good at extracting something from a vague human and produce nothing checkable. Requirements-management and BDD tools produce highly checkable artifacts and assume the requirement already arrived. No commercial surface does both.
+
+**Correction applied at verification (stated rather than buried).** The lane's first formulation was "nothing in 111 surfaces does both." A self-check against the raw rows falsified it: **`github/spec-kit` and `Fission-AI/OpenSpec` do both** — spec-kit mandates `[NEEDS CLARIFICATION]` markers *and* Given/When/Then acceptance scenarios in the same template; OpenSpec pairs a clarify-before-code flow with SHALL/WHEN/THEN scenarios. The claim survives in a narrower and more useful form: **both are templates plus prompts with no engine enforcing either half**, so the combination is asserted by convention rather than computed. Nothing surveyed — commercial or OSS — combines elicitation with *computed* falsifiability. That is the actual gap, and it is a gap in enforcement, not in ideas.
+
+That gap defines the design: **elicit *into* a falsifiable structure** rather than eliciting freely and formalising afterwards, because the formalisation pass is where fidelity dies. Concretely — elicit into EARS-shaped mandatory slots, emit Gherkin.
+
+Three mechanisms are worth copying outright, and each answers one of P02's stated open questions:
+
+1. **EARS slots answer "how should assumptions and confidence be represented."** A trigger, precondition, system name and response are mandatory; an author cannot finish the sentence while the requirement is vague. The unfilled slot *is* the next interview question and *is* the confidence representation. Nothing in 51 commercial surfaces used a percentage — mild evidence that percentages are not useful here.
+2. **Computed `UNCOVERED` answers "what is the minimum ProductSpec."** Xray renders a requirement as UNCOVERED when nothing tests it — falsifiability computed rather than asserted. The minimum spec is whatever makes that computation possible.
+3. **Prototype for look-and-feel, ask for data and behaviour** answers "when should a prototype replace more chat."
+
+## Denominators
+
+| Class | Surfaces | Fetch-verified | Search-only |
+|---|---:|---:|---:|
+| Commercial | 51 | 13 | 38 |
+| OSS | 60 | 23 | 37 |
+| Local estate | 10 | 10 (read) | 0 |
+| **Total** | **121** | **46** | **75** |
+
+Commercial segments: builder-intake 13, req-mgmt 11, scoping 10, ai-prd 9, acceptance 8.
+OSS segments: spec-driven 18, executable-spec 16, form-engine 13, prd-agent 8, dialog 5.
+
+The ~100 denominator target is met (111 external surfaces); verified fraction 36/111 (32%). `oss-a` completed licence verification for all 60 OSS rows via the authenticated `gh` CLI after WebFetch hit a usage limit, which produced *better* evidence than HTML pages — exact SPDX identifiers, `pushed_at` timestamps and raw LICENSE bodies.
+
+## The grammar layer: what makes a requirement checkable
+
+**EARS** constrains natural language with a tiny ruleset — zero-or-many preconditions, zero-or-one trigger, one system name, one-or-many responses, clauses always in the same temporal order — across six patterns (ubiquitous, state-driven, event-driven, optional-feature, unwanted-behaviour, complex). Developed in 2009 at Rolls-Royce while analysing an airworthiness regulation, published at IEEE RE09.
+
+The mechanism that matters is not tidiness: **the grammar makes gaps structurally visible**. And because clause order is temporal, an EARS statement maps almost mechanically onto Given/When/Then, so testability comes free rather than as a second authoring pass. Actionist should adopt slot-mandatory grammar as the internal representation and drive clarifying questions off unfilled slots rather than off an LLM's discretion (`D`, fetched).
+
+**Caution before any client quotation:** the fetched page is Jama-published — Jama sells the tool implementing EARS — and template text was placeholder-stripped in the render. Re-verify the six patterns against Mavin's original RE09 paper.
+
+**Gherkin** contributes the two-audience artifact: one document a non-technical client can read and approve, and a machine can execute as a pass/fail gate. The same sentence the client signed becomes the test proving delivery, converting "is it done?" from an argument into a test run. Cucumber's three practices name the transition Actionist needs — discovery, **formulation**, automation — where formulation turns an agreed concrete example into a written scenario.
+
+Its documented failure mode is the reason to generate rather than mandate it: step definitions become a maintenance burden, Gherkin ends up written by developers for developers, and the stakeholder readability that justified the ceremony evaporates. Scenarios also run 10–100× slower than unit tests and belong at acceptance level. **Generate Gherkin as an output artifact; never require the client to author it** (`D`, fetched for Studio, search-only for core).
+
+## The coverage layer: falsifiability as a computed state
+
+**Xray** stores Gherkin in Jira as typed issues and deliberately drops feature-level content on import, because the feature is expected to already exist as a requirement issue. A tag carrying a requirement key creates a `Tests` link. The payoff is the sharpest coverage semantics in the survey: **a requirement renders `UNCOVERED` when nothing tests it** — a falsifiable property of the spec itself, computed rather than asserted, and exactly what every AI-PRD tool lacks. Those tools can tell you a PRD exists; none can tell you a requirement is unverified.
+
+Xray's own documentation surfaces the unresolved tension honestly: teams must decide where scenarios are mastered, since you want a single source of truth — Jira or the repo, not both. **Actionist should copy `UNCOVERED` as a first-class computed state and decide mastering once, in the spec** (`D`, search-only — Cloud doc 403'd, reconstructed from indexed docs plus third-party).
+
+**DOORS Next** shows what industrial completeness costs. Artifacts organised into modules, every module artifact also persisting as a base artifact (one object, two identities, links behaving differently by which you touched), system-defined extensible link types including `Validated By`, and cross-component traceability that only resolves inside a Global Configuration context. The model genuinely proves a requirement was verified at a frozen point in time, and it costs an administrator-designed data model plus configuration-management literacy from every author. **Copy exactly two things: the typed `Validated By` link, and baselining at agreement time** so "what we agreed" is a retrievable object rather than an argument about an email. Reject the configuration-context model (`D`, search-only — IBM page 403'd).
+
+**Jama Connect** contributes per-statement quality gating (the unit of quality is one requirement sentence, making quality-checking and testability the same operation) and **suspect links** — editing a requirement automatically flags dependents as suspect, turning change impact into a work queue. That answers the question every AI-PRD tool ducks: what happens to the spec when reality moves.
+
+**Evidence caution:** the fetched Advisor page is an announcement that enumerates **zero INCOSE rules, zero EARS patterns and no scoring mechanism**. The widely repeated claim that it detects ambiguity or passive voice **could not be confirmed** and must not be repeated as observed. Scale figures (10M items/project) are vendor claims (`D`, fetched).
+
+## The elicitation layer: what actually gets something out of a vague human
+
+**Replit Agent Plan mode** is the only builder in the survey with a documented blocking pre-build gate: an ordered task list, exploration of alternatives, then an explicit **Accept tasks / Revise plan** dialog before any code or data is modified. Independent field testing found it asking real clarifying questions — which database, whether auth was needed, what happens when a reminder date passes — and the reviewer's conclusion is the sharpest line in the sweep: it was the only tool tested that **treated a vague description as vague**.
+
+But the artifact is **decomposition, not description**: it says what will be done, never what must be true afterwards, so there is nothing to verify against once building starts. Correctness load shifts to checkpoints and self-testing, converting specification failure into rollback rather than prevention. **Copy the blocking gate — a spec the client never explicitly accepted is not a spec — and reject task-list-as-spec.** One design smell to avoid: Replit conflates scope approval with billing approval, training users to click through gates (`D`, fetched; the clarifying-question behaviour is one reviewer's session, not a documented guarantee).
+
+**Lovable Knowledge** is valuable precisely because the vendor documents its limits: two plain-text tiers capped at 10,000 characters, no formal PRD template, always-on context competing with code and repo files, and the admission that **in long conversations with a lot of context, instructions may not always be followed consistently**. That is a vendor conceding persistent context degrades under pressure — the exact failure any Actionist ProductSpec fed to a coding agent will hit. **Copy the two-tier org-conventions vs project-facts split and the specificity discipline; reject the unbounded text blob** — structure the spec so clauses can be *selected* into a prompt rather than hoping 10k characters all land (`D`, fetched).
+
+**BuildBetter** inverts elicitation entirely: rather than asking what a user wants, it captures what customers already said across calls, Slack, tickets and surveys, then generates PRDs grounded in it with citations to source conversations. Its falsifiability is **evidential rather than logical** — the check is "did someone actually say this?" rather than "can we test this?" — a genuinely complementary axis to EARS/Gherkin. **Copy the citation discipline: every requirement carries a provenance pointer to the client utterance that produced it**, converting scope disputes from opinion into lookup. Two cautions: all accuracy figures (99% evidence coverage, 98% classification) are vendor self-benchmarks against unnamed baselines, and the model presupposes an existing call corpus, making it **useless at true cold start — precisely Actionist's likely condition** (`D`, fetched).
+
+## The OSS layer: mechanisms without engines
+
+**spec-kit** contributes the single most adoptable artifact pattern: `[NEEDS CLARIFICATION: auth method not specified — email/password, SSO, OAuth?]` written **into the artifact at the point of ambiguity, carrying candidate answers**. Ambiguity becomes countable, greppable, addressable and impossible to skip silently — a spec can be mechanically gated on zero open markers. Its template also mandates prioritised, independently testable user stories with Given/When/Then scenarios, MUST-language functional requirements, and `SC-###` success criteria that must be **measurable and technology-agnostic** — the discipline that turns "make it feel fast" into something verifiable.
+
+Its limitation is the segment's limitation: it is a template plus prompts, with **no engine enforcing any of it**. Nothing prevents an agent emitting a spec with zero markers because it guessed confidently. The structure is real; the rigour depends entirely on what fills it (`D`, fetched, MIT — read `templates/spec-template.md` directly).
+
+**OpenSpec** scopes everything to a **change** rather than a codebase — ADDED/MODIFIED/REMOVED deltas against a baseline, archived on completion — which is exactly right for iterative client work where the second engagement is never a blank page and re-eliciting settled requirements wastes goodwill. Its `/opsx:explore` vs `/opsx:propose` split gives a **stakes-free divergent phase** before anything becomes committed scope, a materially different conversation from "approve this document" (`D`, fetched, MIT).
+
+**ProductSpec** is the only formally schematised spec format found, and candid that it "does not define taste, quality, or reviewer behavior." Its `artifact_type` enum (`hypothesis` | `prd` | `openspec_proposal`) encodes a **maturity ladder** — the same document graduates from unvalidated guess to committed requirement — and it ships `decision-trace`, `review-annotation` and `agent-run` as first-class validatable schemas. A discovery output should be schema-validated, versioned and typed by maturity, not just well-formatted prose. Adopt the ideas; do not bet on the format — 275 stars and no visible ecosystem make it a proposal, not an interoperability layer (`D`, fetched, MIT).
+
+**survey-mcp-server** is the strongest structural match in either survey and almost nobody has found it (4 stars, ~10 months idle). It inverts conversational-form design: the **server owns question state, eligibility, validation, scoring and progress; the LLM is demoted to the conversational surface**. Three decisions worth stealing: every question carries `currentlyEligible` **and** `eligibilityReason` so a wrong skip is debuggable; `guidanceForLLM` separates what to ask (data, server-owned) from how to ask it (tone, model-owned); and sessions are first-class resumable objects. This gives replayable, auditable, unit-testable discovery — impossible if branching lives in a prompt. **Design reference, never a dependency** (`D`, fetched, Apache-2.0 — read a full 21-question survey definition).
+
+**OASIS** contributes the best governance idea in the lane: **shadow mode**. Its adaptive engagement policy ships non-acting by default, logging what it *would* have done to an audit trail for researcher review before live action is enabled. For a client-facing discovery agent this is how you earn the right to let a model adapt questioning — it converts "trust our AI" into an inspectable record. **AGPL-3.0-only: adopt the pattern and methodology, not the source** (`D`, fetched).
+
+## Licence traps and evidence hygiene
+
+Reading LICENSE bodies rather than badges caught nine failures across 110 OSS rows, five of them in this part's survey: `ai-prd-generator` is **proprietary commercial, All Rights Reserved** despite a LICENSE file; `typebot.io` is **FSL-1.1** source-available with competing use barred two years; `surveyjs/survey-library`'s MIT covers the renderer while **the authoring Creator is a separate repo under a commercial EULA** — any proposal saying "we'll use SurveyJS, it's MIT" understates cost unless the authoring surface is built in-house; `formbricks`/`OpnForm` are open-core AGPLv3 with proprietary enterprise carve-outs; and `serenity-core` is Apache-2.0, with detection failing only because the file is `licence.txt`. Third-party claims corrected: `react-jsonschema-form` is Apache-2.0, not the MIT comparison articles assert; `Reqnroll` is BSD-3-Clause; `behave` is BSD-style.
+
+**Format lock-in is a live risk, not hypothetical.** Tricentis discontinued SpecFlow — the most widely used .NET BDD framework — stranding users until Reqnroll appeared as a community reboot led by SpecFlow's original creator. Gherkin survived because the grammar was never owned by the tool. Actionist's canonical ProductSpec form must be plain, portable, documented, and readable by something other than Actionist.
+
+## Innovation register
+
+50 hypotheses in `innovation-register.jsonl`. Top 10 by expected decision impact, all marked `top10`:
+
+1. EARS-slotted internal representation (`inn-p02-001`)
+2. Computed `UNCOVERED` state gating spec completeness (`inn-p02-002`)
+3. Elicit into slots, emit Gherkin — closing the disjointness (`inn-p02-003`)
+4. NEEDS-CLARIFICATION markers with candidate answers (`inn-p02-004`)
+5. Provenance pointer per requirement (`inn-p02-005`)
+6. Blocking Accept/Revise gate with baselining (`inn-p02-006`)
+7. Technology-agnostic measurable success criteria (`inn-p02-013`)
+8. Prototype for look-and-feel, ask for data and behaviour (`inn-p02-014`)
+9. Zero-open-markers promotion gate (`inn-p02-040`)
+10. Minimum spec derived backwards from what composition needs (`inn-p02-046`)
+
+## Boundaries and what this pack does not establish
+
+- **The five-workflow proving harness is specified, not executed.** Whether EARS survives contact with five real business workflows is the lane's primary falsifier and remains **unrun**.
+- P02's minimum cannot be closed while P12's contract is unsettled; this report derives the minimum backwards from P12's *anticipated* inputs, which S2-L4 may revise.
+- 68% of external rows are search-only.
+- Vendor figures are claims, attributed: BuildBetter 99%/98%, Jama 10M items, Keeborg's 8-document stack, the 5.5-hours-vs-12-minutes BMAD/OpenSpec benchmark. **None may be repeated to Cena as fact.** The Jama Advisor ambiguity-detection claim is explicitly **unconfirmed**.
+- No repository cloned or executed; every mechanism statement comes from reading templates, schemas, definitions and licence text.
+- No schema is committed and no contract is promoted. This is evidence for S2, not a decision.

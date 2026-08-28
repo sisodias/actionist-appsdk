@@ -26,6 +26,7 @@ This map points to high-signal source packets. The generated `source-inventory.j
 
 | Source | Measured contribution | Limits |
 |---|---|---|
+| [Permanent capability source registry](capability-shelf/README.md) | Joins expanded-universe seeds, P03 candidates, recovered Foundry/operator nominations and Bykonz runtime precedents into one identity projection | Registry status is not qualification or admission; evidence classes remain separate |
 | [GitHub expansion report](../research/actionmodel-builder-research-2026-08-26/expansion/outputs/github-expansion-report.md) | 500 unique candidates; 17 industries; 9 capability families | Metadata/reference corpus |
 | [Phase 7 corpus integrity](../research/actionmodel-builder-research-2026-08-26/phase-7/lanes/01-corpus-integrity/outputs/corpus-integrity-report.md) | 1,700 target rows with 270 complete and 1,430 explicit deficits | Completeness invariant was research-specific |
 | [Pair completion forensics](../research/actionmodel-builder-research-2026-08-26/phase-9/lanes/01-pair-completion-forensics/outputs/pair-completion-forensics.md) | Proved the 270/1,700 denominator and evidence gaps | Did not execute or qualify repositories |
@@ -61,6 +62,7 @@ This map points to high-signal source packets. The generated `source-inventory.j
 
 | Source | Contribution | Limits |
 |---|---|---|
+| [Design grammar and preference protocol](06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md) | Current join of validity gates, design axes, elicitation rounds, DesignDNA and focused experiments | Exact axis levels, correlations and round policy remain unexecuted |
 | [Local corpus join](../research/actionmodel-builder-research-2026-08-26/phase-8/lanes/02-local-corpus-join/outputs/local-corpus-join-report.md) | Two complementary 21st stores and precise counts | Quality and source readiness vary |
 | [Claude lane synthesis](../research/actionmodel-builder-research-2026-08-26/phase-8/external-opus-inputs/CLAUDE-LANES-SYNTHESIS.md) | Preference learning, UI knobs and deterministic UI findings | Conversation-derived synthesis |
 | [AutoSaaS UI requirements](/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/process/10-ui-component-library-requirements.md) | Required dashboard primitives and metadata | Early minimal registry |

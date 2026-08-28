@@ -1,0 +1,150 @@
+{
+  "part": "P08",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "observed": "2026-08-27",
+  "mode": "research-only",
+  "status": "complete",
+  "admission": "NOT_ADMITTED",
+  "execution": "UNEXECUTED",
+  "counts": {
+    "source_register": 57,
+    "top_companies": 10,
+    "top_repos": 10,
+    "innovation_register": 100,
+    "decisions": 10
+  },
+  "checkpoints": [
+    {
+      "id": "CP1",
+      "name": "Audited local priors read",
+      "status": "done",
+      "detail": "b2b template shelf report, autosaas-method.md, master synthesis (five-area + reuse shapes sections), assumption ledger A15/A32-A35, SISOCRM ownership + Teable briefs, parts.json P08 entry."
+    },
+    {
+      "id": "CP2",
+      "name": "Local shell estate surveyed from source",
+      "status": "done",
+      "detail": "ISSO five-area claim VERIFIED as a compile-time 5-tuple (sidebar-factory.tsx:19-25) with frozen product ids (page-registry.tsx:6) and observed semantic drift across agency/model rails. SISOCRM FROZEN-PAGE-SKELETON read: 11 host pages, ~20 donors, zero donor-named nav entries. AutoSaaS five-area origin traced to line 130-146 with its own caveat and line 283 admitting no extraction."
+    },
+    {
+      "id": "CP3",
+      "name": "Commercial denominator",
+      "status": "done",
+      "detail": "111 products; 24 observed, 87 inferred; top 10 dossiers favouring platform-in-platform precedents. Two identity corrections caught: Copilot is now Assembly; practice.do returns 404."
+    },
+    {
+      "id": "CP4",
+      "name": "OSS denominator",
+      "status": "done",
+      "detail": "104 repos, every licence read from the body via gh api. 28 NOASSERTION resolved. Directus is MSCL-1.0-GPL not BSL; qiankun v3 deleted the 2.x isolation flags; Backstage removed NavItemBlueprint in v1.51.0."
+    },
+    {
+      "id": "CP5",
+      "name": "Innovation register",
+      "status": "done",
+      "detail": "100 candidates across 10 families; top 10 ranked with designed experiments."
+    },
+    {
+      "id": "CP6",
+      "name": "Coverage computation",
+      "status": "done",
+      "detail": "Re-derived from source. Primary-only 5 archetypes = 82.4%. Both primary+secondary: no subset <=7 reaches 80%. case_workflow+portal satisfy only 4/17."
+    },
+    {
+      "id": "CP7",
+      "name": "Shell option matrix",
+      "status": "done",
+      "detail": "6 options x 6 criteria. Option 1 (host page shelf) 25/30; runners-up Option 2 and Option 4 joint at 19/30."
+    },
+    {
+      "id": "CP8",
+      "name": "Boundary contract, absorb rule, verdicts",
+      "status": "done",
+      "detail": "8 host-owned surfaces; capability-vs-destination rule; A15 rejected as default; 20/80 concept kept, number replaced with 320px + collapse rule."
+    },
+    {
+      "id": "CP9",
+      "name": "Packet written",
+      "status": "done",
+      "detail": "8 required files in the owned run dir."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "BLK-00",
+      "name": "Denominator discrepancy",
+      "status": "RESOLVED by honest reframing (not by padding)",
+      "owner": "lane_owner",
+      "detail": "Was: report asserted 111 commercial / 104 OSS while files held 10 / 10. RESOLVED \u2014 the agent reframed SRC-C13/SRC-O18 to state the figures are SURVEYED breadth held in the research lanes' returns, with only the top 10 of each RECORDED as per-row dossiers here, and added lane-state.counts_note fixing the quotable form: 'surveyed ~111, recorded 10'. Innovations separately reconciled 30 -> 100 rows on disk. No padding was done and none was asked for. Lane-owner verified the reframing is present in both source records and in counts_note.",
+      "resolved_by": "s1l3-p08 agent, verified by lane owner"
+    },
+    {
+      "id": "BLK-01",
+      "name": "Bykonz located",
+      "status": "RESOLVED",
+      "owner": "lane_owner_verified",
+      "detail": "/Users/shaansisodia/SISO_Workspace/bykonz-archive-2026-08-23/ \u2014 independently verified by the lane owner. 32 entries: ~25 bykonz-* workstream dirs (affine-admission, analytics, communications, design-workbench, documents-signing, shared-infra, vps-packaging, w1-thin-vertical, w2-native-dashboard-media, ...), admin UI screenshots at 1440/390, and plane-delivery-candidate. It is an ARCHIVE OF WORKSTREAMS, not a running app. Directory names observed; CONTENTS NOT READ, so its shell topology is unknown and it contributes no shell receipt. Closes the 'needs an operator-supplied path' blocker."
+    },
+    {
+      "id": "BLK-02",
+      "name": "A34 unresolved",
+      "status": "open",
+      "detail": "'The Actionist host can absorb donor identity/settings/navigation cleanly' entered and leaves this run as UNKNOWN. No donor was mounted. Gated behind E3."
+    },
+    {
+      "id": "BLK-03",
+      "name": "No comprehension evidence exists",
+      "status": "open",
+      "detail": "Both research lanes searched for published evidence tying nav topology or area count to task success, comprehension or activation, in commercial and OSS products. None found. Reported as an absence rather than filled with a plausible figure. Consequence: every comprehension score in the matrix is judgement calibrated to precedent, not measurement."
+    },
+    {
+      "id": "BLK-04",
+      "name": "Option 1 feasibility untested",
+      "status": "open",
+      "detail": "The top-ranked option rests on donors rendering below full-page, which no local or external evidence confirms across the six named donors. This is the single largest unpriced risk in the recommendation."
+    },
+    {
+      "id": "BLK-05",
+      "name": "Coverage inputs are judgement",
+      "status": "open",
+      "detail": "The 80% arithmetic is exact but its inputs are the b2b shelf's I-class primary/secondary assignments, which that report itself classes as hypotheses rather than measured demand."
+    },
+    {
+      "id": "BLK-06",
+      "name": "Denominator: surveyed vs recorded",
+      "status": "resolved",
+      "detail": "Lead correctly flagged that prose cited 111 commercial / 104 OSS while files hold 10 + 10. Resolved as a FRAMING defect, not missing data: the enumerations live in the research lanes' returns and were never written as per-row records here. Corrected SRC-C13 and SRC-O18 to say surveyed-not-recorded; reframed the report table to 'Surveyed (breadth)' vs 'Recorded as rows here'. No padding added."
+    },
+    {
+      "id": "BLK-07",
+      "name": "Label receipt challenged by lead \u2014 my receipt upheld",
+      "status": "resolved",
+      "detail": "Lead's P08-SR-055 reported my label->product pairs as unsupported, giving Comms->recon / Chat Feed->recon. Re-verified from raw source: agency/sidebar-config.tsx:66 label:'Team' sits directly above :68 product:'recon' \u2014 sibling keys of one sections[] entry. 'Comms' at :55 is an items[] entry nested INSIDE the earlier Content/intelligence section (:46-64). The lead's extractor crossed the section/item nesting boundary. My pairs stand. Report now states pairs are section-level fields, not nested items[] labels."
+    },
+    {
+      "id": "BLK-08",
+      "name": "SISOCRM inspection blocked by auth failures",
+      "status": "RESOLVED",
+      "owner": "lane_owner",
+      "detail": "SISOCRM inspection COMPLETED on the third attempt (agent recovered after two auth failures) and wrote sisocrm-donor-absorption.md (354 lines). Lane owner independently verified its two load-bearing claims: RAIL_GROUPS 4 groups/13 destinations with Tables as a real rail entry, and all 8 patch line counts (674 total). Outcome: the lane's absorb-vs-preserve rule was FALSIFIED and replaced with a mechanical one, and A07 got its first real measurement."
+    }
+  ],
+  "smoke": "pending",
+  "denominator_actual": {
+    "commercial_rows_on_disk": 10,
+    "oss_rows_on_disk": 10,
+    "innovation_rows_on_disk": 100,
+    "source_register_rows_on_disk": 55
+  },
+  "denominator_claimed_in_report": {
+    "commercial": 111,
+    "oss": 104,
+    "verdict": "NOT RECORDED PER-ROW ON DISK. Both P08 agents assert 111 commercial (24 observed/87 inferred) and 104 OSS (licences read from LICENSE bodies via gh api, 28 NOASSERTION resolved). The lane owner checked every file: top-companies.jsonl=10, top-repos.jsonl=10, and source-register.jsonl's 55 rows are all local-or-other with ZERO per-row web/GitHub surfaces. The surveyed space is credible \u2014 the licence findings (Directus MSCL-1.0-GPL with anti-circumvention and GPL only on the 4th anniversary; NocoBase 5.2 forbidding branding removal; single-spa NOASSERTION resolving to plain MIT) are too specific to be invented \u2014 but a count that exists only in prose is NOT a denominator. Quote the 10+10 dossiers and the surveyed space separately; never quote 111/104 as recorded evidence.",
+    "innovations_reconciled": "30 -> 100 rows on disk after query; the ~100 target IS met there."
+  },
+  "depth_contract": "PARTIAL. Innovations MET (100 rows, 10 ranked). Commercial and OSS delivered as high-quality TOP-10 DOSSIERS ONLY (10 rows each; 8 and 10 observed). The 111/104 denominators are asserted in prose and unrecorded on disk \u2014 reported as a shortfall, not resolved in the packet's favour.",
+  "counts_note": "111 and 104 are SURVEYED breadth held in the research lanes' returns; this packet RECORDS the top 10 of each. Quote as 'surveyed ~111, recorded 10' / 'surveyed ~104, recorded 10'. Never quote 111/104 as recorded rows.",
+  "headline_findings": [
+    "SISOCRM estate falsified the lane's absorb-vs-preserve rule: the axis is CASCADE-AND-SESSION COUPLING, not capability-vs-destination. A07 is false as a universal (iframe preserve 17-62 patch lines; identity+data absorption 273 lines/9 files incl. a changed public API regex). 'Zero donor-named nav entries' is false as built \u2014 Tables is a rail destination."
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P13",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "recorded": "2026-08-27",
+  "owner": "ACTIONIST-S1-L5-RUNTIME",
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "implementation_authorized": false,
+    "promotion": "unpromoted"
+  },
+  "decisions": [
+    {
+      "id": "D-P13-01",
+      "statement": "Bounded editing is limited by the least-bounded channel, not by the edit verb set",
+      "state": "accepted",
+      "support": "30-surface census: all seven verbs near-universal; three boundary postures; every AI builder shows unbounded fallthrough",
+      "falsifier": "A system with an ungated chat channel nevertheless preserves compositional properties under audit",
+      "evidence_class": "observed_behavior"
+    },
+    {
+      "id": "D-P13-02",
+      "statement": "Store intent, not mutation; upgrade safety is a property of what was stored",
+      "state": "accepted",
+      "support": "No surveyed surface durably records why; coordinate-bound edits cannot survive node movement",
+      "falsifier": "Stored intents fail to re-resolve on a real minor-version upgrade",
+      "evidence_class": "observed_behavior"
+    },
+    {
+      "id": "D-P13-03",
+      "statement": "Out-of-bounds edits must be unrepresentable, not merely blocked",
+      "state": "accepted",
+      "support": "Storyblok whitelists and Power Apps managed layers are the only architecturally sound posture observed",
+      "falsifier": "A donor whose editable surface cannot be typed without rewriting it",
+      "evidence_class": "observed_behavior"
+    },
+    {
+      "id": "D-P13-04",
+      "statement": "Layer separation is necessary but not sufficient for upgrade safety",
+      "state": "accepted",
+      "support": "Verified: Shopify OS2.0 settings layer reportedly wiped on theme update, Mar 2026, two independent merchant reports plus staff acknowledgement of receipt",
+      "falsifier": "A per-upgrade snapshot/diff gate proves unnecessary across a representative donor set",
+      "evidence_class": "observed_behavior"
+    },
+    {
+      "id": "D-P13-05",
+      "statement": "Adopt `deferred` as a fourth edit outcome",
+      "state": "accepted",
+      "support": "Local siso-ui-base gate reports DNA-overridden values as deferred without failing the run",
+      "falsifier": "Clients cannot distinguish deferred from denied in practice",
+      "evidence_class": "first_party_docs"
+    },
+    {
+      "id": "D-P13-06",
+      "statement": "Open Design is not a live foundation",
+      "state": "accepted",
+      "support": "opendesigndev org last activity 3 Sep 2024; nothing 2025-2026; open-design.ai is an unrelated agent wrapper; ODA is unrelated CAD/BIM",
+      "falsifier": "Evidence of active 2026 maintenance on the Open Design Engine or Octopus spec",
+      "evidence_class": "observed_behavior"
+    },
+    {
+      "id": "D-P13-07",
+      "statement": "Data-binding is the highest-risk verb and must be scope-gated",
+      "state": "accepted",
+      "support": "Only verb that alters what data the app touches; market UIs weight it like a style change",
+      "falsifier": "A binding model that provably cannot widen scope regardless of gating",
+      "evidence_class": "inference"
+    },
+    {
+      "id": "D-P13-08",
+      "statement": "Commercial denominator is 30, not ~100 \u2014 depth contract unmet",
+      "state": "recorded_gap",
+      "support": "Account-wide quota terminated the sweep; no padding performed",
+      "falsifier": "A completed continuation wave closes it",
+      "evidence_class": "observed_behavior"
+    }
+  ]
+}

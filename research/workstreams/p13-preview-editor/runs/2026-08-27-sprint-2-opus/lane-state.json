@@ -1,0 +1,85 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane": "S2-L3",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "owner_agent": "ACTIONIST-S2-L3-SHELL-EDITOR",
+  "parent_model": "opus-5[1m]",
+  "subagent_model_policy": "opus_5_only",
+  "subagents_dispatched": 0,
+  "subagent_policy_violations": 0,
+  "recorded": "2026-08-27",
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "implementation_authorized": false,
+    "client_data_used": false,
+    "vendor_login_used": false,
+    "repository_code_copied": false,
+    "external_side_effects": "none",
+    "production_deployment": false,
+    "executed_rollback": false,
+    "wrote_only_owned_paths": true,
+    "sprint_promotion": "unpromoted",
+    "parent_goal_status": "active"
+  },
+  "part": "P13",
+  "title": "Preview, editor and change loop \u2014 Sprint 2 extension",
+  "mode": "contract_synthesis_not_census",
+  "files": {
+    "edit-model.md": {
+      "bytes": 15944,
+      "sha256_16": "3b70e1cbeabbe9d4"
+    },
+    "edit-operation.schema.json": {
+      "bytes": 6714,
+      "sha256_16": "061487480983e364"
+    },
+    "authority-rules.json": {
+      "bytes": 5697,
+      "sha256_16": "c3e9f500616ca773"
+    },
+    "worked-traces.md": {
+      "bytes": 10942,
+      "sha256_16": "e3efb8ed808609ad"
+    },
+    "upgrade-replay-model.md": {
+      "bytes": 5826,
+      "sha256_16": "4ae1206e7c326c9b"
+    },
+    "decision-ledger.json": {
+      "bytes": 5690,
+      "sha256_16": "790ca3e4d933d83a"
+    }
+  },
+  "counts": {
+    "verbs": 7,
+    "substrates": 3,
+    "authority_cells": 21,
+    "anchor_classes": 5,
+    "outcomes": 4,
+    "replay_states": 3,
+    "worked_traces": 3,
+    "decisions": 9
+  },
+  "unknowns": [
+    {
+      "id": "U-5",
+      "statement": "Whether clients accept a bounded surface at all",
+      "severity": "high",
+      "note": "largest commercial risk in P13"
+    },
+    {
+      "id": "U-6",
+      "statement": "No numeric visual-quality threshold exists locally; no automated visual gate claimed"
+    },
+    {
+      "id": "U-7",
+      "statement": "Anchor exportability from intact donors untested"
+    }
+  ],
+  "blockers": [
+    "No editor exists; every trace is designed over observed mechanics, not executed."
+  ]
+}

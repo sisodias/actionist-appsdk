@@ -1,0 +1,347 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P06 research artifact research-report.md"><link rel="icon" href="../../../favicon.svg"><title>P06 · research-report.md · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p06/">P06</a> / Research artifact / research-report.md</div><div class="node-actions"><a class="button" href="../raw/research-report.md" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>research-report.md</h1><p><code>research/workstreams/p06-preference-science/runs/2026-08-27-sprint-1-fable/research-report.md</code></p></div><pre class="artifact-source"># P06 — Design taste and preference learner
+
+Run: `2026-08-27-sprint-1-fable` · Lane: S1-L3 · Part: P06
+Status: research-only, UNEXECUTED, NOT_ADMITTED, unpromoted.
+
+**Authorship note.** This file supersedes a placeholder written by the lane owner at ~16:35,
+when a first delegated worker had produced no output. The owner&#39;s packet was not wrong — its
+best-worst argument is retained and strengthened below — but it declared the two denominators
+`not_built`. They are now built. Where this report and the owner&#39;s original decision ledger
+disagree (comparison format), the disagreement is stated explicitly in §1(a) and in
+`decision-ledger.json` rather than silently resolved.
+
+---
+
+## 0. Read this first — what is verified and what is not
+
+| Register | Rows | Verified (`observed`) | Honest reading |
+|---|---|---|---|
+| `top-repos.jsonl` (OSS + papers) | 119 | 109 | **Strong.** Repos checked via authenticated `gh api`, licences read from LICENSE bodies and CRAN DESCRIPTION, papers verified via arXiv/Crossref with several full-text PDF extractions. |
+| `innovation-register.jsonl` | 110 | 42 | **Adequate.** 42 rows rest on a cited source; 31 are inferred; 27 are explicit hypotheses awaiting test. |
+| `top-companies.jsonl` | 113 | **13** | **WEAK — read the caveat below.** |
+| `source-register.jsonl` | 14 | 12 | Prior-run rows retained; two superseded rows updated in place. |
+
+**The commercial denominator is the weak leg and must not be presented as otherwise.**
+103 surfaces are enumerated, but only 13 carry facts I read on a vendor page or vendor doc.
+57 are marked `hypothesis` — the surface is known to exist, its mechanics are unverified.
+
+There is a structural reason, and it is worth recording because it will recur: **consumer
+style quizzes are client-side JavaScript behind bot protection.** Direct fetches to Stitch
+Fix, Warby Parker, Looka, Behr and Hinge returned 403; Function of Beauty returned a JS shell;
+1000minds and Conjointly returned 404 on the documented paths. Question counts and adaptivity
+for that whole category are **not** obtainable by fetch. Closing this gap requires a real
+browser session stepping through the flows, not more fetch attempts.
+
+What survived that filter is, fortunately, the part that matters most: the two *vendor-
+documented* surfaces (Sawtooth&#39;s MaxDiff manual and Midjourney&#39;s Style Creator docs) are also
+the two most informative for our design.
+
+---
+
+## 1. Resolved decisions
+
+### (a) Comparison format — 4-up gallery with an explicit outside option, best-worst as a pre-registered A/B arm
+
+**This is a genuine, live disagreement inside the lane, and it should reach Cena as one.**
+
+The case for **best-worst** (the lane owner&#39;s original D01) is real and I am not overturning
+it on taste. Naming best and worst among four items recovers **5 of the 6 implied pairwise
+relations** — only the middle pair stays unknown (Wikipedia BWS entry, verified; the
+combinatorial fact is checkable by hand). My own information derivation agrees: best-worst of
+4 carries 3.58 noiseless bits against 2.32 for a 4-up-plus-none, which would cut the round
+count from ~5 to ~3 at a 15% error rate. Sawtooth&#39;s manual independently converges on 4–5
+items per screen. There is also real evidence it is *accessible*: BWS Case 2 has proven usable
+by populations that struggle with conventional discrete choice experiments.
+
+The case for **4-up with an outside option**, which is what I recommend as primary:
+
+1. **Cognitive cost is not linear in information.** Asking for best *and* worst roughly
+   doubles deliberation per screen. Sequential Gallery measured 14.8 s for a *single* pick.
+   Three best-worst screens may cost more wall-clock and more fatigue than five single-pick
+   screens while delivering the same bits.
+2. **&quot;Pick the worst&quot; is hostile in a client-onboarding context.** This is not a survey
+   panel; it is a paying client forming an impression of us during onboarding. Repeatedly
+   asking someone to reject work reads differently from asking what they like. This is a
+   product judgement, not a statistical one, and I flag it as such.
+3. **The model assumption is empirically doubtful.** True MaxDiff assumes the respondent
+   evaluates all n(n−1) ordered pairs and picks the maximum-difference pair. The method&#39;s own
+   authors report they have virtually never met a practitioner who admitted using that
+   strategy; most describe sequential best-then-worst. If we adopt best-worst we must model it
+   as sequential best-then-worst (the owner&#39;s D05 gets this right).
+4. **The marginal rounds saved are small against the ceiling.** Two rounds saved against a
+   15-round cap is not worth the above.
+5. **Our own working prototype already implements 4-up-plus-none**, so it is the cheaper path
+   to a measured result.
+
+**Resolution: ship 4-up with an outside option; pre-register best-worst as arm B.** This is
+falsifier F6. If best-worst converges in materially fewer rounds *without* worse completion or
+satisfaction, switch. The disagreement is cheap to settle empirically and expensive to settle
+by argument, so settle it empirically.
+
+**Rejected:** binary pairwise (~11 rounds at p=0.15, and most sensitive to near-ties);
+full ranking of 4 (heavy, inherits IIA); 9-up (exceeds comfortable simultaneous whole-screen
+comparison — note Sequential Gallery itself dropped from a 5×5 to a 3×3 grid on a 13-inch
+display).
+
+### (b) How many choices — 8–12 rounds, floor 5, ceiling 15; and &quot;7 or 14&quot; is the wrong question
+
+The question as posed in `parts.json` is not well-formed. A minimum only exists relative to
+four things: the size of the knob space, what counts as done, the per-answer error rate, and
+the question format. Fix those and the number falls out; leave any free and &quot;7 or 14&quot; is a UX
+preference in mathematical costume.
+
+**The derivation** (full arithmetic in `first-principles.md` §1–§3):
+
+- 7 knobs at plausible level counts → 36,000 distinct packs → **15.14 bits** prior entropy.
+- But exact identification is the *wrong objective*. The client needs the right
+  neighbourhood, not `radius = 3` over `radius = 4`. Resolving each knob to **±1 level**
+  leaves 11.09 bits deliberately unresolved, so only **4.04 bits** must actually be acquired.
+- Through a binary symmetric channel at a realistic 15% error rate, a 4-up-plus-none screen
+  delivers ~0.91 effective bits → **5 rounds**. At 20% error → 7 rounds.
+- I recommend roughly double that (**8–12**) because the acquisition policy is myopic, early
+  rounds are spent exploring, and correlated knobs make some rounds redundant.
+
+**The cross-check is the strongest part of this result.** Five independent sources land in
+the same 5–15 band:
+
+| Source | Figure | Nature |
+|---|---|---|
+| Sequential Gallery (SIGGRAPH 2020) | mean **5.36 ± 2.69** rounds to satisfaction, 14.8 s/round, tested 5D–20D | user study, n=6 |
+| Sequential Line Search (SIGGRAPH 2017) | 15-iteration budget; &quot;distances become small rapidly in the first **4 or 5** iterations&quot;, at 6D and **7D** | user study |
+| Brochu et al. (NIPS 2007) | **8.56 ± 5.23** clicks vs ~18 non-adaptive | user study, n=5 |
+| Brochu et al. (SCA 2010) | **5.38–8.45** iterations; 20 is &quot;the point at which users start to quit&quot; | user study |
+| **Midjourney Style Creator** | &quot;most styles stabilize after **5–10 rounds**&quot;; past 15 &quot;small and subtle&quot; | **shipped product docs** |
+
+A derivation from first principles and five independent empirical sources agreeing is as
+close to a settled answer as this lane can get without running the experiment.
+
+**On the inherited numbers:** **7 is approximately right by coincidence** (it is near the
+noiseless 4-up-plus-none requirement) but the reasoning usually offered for it is wrong.
+Do **not** justify it with Miller&#39;s &quot;magical number seven&quot; — Miller 1956 is about absolute
+judgment of unidimensional stimuli and immediate memory span, not interface option counts,
+and Miller himself treats the recurrence of ~7 with irony. **14 has no derivation I could find
+or reconstruct.** It sits inside the defensible band, so it is not wrong, but it is not a
+result.
+
+The honest framing for the client: *no paper anywhere gives a &quot;N queries suffice&quot; guarantee
+for our setting.* The defensible statements are Jamieson &amp; Nowak&#39;s average-case `d log n` and
+the 5–15 empirical band. Neither should be upgraded into a sufficiency claim.
+
+### (c) Stopping rule — three conditions, with the fixed count only as a ceiling
+
+Stop when **any** of:
+
+1. **Confidence:** every knob&#39;s posterior interval is within ±1 level **and** the expected
+   information gain of the best available next question is below ~0.25 bits. The second
+   clause matters: a wide posterior that no available question can narrow is a reason to
+   stop, not to continue.
+2. **Ceiling: 15 rounds.** Grounded in two independent observations — Brochu et al. 2010&#39;s
+   20-iteration abandonment point and Midjourney&#39;s &quot;past round 15, changes are small and
+   subtle.&quot;
+3. **User satisfaction:** an always-available &quot;this is right&quot; control. Sequential Gallery used
+   exactly this and measured a mean of 5.36 rounds to it.
+
+**Floor: 5 rounds**, because early apparent convergence is usually the prior, not the data.
+
+**Report confidence per knob, never as one scalar.** Typography usually resolves in two
+rounds; a client may genuinely not care about shadow, and &quot;no preference&quot; is a finding, not a
+failure. A single &quot;87% confident&quot; number would be actively misleading to a technical client.
+
+### (d) TasteProfile → tokens — continuous vector internally, closed pack at the boundary
+
+**Learn a continuous preference vector in knob space; ship a closed, pre-authored, gate-passing
+pack selected by nearest neighbour. Do not ship interpolated tokens.**
+
+- *Continuous internally* because learning &quot;likes pack #17&quot; is not transferable — add a pack
+  and you must re-elicit. A point in knob space lets the catalogue grow, be re-ranked, or be
+  replaced without touching the elicitation model.
+- *Discrete at the boundary* because **an interpolated pack has passed none of gates A–J**.
+  Interpolating between two accessible packs does not yield an accessible pack: the WCAG
+  relative-luminance formula is non-linear in channel values, so the midpoint of two
+  AA-passing palettes can fail AA. This is not a theoretical worry, it follows from the
+  formula.
+
+**This is also the anti-overfitting answer the brief asks for.** Snapping to a catalogue of
+~20–30 packs is a hard regularizer: the output space cannot absorb an overfit from ten noisy
+clicks. Reinforced by hierarchical-Bayes shrinkage toward a population prior (standard
+conjoint practice for exactly this few-observations regime) and a warm-start prior from a
+population aesthetic model — Brochu et al. 2010 measured a learned prior cutting iterations
+from 11.25 to 6.5, the single largest efficiency lever reported anywhere in the applied
+literature.
+
+### (e) Whole screens vs fragments — whole screens, with only the targeted knobs varied
+
+Not a real dichotomy. Render complete, realistic screens (a fragment is not the thing being
+bought, and fragments strip the cross-knob interactions that carry most of the signal), but
+vary only the knobs the round targets and hold the rest at the posterior mean. Otherwise two
+screens differing on all seven knobs yield one bit about a seven-dimensional vector.
+
+This is what the live demo already does — its own copy says later rounds target the
+&quot;least-resolved knob.&quot; The instinct is right and is supported by the optimal-design
+literature.
+
+**The P05 corpus makes this cheap and rigorous.** 8,515 identities as re-themable bundles;
+86.7% of colour-bearing CSS rules already resolve through `var(--token)` and 87.3% of bundles
+carry a standard shadcn `:root` oklch block, so re-theming is a find-and-replace over ~30
+custom properties. Identical structure with varying treatment is the ideal experimental
+article, and holding content constant removes content preference as a confound.
+
+Fragments are reserved for a targeted disambiguation phase only (falsifier F4).
+
+---
+
+## 2. What the denominators actually taught us
+
+Three findings changed the design rather than merely confirming it.
+
+**1. A shipped product has already solved most of this, and its numbers match ours.**
+Midjourney&#39;s Style Creator is an adaptive visual-preference elicitor in production. It uses
+picks *and* non-picks (&quot;the styles you pick (and the ones you don&#39;t!)&quot;), publishes a
+convergence profile (5–10 rounds to stabilise, 10–15 for detail, negligible past 15), and
+outputs a reusable *parameter* rather than an asset. That is our architecture, shipped.
+We should diverge on exactly one point: Midjourney explicitly makes skipping non-informative
+(&quot;skipping does not affect your style development&quot;), whereas the outside option should be weak
+negative evidence against all shown cards.
+
+**2. The most important commercial evidence is a negative result.**
+Pinterest **removed** onboarding interest selection as a retrieval signal, because it &quot;skewed
+heavily toward dominant interests&quot; and was &quot;static, not evolving with behavior,&quot; replacing it
+with clusters derived from actual engagement. Netflix documents the same shape: initial picks
+are &quot;superseded&quot; once real engagement begins. Two of the largest personalisation systems in
+the world found stated onboarding preference decays against revealed behaviour.
+
+The implication is not to abandon elicitation — we have no behavioural history at pack-choice
+time, which is precisely the cold-start case elicitation exists for. The implication is that
+**the profile must be treated as perishable**: prefer cheap explicit re-elicitation over
+assuming permanence, and treat client approval or rejection of delivered work as the
+higher-quality signal it is.
+
+**3. Sawtooth&#39;s manual gives the only hard sizing formula in commercial practice.**
+Quoted verbatim from the vendor: display &quot;four or five items at a time,&quot; ask enough sets &quot;such
+that each item has the opportunity to appear from three to five times per respondent,&quot; via the
+formula **`3K/k`**. Beyond ~5 per screen &quot;the gains in precision of the estimates are minimal.&quot;
+It is a formula for *item scaling*, not for locating a point in continuous knob space, so it
+maps to us by analogy rather than identity — but the 4–5-per-screen guidance independently
+corroborates our 4-up recommendation from a completely different tradition.
+
+And one licence trap of the kind this project was explicitly warned about: **`sublee/trueskill`
+(803 stars) shows a BSD badge, but the LICENSE body reads &quot;Microsoft permits only Xbox Live
+games or non-commercial projects to use TrueSkill(TM). If your project is commercial, you
+should find another rating system.&quot;** GitHub&#39;s API reports only `NOASSERTION`. Disqualified for
+Cena&#39;s paid work; `openskill.py` (MIT) is the clean substitute. In the other direction,
+`huawei-noah/HEBO` shows a bare `NONE` badge but carries a real MIT licence one directory down.
+Badges were wrong in both directions.
+
+---
+
+## 3. Industry connection
+
+The 17 industries change elicitation in three material ways.
+
+**Regulated and conservative industries should have the stimulus space pruned before
+elicitation, not learned.** Healthcare (PHI), law firms (privilege), insurance and mortgage
+(regulated document authority), accounting — these should be seeded from a low-chroma,
+low-motion region. The mechanism to copy is Sawtooth ACBC&#39;s **must-have / unacceptable**
+cutoffs: once a constraint is identified, all further concepts satisfy it. A hard prune is
+categorically better than learning a client&#39;s non-negotiables as a soft preference. The guard
+is that the prior must be overridable within ~3 rounds so it remains a starting point, not a
+cage.
+
+**The dual-audience problem is real, unsolved, and affects 6 of 17 industries.** `portal` is
+the secondary archetype for six industries, and in those the person choosing is not the person
+using: a property-management tenant portal serves &quot;a distinct untrusted identity&quot;; for MSPs
+&quot;per-client tenancy is the product.&quot; We would be eliciting from the operator while the
+end-user bears the design. Nobody in the commercial denominator has solved this. Naming it now
+prevents shipping a system that confidently optimises for the wrong person.
+
+**Density preference is archetype-conditional.** `case_workflow` is primary for 6 of 17
+industries and `portal` secondary for 6 — two archetypes carry most catalogue demand, and a
+dense case-workflow console and a sparse client portal have opposite density expectations.
+Conditioning density on archetype is the cheapest useful form of per-context modelling.
+Full per-context profiles (the `parts.json` open question) multiply parameters by contexts and
+directly worsen the sample-size problem; a single profile with small learned **context offsets**
+is the preferred form.
+
+---
+
+## 4. Experiment protocol and decision gates (specified, NOT implemented)
+
+Run in this order. Each gate can stop the lane.
+
+**Gate 0 — Perturbation tolerance (falsifier F1). Run first, it is cheapest and most load-bearing.**
+Show 20 clients a converged pack and a ±1-level perturbation. *Pass:* clients cannot reliably
+distinguish or do not care. *Fail:* the ±1 tolerance argument in §1(b) collapses, the bit
+requirement returns toward 15.14, and round counts roughly triple. Everything downstream
+assumes this gate passes.
+
+**Gate 1 — Knob correlation (falsifier F3).**
+Measure the knob-preference correlation matrix over ≥30 clients. *Pass:* effective
+dimensionality below 7, which is the precondition for Jamieson &amp; Nowak&#39;s `d log n`. *Fail:*
+near-identity correlation means no dimensionality saving and the round budget must rise.
+
+**Gate 2 — Preference stability (falsifier F7). The one that kills rather than adjusts.**
+Re-run elicitation with a subset of clients after two weeks; measure per-knob agreement.
+*Pass:* agreement materially above chance. *Fail:* preference is constructed, not measured
+(Slovic 1995), and no amount of elicitation precision matters. Test early and cheaply.
+
+**Gate 3 — Simulate-to-size.**
+Monte Carlo power analysis over synthetic clients under a BT likelihood at varying error
+rates, to settle the round count empirically rather than by argument (`skpr` demonstrates the
+approach). Since no paper gives a sufficiency guarantee for our setting, this is the only route
+to a defensible number.
+
+**Gate 4 — Format A/B (falsifier F6).**
+Arm A 4-up-plus-none, arm B best-worst-of-4, arm C non-adaptive orthogonal design as control.
+Measure rounds to convergence, completion rate, wall-clock, and satisfaction. Settles §1(a).
+
+**Gate 5 — Neighbour discrimination (falsifier F5).**
+Show the client their selected pack alongside the 2nd and 3rd nearest, unlabelled. *Fail
+(cannot pick own above chance):* catalogue denser than perception. *Fail (reliably prefer a
+neighbour):* the knob-space distance metric is mis-weighted.
+
+**Gate 6 — The system-level holdout. Non-negotiable.**
+Compare elicited packs against an industry-default static pack on client acceptance. Per
+Spotify Engineering, a personalisation system is &quot;a feature you&#39;ve built, not an experimental
+method&quot; — without this holdout we cannot claim the learner works at all. This is likely the
+binding constraint, since it needs enough clients for a powered comparison.
+
+**Instrumentation throughout:** per-round drop-off (Brochu&#39;s 20-iteration quit point),
+time-per-round (Sequential Gallery&#39;s 14.8 s benchmark), outside-option rate, consecutive-
+outside-option events, and pack-collision rate as a catalogue-coverage signal.
+
+---
+
+## 5. Top blockers and open questions
+
+1. **The commercial denominator is 13/103 verified.** Consumer style quizzes are JS behind bot
+   protection and are not fetchable. Needs a browser session, not more fetching. Until then,
+   the market-coverage leg of this packet is thin and must be described that way.
+2. **No sufficiency guarantee exists for our setting.** The 8–12 recommendation is a
+   derivation plus five converging empirical sources, not a theorem. Gate 3 must convert it
+   into a measured number before it is quoted to Cena as anything firmer.
+3. **The dual-audience (operator vs end-user) problem is unsolved** and affects 6 of 17
+   industries. No prior art found. This is a genuine design gap, not a research gap.
+4. **Knob independence is assumed, not measured** (Gate 1). The whole few-rounds argument rests
+   on effective dimensionality being below 7.
+5. **1000minds PAPRIKA could not be verified** (404 on both attempted paths). Its
+   transitivity-based pair-elimination is potentially directly applicable and should be
+   verified before the format decision is frozen.
+6. **Our own demo&#39;s convergence claims are unmeasured.** `actionist-taste.pages.dev` asserts
+   &quot;~10 picks instead of ~50&quot; with nothing behind it. That number must not be recycled into a
+   client deliverable.
+
+## 6. Writing rules carried forward
+
+Four claims that would not survive a technical client&#39;s scrutiny, recorded so they are not
+made accidentally:
+
+- **Do not cite Miller 7±2** to justify gallery size. It is about absolute judgment and memory
+  span, not interface options.
+- **Do not cite the jam study** as a design principle. Scheibehenne et al. (2010) meta-analysed
+  63 conditions across 50 experiments (N=5,036) and found D = 0.02, CI₉₅ [−0.09, 0.12] —
+  choice overload does not robustly replicate.
+- **Do not quote an accuracy number** before measuring on our own sample. No published
+  benchmark measures our task.
+- **Do not quote a coefficient from Lindgaard 2006.** The abstract says only &quot;highly
+  correlated&quot;; circulating values such as r = .88 could not be confirmed.
+</pre></div></main></body></html>

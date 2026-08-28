@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P02 research artifact first-principles.md"><link rel="icon" href="../../../favicon.svg"><title>P02 · first-principles.md · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p02/">P02</a> / Research artifact / first-principles.md</div><div class="node-actions"><a class="button" href="../raw/first-principles.md" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>first-principles.md</h1><p><code>research/workstreams/p02-outcome-product-spec/runs/2026-08-27-sprint-1-fable/first-principles.md</code></p></div><pre class="artifact-source"># P02 — first principles: outcome and product specification
+
+Run `2026-08-27-sprint-1-fable` · lane S1-L1 · observed 2026-08-27
+Status: research only. No implementation, no schema committed.
+
+## 1. The irreducible problem
+
+A ProductSpec exists to answer one question later, under dispute: **did we build the right thing?**
+
+Every other property people want from a spec — readability, completeness, traceability — is instrumental to that. This makes the defining requirement *falsifiability*: a spec that cannot be proven wrong cannot settle the question it exists to settle.
+
+&gt; Convert what a client said into statements that can each be shown true or false about a delivered system, without naming how the system is built.
+
+The two halves of that sentence pull against each other, and that tension is the whole design problem. Getting statements out of a vague human favours loose natural language. Making statements checkable favours rigid structure. **The survey&#39;s central finding is that the entire industry has resolved this tension by picking a side.**
+
+## 2. The gap, stated precisely
+
+Across 51 commercial surfaces and 60 OSS projects, **elicitation and computed falsifiability are disjoint**. The precise statement, after a verification pass corrected an overreach: no *commercial* surface does both, and the two OSS projects that do (`spec-kit`, `OpenSpec`) combine them by convention with **no enforcing engine** — nothing prevents an agent emitting a spec with zero clarification markers and shallow scenarios. The gap is in enforcement, not in ideas:
+
+| Family | Elicitation | Falsifiability |
+|---|---|---|
+| AI-PRD tools (9) | Good — extracts something from a vague human | None — output is prose nobody can fail |
+| App-builder intake (13) | Good — conversational, low friction | None — task lists say what will be done, never what must be true |
+| Requirements management (11) | None by design — schema first, authors fill it | High — typed links, coverage, baselines |
+| BDD/acceptance (8) | None — assumes the requirement arrived | Highest — the document *is* the test |
+| OSS spec-driven (18) | Partial — templates and prompts | Partial — structure without an enforcing engine |
+
+Nothing surveyed does both. This is not a market gap in the marketing sense; it is a structural observation with a clear implication: **elicit *into* a falsifiable structure**, rather than eliciting freely and formalising afterwards. The formalisation pass is where fidelity dies.
+
+## 3. Objectives
+
+1. Every requirement is individually checkable against a delivered system.
+2. Gaps in understanding are structurally visible, countable, and block promotion.
+3. The spec remains implementation-independent until composition.
+4. What was agreed is retrievable as an object, not reconstructed from email.
+5. The client can read and accept it without learning a notation.
+
+## 4. Constraints
+
+| Constraint | Source | Consequence |
+|---|---|---|
+| Requirements must stay implementation-independent | framework invariant 3 | The spec may not name repos, databases or frameworks; needs mechanical enforcement |
+| Specs degrade in long agent contexts | Lovable&#39;s own documented admission | Spec must be selectable clause-by-clause, not a blob pasted into a prompt |
+| Tool death strands formats | SpecFlow discontinued; Gherkin survived | Canonical form must be plain, documented, and readable by something other than Actionist |
+| Clients cannot state abstract requirements | Cucumber formulation practice | Elicit concrete examples, generalise afterwards |
+| Cold start is Actionist&#39;s likely condition | BuildBetter useless without a call corpus | Evidence-grounded spec generation cannot be the only path |
+| No validated demand exists | phase-2 `validated_demand=U` for all 17 | Acceptance criteria cannot be calibrated on prior outcomes |
+
+## 5. Invariants
+
+1. **Every requirement carries a provenance pointer** to the client utterance or evidence item that produced it.
+2. **Every requirement has a computed coverage state**, starting `UNCOVERED`.
+3. **Ambiguity is written into the artifact at the point of ambiguity**, carrying candidate answers.
+4. **No implementation choice appears in the spec.**
+5. **Acceptance is an explicit, blocking, baselined event.**
+6. **Assumptions made where the client was silent are recorded as assumptions**, never as requirements.
+7. **Spec content quoted from client material is data, not instructions** to a downstream build agent.
+
+## 6. The synthesised minimum ProductSpec
+
+Derived backwards from what composition and verification actually need, not forwards from documentation habit:
+
+```text
+ProductSpec
+├── outcome            one sentence: the measurable business change
+├── buyer + terminal owner   who pays, who is accountable for the workflow
+├── workflow           steps, actors, handoffs (from ClientContext evidence)
+├── requirements[]     EARS-slotted statements:
+│     ├── slots: {precondition?, trigger?, system, response+}
+│     ├── atom          which of the 12 atoms it instantiates
+│     ├── authority     who may approve any side effect
+│     ├── provenance    → client utterance / evidence item
+│     ├── coverage      UNCOVERED | COVERED (computed, not asserted)
+│     └── evidence_grade  client-stated | observed | inferred | assumed
+├── entities[]         with the client&#39;s own vocabulary preserved
+├── failure_states[]   what happens when the date passes, the record is missing
+├── non_goals[]        first-class, mandatory
+├── assumptions[]      every default chosen where the client was silent
+├── success_criteria[] SC-###: measurable AND technology-agnostic
+├── acceptance[]       generated Given/When/Then, linked Validated-By to requirements
+├── open_markers[]     NEEDS-CLARIFICATION items, each with candidate answers
+└── baseline           signed acceptance event + revision
+```
+
+Two computed gates govern promotion: **zero open markers** and **zero UNCOVERED requirements**. Both are mechanical, both refusable, neither is a judgement call. A documented waiver path is required so the gate does not block low-stakes work — an ungoverned gate gets bypassed, and a bypassed gate is worse than none.
+
+## 7. How confidence and assumptions are represented
+
+The survey answers P02&#39;s open question with unusual clarity. Three prior-art options, in descending attractiveness:
+
+1. **An unfilled mandatory slot** (EARS). Self-evident, needs no scale, and doubles as the next interview question. Strongly preferred.
+2. **An absent provenance pointer** (BuildBetter, inverted): this requirement came from us, not from you.
+3. **A numeric range** (parametric estimation): honest, but only meaningful once scope exists.
+
+**Nothing in 51 commercial surfaces represented confidence as a percentage on a requirement.** That is mild but real evidence that percentages are not useful here — a finding worth more than the absence of a feature usually is, because the surveyed population had every incentive to add one if it sold.
+
+## 8. When a prototype replaces a question
+
+The segment&#39;s implicit consensus, and the clearest answer available to P02&#39;s third open question:
+
+&gt; **Prototype for look-and-feel. Ask for data and behaviour.**
+
+A mockup substitutes recognition for articulation, which is exactly right where the client&#39;s taste *is* the requirement and they cannot describe it. It is worthless for &quot;what happens when the reminder date passes&quot; — only an answer will do. The cautionary limit is a builder that produces a beautiful interface in two minutes with no database and no way to save anything: it answers a question nobody asked while leaving the load-bearing ones untouched.
+
+Boundary case held open: **workflow shape** fits neither cleanly. A prototype can elicit a reaction to a proposed flow, but the reaction may be about the rendering rather than the flow.
+
+## 9. Assumptions (labelled)
+
+| ID | Assumption | State | Falsifier |
+|---|---|---|---|
+| P02-A1 | Elicitation can write directly into EARS slots without breaking conversational flow | hypothesis | Run 5 workflows through slot-directed elicitation; measure client friction and slot fill rate |
+| P02-A2 | EARS, designed for engineered systems, fits fuzzy business outcomes | hypothesis | Attempt EARS encoding of 5 target workflows; count statements that resist the grammar |
+| P02-A3 | Generated Gherkin is faithful enough to serve as the acceptance gate | hypothesis | Human-review generated scenarios against client intent; measure correction rate |
+| P02-A4 | Zero-open-markers is achievable without the model guessing to clear markers | hypothesis | Adversarial check: does marker count fall because ambiguity resolved or because the model got confident? |
+| P02-A5 | Clients will engage with a blocking Accept/Revise gate rather than click through | hypothesis | Measure revision rate; a near-100% accept rate means the gate is ceremonial |
+| P02-A6 | The 12-atom vocabulary covers enough requirements to be worth mandating | hypothesis | Encode 5 workflows; count requirements needing the escape hatch |
+| P02-A7 | A spec structured this richly can still render as one humane client-facing page | hypothesis | Produce both renderings for 5 workflows; test client comprehension |
+
+## 10. Contradictions held open
+
+1. **Rigour vs adoption.** DOORS Next proves a requirements model can be complete enough to prove verification at a frozen point in time, and spends most of its usability budget doing it. BMAD is estimated at ~2 months to master versus ~a day for Spec Kit. Every mechanism this lane recommends adds authoring cost, and the survey contains no measurement of where clients abandon. Held open.
+2. **The best clarification loop found is unauditable.** `ai-prd-generator` has confidence-scored rounds gated at 92/95/100% with multi-judge verification — the most mechanically interesting design in the segment — and it is **proprietary commercial software**, so those claims are marketing behind a licence key. The idea is attractive and the evidence is inadmissible.
+3. **Two-audience artifacts have a documented decay mode.** Gherkin&#39;s justification is that non-technical stakeholders can read it; its well-attested real-world failure is that step definitions become a maintenance burden and scenarios end up written by developers for developers, losing exactly the readability that justified the ceremony. Recommending Gherkin as *generated output* rather than *client-authored input* mitigates this, but does not disprove it.
+4. **Structure makes gaps visible and also makes them easy to fake.** Nothing prevents a model emitting a spec with zero clarification markers because it guessed confidently. The structure is real; the rigour depends on what fills it. This is the strongest argument for an independent ambiguity detector rather than trusting the authoring model.
+
+## 11. Design consequences
+
+1. ProductSpec is a **typed graph with a document as one rendering**, not a document with links added.
+2. **Requirements are EARS-slotted internally and rendered in the client&#39;s own industry vocabulary** externally.
+3. **Acceptance fixtures are generated from the spec at acceptance time**, becoming P14&#39;s verification input without a second authoring pass.
+4. **Repeat engagements produce deltas** (ADDED/MODIFIED/REMOVED) against the last accepted baseline; settled requirements are never re-elicited.
+5. **An implementation-independence linter** enforces framework invariant 3 mechanically rather than by reviewer vigilance.
+6. **Mastering is decided once** — the spec masters acceptance scenarios, not the repo — rejecting the dual-mastering drift the tooling documents as an unresolved tension.
+
+## 12. Unresolved questions for later sprints
+
+- What is the true minimum? This lane derived the spec backwards from P12&#39;s needs, but **P12&#39;s contract is itself unsettled in Sprint 1**. The minimum cannot be closed until S2-L4 defines what the composer consumes.
+- Does EARS survive contact with five real workflows? Designed as the lane&#39;s primary falsifier; **not run** — the five-workflow proving harness is specified, not executed.
+- Who owns the waiver path on the promotion gates?
+- How is spec expiry set without engagement data to calibrate the window?
+- Can generated Gherkin be trusted enough to skip human formulation review at any scope size?
+</pre></div></main></body></html>

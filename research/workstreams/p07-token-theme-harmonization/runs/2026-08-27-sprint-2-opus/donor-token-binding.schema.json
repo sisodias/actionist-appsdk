@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "actionist.p07.donor-token-binding.v1",
+  "title": "Actionist donor token binding",
+  "description": "One instance describes how ONE donor surface binds to the Actionist semantic token contract. The schema encodes P07's invariants as constraints rather than prose: encoding conversion is required when encodings differ, :root scoping is forbidden, a dark mirror is mandatory, and a cross-origin frame may not claim parity.",
+  "part": "P07",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "lane": "S2-L2",
+  "observed": "2026-08-27",
+  "status": "proposal",
+  "boundaries": "research-only; no implementation, execution or admission authorized",
+
+  "type": "object",
+  "required": [
+    "binding_id",
+    "donor",
+    "binding_class",
+    "mount_topology",
+    "coherence_ceiling",
+    "scope",
+    "encoding",
+    "mappings",
+    "dark_mirror",
+    "unstylable",
+    "upgrade_fragility",
+    "evidence"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+    "binding_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,63}$",
+      "description": "Stable identifier for this binding. One per donor SURFACE, not per donor -- a donor mounted two ways needs two bindings."
+    },
+
+    "donor": {
+      "type": "object",
+      "required": ["name", "upstream", "version_pin"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "upstream": {"type": "string", "description": "Canonical upstream repository or product URL."},
+        "version_pin": {"type": "string", "description": "Exact commit, tag or release the binding was authored against. A binding is only valid for the pinned version."},
+        "token_system": {
+          "type": ["string", "null"],
+          "description": "The donor's own design-token system if it has one, e.g. 'shadcn/ui'. null when the donor is not token-driven.",
+          "examples": ["shadcn/ui", "material-3", "carbon", null]
+        },
+        "variable_count": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Number of donor variables enumerated from source. Required evidence for a B3 binding: an unenumerated donor cannot be bridged, only overridden."
+        }
+      }
+    },
+
+    "binding_class": {
+      "enum": ["B1", "B2", "B3", "B4", "B5"],
+      "description": "B1 native emission (owned) | B2 source extraction and retokenization | B3 scoped variable bridge | B4 scoped stylesheet override | B5 frame negotiation."
+    },
+
+    "mount_topology": {
+      "enum": ["native", "iframe_same_origin", "iframe_cross_origin", "web_component", "service"],
+      "description": "Structural fact determining which binding classes are physically available. iframe_cross_origin forces B5: custom properties do not inherit across an origin boundary."
+    },
+
+    "coherence_ceiling": {
+      "enum": ["parity", "high", "bounded", "none"],
+      "description": "The honesty field. parity = visually indistinguishable from owned UI. high = bounded only by donor token coverage. bounded = same product, visibly different surface. none = donor renders in its own identity. A B5 binding may NOT declare parity."
+    },
+
+    "scope": {
+      "type": "object",
+      "required": ["selector", "applies_to"],
+      "additionalProperties": false,
+      "properties": {
+        "selector": {
+          "type": "string",
+          "not": {"pattern": "(^|[^a-zA-Z0-9_-])(:root|html)\\s*$"},
+          "description": "The container the binding is written to. :root and html are FORBIDDEN -- global injection leaks donor variable names into the whole host app and collides two namespaces silently.",
+          "examples": [".donor-teable-surface", "[data-am-donor='teable']"]
+        },
+        "applies_to": {
+          "type": "string",
+          "description": "Human-readable description of the DOM subtree this binding governs."
+        },
+        "single_seam": {
+          "type": "boolean",
+          "default": true,
+          "description": "True when this binding is the ONLY place the donor's styling is defined. A donor with styling defined in more than one place is unauditable."
+        }
+      }
+    },
+
+    "encoding": {
+      "type": "object",
+      "required": ["host", "donor", "conversion"],
+      "additionalProperties": false,
+      "properties": {
+        "host": {"enum": ["srgb-hex", "rgb-triplet", "hsl-triplet", "oklch", "hct"]},
+        "donor": {"enum": ["srgb-hex", "rgb-triplet", "hsl-triplet", "oklch", "hct", "unknown", "not_applicable"]},
+        "conversion": {
+          "enum": ["alias", "convert", "authored", "not_applicable"],
+          "description": "alias = donor variable set directly to host variable (ONLY legal when encodings are identical). convert = values transformed into the donor's encoding. authored = bridge values hand-authored in the donor's encoding. not_applicable = no variable-level binding (B5)."
+        },
+        "conversion_method": {
+          "type": ["string", "null"],
+          "description": "Named, pinned conversion. Required when conversion = convert."
+        },
+        "alpha_preserved": {
+          "type": "boolean",
+          "description": "Whether donor values carrying alpha retain it. Dropping alpha is a silent visual change."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "allOf": [
+              {"properties": {"conversion": {"const": "alias"}}},
+              {"not": {"properties": {"donor": {"const": "not_applicable"}}}}
+            ]
+          },
+          "then": {
+            "description": "INVARIANT I5: aliasing is only legal when host and donor encodings are identical. An aliased mismatch parses, renders, and is wrong -- only gate L catches it.",
+            "anyOf": [
+              {"properties": {"host": {"const": "srgb-hex"}, "donor": {"const": "srgb-hex"}}},
+              {"properties": {"host": {"const": "rgb-triplet"}, "donor": {"const": "rgb-triplet"}}},
+              {"properties": {"host": {"const": "hsl-triplet"}, "donor": {"const": "hsl-triplet"}}},
+              {"properties": {"host": {"const": "oklch"}, "donor": {"const": "oklch"}}},
+              {"properties": {"host": {"const": "hct"}, "donor": {"const": "hct"}}}
+            ]
+          }
+        },
+        {
+          "if": {"properties": {"conversion": {"const": "convert"}}},
+          "then": {"required": ["conversion_method"], "properties": {"conversion_method": {"type": "string"}}}
+        }
+      ]
+    },
+
+    "mappings": {
+      "type": "array",
+      "description": "One entry per donor variable bound to a host role. Empty is legal ONLY for B5 (no variable-level binding is possible across an origin boundary).",
+      "items": {
+        "type": "object",
+        "required": ["donor_variable", "host_role"],
+        "additionalProperties": false,
+        "properties": {
+          "donor_variable": {"type": "string", "description": "The donor's own variable name, verbatim from donor source."},
+          "host_role": {"type": "string", "description": "A role name from semantic-token-contract.json. Must be a family with donor_bindable = true."},
+          "mode_specific": {
+            "type": "object",
+            "description": "Per-mode override where a single mapping is insufficient.",
+            "additionalProperties": {"type": "string"}
+          },
+          "alpha": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "verified": {
+            "enum": ["observed", "inferred", "unknown"],
+            "description": "observed = the donor variable was read from donor source. inferred = deduced from the donor's token system. unknown = assumed."
+          }
+        }
+      }
+    },
+
+    "dark_mirror": {
+      "type": "object",
+      "required": ["required", "selector", "coverage"],
+      "additionalProperties": false,
+      "description": "Object rather than boolean: 'we have dark mode' is not a claim, a mirrored selector with measured coverage is.",
+      "properties": {
+        "required": {"type": "boolean"},
+        "selector": {"type": ["string", "null"], "description": "The dark-mode scope selector mirroring scope.selector."},
+        "coverage": {
+          "enum": ["complete", "partial", "none", "donor_native", "not_applicable"],
+          "description": "donor_native = the donor switches its own dark theme by protocol rather than by inherited tokens (B5). This is a synchronization hazard under donor upgrade (U-F)."
+        },
+        "uncovered_roles": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+
+    "unstylable": {
+      "type": "array",
+      "description": "Declared surfaces this binding CANNOT reach. An empty array on a B5 binding is suspicious by construction -- a cross-origin frame always has unreachable surfaces.",
+      "items": {
+        "type": "object",
+        "required": ["surface", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "surface": {"type": "string"},
+          "reason": {
+            "enum": [
+              "cross_origin_boundary",
+              "shader_or_canvas",
+              "baked_literal",
+              "inline_style",
+              "donor_internal_no_token",
+              "would_require_forking_donor_source",
+              "unknown"
+            ]
+          },
+          "note": {"type": "string"}
+        }
+      }
+    },
+
+    "upgrade_fragility": {
+      "enum": ["stable", "selector_coupled", "structure_coupled"],
+      "description": "stable = bound through the donor's own published token names. selector_coupled = depends on donor class names (B4). structure_coupled = depends on donor DOM shape. Consumed by S2-L3's upgrade replay model."
+    },
+
+    "retokenization": {
+      "type": "object",
+      "description": "B2 only. Records the extraction-time rewrite of donor literals to host roles.",
+      "additionalProperties": false,
+      "properties": {
+        "failure_class": {
+          "enum": ["ok", "webgl", "tailwind_v3", "baked_literal", "no_token_block"],
+          "description": "P05's taxonomy, adopted verbatim. webgl is NOT retokenizable by CSS -- colours live in shader uniforms."
+        },
+        "source_available": {"type": "boolean", "description": "False for compiled bundles. A bundle-only component cannot be retokenized at source."},
+        "literals_rewritten": {"type": ["integer", "null"], "minimum": 0},
+        "literals_remaining": {"type": ["integer", "null"], "minimum": 0},
+        "review_required": {"type": "boolean", "description": "True when machine rewrite is insufficient and a human must judge the result (U-B)."}
+      }
+    },
+
+    "frame_negotiation": {
+      "type": "object",
+      "description": "B5 only. What is achievable by protocol when no cascade crosses the boundary.",
+      "additionalProperties": false,
+      "properties": {
+        "channel": {"enum": ["postMessage", "query_param", "donor_theming_api", "none"]},
+        "negotiated": {
+          "type": "array",
+          "items": {"enum": ["mode", "accent", "radius", "font", "density", "locale"]},
+          "description": "What the host can influence. Note what is absent: per-role token parity is not negotiable."
+        },
+        "chrome_suppression": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "mechanism": {"type": "string", "description": "How donor chrome is hidden when framed. Precedent: data-* hide markers plus CSS injected only when framed."},
+            "suppressed": {"type": "array", "items": {"type": "string"}},
+            "retained": {"type": "array", "items": {"type": "string"}, "description": "Donor chrome deliberately kept, e.g. a switcher the host has no replacement for."}
+          }
+        },
+        "escape_available": {
+          "enum": ["same_origin_proxy", "reuse_shape_change", "none", "unknown"],
+          "description": "How this binding could escape the B5 ceiling if the ceiling proves unacceptable. same_origin_proxy is UNKNOWN in the estate (U-E); reuse_shape_change is proven but expensive."
+        }
+      }
+    },
+
+    "gates": {
+      "type": "object",
+      "description": "Which gates apply to this binding and their last recorded result. Source-literal gates B and J do not apply to B3/B4/B5.",
+      "additionalProperties": false,
+      "properties": {
+        "applicable": {"type": "array", "items": {"enum": ["A","B","C","D","E","F","G","H","I","J","K","L","M1","M2","N"]}},
+        "results": {
+          "type": "object",
+          "additionalProperties": {"enum": ["pass", "fail", "not_run", "not_applicable"]}
+        }
+      }
+    },
+
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Receipts. Every load-bearing claim in this binding traces to one.",
+      "items": {
+        "type": "object",
+        "required": ["claim", "state"],
+        "additionalProperties": false,
+        "properties": {
+          "claim": {"type": "string"},
+          "state": {"enum": ["observed", "inferred", "hypothesis", "unknown", "rejected"]},
+          "receipt": {"type": ["string", "null"], "description": "Exact path, file:line, or URL. Required when state = observed."},
+          "sample_size": {"type": ["string", "null"], "description": "Required when the claim quotes a rate. A rate without its denominator is not evidence."}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"state": {"const": "observed"}}},
+            "then": {"required": ["receipt"], "properties": {"receipt": {"type": "string"}}}
+          }
+        ]
+      }
+    }
+  },
+
+  "allOf": [
+    {
+      "if": {"properties": {"binding_class": {"const": "B5"}}},
+      "then": {
+        "description": "INVARIANT I6: a cross-origin frame cannot inherit custom properties, so it cannot reach parity. Declaring parity here is a false claim, not an ambitious one.",
+        "properties": {"coherence_ceiling": {"enum": ["bounded", "none"]}},
+        "required": ["frame_negotiation"]
+      }
+    },
+    {
+      "if": {"properties": {"mount_topology": {"const": "iframe_cross_origin"}}},
+      "then": {
+        "description": "Structural consequence: no cascade crosses an origin boundary, therefore only B5 is physically available.",
+        "properties": {"binding_class": {"const": "B5"}}
+      }
+    },
+    {
+      "if": {"properties": {"binding_class": {"const": "B2"}}},
+      "then": {"required": ["retokenization"]}
+    },
+    {
+      "if": {"properties": {"binding_class": {"enum": ["B3", "B4"]}}},
+      "then": {
+        "description": "A bridge or override needs a real container scope and at least one mapping; otherwise it is an empty claim.",
+        "properties": {"mappings": {"minItems": 1}, "mount_topology": {"enum": ["native", "iframe_same_origin", "web_component"]}}
+      }
+    },
+    {
+      "if": {"properties": {"binding_class": {"const": "B4"}}},
+      "then": {
+        "description": "B4 couples the host to donor class names and DOM structure -- the surface with no stability contract. It cannot be stable by construction.",
+        "properties": {"upgrade_fragility": {"enum": ["selector_coupled", "structure_coupled"]}}
+      }
+    }
+  ],
+
+  "examples_note": "Three worked instances -- one B3 (token-driven native mount), one B2 (component corpus), one B5 (cross-origin intact service) -- are carried in cross-donor-experiments.md rather than inlined here, so the schema stays the contract and the traces stay falsifiable."
+}

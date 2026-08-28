@@ -1,0 +1,90 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane": "S2-L5",
+  "part": "P14",
+  "agent": "ACTIONIST-S2-L5-RUNTIME-LEARNING",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "model": "opus-5[1m]",
+  "subagent_model_policy": "opus_5_only",
+  "subagents_dispatched": 0,
+  "status": "complete",
+  "parent_goal_status": "active",
+  "research_only": true,
+  "implementation_authorized": false,
+  "execution_status": "UNEXECUTED",
+  "admission_status": "NOT_ADMITTED",
+  "admitted_blocks": 0,
+  "promotion_status": "unpromoted",
+  "artifacts": [
+    "runtime-profile-contracts.md",
+    "observability-attribution-contract.md",
+    "release-rollback-contract.md",
+    "worked-traces.md",
+    "packaging-runtime-reconciliation.md",
+    "runtime-profiles.json",
+    "release-manifest.schema.json",
+    "decision-ledger.json",
+    "lane-state.json",
+    "smoke.sh"
+  ],
+  "depth_contract": {
+    "first_principles_stated": true,
+    "consumed_sprint1_without_repeating_survey": true,
+    "machine_readable_contracts": 2,
+    "worked_traces": 4,
+    "deterministic_vs_judgment_vs_human_separated": true,
+    "contradictions_recorded": 4,
+    "rejected_alternatives_recorded": 7,
+    "falsifiers_specified": true,
+    "post_write_smoke": "smoke.sh"
+  },
+  "new_invariants": [
+    "I-P14-7 runtime profile is a claim about ownership, not deployment convenience",
+    "I-P14-8 instrumentability is an admission criterion; attribution class bounds what P15 may conclude",
+    "I-P14-9 recovery horizon computed at release time; shortfall refuses the release",
+    "I-P14-10 rollback rehearsal evidence is per object class, not per release"
+  ],
+  "unresolved": [
+    "AP14-1 five profiles suffice \u2014 hypothesis; iframe-own-origin seam recorded as likeliest falsifier",
+    "AP14-2 ComputeSDK abstraction \u2014 resolved against; the three-way choice remains open and must be explicit",
+    "AP14-5 K long-lived schema versions \u2014 doubtful; not assumed by any Sprint 2 contract",
+    "Vendor rollback claims (Northflank, Datadog Synthetics) unverified",
+    "FireHydrant, Rootly, Bugsnag stability targets, Datadog Error Tracking fingerprinting \u2014 open from Sprint 1",
+    "Duplicate ReleaseManifest defined by both S2-L1 (D18) and S2-L5 \u2014 coordinator must merge",
+    "S2-L5 tier enum missing T0 relative to S2-L1 evidence_tier \u2014 unpatched, seam-owned"
+  ],
+  "refuses_to_claim": [
+    "Nothing has been released, rolled back or rehearsed; admitted_blocks 0",
+    "Every horizon figure quoted is vendor-documented mechanics, not measured Actionist behavior",
+    "The rollback ordering is derived from object dependencies, not observed in an executed rollback",
+    "No SLA page or published postmortem was retrieved for any surveyed vendor"
+  ],
+  "reconciliation": {
+    "s2_l1": "executed",
+    "source_read": "research/workstreams/p04-repo-to-module-framework/runs/2026-08-27-sprint-2-opus/module-contract-family.json (read 2026-08-27 22:12, S2-L1 still working)",
+    "checks": "RC-1..RC-7",
+    "results": {
+      "pass": 4,
+      "partial": 1,
+      "not_modelled": 2
+    },
+    "independent_convergence": [
+      "same 8 rollback objects, derived separately",
+      "minimum-horizon rule identical",
+      "digest pinning + Actionist-owned retention identical",
+      "anti-averaging minimum-across-families identical",
+      "L1 HostContract.observability reproduces the Sprint 1 attribution requirements"
+    ],
+    "defects_raised_against_p04": [
+      "S2L5-P04-001 identity trust model",
+      "S2L5-P04-002 correlated rollback grouping",
+      "S2L5-P04-003 duplicate ReleaseManifest ownership"
+    ],
+    "defects_accepted_against_self": [
+      "tier enum missing T0",
+      "upstream_sync_model not consumed",
+      "correlated grouping modelled only on the signal side"
+    ],
+    "artifact": "packaging-runtime-reconciliation.md"
+  }
+}

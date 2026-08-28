@@ -1,0 +1,188 @@
+{
+  "schema_version": "actionist.three-candidate-solver-pilot.results.v1",
+  "run_id": "2026-08-28-three-candidate-solver-pilot",
+  "solver_version": "actionist.p12.contract-pilot-solver.v1",
+  "input_digest": "sha256:3bb3b20c191d1d3625cfaa7cb56babc9fee0315aad6e23c62e4de43c277f7f50",
+  "exact_run_count": 3,
+  "rule_counts": { "ordered_rules": 22, "distinct_constraints": 19 },
+  "digest_basis": "Run and scenario digests cover the complete in-memory solver results; persisted check rows retain ordered outcomes and missing-field references while omitting repeated explanatory prose.",
+  "runs": [
+    {
+      "run_index": 1,
+      "input_digest": "sha256:3bb3b20c191d1d3625cfaa7cb56babc9fee0315aad6e23c62e4de43c277f7f50",
+      "output_digest": "sha256:f2eab0e3b664a60d84cf4e46611121b06fdeae66d119bf83c570e0bc01117943",
+      "scenario_digests": {
+        "candidate-affine": "sha256:7ad47c23ddf3ebc49cd732760dee451d4b73011a2da8fa1985062e945d631b1f",
+        "candidate-teable": "sha256:4491aa2460baceb16377c659248945ec7fb5e0f5b5aab658812807dec98bdf97",
+        "candidate-chatwoot": "sha256:c1efbefa4953334faf5c18848878830876bd16a8b34826eca816caab5e095d3a",
+        "combined-all-three": "sha256:361ba324c934e28e90bab18d1e574d6af1375615193b145500d0ae0001dd5e02"
+      },
+      "relaxations_applied": 0
+    },
+    {
+      "run_index": 2,
+      "input_digest": "sha256:3bb3b20c191d1d3625cfaa7cb56babc9fee0315aad6e23c62e4de43c277f7f50",
+      "output_digest": "sha256:f2eab0e3b664a60d84cf4e46611121b06fdeae66d119bf83c570e0bc01117943",
+      "scenario_digests": {
+        "candidate-affine": "sha256:7ad47c23ddf3ebc49cd732760dee451d4b73011a2da8fa1985062e945d631b1f",
+        "candidate-teable": "sha256:4491aa2460baceb16377c659248945ec7fb5e0f5b5aab658812807dec98bdf97",
+        "candidate-chatwoot": "sha256:c1efbefa4953334faf5c18848878830876bd16a8b34826eca816caab5e095d3a",
+        "combined-all-three": "sha256:361ba324c934e28e90bab18d1e574d6af1375615193b145500d0ae0001dd5e02"
+      },
+      "relaxations_applied": 0
+    },
+    {
+      "run_index": 3,
+      "input_digest": "sha256:3bb3b20c191d1d3625cfaa7cb56babc9fee0315aad6e23c62e4de43c277f7f50",
+      "output_digest": "sha256:f2eab0e3b664a60d84cf4e46611121b06fdeae66d119bf83c570e0bc01117943",
+      "scenario_digests": {
+        "candidate-affine": "sha256:7ad47c23ddf3ebc49cd732760dee451d4b73011a2da8fa1985062e945d631b1f",
+        "candidate-teable": "sha256:4491aa2460baceb16377c659248945ec7fb5e0f5b5aab658812807dec98bdf97",
+        "candidate-chatwoot": "sha256:c1efbefa4953334faf5c18848878830876bd16a8b34826eca816caab5e095d3a",
+        "combined-all-three": "sha256:361ba324c934e28e90bab18d1e574d6af1375615193b145500d0ae0001dd5e02"
+      },
+      "relaxations_applied": 0
+    }
+  ],
+  "digest_parity": { "input_digests_equal": true, "output_digests_equal": true, "scenario_digests_equal": true, "all_equal": true },
+  "scenario_results": [
+    {
+      "scenario_id": "candidate-affine",
+      "selected_candidate_ids": ["actionist/affine-workspace@0.1.0"],
+      "verdict": "INFEASIBLE",
+      "first_non_pass": { "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail", "field": null, "conflict": ["actionist/affine-workspace@0.1.0", "pilot.marketing-social-agency"] },
+      "rule_outcomes": [
+        { "order": 1, "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail" },
+        { "order": 2, "rule_id": "R-LICENSE", "constraint": "license", "outcome": "pass" },
+        { "order": 3, "rule_id": "R-EVIDENCE", "constraint": "evidence_tier", "outcome": "underdetermined", "missing_field": "QualificationDossier.families_reported.F1_source_identity (actionist/affine-workspace@0.1.0)" },
+        { "order": 4, "rule_id": "R-HOSTVER", "constraint": "host_version", "outcome": "pass" },
+        { "order": 5, "rule_id": "R-RUNTIME", "constraint": "runtime", "outcome": "pass" },
+        { "order": 6, "rule_id": "R-DATAMODE", "constraint": "data_mode", "outcome": "pass" },
+        { "order": 7, "rule_id": "R-TENANCY", "constraint": "tenancy", "outcome": "underdetermined", "missing_field": "CapabilityContract.state_semantics.tenant_model/tenant_key (actionist/affine-workspace@0.1.0)" },
+        { "order": 8, "rule_id": "R-PORTCLOSE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 9, "rule_id": "R-VERSION", "constraint": "version", "outcome": "pass" },
+        { "order": 10, "rule_id": "R-PORTTYPE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 11, "rule_id": "R-NAMESPACE", "constraint": "namespace", "outcome": "pass" },
+        { "order": 12, "rule_id": "R-MIGOWNER", "constraint": "migration_owner", "outcome": "pass" },
+        { "order": 13, "rule_id": "R-IDENTITY", "constraint": "identity", "outcome": "pass" },
+        { "order": 14, "rule_id": "R-NAV", "constraint": "navigation", "outcome": "pass" },
+        { "order": 15, "rule_id": "R-TOKEN", "constraint": "token", "outcome": "underdetermined", "missing_field": "BindingPlan.token_binding.token_paths/resolver_context_id (actionist/affine-workspace@0.1.0)" },
+        { "order": 16, "rule_id": "R-OBSID", "constraint": "observability_identity", "outcome": "pass" },
+        { "order": 17, "rule_id": "R-AUTHORITY", "constraint": "authority", "outcome": "fail" },
+        { "order": 18, "rule_id": "R-IDEMPOTENCY", "constraint": "idempotency", "outcome": "pass" },
+        { "order": 19, "rule_id": "R-CONSENT", "constraint": "authority", "outcome": "pass" },
+        { "order": 20, "rule_id": "R-ROLLBACK", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.donor_revision_recovery_declared (actionist/affine-workspace@0.1.0)" },
+        { "order": 21, "rule_id": "R-HORIZON", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.rollback_plan.objects[].recovery_horizon_seconds (actionist/affine-workspace@0.1.0)" },
+        { "order": 22, "rule_id": "R-GLUE", "constraint": "glue_budget", "outcome": "underdetermined", "missing_field": "BindingPlan.glue_budget.predicted_changed_files/predicted_changed_lines (actionist/affine-workspace@0.1.0)" }
+      ],
+      "relaxations_applied": 0
+    },
+    {
+      "scenario_id": "candidate-teable",
+      "selected_candidate_ids": ["actionist/teable-data-grid@0.1.0"],
+      "verdict": "INFEASIBLE",
+      "first_non_pass": { "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail", "field": null, "conflict": ["actionist/teable-data-grid@0.1.0", "pilot.marketing-social-agency"] },
+      "rule_outcomes": [
+        { "order": 1, "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail" },
+        { "order": 2, "rule_id": "R-LICENSE", "constraint": "license", "outcome": "pass" },
+        { "order": 3, "rule_id": "R-EVIDENCE", "constraint": "evidence_tier", "outcome": "underdetermined", "missing_field": "QualificationDossier.families_reported.F2_shape_and_rights (actionist/teable-data-grid@0.1.0)" },
+        { "order": 4, "rule_id": "R-HOSTVER", "constraint": "host_version", "outcome": "pass" },
+        { "order": 5, "rule_id": "R-RUNTIME", "constraint": "runtime", "outcome": "pass" },
+        { "order": 6, "rule_id": "R-DATAMODE", "constraint": "data_mode", "outcome": "pass" },
+        { "order": 7, "rule_id": "R-TENANCY", "constraint": "tenancy", "outcome": "pass" },
+        { "order": 8, "rule_id": "R-PORTCLOSE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 9, "rule_id": "R-VERSION", "constraint": "version", "outcome": "pass" },
+        { "order": 10, "rule_id": "R-PORTTYPE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 11, "rule_id": "R-NAMESPACE", "constraint": "namespace", "outcome": "pass" },
+        { "order": 12, "rule_id": "R-MIGOWNER", "constraint": "migration_owner", "outcome": "pass" },
+        { "order": 13, "rule_id": "R-IDENTITY", "constraint": "identity", "outcome": "pass" },
+        { "order": 14, "rule_id": "R-NAV", "constraint": "navigation", "outcome": "pass" },
+        { "order": 15, "rule_id": "R-TOKEN", "constraint": "token", "outcome": "underdetermined", "missing_field": "BindingPlan.token_binding.token_paths/resolver_context_id (actionist/teable-data-grid@0.1.0)" },
+        { "order": 16, "rule_id": "R-OBSID", "constraint": "observability_identity", "outcome": "pass" },
+        { "order": 17, "rule_id": "R-AUTHORITY", "constraint": "authority", "outcome": "fail" },
+        { "order": 18, "rule_id": "R-IDEMPOTENCY", "constraint": "idempotency", "outcome": "pass" },
+        { "order": 19, "rule_id": "R-CONSENT", "constraint": "authority", "outcome": "pass" },
+        { "order": 20, "rule_id": "R-ROLLBACK", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.donor_revision_recovery_declared (actionist/teable-data-grid@0.1.0)" },
+        { "order": 21, "rule_id": "R-HORIZON", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.rollback_plan.objects[].recovery_horizon_seconds (actionist/teable-data-grid@0.1.0)" },
+        { "order": 22, "rule_id": "R-GLUE", "constraint": "glue_budget", "outcome": "underdetermined", "missing_field": "BindingPlan.glue_budget.predicted_changed_files/predicted_changed_lines (actionist/teable-data-grid@0.1.0)" }
+      ],
+      "relaxations_applied": 0
+    },
+    {
+      "scenario_id": "candidate-chatwoot",
+      "selected_candidate_ids": ["actionist/chatwoot-inbox@0.1.0"],
+      "verdict": "INFEASIBLE",
+      "first_non_pass": { "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail", "field": null, "conflict": ["actionist/chatwoot-inbox@0.1.0", "pilot.marketing-social-agency"] },
+      "rule_outcomes": [
+        { "order": 1, "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail" },
+        { "order": 2, "rule_id": "R-LICENSE", "constraint": "license", "outcome": "pass" },
+        { "order": 3, "rule_id": "R-EVIDENCE", "constraint": "evidence_tier", "outcome": "underdetermined", "missing_field": "QualificationDossier.families_reported.F1_source_identity (actionist/chatwoot-inbox@0.1.0)" },
+        { "order": 4, "rule_id": "R-HOSTVER", "constraint": "host_version", "outcome": "pass" },
+        { "order": 5, "rule_id": "R-RUNTIME", "constraint": "runtime", "outcome": "pass" },
+        { "order": 6, "rule_id": "R-DATAMODE", "constraint": "data_mode", "outcome": "pass" },
+        { "order": 7, "rule_id": "R-TENANCY", "constraint": "tenancy", "outcome": "fail" },
+        { "order": 8, "rule_id": "R-PORTCLOSE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 9, "rule_id": "R-VERSION", "constraint": "version", "outcome": "pass" },
+        { "order": 10, "rule_id": "R-PORTTYPE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 11, "rule_id": "R-NAMESPACE", "constraint": "namespace", "outcome": "pass" },
+        { "order": 12, "rule_id": "R-MIGOWNER", "constraint": "migration_owner", "outcome": "pass" },
+        { "order": 13, "rule_id": "R-IDENTITY", "constraint": "identity", "outcome": "pass" },
+        { "order": 14, "rule_id": "R-NAV", "constraint": "navigation", "outcome": "pass" },
+        { "order": 15, "rule_id": "R-TOKEN", "constraint": "token", "outcome": "underdetermined", "missing_field": "BindingPlan.token_binding.token_paths/resolver_context_id (actionist/chatwoot-inbox@0.1.0)" },
+        { "order": 16, "rule_id": "R-OBSID", "constraint": "observability_identity", "outcome": "pass" },
+        { "order": 17, "rule_id": "R-AUTHORITY", "constraint": "authority", "outcome": "fail" },
+        { "order": 18, "rule_id": "R-IDEMPOTENCY", "constraint": "idempotency", "outcome": "fail" },
+        { "order": 19, "rule_id": "R-CONSENT", "constraint": "authority", "outcome": "fail" },
+        { "order": 20, "rule_id": "R-ROLLBACK", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.donor_revision_recovery_declared (actionist/chatwoot-inbox@0.1.0)" },
+        { "order": 21, "rule_id": "R-HORIZON", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.rollback_plan.objects[].recovery_horizon_seconds (actionist/chatwoot-inbox@0.1.0)" },
+        { "order": 22, "rule_id": "R-GLUE", "constraint": "glue_budget", "outcome": "underdetermined", "missing_field": "BindingPlan.glue_budget.declared_max_changed_files/declared_max_changed_lines (actionist/chatwoot-inbox@0.1.0)" }
+      ],
+      "relaxations_applied": 0
+    },
+    {
+      "scenario_id": "combined-all-three",
+      "selected_candidate_ids": ["actionist/affine-workspace@0.1.0", "actionist/chatwoot-inbox@0.1.0", "actionist/teable-data-grid@0.1.0"],
+      "verdict": "INFEASIBLE",
+      "first_non_pass": { "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail", "field": null, "conflict": ["actionist/affine-workspace@0.1.0", "actionist/chatwoot-inbox@0.1.0", "actionist/teable-data-grid@0.1.0", "pilot.marketing-social-agency"] },
+      "rule_outcomes": [
+        { "order": 1, "rule_id": "R-SCOPE", "constraint": "scope", "outcome": "fail" },
+        { "order": 2, "rule_id": "R-LICENSE", "constraint": "license", "outcome": "pass" },
+        { "order": 3, "rule_id": "R-EVIDENCE", "constraint": "evidence_tier", "outcome": "underdetermined", "missing_field": "QualificationDossier.families_reported.F1_source_identity (actionist/affine-workspace@0.1.0)" },
+        { "order": 4, "rule_id": "R-HOSTVER", "constraint": "host_version", "outcome": "pass" },
+        { "order": 5, "rule_id": "R-RUNTIME", "constraint": "runtime", "outcome": "pass" },
+        { "order": 6, "rule_id": "R-DATAMODE", "constraint": "data_mode", "outcome": "pass" },
+        { "order": 7, "rule_id": "R-TENANCY", "constraint": "tenancy", "outcome": "underdetermined", "missing_field": "CapabilityContract.state_semantics.tenant_model/tenant_key (actionist/affine-workspace@0.1.0)" },
+        { "order": 8, "rule_id": "R-PORTCLOSE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 9, "rule_id": "R-VERSION", "constraint": "version", "outcome": "pass" },
+        { "order": 10, "rule_id": "R-PORTTYPE", "constraint": "port_closure", "outcome": "pass" },
+        { "order": 11, "rule_id": "R-NAMESPACE", "constraint": "namespace", "outcome": "pass" },
+        { "order": 12, "rule_id": "R-MIGOWNER", "constraint": "migration_owner", "outcome": "pass" },
+        { "order": 13, "rule_id": "R-IDENTITY", "constraint": "identity", "outcome": "pass" },
+        { "order": 14, "rule_id": "R-NAV", "constraint": "navigation", "outcome": "pass" },
+        { "order": 15, "rule_id": "R-TOKEN", "constraint": "token", "outcome": "underdetermined", "missing_field": "BindingPlan.token_binding.token_paths/resolver_context_id (actionist/affine-workspace@0.1.0)" },
+        { "order": 16, "rule_id": "R-OBSID", "constraint": "observability_identity", "outcome": "pass" },
+        { "order": 17, "rule_id": "R-AUTHORITY", "constraint": "authority", "outcome": "fail" },
+        { "order": 18, "rule_id": "R-IDEMPOTENCY", "constraint": "idempotency", "outcome": "fail" },
+        { "order": 19, "rule_id": "R-CONSENT", "constraint": "authority", "outcome": "fail" },
+        { "order": 20, "rule_id": "R-ROLLBACK", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.donor_revision_recovery_declared (actionist/affine-workspace@0.1.0)" },
+        { "order": 21, "rule_id": "R-HORIZON", "constraint": "rollback", "outcome": "underdetermined", "missing_field": "ReleaseManifest.rollback_plan.objects[].recovery_horizon_seconds (actionist/affine-workspace@0.1.0)" },
+        { "order": 22, "rule_id": "R-GLUE", "constraint": "glue_budget", "outcome": "underdetermined", "missing_field": "BindingPlan.glue_budget.predicted_changed_files/predicted_changed_lines (actionist/affine-workspace@0.1.0)" }
+      ],
+      "relaxations_applied": 0
+    }
+  ],
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "donor_source_cloned": false,
+    "donor_source_executed": false,
+    "staged_binding": false,
+    "deployment_performed": false,
+    "admission_status": "NOT_ADMITTED",
+    "admitted_modules": 0,
+    "client_data_used": false,
+    "shared_file_edits": false,
+    "relaxations_applied": 0
+  },
+  "canonical_output_digest": "sha256:f2eab0e3b664a60d84cf4e46611121b06fdeae66d119bf83c570e0bc01117943"
+}

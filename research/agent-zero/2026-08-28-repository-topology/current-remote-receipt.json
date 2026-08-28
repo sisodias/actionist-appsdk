@@ -1,0 +1,141 @@
+{
+  "$schema": "actionist.current-remote-receipt.v1",
+  "schema_version": "actionist.current-remote-receipt.v1",
+  "observed_at": "2026-08-28",
+  "read_only": true,
+  "commands": [
+    "gh api repos/Sinamun/Actionist-AppSDK",
+    "gh api repos/Sinamun/Actionist-AppSDK/branches",
+    "gh api repos/sisodias/great-library-of-siso",
+    "gh api repos/sisodias/siso-foundry",
+    "gh api repos/sisodias/siso-design-system",
+    "gh api repos/sisodias/siso-ui-base",
+    "gh api repos/sisodias/teable",
+    "git -C Actionist-AppSDK status --short",
+    "git -C Actionist-AppSDK rev-parse HEAD",
+    "git -C SISO_Workspace/Great_Library_of_SISO status --short",
+    "git -C SISO_Workspace/Great_Library_of_SISO rev-parse HEAD",
+    "git -C SISO_Workspace/siso-ui-base status --short",
+    "git -C SISO_Workspace/siso-ui-base rev-parse HEAD"
+  ],
+  "github_api": {
+    "Sinamun/Actionist-AppSDK": {
+      "full_name": "Sinamun/Actionist-AppSDK",
+      "private": true,
+      "owner": "Sinamun",
+      "default_branch": "main",
+      "html_url": "https://github.com/Sinamun/Actionist-AppSDK",
+      "license_spdx_id": null,
+      "pushed_at": "2026-08-27T09:47:30Z",
+      "api_size_kb": 15937,
+      "branches": [
+        {"name": "main", "sha": "9f182b63538fc741c69982c2c0b51f38eeb11065", "protected": false},
+        {"name": "research/actionmodel-snapshot-20260827", "sha": "87dbfc544da022c958ef2838483ca4bf97cad200", "protected": false}
+      ]
+    },
+    "sisodias/great-library-of-siso": {
+      "full_name": "sisodias/great-library-of-siso",
+      "private": false,
+      "owner": "sisodias",
+      "default_branch": "main",
+      "html_url": "https://github.com/sisodias/great-library-of-siso",
+      "license_spdx_id": "MIT",
+      "pushed_at": "2026-08-27T04:46:35Z",
+      "api_size_kb": 4034,
+      "local_head": "4ce8da029c90e272e3fe26374c1fb4d2d5c5c86e",
+      "local_status": "dirty_before_lane"
+    },
+    "sisodias/siso-foundry": {
+      "full_name": "sisodias/siso-foundry",
+      "private": false,
+      "owner": "sisodias",
+      "default_branch": "main",
+      "html_url": "https://github.com/sisodias/siso-foundry",
+      "license_spdx_id": "MIT",
+      "pushed_at": "2026-08-07T17:50:49Z",
+      "api_size_kb": 12408,
+      "remote_head": "6cf02e0fb4611ffbeebf9f4c4967626a662b14ef",
+      "great_library_locator_reconciliation_required": true
+    },
+    "sisodias/siso-design-system": {
+      "full_name": "sisodias/siso-design-system",
+      "private": false,
+      "owner": "sisodias",
+      "default_branch": "main",
+      "html_url": "https://github.com/sisodias/siso-design-system",
+      "license_spdx_id": null,
+      "pushed_at": "2026-08-18T19:58:29Z",
+      "api_size_kb": 15732,
+      "publication_status": "candidate_public_no_license_observed"
+    },
+    "sisodias/siso-ui-base": {
+      "full_name": "sisodias/siso-ui-base",
+      "private": true,
+      "owner": "sisodias",
+      "default_branch": "main",
+      "html_url": "https://github.com/sisodias/siso-ui-base",
+      "license_spdx_id": null,
+      "pushed_at": "2026-08-20T16:41:07Z",
+      "api_size_kb": 884,
+      "remote_head": "24b85423220dd5b3730975155f89b4558f1859c3",
+      "local_status": "clean_before_lane"
+    },
+    "sisodias/teable": {
+      "full_name": "sisodias/teable",
+      "private": false,
+      "owner": "sisodias",
+      "default_branch": "siso/main",
+      "html_url": "https://github.com/sisodias/teable",
+      "license_spdx_id": "NOASSERTION",
+      "parent": "teableio/teable",
+      "pushed_at": "2026-08-01T21:31:55Z",
+      "api_size_kb": 69733,
+      "remote_head": "b245a987f8bfb7411d4e2423907b9cbb0a1c9b6b"
+    }
+  },
+  "proposed_repository_checks": [
+    {"name": "sisodias/actionist-framework-registry", "result": "not_observed_via_read_only_gh_api"},
+    {"name": "sisodias/actionist-block-registry", "result": "not_observed_via_read_only_gh_api"},
+    {"name": "sisodias/actionist-blocks", "result": "not_observed_via_read_only_gh_api"},
+    {"name": "sisodias/actionist-block-teable", "result": "not_observed_via_read_only_gh_api"},
+    {"name": "sisodias/actionist-block-affine", "result": "not_observed_via_read_only_gh_api"},
+    {"name": "sisodias/actionist-ui-corpus-data-plane", "result": "not_observed_via_read_only_gh_api"}
+  ],
+  "local_git_receipts": [
+    {
+      "checkout": "Actionist-AppSDK",
+      "remote": "https://github.com/Sinamun/Actionist-AppSDK",
+      "branch": "research/actionmodel-snapshot-20260827",
+      "head": "87dbfc544da022c958ef2838483ca4bf97cad200",
+      "status": "clean_before_lane",
+      "tracked_files": 971,
+      "tracked_regular_bytes": 566516144
+    },
+    {
+      "checkout": "SISO_Workspace/Great_Library_of_SISO",
+      "remote": "https://github.com/sisodias/great-library-of-siso.git",
+      "branch": "main",
+      "head": "4ce8da029c90e272e3fe26374c1fb4d2d5c5c86e",
+      "status": "dirty_before_lane",
+      "tracked_files": 394,
+      "tracked_regular_bytes": 5940740
+    },
+    {
+      "checkout": "SISO_Workspace/siso-ui-base",
+      "remote": "https://github.com/sisodias/siso-ui-base.git",
+      "branch": "main",
+      "head": "24b85423220dd5b3730975155f89b4558f1859c3",
+      "status": "clean_before_lane",
+      "tracked_files": 85,
+      "tracked_regular_bytes": 3478858,
+      "working_tree_observed": "about_3.6G",
+      "lfs_tracked_files": 0
+    }
+  ],
+  "reconciliation_flags": [
+    "Historical Great Library/generated records use Lordsisodia URLs while current API evidence uses sisodias for relevant public repositories.",
+    "Great Library local/generated counts are stale relative to some current local generated files; use immutable receipts rather than prose counts.",
+    "The proposed repository names are plans only; no repository was created or pushed."
+  ]
+}
+

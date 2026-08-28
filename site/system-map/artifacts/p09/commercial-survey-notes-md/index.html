@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P09 research artifact commercial-survey-notes.md"><link rel="icon" href="../../../favicon.svg"><title>P09 · commercial-survey-notes.md · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p09/">P09</a> / Research artifact / commercial-survey-notes.md</div><div class="node-actions"><a class="button" href="../raw/commercial-survey-notes.md" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>commercial-survey-notes.md</h1><p><code>research/workstreams/p09-data-plane/runs/2026-08-27-sprint-1-fable/commercial-survey-notes.md</code></p></div><pre class="artifact-source"># P09 Data &amp; State Plane — Commercial Survey Notes
+
+Run: 2026-08-27 · Sprint-1 lane S1-L4 · 35 rows in `top-companies.jsonl` (10 top10, 23 register, 2 rejected)
+
+## Method
+
+Research only: no cloning, execution, signup, or authenticated access. Every row cites a URL fetched or searched in this run, and `evidence_class` separates what was read from what was reasoned. Three lanes: direct page reads (WebFetch) for pricing/limits/tenancy docs; **LICENSE-body reads over raw.githubusercontent.com** rather than badges or the GitHub API `license.spdx_id` field; and server-side curl + HTML-to-text extraction for pages WebFetch could not reach after a mid-run model usage limit blocked the web tools. Rows sourced by scrape say so in `limitations`, since a scrape aligns tier-to-number less reliably than an interactive read.
+
+**Deviation to flag:** about two-thirds through, WebFetch and WebSearch began returning a hard usage limit. Remaining verification was rerouted through curl rather than stalling or inventing. One surface — Crunchy Data — could not be verified at all: marked `inferred` / `rejected` with an explicit &quot;NOT VERIFIED&quot; note, and it must be re-verified before appearing in anything Cena sees. Elastic Cloud Serverless (404) and Typesense Cloud pricing were likewise never read; those gaps are recorded in the rows.
+
+### The licence-badge trap, quantified
+
+The brief warns that a licence badge is a claim, not a verdict. This run produced five cases where the GitHub API would have misled an automated pipeline:
+
+| Surface | GitHub API reports | Actual LICENSE body |
+|---|---|---|
+| Convex | `NOASSERTION` | FSL-1.1-Apache-2.0 (bars Competing Use) |
+| PowerSync (server) | `NOASSERTION` | FSL-1.1-ALv2 (bars Competing Use) |
+| Inngest | `NOASSERTION` | SSPL v1 + Apache-2.0 future |
+| Redpanda | `None` (null) | BSL 1.1, streaming-service carve-out |
+| Elasticsearch | *no `license` key at all* | Triple AGPL/SSPL/ELv2, x-pack ELv2-only |
+
+Redpanda&#39;s LICENSE sits at `licenses/bsl.md`, not the repo root, which is why tooling reports nothing. Elasticsearch&#39;s is sharpest: the ELv2-only portion is `x-pack`, and document-level security — the actual multi-tenancy feature — lives there. Supabase needed a branch correction too: `master` carries Apache-2.0 while `main` 404s.
+
+## Top-10 rationale
+
+Each of the ten establishes a **distinct architectural or legal fact** for a host federating owned and donor-owned state. Surfaces that merely priced a category well were demoted to `register`, even good ones (Turso, PowerSync, R2, Tinybird, Pinecone).
+
+1. **Neon** — the only Postgres surface where per-tenant *physical* isolation is near-free at rest; recommends project-per-tenant outright, not schema or branch.
+2. **Cloudflare D1** — database-per-tenant at a cardinality nothing else matches (50k/account documented, millions on request), tenancy priced at zero. The 10 GB hard ceiling is the trade.
+3. **Durable Objects** — per-tenant state that is *also* a per-tenant compute and coordination boundary; single-threaded per object gives a serialization point without external locking, which donor-app session and lock state needs.
+4. **Supabase** — the RLS baseline the host must adopt or beat; tenancy enforced below the application layer.
+5. **Convex** — kept for the licence landmine, not the product: reselling a Convex-derived backend is a textbook Competing Use under FSL.
+6. **ElectricSQL** — the strongest precedent for authorization *above* the database. Electric explicitly refuses to codify auth into a database rule system; a proxy sets the shape and client subsets can only narrow, never widen. The most transferable idea here for federating stores you do not control.
+7. **MongoDB Atlas** — quantified proof that collection- and database-per-tenant have a hard ceiling in the document world (collections *and* indexes counted together).
+8. **Redpanda** — BSL 1.1 bars use as a &quot;Streaming or Queuing Service&quot;, explicitly including offerings letting third parties cause topic creation. A multi-tenant event plane could land inside that carve-out.
+9. **Elasticsearch** — the ELv2 hosting-clause trap inside the most commonly assumed-safe search dependency.
+10. **Algolia** — the strongest precedent for handing a *cryptographically tenant-scoped credential* to an untrusted client, with the explicit doc line that per-tenant indices are not needed.
+
+## Workload-shape taxonomy actually observed
+
+Commercial practice distinguishes fewer state classes than architecture diagrams assume. What vendors genuinely separate and price differently: **transactional** (row-shaped, priced by compute-time or query count); **document** (schema-flexible, tenancy bounded by collection/index counts); **analytics** (column-shaped, append-heavy, universally scale-to-zero — ClickHouse Cloud, MotherDuck, and Tinybird all separate compute from storage); **search** and **vector**, which are increasingly one product (Typesense markets against Algolia *and* Pinecone; Atlas and Elastic carry both); **files** (no query or tenancy semantics at all — isolation is purely naming and credential discipline); **events** (ordered, replayable, where partition limits rather than cost constrain topic-per-tenant); **sync**, the genuinely new class, a *subscription* over a filtered subset (Electric shapes, PowerSync sync rules, Convex reactive queries, Zero queries); **workflow** (durable execution state priced per state transition); and **cache**, rarely sold standalone now, absorbed into the actor/edge tier.
+
+The observation that matters for P09: **sync and workflow are the two classes where the vendor owns your state machine, not just your bytes.** Those are where donor federation is hardest, because you cannot point them at a store you do not control.
+
+## Tenancy patterns seen, and why
+
+**Row-level (RLS / discriminator column)** — Supabase (Postgres RLS + `tenant_id`), Atlas (`tenantId` at scale), Algolia (filter embedded in a signed key). Chosen when tenant count is unbounded and per-tenant overhead must be zero. The enforcement point varies enormously in trustworthiness: Supabase enforces in the database engine, Algolia in a signed credential the client cannot alter, Electric in a proxy. All three beat &quot;the application remembers to add a WHERE clause.&quot;
+
+**Schema-per-tenant** — supported nearly everywhere, recommended almost nowhere; Neon explicitly discourages it &quot;unless this is a design you&#39;re already experienced with.&quot;
+
+**Database-per-tenant** — what the edge/embedded tier was built for. D1 and Durable Objects make it free at rest, Turso prices unlimited databases and meters rows instead, Neon reframes it as project-per-tenant. Conversely it is structurally unavailable on Firestore (hard cap of 100 databases per project) and economically bounded on Atlas (~16k tenants at M40+ once indexes count).
+
+**The real dividing line is cost-at-rest, not capability.** Every surface *can* do database-per-tenant. Only those scaling idle tenants to zero — D1, Durable Objects, Neon, Turso — can afford it at high tenant counts. Supabase Pro explicitly does not scale to zero, which is exactly why its guidance is RLS-first.
+
+**Namespace/room/object as tenancy** — Pinecone namespaces (100k on paid tiers), Liveblocks rooms (unlimited, metered on connections and 10 MB per room), Durable Objects, Temporal namespaces (a capacity unit; the pricing page never confirms namespace-to-tenant mapping).
+
+## Innovation / design hypotheses for Actionist&#39;s data plane
+
+- **P09-I-C-1** — Adopt Electric&#39;s inversion: enforce tenancy in a host-owned **gatekeeper that signs a shape**, not in each donor&#39;s schema. Donors keep their native model; the host owns authorization. The only pattern found that works without schema access.
+- **P09-I-C-2** — Make the tenant-scoped credential the federation primitive. Algolia proves a signed, unalterable, filter-bearing key can go to an untrusted client; generalize into one host-issued capability token every donor adapter must honor.
+- **P09-I-C-3** — Enforce the &quot;narrowing-only&quot; invariant globally: client filters are AND-ed with the host filter, never OR-ed. Cheap, and eliminates a whole class of cross-tenant widening bugs.
+- **P09-I-C-4** — Classify every donor store on one axis: *can the host reach its authorization layer?* Yes gets in-database RLS; no gets proxy-enforced shapes. Two adapter kinds, not N.
+- **P09-I-C-5** — Make cost-at-rest the tenancy selection rule. Low-activity tenants live on a scale-to-zero substrate; promote to shared-RLS only when activity justifies always-on compute.
+- **P09-I-C-6** — Treat the per-tenant coordination point as a first-class object (Durable Objects model): one single-threaded actor per tenant for locks, sequencing, and in-flight donor sync state, avoiding a distributed lock service entirely.
+- **P09-I-C-7** — Build a **licence gate in CI** reading LICENSE bodies, not API SPDX fields, failing on FSL/BSL/SSPL/ELv2. Five surfaces here have wrong or absent API fields: a systematic tooling failure, not bad luck.
+- **P09-I-C-8** — Encode carve-outs as policy rules, not prose: Redpanda&#39;s &quot;third parties cause topic creation&quot; and Elastic&#39;s &quot;x-pack only&quot; are testable conditions against a planned architecture.
+- **P09-I-C-9** — Prefer permissive cores at every load-bearing layer where a real choice exists: Electric (Apache-2.0) over PowerSync (FSL) for sync, NATS (Apache-2.0) over Redpanda (BSL) for events, y-sweet (MIT) over Liveblocks for collaborative state.
+- **P09-I-C-10** — Since search and vector have converged commercially, do not build two planes. One retrieval plane with a tenancy filter, chosen for licence safety.
+- **P09-I-C-11** — Separate &quot;state the host owns&quot; from &quot;state the host federates&quot; in the type system, so a query joining across the boundary fails at compile time rather than silently reading a donor&#39;s stale replica.
+- **P09-I-C-12** — Give every donor system a **shape contract**: the tables, columns, and WHERE clause the host may sync. Versioned and reviewable, it becomes the audit artifact for what the host actually reads from an absorbed app.
+- **P09-I-C-13** — Meter tenants on the dimension the substrate meters (rows read/written, not gigabytes) so host pricing cannot invert against supplier cost. A storage-priced host on a row-priced substrate loses money on chatty tenants.
+- **P09-I-C-14** — Use last-write-wins only where truthful. Electric&#39;s LWW is uncustomizable; donors with real edit conflicts need server-authoritative mutations (Zero&#39;s model) or CRDTs (y-sweet), chosen per data class rather than globally.
+- **P09-I-C-15** — Model durable cross-donor operations as workflows with explicit compensation rather than distributed transactions; Temporal&#39;s per-action pricing is also useful design pressure toward fewer, coarser steps.
+- **P09-I-C-16** — Budget egress as a federation tax. Bridging N donor systems multiplies data movement; zero-egress storage and intra-cloud placement are architectural decisions, not procurement ones.
+- **P09-I-C-17** — Set a hard per-tenant storage ceiling deliberately, as D1 (10 GB) and Liveblocks (10 MB/room) do. A ceiling forces early sharding decisions instead of a late migration.
+- **P09-I-C-18** — Treat &quot;vendor owns your state machine&quot; (sync, workflow) as requiring an exit plan on day one. Fauna is the receipt: 3,000+ teams, permanent data deletion, roughly two months&#39; notice.
+
+## Unknowns and gaps
+
+- **Crunchy Data is entirely unverified** (rate-limited mid-run); the reported Snowflake acquisition was never confirmed. Rejected pending re-verification.
+- **Elastic Cloud Serverless pricing** — 404&#39;d; project-to-tenancy mapping unknown.
+- **Typesense Cloud** pricing and its scoped-search-key mechanism were never fetched; only GPL-3.0 was confirmed.
+- **NATS accounts as a tenancy primitive** is inferred from architecture knowledge, not read from docs. It is load-bearing for P09-I-C-9 and should be verified.
+- **Temporal namespace-to-tenant mapping** is explicitly unconfirmed — the pricing page treats namespaces only as a capacity unit.
+- **Firestore per-document write rate** (the classic ~1 write/sec/document limit) was not isolated in the text extraction.
+- **Pinecone namespace-per-tenant** and **Tinybird row-level JWT scoping** are partly inferred from limits and line items rather than a tenancy doc.
+- Not surveyed at all: RDS/Cloud SQL proper, BigQuery, Backblaze B2, S3 itself, Replicache, Redis/Upstash, CockroachDB, SingleStore.
+</pre></div></main></body></html>

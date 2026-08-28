@@ -1,0 +1,255 @@
+# P15 — Continuous corpus and production learning: OSS/GitHub census
+
+**Run:** 2026-08-27-sprint-1-fable · **Lane:** S1-L5 · **Observed date:** 2026-08-27
+**Scope:** research only. No repository was cloned and no code was executed.
+**Companion data:** `top-repos.jsonl` (97 records, one per project)
+
+---
+
+## 1. Method
+
+Every repository in this census was resolved through the authenticated GitHub REST API
+on 2026-08-27, capturing full name, licence field, star count, `archived` flag, and
+`pushed_at`. That gives a first-party observation of repository state rather than a
+badge scraped from a README.
+
+Licence handling followed the project's evidence standard deliberately. The GitHub
+`license.spdx_id` field is a **claim**, not a verdict: it is produced by a licence
+detector that returns `NOASSERTION` whenever a LICENSE file deviates from a known
+template, which happens both for trivially reformatted licences and for genuinely
+restrictive ones. For **all ten top-10 projects**, plus every repository whose API
+field returned `NOASSERTION`, `NONE`, or a copyleft SPDX id, the LICENSE file body was
+fetched and read. That step changed the answer four times, documented in §5.
+
+Production evidence was pursued through first-party sources — the project's own papers,
+docs, and release notes — and is recorded as `production_evidence` per record. Where no
+first-party statement of a named deployment exists, the record says so rather than
+inferring one from corporate provenance.
+
+Archive state was verified by reading the `archived` flag **and** checking last-push
+dates and README self-descriptions, because the flag alone proved unreliable (§5.2).
+
+## 2. Denominator
+
+**The honest count is 97 relevant projects, not 100.** No padding was added to reach a
+round number. The brief allowed for this explicitly, and three candidate slots were
+dropped rather than filled with weak entries:
+
+- Several categories genuinely run out of distinct projects. Registry ranking is the
+  clearest case: after crates.io, PyPI Warehouse, the npm CLI, the npms analyzer, and
+  Homebrew's analytics, the remaining registry code either has no public ranking logic
+  or duplicates one of these.
+- Four originally-listed repositories did not exist at the given path and were resolved
+  to their real locations rather than counted twice: `vivekmyers/openskill.py` →
+  `vivekjoshy/openskill.py`, `splitio/split-javascript-sdk` → `splitio/javascript-client`,
+  `ecosyste-ms/ecosystems` → `ecosyste-ms/packages`, `Homebrew/homebrew-analytics` →
+  `Homebrew/homebrew-formula-analytics`.
+- Four repositories silently redirect to new owners, which the API resolves transparently
+  and which matters for anyone citing them later: `pytorch/botorch` → **meta-pytorch/botorch**,
+  `explodinggradients/ragas` → **vibrantlabsai/ragas**, `great-expectations/great_expectations`
+  → **fivetran/great_expectations**, `opendp/tumult-analytics` (Tumult Labs work now under
+  the OpenDP org).
+
+### Per-category counts
+
+| Category | Count |
+|---|---:|
+| bayesian_preference | 14 |
+| privacy_telemetry | 12 |
+| bandits | 11 |
+| llm_eval_loop | 11 |
+| asset_scoring | 10 |
+| experimentation | 10 |
+| recommender | 10 |
+| drift_monitoring | 8 |
+| edit_learning | 6 |
+| registry_ranking | 5 |
+| **Total** | **97** |
+
+Dispositions: **10 top10**, **77 census**, **10 excluded**. Exclusions are projects that
+are archived, dead, licence-blocked, or categorically mismatched — each carries its
+reason in the `limitations` field.
+
+## 3. Top 10
+
+Ranked by how well the mechanism transfers to *reranking a shelf of software assets from
+sparse production outcomes, with cold starts and privacy constraints*. Licences below
+were read from the LICENSE body, not taken from the API field.
+
+| # | Repo | Licence (verified by reading) | Core mechanism |
+|---|---|---|---|
+| 1 | VowpalWabbit/vowpal_wabbit | BSD-3-clause-style text, Microsoft/Yahoo copyright (API says `NOASSERTION` due to custom header) | Explore → log with propensities → learn → deploy |
+| 2 | meta-pytorch/botorch | MIT, Meta Platforms copyright | GP posterior + acquisition function over few noisy evals |
+| 3 | fidelity/mabwiser | Apache-2.0, full text | Bandit policies incl. neighborhood pooling across contexts |
+| 4 | facebook/Ax | MIT, Meta Platforms copyright | Adaptive experiment loop: trials, arms, metrics |
+| 5 | lucasmaystre/choix | MIT, full text, Lucas Maystre 2015 | Bradley-Terry-Luce strength from pairwise comparisons |
+| 6 | pymc-devs/pymc | Apache-2.0 (header + full text; also embeds MIT AePPL code and 2006-08 Academic Free License copyrights — hence `NOASSERTION`) | Hierarchical partial pooling for cold-start priors |
+| 7 | st-tech/zr-obp | Apache-2.0, full text | Off-policy evaluation from logged propensities |
+| 8 | vivekjoshy/openskill.py | MIT, full text | Bayesian rating (mu, sigma) from sparse comparisons |
+| 9 | lyst/lightfm | Apache-2.0, full text | Item = sum of its content-feature embeddings |
+| 10 | growthbook/growthbook | **Mixed:** MIT Expat core, but `packages/back-end/src/enterprise`, `packages/front-end/enterprise`, `packages/shared/src/enterprise` are under the GrowthBook Enterprise licence | Bayesian probability-to-beat-control gating |
+
+Rationales are in `top10_rationale` per record. The short version of why these ten and
+not others: they are the projects whose *mechanism* survives being moved into a
+tens-of-builds regime. Most of the 97 are either scoring tools that never close a loop,
+or learning systems whose guarantees only arrive at a scale Actionist will not have.
+
+## 4. The five most transferable mechanisms
+
+**1. Propensity logging (VowpalWabbit / Decision Service, reinforced by OBP).**
+Record the probability with which each asset was chosen at the moment of choosing it.
+This one discipline is what makes historical build data counterfactually reusable — it
+lets you later ask "how would a different ranking have performed?" without re-running
+the builds. It costs almost nothing to add at the start and is effectively impossible to
+retrofit, which makes it the highest-leverage item in this entire survey. The Microsoft
+Research deployment (MSN, Complex, TrackRevenue; tens of millions of users; 14-25% lift)
+is the production proof that the pattern works, even though its data volume is nothing
+like Actionist's.
+
+**2. Bayesian optimization over expensive evaluations (BoTorch / Ax).**
+This is the only mature mechanism here whose *explicit design point* is tens of costly,
+noisy observations — which is exactly a build. The GP posterior gives calibrated
+uncertainty per candidate, so explore-vs-exploit becomes a principled acquisition
+decision instead of a hand-tuned epsilon. Meta's own framing is that these tools work
+"without the need for large quantities of data," and the constrained-BO paper exists
+because A/B measurement noise there was on the same order as the effect size — the same
+problem Actionist will have with a handful of builds per asset.
+
+**3. Relative comparisons instead of absolute scores (choix / BTL, OpenSkill).**
+"Asset A adapted more cheaply than asset B on this build" is a far more robust
+observation than "asset A scored 7.3." Bradley-Terry-Luce estimates one strength
+parameter per item with O(n) parameters, and each comparison informs *two* items at
+once, so a usable global ranking needs roughly n·log n comparisons rather than millions
+of events. OpenSkill adds per-item uncertainty (mu, sigma) that doubles as the
+exploration signal for rarely-used assets. Two documented failure modes matter and are
+cheap to design around: the comparison graph must stay connected or strengths are
+unidentifiable, and unbeaten items diverge without regularization.
+
+**4. Hierarchical partial pooling for cold start (PyMC / Stan).**
+This is the principled answer to "new client, new industry, no history." A new client
+starts at the population prior and shrinks toward its own data as builds accumulate,
+with the amount of shrinkage determined by the data rather than by a hand-set rule.
+Every alternative cold-start approach in this survey is a heuristic approximation of
+this.
+
+**5. Represent assets by features, never by opaque id (LightFM).**
+Because a user or item vector is literally the sum of its content-feature embeddings, a
+brand-new asset with known metadata gets a meaningful score at zero interactions,
+inheriting statistical strength from every asset sharing its tags. This is a structural
+property, not a bolt-on cold-start patch, and it maps directly onto a metadata-rich,
+interaction-poor shelf. Lyst's RecSys 2015 paper carries the strongest first-party
+production claim in the recommender category ("We have deployed LightFM in production",
+~8M items).
+
+A sixth, worth noting for the privacy constraint: **mergeable statistical profiles**
+(whylogs) rather than raw event shipping. Profiles are small sketches that can be merged
+across clients, which gives cross-client aggregation without centralizing per-client
+records — and unlike DP or Prio, it does not require large cohorts to be meaningful.
+
+## 5. Verifications that changed the answer
+
+### 5.1 Licence traps
+
+**Arize Phoenix is not open source — excluded.** The API reports `NOASSERTION`; the
+LICENSE body is **Elastic License 2.0**, which states you may not "provide the software
+to third parties as a hosted or managed service" and may not circumvent licence-key
+functionality. That restriction is squarely incompatible with embedding it in a hosted
+client product. This is the same shape as the ELv2 hosting clause the project flagged on
+27 Aug, caught here only by reading the body.
+
+**TrueSkill is licence-blocked for commercial use — excluded.** `sublee/trueskill` shows
+BSD, and the code is BSD. But the LICENSE file opens with a Caution stating Microsoft
+permits the TrueSkill™ algorithm only for Xbox Live games or non-commercial projects,
+and says verbatim: *"If your project is commercial, you should find another rating
+system."* A star count and a BSD badge would have sailed straight past this. OpenSkill
+(MIT, patent-free, rank 8) is the intended replacement and is why it appears in the top
+10 instead.
+
+**Three "MIT" platforms are actually mixed-licence.** GrowthBook, PostHog, and Langfuse
+all report `NOASSERTION` and all use the same pattern: MIT Expat for the core, with
+named enterprise directories carved out under a separate commercial licence
+(GrowthBook's three `enterprise` dirs, PostHog's `ee/`, Langfuse's `ee/`, `web/src/ee/`,
+`worker/src/ee/`). Usable, but not "MIT" without qualification. Langfuse's copyright
+line now reads **ClickHouse, Inc.**, indicating a change of ownership. `dyad-sh/dyad`
+follows the same pattern with `src/pro/`.
+
+**Copyleft that constrains a commercial hosted product:** Unleash (AGPL-3.0),
+libraries.io (AGPL-3.0), ecosyste.ms packages (AGPL-3.0), Plausible (AGPL-3.0), and
+GrimoireLab (GPL-3.0) — all confirmed by reading the full licence text.
+
+### 5.2 Archive-state verifications requested in the brief
+
+| Project | Verified state |
+|---|---|
+| **planout** | **Archived** (`archived=true`, last push 2021-03). LICENSE body is a BSD licence, Facebook 2014. Assignment DSL only — no analysis or learning. |
+| **Wasabi** | **Dead, and the flag lies.** `archived=false`, but last push 2023-05 and the README's own first line states it "is no longer under active development or being supported." Excluded. A case where the metadata badge and the document body disagree, and the body is right. |
+| **npms.io / npms-analyzer** | **Repo not archived, service effectively dead.** Last push 2023-02. The live API returns **HTTP 200** — but every record is frozen around Jan 2023 (lodash `analyzedAt` 2022-12-03; `next` pinned at 13.1.2). A healthy-looking endpoint serving 3.5-year-stale scores is the most dangerous failure mode in this survey: it answers confidently and is wrong. Keep the *methodology*, never the numbers. |
+| **RAPPOR** | **Archived** (`archived=true`, last push 2022-07), Apache-2.0. Chrome deployment to ~14M opted-in respondents/day is **observed** from the CCS 2014 paper; supersession in Chrome is **inferred**, not first-party confirmed. The repo also warns its own `fastrand` module is not cryptographically strong and must not be used in production. |
+| **Tumult Analytics** | **Alive**, contrary to the brief's tentative framing — `opendp/tumult-analytics`, Apache-2.0, last push 2026-08-24. Now under the OpenDP org, with only 16 stars at that path, so it is easy to mistake for abandoned. |
+
+**Bonus finding — CHAOSS Augur is gone.** `chaoss/augur` is archived with 0 stars and no
+resolvable LICENSE file (API returns 404). The entire `augur-*` family under the CHAOSS
+org is archived. **GrimoireLab** (GPL-3.0, actively pushed 2026-08) is the live CHAOSS
+tooling. Any recommendation citing Augur as current community-health infrastructure is
+out of date.
+
+### 5.3 Production-evidence corrections
+
+**MABWiser has the weakest production claim of its tier, and it is ranked 3 anyway.**
+Fidelity's AI Center of Excellence built it and it has two peer-reviewed papers, but the
+README self-describes as a library "for rapid prototyping" and names only downstream
+integrations. There is **no first-party statement of a named production system serving
+Fidelity customers**. It earns rank 3 on mechanism fit — its neighborhood policies pool
+reward across similar contexts, which is the sparse-data move Actionist needs — not on
+deployment pedigree. *Do not tell Cena that Fidelity runs this in production.*
+
+**OpenSSF Scorecard disclaims its own headline number.** The project's docs state that
+"Aggregate scores in particular tells you nothing about what individual behaviors a
+repository is or is not doing," that every check is opinionated, and that the checks are
+heuristics with false positives and negatives. The weighting *is* documented (Critical
+10, High 7.5, Medium 5, Low 2.5) and it does run at real scale (weekly across the 1M
+most critical projects, published to BigQuery). But quoting a repo's X/10 as a quality
+verdict misrepresents what the project says it measures — use the per-probe structured
+results instead. This is the same class of error as the "728 connectors" figure.
+
+**BanditPAM is miscategorized in essentially every bandit list, including the brief's.**
+It uses bandit-style sampling to accelerate k-medoids *clustering*. It is an
+optimization trick, not a feedback loop, and contributes nothing to reranking. Excluded.
+
+## 6. What does *not* transfer, and why that matters
+
+Four otherwise-excellent projects are architecturally committed to volumes Actionist
+will not have: **VowpalWabbit's** own serving regime (thousands of requests/second),
+**OBP's** IPS-family estimators (variance explodes at low N), **Prio/DAP** (secure
+aggregation is only meaningful over large populations; small cohorts leak), and
+**RAPPOR** (noise cancels only in aggregate; its real regime was ~14M respondents/day).
+VW and OBP still earn top-10 places, but strictly for their *mechanisms* — propensity
+logging and pre-deployment policy evaluation — never for their sample-size assumptions.
+
+This is the central tension in P15 and worth stating plainly to the client: the
+privacy-preserving aggregation techniques with the strongest production pedigree (Prio,
+RAPPOR, DP) are the ones **least** suited to tens of builds across a handful of clients.
+Differential privacy noise at that scale swamps the signal entirely. If cross-client
+learning is required at small N, the realistic paths are contractual and architectural —
+mergeable profiles (whylogs-style), feature-level rather than record-level sharing, and
+explicit opt-in — not cryptographic aggregation. **Homebrew's opt-in analytics** is the
+better precedent here than Prio, despite being the less impressive technology (and note
+it is itself archived and carries no LICENSE file).
+
+## 7. Unknowns and limits
+
+- **Production evidence is asymmetric.** Absence of a first-party deployment statement is
+  recorded as `none_found`, which is not evidence of absence — several commercial-lineage
+  projects likely have unpublished internal deployments.
+- **Azure Personalizer's retirement** (the VW/Decision Service commercial descendant) is
+  inferred from lineage, not confirmed from a live first-party page.
+- **RAPPOR's supersession in Chrome** is inferred; the deployment itself is observed.
+- **Licence reading covered the top 10 and all ambiguous cases**, not all 97. Records
+  whose licence came from the API field alone are marked `observed_behavior` rather than
+  `first_party_docs` in `evidence_class`, and say "per API" in `license_observed`. Any
+  project promoted out of the census later needs its LICENSE body read first.
+- **Sub-component licences were not audited.** Several projects vendor code under
+  different terms (PyMC embeds MIT AePPL code; Seldon's `alibi-detect` reports
+  `NOASSERTION` and parts of Seldon's stack use a Business Source Licence, which would
+  need reading before any adoption).
+- Star counts and push dates are a 2026-08-27 snapshot and will drift.

@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "actionist.capability-evidence-state.v1",
+  "title": "Actionist capability evidence state",
+  "description": "Min-gated evidence state and lifecycle for one capability. Sprint 2 P15 proposal. Research only; UNEXECUTED; NOT_ADMITTED; zero instances exist.",
+  "type": "object",
+  "required": ["schema_version", "capability_id", "lifecycle_state", "families", "tier", "tier_rule", "observation_count"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "actionist.capability-evidence-state.v1" },
+    "capability_id": { "type": "string", "minLength": 1 },
+
+    "lifecycle_state": {
+      "enum": ["unproven", "provisional", "proven", "retired"],
+      "description": "unproven is the cold-start default and is NOT a negative judgement. Absence is not a negative signal."
+    },
+
+    "families": {
+      "type": "object",
+      "description": "Per-family evidence tier. The capability tier is the MINIMUM across these, never an average.",
+      "additionalProperties": false,
+      "properties": {
+        "rights_licence": { "$ref": "#/definitions/family" },
+        "tenancy_isolation": { "$ref": "#/definitions/family" },
+        "security_posture": { "$ref": "#/definitions/family" },
+        "adaptation_cost": { "$ref": "#/definitions/family" },
+        "workflow_defects": { "$ref": "#/definitions/family" },
+        "incidents": { "$ref": "#/definitions/family" },
+        "upgrade_burden": { "$ref": "#/definitions/family" },
+        "fit_edit_volume": { "$ref": "#/definitions/family" },
+        "instrumentability": { "$ref": "#/definitions/family" }
+      }
+    },
+
+    "tier": {
+      "enum": ["T1", "T2", "T3", "T4", "UNKNOWN"],
+      "description": "min(families[*].tier). A single T1 family pins the capability at T1 regardless of eight T4s."
+    },
+    "tier_rule": {
+      "const": "minimum_across_families",
+      "description": "Never a weighted average. Averaging would let excellent adaptation cost compensate for unresolved rights."
+    },
+
+    "weakest_family": {
+      "type": "string",
+      "description": "The family setting the tier. When ranking is degenerate (AP15-7), THIS is the useful output: it names the missing evidence."
+    },
+
+    "observation_count": { "type": "integer", "minimum": 0 },
+    "independent_observation_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Observations with distinct cause_id. Ten observations of one correlated event count as one."
+    },
+
+    "posterior": {
+      "type": "object",
+      "description": "Estimator must be honest at n=10: wide intervals must read as 'unproven', not as a confident point estimate.",
+      "additionalProperties": false,
+      "properties": {
+        "estimator": { "enum": ["bradley_terry", "thompson_beta", "hierarchical_prior", "none"] },
+        "credible_interval_low": { "type": "number" },
+        "credible_interval_high": { "type": "number" },
+        "prior_source": { "enum": ["industry_archetype", "uniform", "none"] },
+        "prior_transfer_validated": {
+          "type": "boolean",
+          "default": false,
+          "description": "AP15-3 untested. Until E-P15-3 runs, priors must be weak enough that real observations dominate."
+        }
+      }
+    },
+
+    "attribution_class": {
+      "enum": ["dependency", "service", "endpoint", "deploy", "none"],
+      "description": "Ceiling on what may be concluded about this capability. Bound to P14 admission."
+    },
+
+    "zero_tolerance_breaches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["family", "signal_id", "observed_at"],
+        "additionalProperties": false,
+        "properties": {
+          "family": { "enum": ["rights_licence", "tenancy_isolation", "security_posture"] },
+          "signal_id": { "type": "string" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "description": "Any entry forces lifecycle_state = retired immediately. Never averaged against positive evidence."
+    },
+
+    "retirement": {
+      "type": "object",
+      "description": "Retirement requires a positive reason. Accumulated silence is NEVER a retirement trigger.",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": { "enum": ["zero_tolerance_breach", "sustained_quality_degradation", "operator_decision"] },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } },
+        "retired_at": { "type": "string", "format": "date-time" },
+        "propagated_to_manifests": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Revocation propagates to every composing assembly."
+        }
+      }
+    },
+
+    "exploration_eligible": {
+      "type": "boolean",
+      "description": "True only when every zero-tolerance gate passes and the workload is not regulated. Exploration is over quality, never safety."
+    },
+
+    "research_only": { "type": "boolean", "const": true },
+    "admission_status": { "const": "NOT_ADMITTED" }
+  },
+
+  "definitions": {
+    "family": {
+      "type": "object",
+      "required": ["tier"],
+      "additionalProperties": false,
+      "properties": {
+        "tier": { "enum": ["T1", "T2", "T3", "T4", "UNKNOWN"] },
+        "observation_count": { "type": "integer", "minimum": 0 },
+        "unknown_reason": {
+          "type": "string",
+          "description": "UNKNOWN stays UNKNOWN. It is not scored as zero and not treated as a negative signal."
+        }
+      }
+    }
+  }
+}

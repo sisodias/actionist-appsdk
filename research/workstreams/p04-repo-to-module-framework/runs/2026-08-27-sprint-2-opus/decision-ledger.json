@@ -1,0 +1,72 @@
+{
+  "schema": "actionist.p04.decision-ledger.v1",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "lane": "S2-L1",
+  "part": "P04",
+  "agent": "ACTIONIST-S2-L1-MODULE-FRAMEWORK",
+  "observed_at": "2026-08-27",
+  "status": "research_only; UNEXECUTED; NOT_ADMITTED; admitted_modules=0",
+  "decisions": [
+    {"id":"D-P04-001","decision":"Split the monolithic Block Contract into seven linked records: CapabilityContract, PackagingProfile, HostContract, BindingPlan, QualificationDossier, RegistryRecord, ReleaseManifest.","rationale":"The seven concerns have seven owners changing on seven different clocks. Fusing them lets a proof re-run mutate the semantic interface a composer reads.","separation_rule":"A field belongs to the record whose owner can change it without invalidating the others.","alternatives_rejected":["Keep one contract and document ownership in prose — prose does not prevent the mutation","Split into two (semantic vs evidence) — leaves packaging, host, binding and registry fused"],"state":"proposed","falsifier":"F-SPLIT: a composition is planned from a monolithic contract without the composer reading proof or rights fields","evidence_class":"I"},
+
+    {"id":"D-P04-002","decision":"Carry TWO shape axes, not one: reuse_shape (10 values, architecture) and rights_exposure (4 values, restating S1-S4).","rationale":"Three prior artifacts used three shape vocabularies that were not synonyms. S1-S4 measure how much source is copied (rights/maintenance); the others measure what the module is in the product (architecture). An intact_service copies nothing; a transplant copies source. Merging would have silently deleted the rights-exposure axis.","alternatives_rejected":["Merge into one enum and treat the difference as naming drift — loses an axis","Keep three vocabularies — guarantees cross-lane divergence"],"state":"proposed","falsifier":"Two modules share a reuse_shape and a rights_exposure yet need materially different rights handling","evidence_class":"I"},
+
+    {"id":"D-P04-003","decision":"Add `engine` and `surface` to capability_kind.","rationale":"P03 measured the decisive supply distinction: across 13 case/workflow rows, 7 runnable products exist and every one is copyleft or open-core — clean permissive products: zero — while the permissive candidates (flowable, jBPM) are engine libraries with no UI, identity or workflow. P03 revised this claim twice; collapsing engine and product is the error it caught.","state":"proposed","falsifier":"A clean permissive case/workflow product is found, collapsing Trace C","evidence_class":"E"},
+
+    {"id":"D-P04-004","decision":"Identity pinning precedes rights resolution.","rationale":"Rights work on an unpinned source is wasted because the finding cannot be bound to specific bytes. The Phase 7 corpus records immutable_commit_or_tag NOT_CAPTURED and URLs not independently resolved — it is a nomination layer.","state":"inherited_confirmed","falsifier":"A rights receipt is successfully bound to an unpinned source","evidence_class":"E"},
+
+    {"id":"D-P04-005","decision":"Default donor_settings_policy to donor_rendered_behind_host_nav for v1; treat full remount as a research bet.","rationale":"After a deliberate 33-surface commercial sweep, ZERO render a third party's settings inside host-owned chrome. Zoho One and Microsoft 365 unify at identity and admin and explicitly do not suppress donor chrome. Absence of evidence after a deliberate sweep is not proof of impossibility, but it is not an engineering estimate either.","alternatives_rejected":["Promise a unified settings surface in v1 — no precedent to copy","Mark settings absorption impossible — the sweep does not support that either"],"state":"proposed","falsifier":"F-SETTINGS: one donor's settings render in host chrome with full parity and survive a donor upgrade","evidence_class":"E"},
+
+    {"id":"D-P04-006","decision":"Track the host absorption question as three tiers (identity strong / navigation partial / settings none) rather than one `unknown`.","rationale":"A34 conflates three tiers with very different precedent strength and cost class. Identity has 4 independent commercial forms plus a protocol-proven local spike; navigation has two proven halves; settings has nothing.","state":"proposed","supersedes":"A34 as a single unknown","evidence_class":"E"},
+
+    {"id":"D-P04-007","decision":"The host navigation registry is build-not-adopt.","rationale":"Luigi has the declarative node structure (~45 params, runtime-resolving children, visibleForFeatureToggles, userSettingsGroup) but no contribution model. Backstage has decentralized contribution but emits a React element welded to its own CLI and webpack. Two proven halves, no whole.","state":"proposed","falsifier":"A donor contributes nav declaratively at runtime to an adopted registry, gated by role and entitlement","evidence_class":"E"},
+
+    {"id":"D-P04-008","decision":"Tenant isolation is owned, tested work; no dependency removes it.","rationale":"For a TypeScript host there are effectively no adoptable multi-tenancy frameworks. The maintained ones are language-locked (archtechx/tenancy Laravel 4.4k; citusdata/django-multitenant 822); targeted searches otherwise returned sub-5-star templates. NS-TENANT-01 is the only surgery marked recoverable:false.","state":"proposed","evidence_class":"E"},
+
+    {"id":"D-P04-009","decision":"Place the host idempotency layer INSIDE the rate limiter and auth check.","rationale":"Stripe's rate limiters run BEFORE its idempotency layer, so a 429 under the same key can produce a different result; the same holds for a 401 with a missing key and most 400s. Copying the ordering reproduces the hazard at Actionist's boundary. Whether to cache failure responses is flagged as a deliberate Actionist decision, not an inherited default.","state":"proposed","evidence_class":"E","note":"P11 recorded correcting its own draft invariant here — Stripe caches failures too. The correction is preserved rather than smoothed."},
+
+    {"id":"D-P04-010","decision":"Refuse registry projection for modules whose rights_state is ambiguous or incompatible.","rationale":"Great Library license.status has 3 values and cannot represent the two states that must block reuse. Projecting them as `pending` erases a rights refusal.","alternatives_rejected":["Project as pending and annotate — the annotation is not what a consumer reads","Widen the Great Library enum — not this lane's authority"],"state":"proposed","fixes":"X-4","evidence_class":"E"},
+
+    {"id":"D-P04-011","decision":"Rollback enumerates eight object kinds; the composition horizon is the MINIMUM across objects, computed at release time.","rationale":"Derived twice independently — vendor documentation (Vercel does not revert env vars or configuration; Fly does not revert fly.toml, secrets or migrations) and SISOCRM's operated standard ('Data rollback is separate'), which names a third object no vendor surfaced: a standing alternate UI route. RollbackPlan cannot be a boolean.","state":"inherited_confirmed","evidence_class":"E"},
+
+    {"id":"D-P04-012","decision":"Full repo-to-module automation is rejected; three decisions require a named human.","rationale":"Reuse shape (converts a dependency-update problem into a permanent fork if wrong), migration authority (a product-architecture decision), and admission (implementation_authorized is const:false — not a default, a constant). Automation's deliverable is cheap elimination plus a clean decision packet.","state":"inherited_confirmed","falsifier":"F-DET: shape and migration authority decided mechanically at parity with a named human across ten donors","evidence_class":"E"},
+
+    {"id":"D-P04-013","decision":"Require a shape_decision receipt carrying rejected alternatives.","rationale":"Models are best at exactly the SEMI work — 17 of 28 surgeries. The trap is that SEMI output LOOKS like DET output: a proposed shape and a computed digest are both a short confident string. A shape with no recorded alternatives is not a decision, it is a default nobody noticed.","state":"proposed","evidence_class":"I"},
+
+    {"id":"D-P04-014","decision":"Do not publish an adaptation-cost percentage. Publish the categories and their determinism/cost distribution instead.","rationale":"A07 stays unknown. Measured distribution: 3 of 28 surgeries are cosmetic, 13 boundary, 12 architectural; 6 are irreversible. The line-count delta may be small while the boundary delta is not. The framework's contribution is making 'small in lines, large in boundary' plannable, not estimating it.","alternatives_rejected":["Quote 1-2% from the operator's observation — it is an observation about line count, not boundary"],"state":"proposed","falsifier":"F-COSMETIC: a representative absorption measures >80% of adaptation hours in cosmetic surgeries","evidence_class":"I"},
+
+    {"id":"D-P04-015","decision":"Accept S2-L4 defect P04-L4-001: port-level external_effect is authoritative over the authority_class summary.","rationale":"L4 identified that a module classed read_only may declare a port whose external_effect is not none, and named it the single most likely place for a silent privilege bug. Stricter wins; the disagreement returns UNDERDETERMINED rather than resolving silently. The class-to-session-ceiling mapping stays owned by L4 so there is one truth, not two.","state":"accepted","raised_by":"S2-L4","evidence_class":"E"}
+  ],
+
+  "contradictions_carried": [
+    {"id":"X-3","statement":"The forge/judge pipeline is described as a gate but has no numeric threshold; blessing is a human act. Automated visual gating is not established.","status":"open","owner":"S2-L2"},
+    {"id":"X-7","statement":"An AGPL-3.0 donor is operated as a mounted fork while harvest policy classes AGPL as reference-only. Both are current practice.","status":"reconciled_conditionally","condition":"Holds only if intact_service/intact_fork is accepted as a distribution-distinct shape. If a qualified reviewer rejects that distinction, the packaging axis must be rebuilt.","owner":"named legal reviewer, not this lane"},
+    {"id":"P04-NEW","statement":"The knowledge spine lists 8 reuse shapes; this framework carries 10 (adding intact_fork and reference_only).","status":"resolved_here","action":"The spine should adopt the 10 or state why 8."},
+    {"id":"P04-L4-OPEN","statement":"L4's `stage` ceiling maps to no capability class — a capability may be bound but not executed. This family does not model a staged-but-unexecuted binding state.","status":"open","owner":"convergence coordinator"}
+  ],
+
+  "unknowns_preserved": [
+    {"id":"U-01","statement":"Real adaptation-cost distribution across the 14 categories.","class":"U","next":"Loop 3 host absorption pilot"},
+    {"id":"U-02","statement":"Whether donor settings can render in host chrome at all.","class":"U","next":"Loop 3; must precede any client-facing settings-unification claim"},
+    {"id":"U-03","statement":"Cost per converted module.","class":"BLOCKED","note":"An unmeasured cost is BLOCKED, not zero. No estimate is offered."},
+    {"id":"U-04","statement":"Whether a permissive CMMN/BPMN engine exists on Node, or whether Trace C must pay a JVM sidecar boundary.","class":"U"},
+    {"id":"U-05","statement":"Whether the deterministic elimination layer materially reduces model error and tokens.","class":"U","owner":"S2-L4"}
+  ],
+
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "source_cloned": false,
+    "source_executed": false,
+    "build_run": false,
+    "license_scan_run": false,
+    "deployment_run": false,
+    "client_data_accessed": false,
+    "sprint_1_packets_modified": false,
+    "other_lane_directories_written": false,
+    "parent_goal_status": "active"
+  }
+}

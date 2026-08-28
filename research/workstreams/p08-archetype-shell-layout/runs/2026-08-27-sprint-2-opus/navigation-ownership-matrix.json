@@ -1,0 +1,181 @@
+{
+  "schema_version": "actionist.navigation-ownership.v1",
+  "part": "P08",
+  "run_id": "2026-08-27-sprint-2-opus",
+  "recorded": "2026-08-27",
+  "owner": "ACTIONIST-S2-L3-SHELL-EDITOR",
+  "boundary": {
+    "research_only": true,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "implementation_authorized": false
+  },
+  "layers": {
+    "L0_host_frame": "Actionist application; fixed across every product",
+    "L1_archetype_shell": "nav skeleton of a product kind; varies per archetype",
+    "L2_capability_navigation": "navigation within one host destination; varies per destination",
+    "L3_donor_chrome": "surface a donor draws for itself; varies per donor"
+  },
+  "surfaces": [
+    {
+      "surface": "identity_session",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S1",
+      "rationale": "A surface with its own login is a second identity silo and a second logout bug",
+      "built_receipt": "LANE-AUTH-RESULT.md — Teable login deleted from live path; no Teable cookie or bearer token reaches the browser",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "tenant_switch",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S3",
+      "rationale": "Tenancy is an authority boundary, not a UI control",
+      "built_receipt": "No host switcher UI found; workspaceId threaded at App.tsx:200; Teable's own space switcher deliberately left visible because the host had none",
+      "evidence_class": "unknown",
+      "unknown_id": "U-3",
+      "note": "The only L0 surface with no built implementation, and a donor's chrome is covering for it. First thing a pilot must close."
+    },
+    {
+      "surface": "navigation_rail",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S4",
+      "rationale": "Sole source of destinations; donors declare intent, host assigns order",
+      "built_receipt": "GroupedRail.tsx:43-65 — one literal RAIL_GROUPS array",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "url_space_basename",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S2",
+      "rationale": "A surface owning a basename creates URLs the host cannot honour",
+      "built_receipt": "pageNames App.tsx:22-39 — flat host paths, no donor prefixes",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "route_below_basename",
+      "owner": "L2",
+      "delegable": true,
+      "invariant": "INV-S2",
+      "rationale": "Donor keeps hierarchy below a host-assigned basename; Grafana /a/<id>/* precedent",
+      "built_receipt": "react-admin basename pattern; documented caveat that serving the sub-path is the host's responsibility",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "settings_entry",
+      "owner": "L0",
+      "delegable": false,
+      "delegable_pane": true,
+      "invariant": "INV-S5",
+      "rationale": "Host owns the route and frame; donor settings become a section, never a peer nav item",
+      "built_receipt": "App.tsx:262-263 — host route, Teable renders the pane, donor invisible as a brand",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "global_search_keystroke",
+      "owner": "L0",
+      "delegable": false,
+      "delegable_execution": true,
+      "invariant": "INV-S5",
+      "rationale": "Search covering one donor teaches users the host is fake; host owns the keystroke and may delegate execution inward",
+      "built_receipt": "App.tsx:358-364 — on donor routes the host refuses its own palette and postMessages into the frame; asserted per-origin App.test.tsx:106-117",
+      "evidence_class": "observed",
+      "note": "Neither pure absorption nor pure preservation. One keystroke, host-owned, donor-serviced."
+    },
+    {
+      "surface": "notifications_entry",
+      "owner": "L0",
+      "delegable": false,
+      "delegable_pane": true,
+      "invariant": "INV-S5",
+      "rationale": "Deep-links originate here and must resolve in host coordinates",
+      "built_receipt": "App.tsx:309 — host trigger, donor panel",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "theme_token_resolution",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S6",
+      "rationale": "Style isolation is one-way in every surveyed mechanism; the host restyles the donor whether it intends to or not",
+      "built_receipt": "THEMING-CONTRACT.md:38-49 — ONE mapping file, the only place Teable styling is defined",
+      "evidence_class": "observed",
+      "cross_lane_edge": "S2-L2 owns token values and the donor-token binding schema; S2-L3 owns the edit operation that writes them"
+    },
+    {
+      "surface": "destination_set_and_names",
+      "owner": "L1",
+      "delegable": false,
+      "rationale": "Archetype supplies the domain vocabulary and which places exist",
+      "built_receipt": "4 groups / 13 destinations derived from GroupedRail.tsx source, against 11 planned in FROZEN-PAGE-SKELETON.md:8-19",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "archetype_persistent_surface",
+      "owner": "L1",
+      "delegable": false,
+      "rationale": "Deadline clock, SLA timer, audit-trail affordance are archetype-level, not host-level and not donor-level",
+      "built_receipt": "none — not present in the built estate",
+      "evidence_class": "hypothesis"
+    },
+    {
+      "surface": "sub_tabs_view_switchers",
+      "owner": "L2",
+      "delegable": true,
+      "rationale": "Internal below-the-fold structure is the donor's expertise and stays",
+      "built_receipt": "Teable chrome suppression is surgical — settings/trash/template/notifications/profile hidden, internal structure retained",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "donor_named_rail_row",
+      "owner": "FORBIDDEN",
+      "delegable": false,
+      "invariant": "INV-S4",
+      "rationale": "Two nav entries over one concept produce two lists over one dataset; users update the wrong one",
+      "built_receipt": "VIOLATED IN THE BUILT ESTATE — 'Tables' shipped as a rail destination (GroupedRail.tsx:56) against TEABLE-ABSORPTION-BRIEF.md:16,18",
+      "evidence_class": "observed",
+      "status": "known_defect_with_named_owner"
+    },
+    {
+      "surface": "donor_numeric_nav_position",
+      "owner": "FORBIDDEN",
+      "delegable": false,
+      "invariant": "INV-S4",
+      "rationale": "WordPress $position produces silent collisions patched by an MD5 hash offset; menu order becomes a function of what else is installed",
+      "built_receipt": "Grafana addToNav boolean and Shopify declarative s-app-nav are the counter-precedents",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "donor_login_route",
+      "owner": "FORBIDDEN",
+      "delegable": false,
+      "invariant": "INV-S1",
+      "rationale": "Reachable donor auth is a second identity silo",
+      "built_receipt": "Teable login/session/access-token routes blocked with typed 403 at the host proxy (LANE-AUTH-RESULT.md)",
+      "evidence_class": "observed"
+    },
+    {
+      "surface": "host_chrome_on_donor_route",
+      "owner": "L0",
+      "delegable": false,
+      "invariant": "INV-S5",
+      "rationale": "Chrome is deduplicated from both sides; the host removes its own breadcrumb topbar so the donor pane gets the full canvas",
+      "built_receipt": "isModuleRoute App.tsx:357 suppresses host topbar on /tables /documents /ai /marketing /settings; asserted App.test.tsx:62-67",
+      "evidence_class": "observed"
+    }
+  ],
+  "counts": {
+    "surfaces": 16,
+    "host_owned_L0": 9,
+    "archetype_L1": 2,
+    "capability_L2": 2,
+    "forbidden": 3,
+    "observed": 14,
+    "hypothesis": 1,
+    "unknown": 1
+  }
+}

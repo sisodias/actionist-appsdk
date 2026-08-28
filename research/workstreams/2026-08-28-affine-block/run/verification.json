@@ -1,0 +1,107 @@
+{
+  "schema_version": "actionist.affine.verification.v1",
+  "status": "PASS",
+  "recorded_at": "2026-08-28",
+  "scope": "LOCAL_SYNTHETIC_ONLY",
+  "package": "blocks/affine-workspace",
+  "checks": [
+    {
+      "check_id": "VERIFY-SCHEMA-001",
+      "command": "node --check scripts/bind.mjs && node --check scripts/validate.mjs && node --check scripts/install.mjs",
+      "exit_code": 0,
+      "result": "All package JavaScript entrypoints parsed."
+    },
+    {
+      "check_id": "VERIFY-PACKAGE-001",
+      "command": "node scripts/validate.mjs",
+      "exit_code": 0,
+      "result": {
+        "status": "PASS",
+        "records": 7,
+        "evidence_sources": 13,
+        "package_files_checked": 20,
+        "source_copied": false,
+        "donor_repository_vendored": false,
+        "admission_status": "NOT_ADMITTED"
+      }
+    },
+    {
+      "check_id": "VERIFY-BIND-001",
+      "command": "node scripts/bind.mjs --host fixture/host.json --out <temporary-directory>",
+      "exit_code": 0,
+      "result": {
+        "status": "BOUND",
+        "binding_id": "fixture-portal::affine-workspace",
+        "workspace_url": "http://127.0.0.1:3020/workspace/workspace-fixture/all?siso_embedded=1&siso_workspace_revision=3&siso_host_origin=http%3A%2F%2F127.0.0.1%3A4100&siso_server_origin=http%3A%2F%2F127.0.0.1%3A3010",
+        "query_contains_runtime_assertion": false,
+        "navigation_contains_position": false
+      }
+    },
+    {
+      "check_id": "VERIFY-BIND-002",
+      "command": "node scripts/validate.mjs --binding <temporary-directory>/binding.generated.json",
+      "exit_code": 0,
+      "result": "Generated binding passed the package validator after being written."
+    },
+    {
+      "check_id": "VERIFY-IDENTITY-001",
+      "command": "Bind four mutated synthetic hosts",
+      "exit_code": 0,
+      "result": {
+        "wrong_client": "HOST_IDENTITY_REFUSED: client_mismatch",
+        "expired": "HOST_IDENTITY_REFUSED: expired",
+        "missing_edit": "HOST_IDENTITY_REFUSED: capability_denied",
+        "missing_identity": "HOST_IDENTITY_REFUSED: missing_identity"
+      }
+    },
+    {
+      "check_id": "VERIFY-INSTALL-001",
+      "command": "node scripts/install.mjs --host fixture/host.json --out <temporary-directory>",
+      "exit_code": 0,
+      "result": {
+        "status": "PASS",
+        "source_copied": false,
+        "donor_repository_vendored": false,
+        "secrets_embedded": false,
+        "absolute_client_paths_embedded": false,
+        "deployment_performed": false
+      }
+    },
+    {
+      "check_id": "VERIFY-TEST-001",
+      "command": "npm test",
+      "exit_code": 0,
+      "result": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0
+      }
+    },
+    {
+      "check_id": "VERIFY-DIFF-001",
+      "command": "git diff --no-index --check on all owned files, excluding read-only DISPATCH.md",
+      "exit_code": 0,
+      "result": "OWNED_DIFF_CHECK_PASS"
+    }
+  ],
+  "evidence": {
+    "index": "research/workstreams/2026-08-28-affine-block/run/evidence-index.json",
+    "package_smoke": "research/workstreams/2026-08-28-affine-block/run/package-smoke.json",
+    "package_smoke_sha256": "00120d2731e522887fec1fe701b2edd61dd943425ecdb1a2ceddd83b9d01ab89",
+    "historical_receipts_hash_checked": true
+  },
+  "boundary": {
+    "donor_source_started": false,
+    "donor_runtime_started": false,
+    "client_data_read": false,
+    "deployment_performed": false,
+    "admission_claimed": false
+  },
+  "open_holds": [
+    "H-THEME: cross-origin theme/token parity is unproven",
+    "H-SETTINGS: donor-rendered settings fallback remains the v0.1 path",
+    "H-UPGRADE: donor upgrade replay and anchor survival are unrun",
+    "H-DENSITY: density, mobile and tenant-switcher behavior remain unmeasured",
+    "H-CE-WEB: official CE web/service provenance and file-level redistribution are unproven"
+  ]
+}

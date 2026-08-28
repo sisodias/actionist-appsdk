@@ -1,0 +1,322 @@
+{
+  "schema_version": "actionist.three-candidate-solver-pilot.v1",
+  "run_id": "2026-08-28-three-candidate-solver-pilot",
+  "objective": "Evaluate AFFiNE, Teable and Chatwoot as heterogeneous candidates for a marketing/social-agency client approval and asset-delivery workflow using the canonical seven-record contracts and 22 ordered composer rules.",
+  "workflow": {
+    "workflow_id": "marketing-social-agency-client-approval-asset-delivery.v1",
+    "industry_id": "marketing_social_media_agencies",
+    "name": "Marketing/social-agency client approval and asset-delivery workflow",
+    "mode": "read_only_stage",
+    "source_path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/industry-atom-specifications.md",
+    "source_section": "4.12 marketing_social_media_agencies",
+    "atoms": [
+      "approval_publish",
+      "schedule_coordinate",
+      "report_digest",
+      "follow_up_chase",
+      "extract_structure"
+    ],
+    "entities": [
+      "client",
+      "campaign",
+      "content_item",
+      "channel",
+      "approval",
+      "metric_snapshot",
+      "lead",
+      "retainer",
+      "asset_right",
+      "exception"
+    ],
+    "states": [
+      "briefed",
+      "drafted",
+      "approval_pending",
+      "approved",
+      "changes_requested",
+      "scheduled",
+      "reported"
+    ],
+    "terminal_owner": "client account lead with named client approver",
+    "authority_boundary": "Read-only calendars, metrics, lead and asset metadata; no publish, ad spend, client message or rights grant.",
+    "prohibited_effects": [
+      "publish",
+      "ad_spend",
+      "client_message",
+      "rights_grant"
+    ]
+  },
+  "product_spec": {
+    "spec_id": "spec.marketing-social-agency-approval-assets.v1",
+    "baseline_revision": 1,
+    "consumed_fields": {
+      "requirements": [
+        { "requirement_id": "REQ-APPROVAL", "atom": "approval_publish", "authority": "stage", "coverage": "COVERED" },
+        { "requirement_id": "REQ-SCHEDULE", "atom": "schedule_coordinate", "authority": "read", "coverage": "COVERED" },
+        { "requirement_id": "REQ-REPORT", "atom": "report_digest", "authority": "read", "coverage": "COVERED" },
+        { "requirement_id": "REQ-FOLLOW-UP", "atom": "follow_up_chase", "authority": "read", "coverage": "COVERED" },
+        { "requirement_id": "REQ-ASSET-STRUCTURE", "atom": "extract_structure", "authority": "read", "coverage": "COVERED" }
+      ],
+      "entities": [
+        { "entity_id": "client", "client_vocabulary_term": "client" },
+        { "entity_id": "campaign", "client_vocabulary_term": "campaign" },
+        { "entity_id": "content_item", "client_vocabulary_term": "content item" },
+        { "entity_id": "approval", "client_vocabulary_term": "approval" },
+        { "entity_id": "asset_right", "client_vocabulary_term": "asset right" },
+        { "entity_id": "exception", "client_vocabulary_term": "exception" }
+      ],
+      "authority_ceiling": "stage",
+      "data_mode": "read_only_external",
+      "non_goals": [
+        "external publishing",
+        "advertising spend",
+        "outbound client messaging",
+        "rights grants",
+        "production release",
+        "client data access"
+      ]
+    },
+    "open_markers": 0,
+    "uncovered_requirements": 0,
+    "waiver_ref": null
+  },
+  "host_contract": {
+    "host_contract_version": "actionist.three-candidate-host.v0.1",
+    "target_host_scope": "pilot.marketing-social-agency",
+    "projection_status": "derived_for_contract_only_pilot_not_implemented",
+    "facilities": [
+      "identity",
+      "tenant",
+      "settings",
+      "navigation",
+      "data",
+      "files",
+      "events",
+      "secrets",
+      "connectors",
+      "jobs",
+      "notifications",
+      "audit",
+      "billing"
+    ],
+    "runtime_profiles": [
+      "package_in_host",
+      "microfrontend",
+      "sidecar_service",
+      "worker",
+      "scheduled_job"
+    ],
+    "identity": {
+      "identity_source": "host_verified_context",
+      "token_model": "two_token",
+      "assertion_lifetime_seconds_max": 120,
+      "audience_bound": true,
+      "single_use": true,
+      "long_lived_credential_client_side": false,
+      "query_parameter_identity": "forbidden",
+      "session_authority_ladder": ["read", "stage", "write", "message", "deploy"]
+    },
+    "tenancy": {
+      "tenant_key": "tenant_id",
+      "selection_authority": "host",
+      "client_supplied_identity_or_tenant_headers": "untrusted",
+      "explicit_bridges": {
+        "affine_workspace": "tenant_id -> host-selected workspace_id",
+        "teable_base": "tenant_id -> host-allowlisted base_id",
+        "chatwoot_account": "tenant_id -> host-allowlisted account_id"
+      },
+      "cross_tenant_policy": "deny_by_default",
+      "isolation_proof_required": true
+    },
+    "settings": {
+      "combination_rule": "REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS",
+      "scopes": ["global", "tenant", "application", "capability", "user"],
+      "donor_settings_policy": "donor_rendered_behind_host_nav"
+    },
+    "navigation": {
+      "contribution_model": "deploy_time_manifest",
+      "host_owns_url_space": true,
+      "visibility_predicate": "role_and_tenant_entitlement",
+      "permission_and_entitlement_are_separate": true,
+      "cascading_emptiness": true
+    },
+    "token": {
+      "resolver_context_id": "actionist-pilot-token-context-v1",
+      "approved_token_paths": [
+        "color.background",
+        "color.foreground",
+        "color.muted",
+        "color.border",
+        "space.1",
+        "space.2",
+        "radius.default",
+        "type.body"
+      ],
+      "cross_origin_donor_policy": "donor_tokens_are_not_host_resolved"
+    },
+    "data": {
+      "data_mode": "read_only_external",
+      "host_schema": "actionist_host",
+      "cross_owner_reads": "event_fed_read_model",
+      "cross_owner_writes": "forbidden",
+      "one_owner_per_table_and_migration": true
+    },
+    "events": {
+      "envelope": "actionist.capability-event.v1",
+      "required_fields": ["event_id", "capability_id", "tenant_id", "subject", "occurred_at", "trace_id", "payload"]
+    },
+    "observability": {
+      "stable_capability_identifier": true,
+      "per_capability_release_correlation": true,
+      "trace_propagation": true,
+      "failure_cause_group_id": true
+    },
+    "rollback": {
+      "objects": [
+        "code_artifact",
+        "configuration",
+        "secrets",
+        "database_schema",
+        "data",
+        "donor_revision",
+        "surface_route",
+        "connector_credential_state"
+      ],
+      "minimum_horizon_required_for_release": true,
+      "artifact_retention_owner": "actionist"
+    },
+    "required_evidence_families": [
+      "F1_source_identity",
+      "F2_shape_and_rights",
+      "F3_contract_and_ports",
+      "F4_runtime_and_mount",
+      "F5_workflow_and_persistence",
+      "F6_authority_and_tenancy",
+      "F7_security_and_egress",
+      "F8_observability_and_operations",
+      "F9_rollback_and_human_admission"
+    ],
+    "release_class": "research_only_contract_pilot",
+    "minimum_evidence_tier": "T0"
+  },
+  "candidates": [
+    {
+      "candidate_id": "actionist/affine-workspace@0.1.0",
+      "source_id": "SRC-0002",
+      "name": "AFFiNE",
+      "contract_path": "research/workstreams/2026-08-28-three-candidate-solver-pilot/contracts/affine.json",
+      "source_record_paths": [
+        "blocks/affine-workspace/actionist-block.json",
+        "blocks/affine-workspace/records/01-capability.json",
+        "blocks/affine-workspace/records/02-packaging.json",
+        "blocks/affine-workspace/records/03-host-requirements.json",
+        "blocks/affine-workspace/records/04-binding-plan.json",
+        "blocks/affine-workspace/records/05-qualification.json",
+        "blocks/affine-workspace/records/06-registry.json",
+        "blocks/affine-workspace/records/07-release.json",
+        "research/workstreams/2026-08-28-affine-block/run/COMPLETION-PACKET.md"
+      ],
+      "evidence_paths": [
+        "knowledge/capability-shelf/source-registry.jsonl",
+        "../fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json",
+        "../../apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+        "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md",
+        "research/workstreams/2026-08-28-affine-block/run/verification.json"
+      ],
+      "source_verdict": "runtime_precedent_with_native_runtime_note",
+      "source_status": "verified_prototype_with_holds",
+      "reuse_shape": "intact_service"
+    },
+    {
+      "candidate_id": "actionist/teable-data-grid@0.1.0",
+      "source_id": "SRC-0003",
+      "name": "Teable",
+      "contract_path": "research/workstreams/2026-08-28-three-candidate-solver-pilot/contracts/teable.json",
+      "source_record_paths": [
+        "blocks/teable-data-grid/actionist-block.json",
+        "blocks/teable-data-grid/records/capability.json",
+        "blocks/teable-data-grid/records/packaging.json",
+        "blocks/teable-data-grid/records/host-requirements.json",
+        "blocks/teable-data-grid/records/binding-plan.json",
+        "blocks/teable-data-grid/records/qualification.json",
+        "blocks/teable-data-grid/records/registry.json",
+        "blocks/teable-data-grid/records/release.json",
+        "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json"
+      ],
+      "evidence_paths": [
+        "knowledge/capability-shelf/source-registry.jsonl",
+        "research/workstreams/2026-08-28-teable-block/runs/2026-08-28-teable-block-v0.1/run-receipt.json",
+        "../../apps/SISOCRM/verticals/business-broker/TEABLE-ABSORPTION-BRIEF.md",
+        "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+      ],
+      "source_verdict": "reusable_candidate_with_partial_bykonz_integration_proof",
+      "source_status": "verified_prototype_with_holds",
+      "reuse_shape": "intact_service"
+    },
+    {
+      "candidate_id": "actionist/chatwoot-inbox@0.1.0",
+      "source_id": "SRC-0001",
+      "name": "Chatwoot",
+      "contract_path": "research/workstreams/2026-08-28-three-candidate-solver-pilot/contracts/chatwoot.json",
+      "source_record_paths": [
+        "knowledge/capability-shelf/source-registry.jsonl",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/direct-sso-probe.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/w1-handoff-probe.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-communications/communications-module.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/chatwoot-sso-patch.json"
+      ],
+      "evidence_paths": [
+        "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/receipt.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/chatwoot-sso-patch.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/browser-inbox-acceptance.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/direct-sso-probe.json",
+        "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/w1-handoff-probe.json",
+        "../../apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+        "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+      ],
+      "source_verdict": "runtime_precedent_with_expected_donor_warnings",
+      "source_status": "candidate_until_record_set_complete",
+      "reuse_shape": "intact_service"
+    }
+  ],
+  "hold_assertions": {
+    "actionist/affine-workspace@0.1.0": [
+      { "hold_id": "H-THEME", "must_contain": "Cross-origin token/radius/spacing/font parity" },
+      { "hold_id": "H-SETTINGS", "must_contain": "donor settings" },
+      { "hold_id": "H-UPGRADE", "must_contain": "donor upgrade replay" },
+      { "hold_id": "H-DENSITY", "must_contain": "Runtime density" },
+      { "hold_id": "H-CE-WEB", "must_contain": "official CE web/service provenance" }
+    ],
+    "actionist/teable-data-grid@0.1.0": [
+      { "hold_id": "H-TEABLE-UI", "must_contain": "authenticated native desktop CRUD" },
+      { "hold_id": "H-TEABLE-MOBILE", "must_contain": "authenticated native mobile CRUD" },
+      { "hold_id": "H-TEABLE-ATTACHMENTS", "must_contain": "Attachment" },
+      { "hold_id": "H-TEABLE-IDENTITY", "must_contain": "Host identity handoff" },
+      { "hold_id": "H-TEABLE-RESTORE", "must_contain": "independent role/schema/restore" },
+      { "hold_id": "H-TEABLE-RIGHTS", "must_contain": "AGPL corresponding-source" }
+    ],
+    "actionist/chatwoot-inbox@0.1.0": [
+      { "hold_id": "H-CHATWOOT-IDENTITY", "must_contain": "W1 handler" },
+      { "hold_id": "H-CHATWOOT-TENANCY", "must_contain": "tenant/account isolation" },
+      { "hold_id": "H-CHATWOOT-CLOSURE", "must_contain": "dependency closure" },
+      { "hold_id": "H-CHATWOOT-ROLLBACK", "must_contain": "rollback" },
+      { "hold_id": "H-CHATWOOT-ADMISSION", "must_contain": "NOT_ADMITTED" }
+    ]
+  },
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_modules": 0,
+    "donor_source_cloned": false,
+    "donor_source_executed": false,
+    "staged_binding": false,
+    "deployment_performed": false,
+    "client_data_used": false,
+    "shared_file_edits": false,
+    "relaxations_applied": 0
+  }
+}

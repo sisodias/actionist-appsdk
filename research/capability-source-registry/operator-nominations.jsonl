@@ -1,0 +1,30 @@
+{"nomination_id":"ON-001","repo":"teableio/teable","label":"Teable","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Structured data and admin product candidate."}
+{"nomination_id":"ON-002","repo":"toeverything/AFFiNE","label":"AFFiNE","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Collaborative workspace candidate."}
+{"nomination_id":"ON-003","repo":"lfnovo/open-notebook","label":"Open Notebook","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Knowledge and research workspace candidate."}
+{"nomination_id":"ON-004","repo":"makeplane/plane","label":"Plane","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Project delivery candidate."}
+{"nomination_id":"ON-005","repo":"documenso/documenso","label":"Documenso","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Document signing product candidate."}
+{"nomination_id":"ON-006","repo":"chatwoot/chatwoot","label":"Chatwoot","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Customer support and shared inbox candidate."}
+{"nomination_id":"ON-007","repo":"calcom/cal.com","label":"Cal.com","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Scheduling product candidate."}
+{"nomination_id":"ON-008","repo":"activepieces/activepieces","label":"Activepieces","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Automation and connector runtime candidate."}
+{"nomination_id":"ON-009","repo":"knadh/listmonk","label":"Listmonk","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Newsletter and audience operations candidate."}
+{"nomination_id":"ON-010","repo":"gitroomhq/postiz-app","label":"Postiz","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Social publishing candidate."}
+{"nomination_id":"ON-011","repo":"formbricks/formbricks","label":"Formbricks","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Forms, surveys and feedback candidate."}
+{"nomination_id":"ON-012","repo":"metabase/metabase","label":"Metabase","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Embedded analytics candidate."}
+{"nomination_id":"ON-013","repo":"PostHog/posthog","label":"PostHog","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Product analytics candidate."}
+{"nomination_id":"ON-014","repo":"apache/superset","label":"Superset","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Analytics and BI candidate."}
+{"nomination_id":"ON-015","repo":"meilisearch/meilisearch","label":"Meilisearch","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Search platform primitive."}
+{"nomination_id":"ON-016","repo":"qdrant/qdrant","label":"Qdrant","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Vector retrieval platform primitive."}
+{"nomination_id":"ON-017","repo":"infiniflow/ragflow","label":"RAGFlow","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Grounded retrieval and document intelligence candidate."}
+{"nomination_id":"ON-018","repo":"coollabsio/coolify","label":"Coolify","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Deployment and hosting candidate."}
+{"nomination_id":"ON-019","repo":"airbytehq/airbyte","label":"Airbyte","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Data movement and connector candidate."}
+{"nomination_id":"ON-020","repo":"dlt-hub/dlt","label":"dlt","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Data loading primitive."}
+{"nomination_id":"ON-021","repo":"meltano/meltano","label":"Meltano","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Data integration platform candidate."}
+{"nomination_id":"ON-022","repo":"langflow-ai/langflow","label":"Langflow","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Agent and AI workflow builder candidate."}
+{"nomination_id":"ON-023","repo":"coze-dev/coze-studio","label":"Coze Studio","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"Agent builder candidate."}
+{"nomination_id":"ON-024","repo":"FlowiseAI/Flowise","label":"Flowise","origin":"foundry_recovered_operator_nomination","observed_at":"2026-08-02","note":"AI flow builder candidate; used as current locator for the recovered Flowgram/flow-builder class."}
+{"nomination_id":"ON-025","repo":"surveyjs/survey-library","label":"SurveyJS","origin":"foundry_value_matrix_god_source","observed_at":"2026-08-03","note":"Forms and survey engine identified by the Foundry value matrix."}
+{"nomination_id":"ON-026","repo":"jhpyle/docassemble","label":"docassemble","origin":"foundry_value_matrix_god_source","observed_at":"2026-08-03","note":"Document assembly and guided workflow candidate."}
+{"nomination_id":"ON-027","repo":"Open-Source-Legal/OpenContracts","label":"OpenContracts","origin":"foundry_value_matrix_specialist","observed_at":"2026-08-03","note":"Specialist legal/document intelligence candidate."}
+{"nomination_id":"ON-028","repo":"frappe/erpnext","label":"ERPNext","origin":"foundry_value_matrix_specialist","observed_at":"2026-08-03","note":"Composite ERP specialist candidate."}
+{"nomination_id":"ON-029","repo":"keycloak/keycloak","label":"Keycloak","origin":"foundry_value_matrix_platform_primitive","observed_at":"2026-08-03","note":"Identity platform primitive."}
+{"nomination_id":"ON-030","repo":"openfga/openfga","label":"OpenFGA","origin":"foundry_value_matrix_platform_primitive","observed_at":"2026-08-03","note":"Authorization platform primitive."}

@@ -55,6 +55,12 @@
         "path": "research/actionmodel-builder-research-2026-08-26/expansion/wave-11/outputs/public-signals-wave-11.md"
       }
     ],
+    "current_run": "research/workstreams/p01-client-intelligence/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Discovery state should be deterministic and server-owned; the model owns phrasing, not truth.",
+      "Score access persistence and content sensitivity separately.",
+      "Use explicit qualify, prototype, disqualify and escalate terminal states."
+    ],
     "workstream_root": "research/workstreams/P01-client-intelligence-and-discovery/"
   },
   {
@@ -111,6 +117,12 @@
         "label": "AutoSaaS method",
         "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/framework/autosaas-method.md"
       }
+    ],
+    "current_run": "research/workstreams/p02-outcome-product-spec/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Elicit into a falsifiable ProductSpec with EARS-like slots and generated Gherkin.",
+      "Track UNCOVERED and NEEDS_CLARIFICATION explicitly with provenance.",
+      "Block progression on a client Accept/Revise gate; the five-workflow proving harness remains unrun."
     ],
     "workstream_root": "research/workstreams/P02-outcome-and-product-specification/"
   },
@@ -169,6 +181,12 @@
         "label": "Niche → atom → block join",
         "path": "research/actionmodel-builder-research-2026-08-26/expansion/outputs/niche-atom-block-join.md"
       }
+    ],
+    "current_run": "research/workstreams/p03-curated-capability-shelf/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "The 200-repo shelf resolves to 134 products, 20 frameworks and 46 primitives.",
+      "Product-basis supply is 13 commodity, 6 scarce, 3 product-layer-missing and 2 underdetermined.",
+      "Case/workflow, e-sign and field operations support “borrow the engine, build the product surface.”"
     ],
     "workstream_root": "research/workstreams/P03-curated-capability-shelf/"
   },
@@ -230,6 +248,12 @@
         "label": "Block Contract v1",
         "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/block-contract-v1.md"
       }
+    ],
+    "current_run": null,
+    "latest_findings": [
+      "A repository is a source container, not the reusable unit.",
+      "Choose service, module, transplant, package, adapter, pattern, template or custom-delta shape before extraction.",
+      "Identity, dependency closure and human shape choice precede normalization surgery."
     ],
     "workstream_root": "research/workstreams/P04-autonomous-repo-to-block-foundry/"
   },
@@ -293,6 +317,12 @@
         "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/AutoSaaS/process/10-ui-component-library-requirements.md"
       }
     ],
+    "current_run": "research/workstreams/p05-living-component-layer/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "The normalized local union is about 8,483 component identities; the source-bearing legacy store has 3,507 real components.",
+      "Replace inconsistent tags with canonical entities, aliases and measured visual clusters.",
+      "Own the archetype shell and core app primitives; harvest decorative surfaces. The layer is a snapshot, not yet living."
+    ],
     "workstream_root": "research/workstreams/P05-living-ui-component-layer/"
   },
   {
@@ -339,6 +369,10 @@
     "page": "parts/p06/",
     "resources": [
       {
+        "label": "Design grammar and preference protocol",
+        "path": "knowledge/06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md"
+      },
+      {
         "label": "UI pick-to-spec research",
         "path": "research/ui-pick-to-spec-2026-08-27.md"
       },
@@ -350,6 +384,12 @@
         "label": "Taste picker demo",
         "path": "https://actionist-taste.pages.dev/"
       }
+    ],
+    "current_run": "research/workstreams/p06-preference-science/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "P06 established the adaptive learning mechanism, not the complete visual grammar.",
+      "Use controlled realistic screens, an outside option, per-dimension confidence and adaptive least-resolved-dimension targeting.",
+      "Learn continuous DesignDNA internally, but ship a complete pre-gated token pack; the exact axes, levels and 8–12 round estimate still require focused experiments."
     ],
     "workstream_root": "research/workstreams/P06-design-taste-and-preference-learner/"
   },
@@ -411,6 +451,12 @@
         "label": "SISOCRM Teable absorption brief",
         "path": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/apps/SISOCRM/verticals/business-broker/TEABLE-ABSORPTION-BRIEF.md"
       }
+    ],
+    "current_run": null,
+    "latest_findings": [
+      "Map donor variables into an Actionist semantic token contract rather than sharing raw CSS variables.",
+      "Re-render previews under the selected pack so the client only chooses reproducible designs.",
+      "Visual compatibility and scoped token bridges need tests across genuinely different donors."
     ],
     "workstream_root": "research/workstreams/P07-token-and-theme-harmonizer/"
   },
@@ -474,6 +520,12 @@
         "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/industry-atom-specifications.md"
       }
     ],
+    "current_run": "research/workstreams/p08-archetype-shell-layout/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Reject a universal five-area shell; Actionist owns a host frame while capability navigation varies by reuse shape.",
+      "Shopify and Atlassian prove the navigation boundary is a design choice, while the host visual contract is stable.",
+      "Five starting spines—case/workflow, field operations, learning/content, scheduling and CRM—cover most target industries."
+    ],
     "workstream_root": "research/workstreams/P08-archetypes-shells-and-layouts/"
   },
   {
@@ -535,6 +587,12 @@
         "label": "Block Contract data model",
         "path": "research/actionmodel-builder-research-2026-08-26/phase-2/outputs/block-contract-v1.md"
       }
+    ],
+    "current_run": "research/workstreams/p09-data-plane/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Postgres is the default for Actionist-owned transactional data, not a universal donor invariant.",
+      "Enforce one authoritative owner per table and migration, with tenant identity from the first migration.",
+      "Use donor stores plus events/read models for intact services and real foreign keys for absorbed code."
     ],
     "workstream_root": "research/workstreams/P09-data-and-state-plane/"
   },
@@ -598,6 +656,12 @@
         "path": "research/lovable-teardown-2026-08-26.md"
       }
     ],
+    "current_run": "research/workstreams/p10-identity-settings-navigation/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "The host owns authority: identity, tenant, URL space, navigation registry and settings provenance.",
+      "PackagingProfile selects federation versus absorption; there is no single integration pattern.",
+      "Identity has strong precedent, navigation partial precedent, and settings absorption is the largest unknown."
+    ],
     "workstream_root": "research/workstreams/P10-identity-settings-and-navigation-host/"
   },
   {
@@ -658,6 +722,12 @@
         "label": "Connectors report",
         "path": "research/connectors-licensing-2026-08-27.md"
       }
+    ],
+    "current_run": "research/workstreams/p11-connectors-integration-runtime/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Borrow OAuth machinery, catalogues, durable execution and authorization engines.",
+      "Own tenant-keyed connections, outbound token brokerage, idempotency, egress refusal and the action ledger.",
+      "Callers pass identity and intended action, never raw provider secrets."
     ],
     "workstream_root": "research/workstreams/P11-connector-and-external-action-plane/"
   },
@@ -725,6 +795,12 @@
         "path": "research/actionmodel-builder-research-2026-08-26/phase-8/lanes/05-composition-agent-evals/outputs/synthetic-pilot-plan.md"
       }
     ],
+    "current_run": null,
+    "latest_findings": [
+      "Compose plan-then-fill: retrieve, eliminate incompatibilities deterministically, then let models choose among feasible options.",
+      "Deterministic systems own identity, authority, compatibility, dependency and evidence gates.",
+      "The composer must surface UNDERDETERMINED rather than invent compatibility."
+    ],
     "workstream_root": "research/workstreams/P12-deterministic-composition-planner/"
   },
   {
@@ -786,6 +862,12 @@
         "label": "UI pack gallery UX",
         "path": "research/ui-pack-gallery-ux-2026-08-27.md"
       }
+    ],
+    "current_run": "research/workstreams/p13-preview-editor/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Persist typed edit intent instead of only code or DOM mutations.",
+      "Use denial-by-construction and record accepted, rejected and refused operations.",
+      "Puck shows field-level write authority can live in persisted data and survive upgrades."
     ],
     "workstream_root": "research/workstreams/P13-preview-editor-and-change-loop/"
   },
@@ -851,6 +933,12 @@
         "path": "architecture/feature-matrix/ARCHITECTURE.md"
       }
     ],
+    "current_run": "research/workstreams/p14-runtime-sandbox-release/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Rollback is multi-object across artifact, configuration, data/schema and routing horizons.",
+      "Every capability needs stable identity, version, trace context, owner and machine-readable health.",
+      "ComputeSDK cannot be the load-bearing abstraction when memory-preserving pause is required."
+    ],
     "workstream_root": "research/workstreams/P14-runtime-verification-and-release/"
   },
   {
@@ -914,6 +1002,12 @@
         "label": "Master synthesis",
         "path": "knowledge/00-MASTER-SYNTHESIS.md"
       }
+    ],
+    "current_run": "research/workstreams/p15-learning-feedback/runs/2026-08-27-sprint-1-fable",
+    "latest_findings": [
+      "Consume edit, qualification, runtime, rollback and outcome receipts instead of inventing a parallel telemetry system.",
+      "Gate promotion on the weakest critical evidence family; never average away a fatal unknown.",
+      "Update capability ranking, reuse-shape choice, adaptation cost and retirement state from production evidence."
     ],
     "workstream_root": "research/workstreams/P15-continuous-corpus-and-production-learning/"
   }

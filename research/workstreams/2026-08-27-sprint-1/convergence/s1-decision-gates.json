@@ -1,0 +1,16 @@
+{
+  "schema_version": "actionist.s1-decision-gates.v1",
+  "status": "sprint_2_research_unlocked",
+  "decisions": [
+    {"id":"S1-D01","state":"resolved_by_evidence","decision":"Repository is a source container, not the reusable unit."},
+    {"id":"S1-D02","state":"resolved_by_evidence","decision":"Reuse shape is selected before extraction or normalization."},
+    {"id":"S1-D03","state":"resolved_by_evidence","decision":"One authoritative owner per table and migration."},
+    {"id":"S1-D04","state":"provisional","decision":"Postgres is the default for new Actionist-owned transactional data, not a universal module invariant."},
+    {"id":"S1-D05","state":"requires_experiment","decision":"One HostContract can absorb identity, settings, navigation and visual boundaries across all reuse shapes."},
+    {"id":"S1-D06","state":"requires_experiment","decision":"Design preference axes have sufficiently low effective dimension for a short adaptive protocol."},
+    {"id":"S1-D07","state":"requires_experiment","decision":"Donor applications can reliably render below the host frame without destructive adaptation."},
+    {"id":"S1-D08","state":"resolved_by_evidence","decision":"Composition eliminates incompatibilities deterministically before model selection."},
+    {"id":"S1-D09","state":"requires_shaan","decision":"Select the representative Sprint 3 pilot industry/workflow after Sprint 2 convergence."}
+  ],
+  "boundary": {"research_only":true,"implementation_authorized":false,"execution_status":"UNEXECUTED","admission_status":"NOT_ADMITTED","admitted_blocks":0}
+}

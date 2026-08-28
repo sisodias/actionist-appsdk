@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "actionist.edit-operation.v1",
+  "title": "Actionist typed edit operation",
+  "description": "Research-only contract proposal. UNEXECUTED, NOT_ADMITTED. An operation that cannot be expressed in this schema is unrepresentable by construction — that is the enforcement mechanism, not a runtime check.",
+  "type": "object",
+  "required": ["operation_id", "verb", "target", "intent", "authority", "outcome"],
+  "additionalProperties": false,
+  "properties": {
+    "operation_id": {"type": "string", "pattern": "^EOP-[0-9A-Za-z]{4,}$"},
+    "verb": {
+      "enum": ["text", "theme", "reorder", "add", "remove", "replace", "data-binding"],
+      "description": "Closed set. An eighth verb is a schema change requiring a recorded contract transition, never a runtime extension."
+    },
+    "target": {
+      "type": "object",
+      "required": ["substrate", "anchor"],
+      "additionalProperties": false,
+      "properties": {
+        "substrate": {
+          "enum": ["owned_ui", "embedded_module", "intact_service"],
+          "description": "Determines the authority answer, never the vocabulary. Maps to P08 mount profiles: embedded_module=absorbed_native, intact_service=preserved_framed."
+        },
+        "module_id": {"type": "string"},
+        "anchor": {
+          "type": "object",
+          "required": ["anchor_class", "anchor_id"],
+          "additionalProperties": false,
+          "properties": {
+            "anchor_class": {
+              "enum": ["contract_slot", "semantic_role", "bridge_token", "host_seam", "donor_export"],
+              "description": "`coordinate` is deliberately absent from this enum. Coordinate-bound edits are unupgradeable in principle (I-P13-2) and therefore have no encoding."
+            },
+            "anchor_id": {"type": "string", "minLength": 1},
+            "upgrade_debt": {
+              "type": "boolean",
+              "description": "True for donor_export anchors: each one is a patch hunk carrying a permanent merge obligation."
+            }
+          }
+        }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "description": "WHY, version-independent. Survives upgrade. Never discarded.",
+      "required": ["statement", "expressed_by"],
+      "additionalProperties": false,
+      "properties": {
+        "statement": {"type": "string", "minLength": 1},
+        "expressed_by": {"enum": ["client_chat", "client_direct_manipulation", "builder"]},
+        "rationale": {"type": "string"},
+        "recorded": {"type": "string", "format": "date"}
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "description": "HOW the intent was satisfied against one capability version. The ONLY disposable part — discarded and re-resolved on upgrade.",
+      "required": ["capability_version", "applied_value"],
+      "additionalProperties": false,
+      "properties": {
+        "capability_version": {"type": "string"},
+        "applied_value": {},
+        "prior_value": {"description": "Inverse, recorded so `remove` and every other verb is undoable."},
+        "orphaned_bindings": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Bindings orphaned by this operation. Reported, never silently dropped."
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["level", "within_declared_scope"],
+      "additionalProperties": false,
+      "properties": {
+        "level": {"enum": ["low", "medium", "high"]},
+        "within_declared_scope": {
+          "type": "boolean",
+          "description": "C2: composition scope is the INTERSECTION of member scopes, never the union. A data-binding operation outside declared scope is denied, not escalated."
+        },
+        "scope_resources": {"type": "array", "items": {"type": "string"}},
+        "grants_new_authority": {
+          "const": false,
+          "description": "C1: an edit may never grant data, tenant or side-effect authority. Structurally pinned to false."
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "description": "Travels in the persisted composition record, not in editor configuration (Puck readOnly-in-BaseData shape). Editor-only permission is bypassed by upgrades, migrations, agents and direct API writes.",
+      "additionalProperties": false,
+      "properties": {
+        "read_only": {"type": "boolean"},
+        "locked_by": {"type": "string"}
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["allowed", "denied", "deferred", "escalated"]},
+        "violated_constraint": {
+          "type": "string",
+          "description": "REQUIRED when status=denied. The named constraint, never a generic refusal."
+        },
+        "nearest_supported_alternative": {
+          "type": "string",
+          "description": "REQUIRED when status=denied. A denial without an alternative is indistinguishable from a broken product (U-5)."
+        },
+        "overriding_rule": {
+          "type": "string",
+          "description": "REQUIRED when status=deferred. The governing rule, by name."
+        },
+        "contract_transition": {
+          "type": "string",
+          "description": "REQUIRED when status=escalated. The proposed transition and its price."
+        }
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "denied"}}, "required": ["status"]},
+         "then": {"required": ["violated_constraint", "nearest_supported_alternative"]}},
+        {"if": {"properties": {"status": {"const": "deferred"}}, "required": ["status"]},
+         "then": {"required": ["overriding_rule"]}},
+        {"if": {"properties": {"status": {"const": "escalated"}}, "required": ["status"]},
+         "then": {"required": ["contract_transition"]}}
+      ]
+    },
+    "receipt": {
+      "type": "object",
+      "description": "C5: approval binds to an artifact hash; silence is never approval.",
+      "additionalProperties": false,
+      "properties": {
+        "approved_artifact_hash": {"type": "string"},
+        "approved_by": {"type": "string"},
+        "approved_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "upgrade_replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": ["RESOLVED", "DEGRADED", "ORPHANED"],
+          "description": "DEGRADED and ORPHANED are kept and named, never silently dropped. Either blocks auto-publish."
+        },
+        "replayed_against": {"type": "string"},
+        "note": {"type": "string"}
+      }
+    }
+  }
+}

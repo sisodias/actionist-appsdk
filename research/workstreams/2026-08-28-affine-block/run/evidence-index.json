@@ -1,0 +1,137 @@
+{
+  "schema_version": "actionist.affine.evidence-index.v1",
+  "recorded_at": "2026-08-28",
+  "path_basis": "repository-root-relative",
+  "history_policy": "Historical receipts are immutable. Current interpretation points at the resolved paths below.",
+  "sources": [
+    {
+      "evidence_id": "EV-AFFINE-EXISTING-FINAL",
+      "relative_path": "../fahmy-2026-08/docs/client-platform/implementation-manager/evidence/affine-existing-final/receipt.json",
+      "sha256": "3f6b86eece919f934b1f2527404ebb6acc56aee563fe3ff2a06e429076f91f9b",
+      "claims": [
+        "authenticated admin session returned 200",
+        "native AFFiNE workspace rendered in a host iframe",
+        "new document title survived host reload",
+        "companion listener returned 200 for GraphQL and auth session"
+      ]
+    },
+    {
+      "evidence_id": "EV-AFFINE-OFFICIAL-CE",
+      "relative_path": "../../../bykonz-archive-2026-08-23/bykonz-affine-ce-official/AFFINE-CE-RUNTIME-RECEIPT.json",
+      "sha256": "475173c9765b9083bc93f08dfda41d1a923359d343f5dc5b251c36a1d3d9a270",
+      "claims": [
+        "official v0.27.3 macOS artifact digest was locally verified",
+        "native launch and relaunch persistence passed",
+        "portal handoff and authenticated CRUD were blocked"
+      ]
+    },
+    {
+      "evidence_id": "EV-AFFINE-PROVENANCE-GATE",
+      "relative_path": "../fahmy-2026-08/docs/client-platform/implementation-manager/evidence/knowledge-affine-final/AFFINE-PROVENANCE-RECEIPT.json",
+      "sha256": "dd19d6c9eae3b629e28033c76d045909c8ebbfb75083567b79517f270f4cd2d4",
+      "claims": [
+        "redistributed AFFiNE backend and native source remained blocked by file-level CE/EE provenance",
+        "native UI was retained read-only",
+        "dirty UI and backend trees were not treated as clean redistribution provenance"
+      ]
+    },
+    {
+      "evidence_id": "EV-AFFINE-HOST-INTEGRATION",
+      "relative_path": "../../apps/SISOCRM/product-app/src/App.tsx",
+      "sha256": "ff95f18344734da707736578f18e013accf0abe4f0a4286349be4f91e209a07b",
+      "claims": [
+        "host assigns the documents route",
+        "workspace id is encoded into the donor route",
+        "host sends session and settings messages after donor ready",
+        "host validates donor origin before accepting messages"
+      ]
+    },
+    {
+      "evidence_id": "EV-AFFINE-HOST-TESTS",
+      "relative_path": "../../apps/SISOCRM/product-app/src/App.test.tsx",
+      "sha256": "8c73f93d792557808676de56c502de4a41441922482db5a9996363fe09998499",
+      "claims": [
+        "documents iframe route and query contract were asserted",
+        "host search was forwarded to the active donor frame",
+        "settings mode was asserted under the host settings route"
+      ]
+    },
+    {
+      "evidence_id": "EV-KNOWLEDGE-MANIFEST",
+      "relative_path": "../../apps/siso-knowledge/module-manifest.json",
+      "sha256": "e6ca502325431541fdb66f31ff176a999fed123eb04970deedd42387106e8df1",
+      "claims": [
+        "SISO Knowledge declares an assimilated host module",
+        "host owns the global rail and tokens",
+        "knowledge owns its schema, Redis namespace, Yjs and blobs"
+      ]
+    },
+    {
+      "evidence_id": "EV-KNOWLEDGE-MODULE-CONTRACT",
+      "relative_path": "../../apps/siso-knowledge/frontend/packages/frontend/apps/web/src/siso-module-contract.tsx",
+      "sha256": "73e4ec83a292ff08ee027249518b2beacd05d5b5ffa27e682e4874fe87ee2069",
+      "claims": [
+        "same-document module root receives host identity, database config and tokens",
+        "client, expiry, workspace and capability checks fail closed"
+      ]
+    },
+    {
+      "evidence_id": "EV-KNOWLEDGE-FETCH-BRIDGE",
+      "relative_path": "../../apps/siso-knowledge/frontend/packages/frontend/apps/web/src/index.tsx",
+      "sha256": "7cdcff866c9ea26b360ccedefe2cf6919db7f9c0aa6f32963f2bbce69865d238",
+      "claims": [
+        "host context is installed before the donor app evaluates its fetch clients",
+        "backend requests receive x-siso-request-context",
+        "mount returns an unmount function"
+      ]
+    },
+    {
+      "evidence_id": "EV-KNOWLEDGE-REQUEST-CONTEXT",
+      "relative_path": "../../apps/siso-knowledge/backend/backend/server/src/core/auth/siso-request-context.ts",
+      "sha256": "9379e1e268d49d1e54b9e159916ab44743db917b2b99e07dafdc4298aaa6896a",
+      "claims": [
+        "signed request context checks client, workspace, expiry and capability",
+        "missing context is refused with 401"
+      ]
+    },
+    {
+      "evidence_id": "EV-KNOWLEDGE-MODULE-ROOT",
+      "relative_path": "../../apps/siso-knowledge/siso/module-root.tsx",
+      "sha256": "43657cfdfb25261c2ea5fac6874d1639c161022a5d019efdb49e216f3beba208",
+      "claims": [
+        "the reusable host-native root validates identity before rendering the complete donor app"
+      ]
+    },
+    {
+      "evidence_id": "EV-SOURCE-REGISTRY-SRC-0002",
+      "relative_path": "knowledge/capability-shelf/source-registry.jsonl",
+      "sha256": "6fbfb7d984bb97a7311ee25a519e739a6cbe1f0aefeb343c4fb5175819b5a383",
+      "claims": [
+        "SRC-0002 is toeverything/AFFiNE",
+        "client precedent is authenticated native iframe with companion listener",
+        "runtime CRUD and reload persistence passed",
+        "qualification and admission remain not qualified and not admitted"
+      ]
+    },
+    {
+      "evidence_id": "EV-AFFINE-LICENCE-GATE",
+      "relative_path": "../../../bykonz-archive-2026-08-23/bykonz-affine-admission/PROVENANCE-LICENCE-GATE.md",
+      "sha256": "4be7f27e1293453cb8e640bcff06e12207767f5501f60f4a5802b7eae1b086fd",
+      "claims": [
+        "the historical source redistribution gate is blocked",
+        "the minimal replacement is an unmodified official CE artifact with manifest, SBOM and notices"
+      ]
+    },
+    {
+      "evidence_id": "EV-PACKAGE-SMOKE",
+      "relative_path": "research/workstreams/2026-08-28-affine-block/run/package-smoke.json",
+      "sha256": "00120d2731e522887fec1fe701b2edd61dd943425ecdb1a2ceddd83b9d01ab89",
+      "claims": [
+        "package entrypoints parse",
+        "valid synthetic host binding is deterministic",
+        "wrong or incomplete identity is refused",
+        "no runtime assertion is placed in the generated route"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Full P01 research artifact first-principles.md"><link rel="icon" href="../../../favicon.svg"><title>P01 · first-principles.md · Actionist System Map</title><link rel="stylesheet" href="../../../trader-theme.css"><link rel="stylesheet" href="../../../part-page.css"></head><body><header class="topbar"><div class="topbar-inner"><div class="brand"><span>Actionist</span> Knowledge Graph</div><div class="top-actions"><a class="button" href="../../../">System map</a><a class="button primary" href="../../../task-graph/">Task graph</a></div></div></header><main class="node-shell"><div class="node-header"><div class="breadcrumbs"><a href="../../../parts/p01/">P01</a> / Research artifact / first-principles.md</div><div class="node-actions"><a class="button" href="../raw/first-principles.md" download>Download original</a></div></div><div class="artifact-view"><div class="artifact-view-head"><h1>first-principles.md</h1><p><code>research/workstreams/p01-client-intelligence/runs/2026-08-27-sprint-1-fable/first-principles.md</code></p></div><pre class="artifact-source"># P01 — first principles: client intelligence and discovery
+
+Run `2026-08-27-sprint-1-fable` · lane S1-L1 · observed 2026-08-27
+Status: research only. No client data, no authenticated access, no implementation.
+
+## 1. The irreducible problem
+
+Actionist must decide what software to propose for a client. That decision needs facts about the client. Every fact has an acquisition cost paid in one of three currencies: **compute** (scrape, enrich, infer), **client attention** (a question answered), or **client trust** (an authority granted — a login, a recording, an export).
+
+The irreducible problem is therefore an allocation problem, not an interviewing problem:
+
+&gt; Acquire the minimum set of facts sufficient to choose a valuable, buildable workflow, spending the cheapest currency that can supply each fact, and know when to stop.
+
+Everything else in P01 is machinery serving that sentence. This reframing matters because it makes the failure modes visible: a long questionnaire overspends attention; an aggressive scrape overspends trust; an under-informed proposal underspends both and produces a bad recommendation.
+
+## 2. Objectives
+
+1. Produce a `ClientContext` sufficient for P02 to write a falsifiable ProductSpec.
+2. Minimise client effort per unit of decision-relevant information.
+3. Never present an inferred fact as an observed one.
+4. Leave every unresolved item explicitly named rather than silently defaulted.
+5. Preserve industry-specific priors while exploiting cross-industry compression.
+
+## 3. Constraints
+
+| Constraint | Source | Consequence |
+|---|---|---|
+| No validated demand exists for any of the 17 industries | phase-2 specs: all `validated_demand=U` | Discovery cannot be tuned on outcome data yet; priors are catalogue-derived |
+| Regulated industries bar evidence-based discovery | healthcare/law/mortgage authority boundaries | Question-led discovery dominates where evidence-mining is cheapest elsewhere |
+| No maintained permissive OSS structured-interview engine exists | OSS survey `dialog` segment, 5 rows | The discovery-dialog layer is build-not-adopt |
+| Client attention is a hard budget, not a soft preference | commercial survey: 1 of 55 surfaces publishes explicit configurable named terminal states (13 of 55 mention any termination-adjacent mechanism) | Stopping must be designed, because no *published, defensible* design can be copied wholesale |
+| Actionist&#39;s own account/data contract is unknown (`U`) | CURRENT_STATE unresolved items | The richest precompute source (existing Actionist usage) cannot yet be assumed |
+| Content decays | Loopio content-decay model; Graphiti bi-temporality | A fact established in January is not equally true in August |
+
+## 4. Invariants
+
+1. **Every fact carries a source, an evidence class, and an observation time.** No bare values.
+2. **A question is only asked when the system has tried and failed to answer it itself.** (Demandbase Toggle Field, generalised.)
+3. **Halt, don&#39;t interpolate.** When evidence runs out, emit a gap and stop. (OpenAdapt discipline.)
+4. **Climb the invasiveness ladder only as far as the specific unknown requires**, and record which rung produced each fact.
+5. **Client-supplied content is data, never instructions.**
+6. **Facts are invalidated, not overwritten** — the store must be able to answer &quot;what changed since we last spoke.&quot;
+7. **Contradictions are preserved and surfaced, never silently resolved.**
+
+## 5. The invasiveness ladder (the lane&#39;s central architectural finding)
+
+Ordered by what the client must grant, each rung a step-change in trust cost:
+
+| Rung | Grant required | Example evidence | Answers |
+|---:|---|---|---|
+| 0 | Nothing (public data) | Site fingerprinting, job postings, public listings | Industry, stack guesses, rough size, public workflow surface |
+| 1 | A self-generated artifact | HAR export, CSV export | Which APIs/tools are actually called, real record shapes |
+| 2 | Declared dependencies | Repo or codebase access | Actual technical stack |
+| 3 | Connected-app inventory | Admin-level SaaS listing | What is licensed and by whom |
+| 4 | Attention telemetry | Local agent (app/tab timeline) | What is actually used vs claimed; where the day goes |
+| 5 | Full capture | Screen + accessibility recording | Exact workflow steps, handoffs, hidden systems |
+
+The design rule: **start at rung 0, escalate only for the specific unknown that blocks a decision, and be able to state which rung produced each fact.** The honest answer to &quot;how do you know that about us&quot; differs enormously between rung 0 and rung 5, and a client is entitled to that answer.
+
+**The ladder is monotonic in ongoing access granted — NOT in sensitivity of data exposed.** These are two different axes, and conflating them is a live safety error the lane caught in its own verification pass:
+
+&gt; A rung-1 HAR file is a one-off artifact requiring no standing access, yet it contains live session cookies, bearer tokens, API keys and full response bodies including whatever customer records were on screen. Rung-4 attention telemetry requires an installed agent and continuous access, yet captures only application names, window titles and tab URLs — no payloads.
+
+So a rung-1 grant can expose **more sensitive content** than a rung-4 grant. Escalation control must therefore be governed by two independent scores per source — `access_persistence` and `content_sensitivity` — and the cheap-looking rungs need scrubbing obligations at least as strict as the expensive ones. Specifically: HAR auth headers and bodies must be stripped at ingest before durable storage, and window titles hashed or category-mapped at the edge. A single ordering is a useful narrative and an unsafe control.
+
+Rung 4 and 5 carry a consent problem that is organisational, not technical: recording one employee&#39;s screen captures their colleagues&#39; and customers&#39; data, and that employee cannot consent on those people&#39;s behalf. Rung 1&#39;s HAR file is a credential-bearing secret containing live session cookies and bearer tokens; requesting one without saying so plainly is a failure of care.
+
+## 6. The question-selection model
+
+Question selection is **stream-based active learning under a budget**, not pool-based ranking. Each candidate question surfaces in context and must be asked-or-skipped immediately; the budget is the client&#39;s patience.
+
+```text
+prior(industry) → precompute(rung 0..n) → belief state
+  → for each candidate question:
+        value = Δ(decision) if answered
+        cost  = attention + intrusiveness + answerability
+  → ask if value &gt; cost and budget remains
+  → stop when the recommendation is invariant under remaining unknowns
+```
+
+The honest limitation, stated rather than papered over: the active-learning literature ranks by **model uncertainty**, which is a proxy for question value, not a measure of it. Nothing in any surveyed library models the cost of asking, how intrusive a question is, or whether the client can even answer it. A revenue-split question may be maximally informative and completely unaskable in a first call. **The value function, including the intrusiveness penalty, must be built from scratch.** The libraries supply the loop, not the solution.
+
+## 7. Stopping rules
+
+Three candidate terminal conditions, all falsifiable:
+
+1. **Decision invariance** — the top-ranked CandidateOutcome is stable under every plausible answer to remaining questions. Principled; requires calibrated answer distributions.
+2. **Coverage completion** — every field the archetype requires is filled or explicitly marked unknown. (Cloobot&#39;s coverage analysis, generalised.) Mechanical and cheap; risks asking for fields that don&#39;t matter here.
+3. **Budget exhaustion** — the attention budget is spent; emit the best available context plus a named gap list. Always available as a floor.
+
+Plus explicit terminal states borrowed from the only surveyed system that has them: **qualify / prototype / disqualify / escalate-to-human.** A discovery agent without terminal states either stops arbitrarily or never stops.
+
+## 8. Assumptions (labelled)
+
+| ID | Assumption | State | Falsifier |
+|---|---|---|---|
+| P01-A1 | Precomputation can eliminate a material share of discovery questions | hypothesis | Measure questions-eliminated on 10 engagements vs a question-only control |
+| P01-A2 | Industry priors improve first-question value over a generic opener | hypothesis | A/B the 17 cold-start packs against a generic opener; measure decision-relevant information per question |
+| P01-A3 | Clients will grant rung-1 artifacts (a HAR/CSV export) more readily than rung-4 telemetry | hypothesis | Offer both, measure acceptance rates |
+| P01-A4 | Stated wants diverge from observed pain often enough to justify a dual ledger | hypothesis | Count divergences across engagements; if &lt;20%, collapse the ledger |
+| P01-A5 | A stopping rule outperforms &quot;ask until the human stops&quot; | hypothesis | Compare spec quality and client effort under both |
+| P01-A6 | Public-surface fingerprinting materially works outside ecommerce/SaaS | unknown | Attempt rung-0 stack detection across all 17 industries, measure hit rate |
+| P01-A7 | Confidence is better represented as an unfilled slot than a number | inferred | Nothing in 106 commercial surfaces used percentages; test slot-based UX with clients |
+
+## 9. Contradictions held open
+
+1. **Precompute builds trust vs precompute unsettles clients.** Showing a client what you already inferred is either impressive or invasive, and the survey gives no evidence which dominates. Held open; resolve empirically, not by argument.
+2. **Evidence-rich industries are the least regulated ones.** Ecommerce and SaaS are the easiest to precompute and also the most self-served (lowest willingness to buy semi-custom). Healthcare and law have the highest question-led cost and possibly the highest willingness to pay. The precompute thesis is strongest exactly where the commercial case may be weakest.
+3. **The best structural match in OSS is a 4-star idle repo.** Either the category is genuinely unbuilt (supporting the build-not-adopt conclusion) or the survey missed a maintained incumbent. Two independent search angles found nothing; recorded as a finding with residual uncertainty.
+4. **Star counts inverted usefulness at both ends** — 34.6k-star tools answered nothing about internal client operation while a 3-star tool answered a question nothing else could. This is evidence for A22 (stars don&#39;t predict fitness) from a second, independent direction.
+
+## 10. Design consequences
+
+1. `ClientContext` is a **bi-temporal, provenance-carrying fact store**, not a form submission.
+2. Discovery is a **declarative question graph with deterministic eligibility**; the model supplies phrasing and follow-ups only, so sessions are replayable, auditable and unit-testable without an LLM in the loop.
+3. Every eligibility decision carries a **reason**, so a wrong skip is debuggable rather than mysterious.
+4. Adaptive questioning ships in **shadow mode first** — logging what it would have asked for human review before it is allowed to ask anything live.
+5. `DiscoveryGapList` is a **typed artifact**, and P02 must convert each gap into either a labelled assumption or an acceptance question. No gap may be silently lost at the seam.
+6. Sessions are **resumable objects**; a partially completed discovery is a first-class state.
+
+## 11. Unresolved questions for later sprints
+
+- What is the canonical `ClientContext` field set? (Requires P02&#39;s minimum-spec answer to define sufficiency, and P12&#39;s inputs to define necessity.)
+- What may be scraped automatically? This is a **policy owner** question, not a research question. The lane can supply an auditable scrape log; it cannot supply permission.
+- Can the Actionist account itself be the rung-0 source? Blocked on the unknown Actionist data contract.
+- What is the real acceptance rate for each ladder rung, per industry? Unmeasurable without engagements.
+- Does the 17-industry prior survive contact with atypical clients within an industry?
+</pre></div></main></body></html>

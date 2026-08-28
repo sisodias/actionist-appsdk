@@ -1,0 +1,572 @@
+{
+  "schema_version": "actionist.block-dependency-priority-map.v1",
+  "observed_date": "2026-08-28",
+  "status": "research_blueprint_only",
+  "correction": {
+    "supersedes": "Agency OS demand and product selection as the selected pilot",
+    "decision": "Do not treat marketing agencies or any other single vertical as the selected pilot.",
+    "new_outcome": "Map cross-vertical block dependency and priority for Digital Business OS, SaaS, ecommerce, marketing agencies, and course creators, then define the smallest representative foundry test set.",
+    "product_blueprint_produced": false,
+    "workflow_register_produced": false
+  },
+  "source_of_truth": {
+    "block_register": "../../../../../knowledge/block-hub/block-register.json",
+    "composition_recipes": "../../../../../knowledge/block-hub/composition-recipes.json",
+    "capability_source_registry": "../../../../../knowledge/capability-shelf/source-registry.jsonl",
+    "master_synthesis": "../../../../../knowledge/00-MASTER-SYNTHESIS.md",
+    "decision_timeline": "../../../../../knowledge/07-DECISION-TIMELINE.md",
+    "block_hub_readme": "../../../../../knowledge/block-hub/README.md"
+  },
+  "recipe_reconciliation": [
+    {
+      "id": "digital_business_os",
+      "block_count": 31,
+      "role": "shared baseline; supplies the common operating vocabulary"
+    },
+    {
+      "id": "saas",
+      "block_count": 45,
+      "role": "shared baseline plus SaaS commercial, activation, product-operations and retention overlay"
+    },
+    {
+      "id": "ecommerce",
+      "block_count": 50,
+      "role": "shared baseline plus catalogue, transaction, inventory, fulfilment and post-purchase overlay"
+    },
+    {
+      "id": "marketing_agency",
+      "block_count": 48,
+      "role": "shared baseline plus client-service, campaign, approval, publishing, margin and reporting overlay"
+    },
+    {
+      "id": "course_creator",
+      "block_count": 50,
+      "role": "shared baseline plus learning, cohort, community, paid-access and media overlay"
+    }
+  ],
+  "classification_policy": {
+    "universal_foundation": "The smallest cross-vertical control and evidence spine required to bind any of the five recipes. It is intentionally smaller than the 31-block Digital Business OS recipe.",
+    "vertical_spine": "A domain-defining state, authority or transaction block required to prove one overlay's distinctive value.",
+    "optional_enhancement": "A useful shared or overlay capability that can be added after the representative foundry set proves composition and authority boundaries.",
+    "deferred": "A high-risk, high-scope or currently gap-heavy capability excluded from the first foundry proof; this is not a rejection of eventual demand."
+  },
+  "classification": {
+    "universal_foundation": [
+      "B001",
+      "B002",
+      "B003",
+      "B006",
+      "B007",
+      "B010",
+      "B011",
+      "B012",
+      "B013",
+      "B014",
+      "B021",
+      "B028"
+    ],
+    "vertical_spine": [
+      "B032",
+      "B033",
+      "B034",
+      "B035",
+      "B036",
+      "B039",
+      "B041",
+      "B043",
+      "B045",
+      "B046",
+      "B047",
+      "B048",
+      "B049",
+      "B052",
+      "B053",
+      "B058",
+      "B059",
+      "B060",
+      "B061",
+      "B062",
+      "B064",
+      "B065",
+      "B066",
+      "B067",
+      "B068",
+      "B070",
+      "B071",
+      "B072",
+      "B073",
+      "B074",
+      "B075",
+      "B076",
+      "B079",
+      "B080"
+    ],
+    "optional_enhancement": [
+      "B004",
+      "B005",
+      "B008",
+      "B009",
+      "B016",
+      "B017",
+      "B018",
+      "B019",
+      "B020",
+      "B022",
+      "B023",
+      "B024",
+      "B025",
+      "B026",
+      "B027",
+      "B029",
+      "B031",
+      "B037",
+      "B038",
+      "B040",
+      "B042",
+      "B044",
+      "B056",
+      "B057",
+      "B063",
+      "B078"
+    ],
+    "deferred": [
+      "B015",
+      "B030",
+      "B050",
+      "B051",
+      "B054",
+      "B055",
+      "B069",
+      "B077"
+    ]
+  },
+  "vertical_spine_by_recipe": {
+    "saas": [
+      "B032",
+      "B033",
+      "B034",
+      "B035",
+      "B036",
+      "B039",
+      "B041",
+      "B043"
+    ],
+    "ecommerce": [
+      "B045",
+      "B046",
+      "B047",
+      "B048",
+      "B049",
+      "B052",
+      "B053"
+    ],
+    "marketing_agency": [
+      "B058",
+      "B059",
+      "B060",
+      "B061",
+      "B062",
+      "B064",
+      "B065",
+      "B066",
+      "B067",
+      "B068"
+    ],
+    "course_creator": [
+      "B070",
+      "B071",
+      "B072",
+      "B073",
+      "B074",
+      "B075",
+      "B076",
+      "B079",
+      "B080"
+    ]
+  },
+  "dependency_edges": [
+    {"from": "B001", "to": "B002", "kind": "hard", "reason": "Every actor and assignment must be tenant-bound."},
+    {"from": "B001", "to": "B003", "kind": "hard", "reason": "Permission decisions require an explicit tenant boundary."},
+    {"from": "B001", "to": "B006", "kind": "hard", "reason": "The shell must resolve the active workspace."},
+    {"from": "B001", "to": "B007", "kind": "hard", "reason": "Audit records need tenant and actor identity."},
+    {"from": "B001", "to": "B010", "kind": "hard", "reason": "File namespaces cannot be shared across tenants."},
+    {"from": "B001", "to": "B011", "kind": "hard", "reason": "Workflow instances require tenant ownership."},
+    {"from": "B001", "to": "B012", "kind": "hard", "reason": "Connections and credentials require tenant ownership."},
+    {"from": "B001", "to": "B013", "kind": "hard", "reason": "Reports must not mix tenant data."},
+    {"from": "B001", "to": "B014", "kind": "hard", "reason": "Admin actions require a tenant scope."},
+    {"from": "B001", "to": "B021", "kind": "hard", "reason": "Intake records need a tenant and requester scope."},
+    {"from": "B001", "to": "B028", "kind": "hard", "reason": "Work assignments and tasks require tenant ownership."},
+    {"from": "B003", "to": "B007", "kind": "hard", "reason": "Audit must record the authority context of consequential changes."},
+    {"from": "B003", "to": "B011", "kind": "hard", "reason": "State transitions and approvals are permissioned actions."},
+    {"from": "B003", "to": "B012", "kind": "hard", "reason": "Connection grants require least-privilege roles."},
+    {"from": "B003", "to": "B014", "kind": "hard", "reason": "Administrative data operations require bounded roles."},
+    {"from": "B003", "to": "B021", "kind": "hard", "reason": "Form visibility and submission actions are role-scoped."},
+    {"from": "B003", "to": "B028", "kind": "hard", "reason": "Assignment and ownership changes require authority."},
+    {"from": "B006", "to": "B021", "kind": "soft", "reason": "Intake becomes discoverable through the common shell."},
+    {"from": "B006", "to": "B028", "kind": "soft", "reason": "Work views need a common navigation contract."},
+    {"from": "B006", "to": "B058", "kind": "hard", "reason": "A portal must appear as a scoped surface, not a second shell."},
+    {"from": "B007", "to": "B064", "kind": "hard", "reason": "Approval decisions require attributable history."},
+    {"from": "B010", "to": "B021", "kind": "soft", "reason": "Intake may include uploaded briefs and evidence."},
+    {"from": "B010", "to": "B028", "kind": "soft", "reason": "Tasks may carry files and delivery evidence."},
+    {"from": "B010", "to": "B058", "kind": "hard", "reason": "A scoped portal needs tenant-safe file exchange."},
+    {"from": "B010", "to": "B063", "kind": "hard", "reason": "Asset metadata and versions need an object boundary."},
+    {"from": "B010", "to": "B064", "kind": "hard", "reason": "Approval must reference an immutable asset or content version."},
+    {"from": "B011", "to": "B021", "kind": "soft", "reason": "Intake can move through a typed triage state."},
+    {"from": "B011", "to": "B028", "kind": "hard", "reason": "Delivery requires explicit state, owner and exception transitions."},
+    {"from": "B011", "to": "B064", "kind": "hard", "reason": "The foundry must prove versioned approval and revision loops."},
+    {"from": "B012", "to": "B013", "kind": "hard", "reason": "External metrics and source records need typed connections."},
+    {"from": "B013", "to": "B040", "kind": "soft", "reason": "Account health consumes attributed operating evidence."},
+    {"from": "B013", "to": "B066", "kind": "hard", "reason": "Client reporting needs source-linked metrics and freshness."},
+    {"from": "B021", "to": "B023", "kind": "soft", "reason": "Public or client intake can create a qualified party or opportunity."},
+    {"from": "B021", "to": "B058", "kind": "hard", "reason": "Portal requests need a structured intake contract."},
+    {"from": "B021", "to": "B059", "kind": "hard", "reason": "Briefs are a specialized intake surface."},
+    {"from": "B023", "to": "B060", "kind": "hard", "reason": "Commercial proposals need an account and opportunity context."},
+    {"from": "B028", "to": "B062", "kind": "hard", "reason": "A campaign calendar is a scheduled view of work."},
+    {"from": "B028", "to": "B067", "kind": "hard", "reason": "Capacity planning consumes assignments and planned work."},
+    {"from": "B028", "to": "B068", "kind": "soft", "reason": "Agency finance consumes approved work and time evidence."},
+    {"from": "B032", "to": "B033", "kind": "hard", "reason": "Subscription state is derived from a commercial package."},
+    {"from": "B033", "to": "B034", "kind": "hard", "reason": "Access is a consequence of subscription or entitlement state."},
+    {"from": "B033", "to": "B035", "kind": "hard", "reason": "Provisioning follows customer commercial state."},
+    {"from": "B034", "to": "B036", "kind": "soft", "reason": "Entitlement context enriches metering, but usage can be measured independently for the first anchor fixture."},
+    {"from": "B034", "to": "B039", "kind": "soft", "reason": "Controlled rollout may be constrained by entitlements."},
+    {"from": "B036", "to": "B038", "kind": "soft", "reason": "Usage signals can feed product behavior analysis."},
+    {"from": "B037", "to": "B038", "kind": "soft", "reason": "Activation events become product behavior evidence."},
+    {"from": "B038", "to": "B040", "kind": "soft", "reason": "Behavior and adoption signals inform account health."},
+    {"from": "B038", "to": "B041", "kind": "soft", "reason": "Feedback and behavior can inform roadmap decisions."},
+    {"from": "B038", "to": "B042", "kind": "soft", "reason": "Product behavior can expose incident signals."},
+    {"from": "B012", "to": "B043", "kind": "hard", "reason": "Developer access requires a governed connection/event surface."},
+    {"from": "B003", "to": "B043", "kind": "hard", "reason": "Keys and webhooks are privileged authority surfaces."},
+    {"from": "B013", "to": "B044", "kind": "soft", "reason": "Lifecycle journeys consume behavior and lifecycle evidence."},
+    {"from": "B044", "to": "B040", "kind": "soft", "reason": "Lifecycle outcomes contribute to retention health."},
+    {"from": "B032", "to": "B045", "kind": "hard", "reason": "Commerce catalogue pricing needs a packaging or price context."},
+    {"from": "B032", "to": "B047", "kind": "soft", "reason": "Checkout totals may use commercial pricing rules."},
+    {"from": "B045", "to": "B046", "kind": "hard", "reason": "Discovery presents catalogue products and variants."},
+    {"from": "B046", "to": "B047", "kind": "hard", "reason": "Checkout begins with a selected product or basket."},
+    {"from": "B047", "to": "B048", "kind": "soft", "reason": "A paid basket may reserve availability, but inventory can be tested from a synthetic stock event first."},
+    {"from": "B047", "to": "B049", "kind": "hard", "reason": "Checkout creates an order state."},
+    {"from": "B049", "to": "B052", "kind": "hard", "reason": "Fulfilment executes against an order."},
+    {"from": "B049", "to": "B053", "kind": "hard", "reason": "Shipping and tracking attach to an order or fulfilment."},
+    {"from": "B049", "to": "B054", "kind": "soft", "reason": "Returns and exchanges alter a completed order."},
+    {"from": "B030", "to": "B050", "kind": "hard", "reason": "Tax calculation needs payment/amount context but remains a separate authority."},
+    {"from": "B030", "to": "B051", "kind": "hard", "reason": "Risk review is adjacent to payment authorization, not identical to it."},
+    {"from": "B030", "to": "B055", "kind": "soft", "reason": "Promotions can change money totals without owning the payment ledger."},
+    {"from": "B049", "to": "B057", "kind": "soft", "reason": "Recovery begins from an abandoned or incomplete commerce intent."},
+    {"from": "B013", "to": "B057", "kind": "soft", "reason": "Recovery needs attributable conversion evidence."},
+    {"from": "B012", "to": "B046", "kind": "soft", "reason": "Storefronts commonly bind to external catalogue or channel data."},
+    {"from": "B012", "to": "B048", "kind": "soft", "reason": "Availability may be read from a commerce or warehouse source."},
+    {"from": "B012", "to": "B053", "kind": "hard", "reason": "Carrier status and labels require governed connectors."},
+    {"from": "B049", "to": "B056", "kind": "soft", "reason": "Reviews can be attributed to a completed purchase or delivery."},
+    {"from": "B023", "to": "B059", "kind": "soft", "reason": "Agency briefs can be attached to a prospect or existing client account."},
+    {"from": "B059", "to": "B060", "kind": "hard", "reason": "Scope and requirements inform a proposal or retainer."},
+    {"from": "B060", "to": "B061", "kind": "hard", "reason": "Accepted commercial scope precedes contract signature."},
+    {"from": "B061", "to": "B062", "kind": "hard", "reason": "Contracted scope creates scheduled campaign work."},
+    {"from": "B059", "to": "B062", "kind": "hard", "reason": "Brief requirements become campaign calendar items."},
+    {"from": "B062", "to": "B063", "kind": "hard", "reason": "Calendar items need assets and versions for production."},
+    {"from": "B062", "to": "B064", "kind": "soft", "reason": "A campaign calendar normally feeds approval, but approval can be tested on a synthetic version first."},
+    {"from": "B063", "to": "B064", "kind": "soft", "reason": "Asset rights/version context enriches approval; the first fixture can use a host-owned version from B010."},
+    {"from": "B064", "to": "B065", "kind": "hard", "reason": "Publishing is gated by explicit approval."},
+    {"from": "B012", "to": "B065", "kind": "hard", "reason": "Channel operations need governed external connections."},
+    {"from": "B065", "to": "B066", "kind": "hard", "reason": "Reporting needs published/campaign context while preserving source authority."},
+    {"from": "B060", "to": "B068", "kind": "hard", "reason": "Retainer finance derives from contracted scope and price."},
+    {"from": "B067", "to": "B068", "kind": "hard", "reason": "Agency finance needs time/cost and capacity context."},
+    {"from": "B068", "to": "B040", "kind": "soft", "reason": "Margin and delivery evidence inform account health and renewal."},
+    {"from": "B058", "to": "B064", "kind": "hard", "reason": "The portal is the scoped client review surface for approval."},
+    {"from": "B058", "to": "B066", "kind": "hard", "reason": "The portal exposes client-specific reporting without internal operations."},
+    {"from": "B032", "to": "B076", "kind": "hard", "reason": "Paid access needs a plan or package definition."},
+    {"from": "B076", "to": "B034", "kind": "hard", "reason": "Membership payment state becomes learning access."},
+    {"from": "B037", "to": "B070", "kind": "soft", "reason": "Activation guides a creator or learner into content setup/delivery."},
+    {"from": "B070", "to": "B071", "kind": "hard", "reason": "Progress attaches to authored course structure and enrolment."},
+    {"from": "B071", "to": "B072", "kind": "soft", "reason": "Cohort or enrolment membership gates community access."},
+    {"from": "B071", "to": "B073", "kind": "soft", "reason": "Events are scheduled for a cohort or enrolment."},
+    {"from": "B071", "to": "B074", "kind": "hard", "reason": "Assignments and completion attach to learner progress."},
+    {"from": "B074", "to": "B075", "kind": "soft", "reason": "Certificates derive from a verified completion state."},
+    {"from": "B071", "to": "B079", "kind": "hard", "reason": "The learner portal presents course and progress state."},
+    {"from": "B063", "to": "B080", "kind": "hard", "reason": "Media delivery needs asset metadata and version control."},
+    {"from": "B080", "to": "B079", "kind": "hard", "reason": "The learner portal presents playable or downloadable media."},
+    {"from": "B071", "to": "B078", "kind": "soft", "reason": "Communication sequences depend on enrolment and progress state."},
+    {"from": "B044", "to": "B078", "kind": "soft", "reason": "Lifecycle messaging is a shared communication primitive."},
+    {"from": "B013", "to": "B071", "kind": "soft", "reason": "Progress dashboards consume attributable learning events."},
+    {"from": "B010", "to": "B080", "kind": "hard", "reason": "Course media needs a host-owned object boundary."},
+    {"from": "B012", "to": "B078", "kind": "soft", "reason": "Email or messaging delivery needs a governed connection."
+    }
+  ],
+  "representative_foundry_set": {
+    "count": 17,
+    "block_ids": [
+      "B001",
+      "B002",
+      "B003",
+      "B006",
+      "B007",
+      "B010",
+      "B011",
+      "B012",
+      "B013",
+      "B014",
+      "B021",
+      "B028",
+      "B036",
+      "B048",
+      "B058",
+      "B064",
+      "B070"
+    ],
+    "construction": {
+      "universal_foundation_count": 12,
+      "vertical_anchor_count": 5,
+      "vertical_anchors": {
+        "saas": "B036",
+        "ecommerce": "B048",
+        "marketing_agency": ["B058", "B064"],
+        "course_creator": "B070"
+      },
+      "why_smallest": "The set includes the tenant/authority, shell, files, workflow, connector, evidence, admin, intake and delivery contracts, then one dependency-closed domain anchor per overlay. Marketing needs two anchors because its distinguishing proof requires both an untrusted client boundary and an approval/version boundary; the generic workflow engine alone cannot prove either surface."
+    },
+    "dependency_closure": {
+      "all_dependencies_in_set": true,
+      "external_dependencies": [],
+      "notes": "Closure is defined against the hard edges needed by the selected anchors, not against every optional block in the five full recipes."
+    },
+    "shape_probes": [
+      {
+        "id": "shape-01",
+        "blocks": ["B012"],
+        "probe": "Treat a connector/catalogue capability as an externally governed service boundary with tenant-safe identity and action receipts.",
+        "reuse_shape": "intact_service"
+      },
+      {
+        "id": "shape-02",
+        "blocks": ["B058"],
+        "probe": "Treat a client-facing portal as a bounded external surface with scoped visibility and no internal operations leakage.",
+        "reuse_shape": "embedded_or_transplanted_surface"
+      },
+      {
+        "id": "shape-03",
+        "blocks": ["B011", "B036", "B048", "B064", "B070"],
+        "probe": "Bind a workflow/evidence engine to distinct Actionist-owned domain state and approval surfaces without letting a source system define product authority.",
+        "reuse_shape": "engine_plus_owned_surface"
+      }
+    ],
+    "synthetic_probes": [
+      "cross_tenant_read_is_denied",
+      "contractor_cannot_approve_or_publish",
+      "changed_version_invalidates_prior_approval",
+      "connector_identity_and_freshness_are_retained",
+      "stale_or_missing_evidence_is_visible_as_an_exception",
+      "each_vertical_anchor_preserves_its_own_state_machine",
+      "missing_hard_dependency_returns_infeasible_not_a_guess",
+      "unknown_capability_evidence_returns_underdetermined"
+    ]
+  },
+  "value_matrix": {
+    "id": "repository_value_matrix",
+    "row_grain": "one row per source_id + reuse_shape + recipe_id + block_id",
+    "global_repository_score": false,
+    "global_repository_rank": false,
+    "comparison_scope": "Compare rows only when reuse_shape, recipe_id and block_id are held constant; a repository is never assigned one universal value score.",
+    "reason_for_shape_specificity": "The same repository may be valuable as an intact service, unusable as a transplant, and useful only as a generated pattern. Source identity, block semantics, host seam, authority, adaptation cost and evidence must therefore be evaluated per reuse shape.",
+    "unknown_policy": "UNKNOWN is distinct from zero. Missing evidence lowers evidence completeness and blocks a shape-specific decision when a hard gate is unknown; it is never silently converted into a low score.",
+    "dimensions": [
+      {
+        "id": "outcome_importance",
+        "kind": "demand",
+        "scale": "ordinal_0_to_5",
+        "question": "How important is the named outcome to a real operator, team or customer?",
+        "anchors": {
+          "0": "No named outcome or purely cosmetic convenience.",
+          "1": "Nice-to-have preference with no identified consequence.",
+          "2": "Local efficiency or quality improvement with limited downstream effect.",
+          "3": "Repeated workflow, SLA, throughput or margin concern.",
+          "4": "Direct revenue, retention, cost, risk or customer-trust consequence.",
+          "5": "Critical business, financial, safety, regulatory or continuity outcome."
+        },
+        "required_inputs": ["outcome_id", "affected_actor", "terminal_owner", "economic_or_operational_metric", "demand_evidence_refs", "evidence_class"],
+        "rule": "Catalogue mention alone may establish a demand signal but not validated demand; retain the evidence class and denominator."
+      },
+      {
+        "id": "block_universality",
+        "kind": "reuse",
+        "scale": "structured_role_and_counts",
+        "question": "Is the target block a cross-vertical foundation or a narrow overlay, and how broadly is it required by the hub recipes?",
+        "required_inputs": ["block_id", "map_class", "hub_required_recipe_ids", "hub_required_recipe_count", "block_layer", "block_stage"],
+        "rule": "Use the map class as the semantic role and the canonical recipe count as requirement breadth. Do not infer source reuse breadth from the block's hub membership."
+      },
+      {
+        "id": "workflow_completeness",
+        "kind": "reuse",
+        "scale": "ordinal_0_to_5",
+        "question": "How much of the workflow contract is evidenced by this source in the selected shape?",
+        "facets": ["trigger_or_input", "identity_and_data", "state_transition", "authority", "exception_or_recovery", "verification_or_receipt"],
+        "anchors": {
+          "0": "No workflow or only a name/metadata tag.",
+          "1": "Outcome or feature statement only.",
+          "2": "Trigger/input plus a happy-path behavior.",
+          "3": "Trigger, data identity, states and named actor/authority.",
+          "4": "The above plus exception behavior and source/provenance evidence.",
+          "5": "The above plus negative path, recovery/read-back and verification receipt."
+        },
+        "required_inputs": ["workflow_id", "observed_facets", "negative_cases", "verification_refs", "evidence_class"],
+        "rule": "A README, popularity signal or broad category tag cannot fill a missing workflow facet."
+      },
+      {
+        "id": "cross_recipe_reuse_breadth",
+        "kind": "reuse",
+        "scale": "count_0_to_5",
+        "question": "For the selected block and shape, in how many of the five recipes does this source have evidence-backed semantic fit?",
+        "anchors": {
+          "0": "No recipe fit established.",
+          "1": "One recipe has a source-read fit.",
+          "2": "Two recipes have source-read fits.",
+          "3": "Three recipes have source-read fits.",
+          "4": "Four recipes have source-read fits.",
+          "5": "All five recipes have source-read fits."
+        },
+        "required_inputs": ["recipe_id", "semantic_fit_receipt", "recipe_variant_delta", "source_of_truth_fit", "authority_fit"],
+        "rule": "Count only direct or otherwise explicitly evidence-backed semantic joins. Lexical tags, family labels and generic product descriptions do not count."
+      },
+      {
+        "id": "user_visible_vs_engine_only",
+        "kind": "value_mode",
+        "scale": "two_subscores_0_to_5_plus_mode",
+        "question": "Does the selected shape deliver a user-visible surface, engine leverage, or both?",
+        "fields": ["user_visible_score", "engine_only_score", "mode"],
+        "mode_values": ["engine_only", "mostly_engine", "mixed", "mostly_user_visible", "user_visible_and_engine"],
+        "mode_rule": "Preserve both subscores. Classify engine_only when user_visible_score<=1 and engine_only_score>=4; user_visible_and_engine when both scores>=4; otherwise use the nearest mixed mode with evidence.",
+        "required_inputs": ["surface_or_api_observed", "workflow_or_engine_observed", "actor_receipt", "shape_evidence_refs"],
+        "rule": "Engine-only value is not a discount: a reliable service or adapter can unlock several visible workflows. Visible value is not sufficient: a surface without authority or state evidence is not reusable."
+      }
+    ],
+    "shape_specific_fields": [
+      "rights_state",
+      "license_or_clean_room_reimplementation_cost",
+      "adaptation_cost_by_category",
+      "authority_fit",
+      "data_ownership_fit",
+      "integration_surface",
+      "runtime_burden",
+      "qualification_evidence",
+      "maintenance_owner",
+      "rollback_or_exit_evidence"
+    ],
+    "shape_profiles": [
+      {
+        "reuse_shape": "intact_service",
+        "high_value_when": "The source supplies a complete capability behind a stable identity-bound API or event surface and can retain its own data authority.",
+        "value_mode_emphasis": "engine_only_or_mixed",
+        "dimension_weights": {"outcome_importance": 0.3, "block_universality": 0.1, "workflow_completeness": 0.3, "cross_recipe_reuse_breadth": 0.2, "user_visible_vs_engine_only": 0.1},
+        "hard_gates": ["identity_and_tenancy", "contract_and_read_back", "authority_and_data_ownership", "failure_recovery"]
+      },
+      {
+        "reuse_shape": "embedded_module",
+        "high_value_when": "A bounded user-visible surface can share host identity, navigation, settings and permissions without leaking donor ownership.",
+        "value_mode_emphasis": "user_visible",
+        "dimension_weights": {"outcome_importance": 0.25, "block_universality": 0.15, "workflow_completeness": 0.2, "cross_recipe_reuse_breadth": 0.15, "user_visible_vs_engine_only": 0.25},
+        "hard_gates": ["host_session_handoff", "tenant_scoped_visibility", "authority_boundary", "surface_state_and_error_evidence"]
+      },
+      {
+        "reuse_shape": "transplanted_subsystem",
+        "high_value_when": "A product-defining subsystem can be owned deliberately with a bounded dependency closure and explicit migration/data authority.",
+        "value_mode_emphasis": "mixed",
+        "dimension_weights": {"outcome_importance": 0.25, "block_universality": 0.15, "workflow_completeness": 0.3, "cross_recipe_reuse_breadth": 0.15, "user_visible_vs_engine_only": 0.15},
+        "hard_gates": ["dependency_closure", "data_and_migration_owner", "semantic_adaptation_map", "rollback_or_exit_plan"]
+      },
+      {
+        "reuse_shape": "extracted_package",
+        "high_value_when": "A small, portable capability has high block or recipe breadth and does not drag an application-scale dependency closure into the host.",
+        "value_mode_emphasis": "engine_or_shared_primitive",
+        "dimension_weights": {"outcome_importance": 0.2, "block_universality": 0.3, "workflow_completeness": 0.2, "cross_recipe_reuse_breadth": 0.25, "user_visible_vs_engine_only": 0.05},
+        "hard_gates": ["small_dependency_closure", "portable_contract", "testable_state", "rights_and_maintenance_owner"]
+      },
+      {
+        "reuse_shape": "adapter",
+        "high_value_when": "The source remains authoritative while the adapter provides typed identity, mapping, idempotency, provenance and safe read-back.",
+        "value_mode_emphasis": "engine_only",
+        "dimension_weights": {"outcome_importance": 0.25, "block_universality": 0.2, "workflow_completeness": 0.2, "cross_recipe_reuse_breadth": 0.25, "user_visible_vs_engine_only": 0.1},
+        "hard_gates": ["source_of_truth", "identity_mapping", "idempotency", "freshness_and_error_receipts"]
+      },
+      {
+        "reuse_shape": "generated_pattern",
+        "high_value_when": "Observed behavior or interaction grammar can be reproduced without inheriting source code, while the resulting pattern remains tied to a tested contract.",
+        "value_mode_emphasis": "mixed",
+        "dimension_weights": {"outcome_importance": 0.2, "block_universality": 0.3, "workflow_completeness": 0.25, "cross_recipe_reuse_breadth": 0.2, "user_visible_vs_engine_only": 0.05},
+        "hard_gates": ["pattern_provenance", "held_out_replay", "authority_preservation", "no_unbounded_generation"]
+      },
+      {
+        "reuse_shape": "template_archetype",
+        "high_value_when": "A complete composition envelope has a data spine, authority model, variant delta and explicit missing blocks.",
+        "value_mode_emphasis": "user_visible_and_workflow",
+        "dimension_weights": {"outcome_importance": 0.25, "block_universality": 0.2, "workflow_completeness": 0.3, "cross_recipe_reuse_breadth": 0.2, "user_visible_vs_engine_only": 0.05},
+        "hard_gates": ["data_spine", "variant_delta", "required_and_missing_blocks", "rights_and_maintenance_owner"]
+      },
+      {
+        "reuse_shape": "custom_delta",
+        "high_value_when": "No source is better than a bounded custom implementation for the product-specific gap.",
+        "value_mode_emphasis": "not_a_repository_score",
+        "dimension_weights": null,
+        "hard_gates": ["explicit_gap", "measurable_outcome", "bounded_scope", "ownership"]
+      }
+    ],
+    "scoring_rule": "Compute a shape-specific weighted index only for a fixed block_id + recipe_id + reuse_shape row after hard gates are known. Report dimension values, evidence completeness, costs and blockers alongside the index; never roll rows into a repository-wide score.",
+    "calibration_anchors": [
+      {
+        "source_id": "SRC-0002",
+        "repository": "toeverything/AFFiNE",
+        "anchor_name": "AFFiNE",
+        "anchor_shapes": ["embedded_module", "transplanted_subsystem"],
+        "anchor_blocks": ["B029"],
+        "positive_observed_signals": ["Native workspace rendered inside the host", "Authenticated host-session handoff passed", "Document creation and reload persistence passed", "Companion listener and donor runtime remained separate owners"],
+        "matrix_calibration": "Positive user-visible embedded-surface and host-handoff evidence; do not infer cross-recipe breadth, license clearance, qualification or admission.",
+        "registry_limits": ["qualification_status=NOT_QUALIFIED", "admission_status=NOT_ADMITTED", "permissive-open-core rights posture requires separate rights evidence"]
+      },
+      {
+        "source_id": "SRC-0064",
+        "repository": "twentyhq/twenty",
+        "anchor_name": "Twenty",
+        "anchor_shapes": ["transplanted_subsystem", "intact_service"],
+        "anchor_blocks": ["B023"],
+        "positive_observed_signals": ["Product-base CRM identity", "Active-maintenance source signal", "CRM and account-health family alignment"],
+        "matrix_calibration": "Positive user-visible domain-product and outcome-importance anchor; shape-specific workflow, runtime, rights and cross-recipe evidence remain open and must not be borrowed from the label.",
+        "registry_limits": ["qualification_status=NOT_QUALIFIED", "execution_status=UNEXECUTED", "admission_status=NOT_ADMITTED", "strong-copyleft-open-core rights posture requires separate rights evidence"]
+      },
+      {
+        "source_id": "SRC-0001",
+        "repository": "chatwoot/chatwoot",
+        "anchor_name": "Chatwoot",
+        "anchor_shapes": ["intact_service"],
+        "anchor_blocks": ["B025", "B026"],
+        "positive_observed_signals": ["Native Inbox reached", "Exact-origin SSO exchange passed", "Wrong-origin and replay attempts were denied", "Restart persistence passed", "Three bounded donor changes were identified for CORS, exchange compatibility and profiler behavior"],
+        "matrix_calibration": "Positive intact-service workflow, identity-bound handoff and recovery anchor; adaptation cost is part of the row and not a global repository penalty.",
+        "registry_limits": ["qualification_status=NOT_QUALIFIED", "admission_status=NOT_ADMITTED", "permissive-open-core rights posture requires separate rights evidence"]
+      },
+      {
+        "source_id": "SRC-0005",
+        "repository": "makeplane/plane",
+        "anchor_name": "Plane",
+        "anchor_shapes": ["intact_service", "embedded_module"],
+        "anchor_blocks": ["B028"],
+        "positive_observed_signals": ["Native Projects surface reached", "Create, move, restart persistence and delete passed", "Authenticated runtime CRUD and browser checks passed", "Donor bundle remained unchanged"],
+        "matrix_calibration": "Positive universal-block, user-visible project workflow and intact-service boundary anchor; Node compatibility repair is shape-specific adaptation evidence, not a universal repository score.",
+        "registry_limits": ["qualification_status=NOT_QUALIFIED", "admission_status=NOT_ADMITTED", "runtime precedent does not establish production readiness"]
+      }
+    ]
+  },
+  "evidence_state": {
+    "hub_blocks": 80,
+    "hub_recipes": 5,
+    "hub_status": "requirements_mapped_sources_unqualified",
+    "seeded_candidate_supply": 66,
+    "thin_or_gap": 14,
+    "qualification": "unexecuted",
+    "admission": "none",
+    "demand_validation": "not established; the 17-industry catalogue remains a demand signal, not a validated denominator"
+  },
+  "boundary": {
+    "repository_selection": false,
+    "source_execution": false,
+    "implementation": false,
+    "build": false,
+    "deployment": false,
+    "client_private_data": false,
+    "runtime_architecture": false
+  }
+}

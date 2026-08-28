@@ -1,0 +1,54 @@
+{
+  "schema_version": "actionist.affine.package-smoke.v1",
+  "status": "PASS",
+  "run_scope": "LOCAL_SYNTHETIC_ONLY",
+  "commands": [
+    "node --check scripts/bind.mjs",
+    "node --check scripts/validate.mjs",
+    "node --check scripts/install.mjs",
+    "node scripts/validate.mjs",
+    "node scripts/bind.mjs --host fixture/host.json --out <temporary-directory>",
+    "node scripts/validate.mjs --binding <temporary-directory>/binding.generated.json",
+    "node scripts/install.mjs --host fixture/host.json --out <temporary-directory>",
+    "npm test"
+  ],
+  "checks": [
+    {
+      "check_id": "SMOKE-SYNTAX-001",
+      "expected": "All package JavaScript entrypoints parse.",
+      "observed": "bind, validate and install passed node --check."
+    },
+    {
+      "check_id": "SMOKE-BIND-001",
+      "expected": "The valid fixture produces a BOUND binding.",
+      "observed": "fixture-portal::affine-workspace produced binding.generated.json with status BOUND."
+    },
+    {
+      "check_id": "SMOKE-ROUTE-001",
+      "expected": "The frame route contains only the deterministic workspace and host-origin parameters.",
+      "observed": "The route was http://127.0.0.1:3020/workspace/workspace-fixture/all with siso_embedded, revision, host-origin and server-origin parameters; no assertion parameter was present."
+    },
+    {
+      "check_id": "SMOKE-NEGATIVE-001",
+      "expected": "Invalid identity inputs fail closed.",
+      "observed": "Wrong client, expired identity, missing edit capability and missing identity returned exit 1 with HOST_IDENTITY_REFUSED."
+    },
+    {
+      "check_id": "SMOKE-VALIDATOR-001",
+      "expected": "The package validator proves seven records, thirteen evidence sources, static boundary and NOT_ADMITTED status.",
+      "observed": "node scripts/validate.mjs returned PASS with records=7, evidence_sources=13, source_copied=false and admission_status=NOT_ADMITTED."
+    },
+    {
+      "check_id": "SMOKE-TEST-001",
+      "expected": "The package test suite passes route, identity, install, config and interface checks.",
+      "observed": "npm test returned 5 tests, 5 pass, 0 fail."
+    }
+  ],
+  "donor_runtime_started": false,
+  "deployment_performed": false,
+  "admission_status": "NOT_ADMITTED",
+  "limitations": [
+    "This receipt proves only local package and synthetic fixture behavior.",
+    "No client data, donor source, donor runtime, credential or network call was used."
+  ]
+}

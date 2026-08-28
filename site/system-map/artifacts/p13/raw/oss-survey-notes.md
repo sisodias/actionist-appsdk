@@ -1,0 +1,231 @@
+# P13 — Preview, editor and change loop: OSS/GitHub census
+
+Run: 2026-08-27, Sprint-1 lane S1-L5. Research only; nothing cloned or executed.
+Companion data: `top-repos.jsonl` (70 records).
+
+## Headline
+
+**The denominator is 64 unique projects, not ~100.** The target was ~100; I stopped at 64
+because the space genuinely ran dry of *architecturally distinct* projects. Beyond this
+point the additions were near-duplicates (a fourth Slate wrapper, a fifth mobile page
+builder) that would have inflated the count without adding a single new answer to the two
+questions that matter. Per the brief's instruction, an honest 64 is reported rather than a
+padded 100. Where a listed project could not be verified, it is recorded as unknown or
+excluded rather than guessed.
+
+Of those 64, **29 make out-of-bounds edits unrepresentable, 28 do not, and 7 are unknown.**
+That near-even split is itself the finding: schema-bounded editing is a live, well-populated
+tradition in open source, not a novelty — but it is a minority of what the market currently
+ships as "visual editing".
+
+## Method
+
+Metadata came from the GitHub REST API via authenticated `gh` (`gh api repos/{owner}/{name}`),
+capturing `pushed_at`, `archived`, `stargazers_count` and `license.spdx_id` at fetch time on
+2026-08-27. Discovery combined the brief's seven priority tiers with GitHub topic searches
+(`topic:page-builder`, `topic:visual-editor`, `topic:website-builder`, `topic:design-tokens`,
+`topic:wysiwyg`, `topic:low-code`, each with a stars floor) to catch projects the hand-list
+missed — that sweep is where Builder.io's OSS repo, Appsmith, Budibase, ToolJet and
+h5-Dooring entered.
+
+Architecture classification was done by reading source or first-party docs wherever the
+claim was load-bearing: Puck's `Fields.ts` and `Data.tsx`, Webstudio's Zod
+`schema/instances.ts`, ProseMirror's `schema.ts`, Gutenberg's `block-locking.md`, Sanity's
+HTTP patches documentation, Storybook's `controls.mdx`, Onlook's README architecture
+section. Records carry `evidence_class` so `first_party_docs` and `observed_behavior` are
+distinguishable from `secondary` (classified from documented model without reading the
+validator) and `inference`. **28 of the 64 in-denominator repos are `secondary`-class and
+are labelled as such** — they are honest census entries, not deeply verified ones.
+
+All ten top-10 licences were verified by reading the LICENSE body via
+`gh api repos/{r}/license`, never the badge. That step paid for itself four times over
+(below).
+
+## Denominator and per-category counts
+
+Counts are **unique repos**, recomputed from `top-repos.jsonl` immediately before writing.
+Two records share `puckeditor/puck` (P13-R-001, P13-R-002), so 70 records map to 69 unique
+repos; 5 are excluded, leaving **64 in the denominator**.
+
+| Category | Unique repos |
+|---|---|
+| Schema-bounded visual editors | 21 |
+| Block/document editors with schema'd blocks | 16 |
+| Design-token / theme editors | 7 |
+| Edit-history substrates | 6 |
+| Visual-editing bridges over real code | 5 |
+| AI-editor OSS | 5 |
+| CMS visual editing | 4 |
+| **Total in denominator** | **64** |
+| Excluded (dormant/archived/unresolvable) | 5 |
+
+Excluded, with reasons: `easyblocks/easyblocks` (HTTP 404 — unresolvable, not assumed dead),
+`storyblok/storyblok-js-client` (archived; thin delivery client carrying none of Storyblok's
+whitelist enforcement), `nraiden/openv0` (dormant since 2024-09-19; the brief's path
+`raineorshine/openv0` 404s), `salesforce-ux/theo` (archived, superseded by Style Dictionary),
+`opendesigndev/octopus` (dormant, see below).
+
+## Top 10, with verified licences
+
+| # | Project | Licence (read from body) | Why it earns the slot |
+|---|---|---|---|
+| 1 | **puckeditor/puck** | MIT | Closed field union + per-prop `readOnly` **in the persisted data**, plus a load-time migration hook. The closest whole-system match to Actionist. |
+| 2 | **webstudio-is/webstudio** | **AGPL-3.0** | Runtime Zod parse of the instance tree — invalid compositions fail to load, not merely to render. Licence is the blocker. |
+| 3 | **WordPress/gutenberg** | **GPL-2.0-or-later** (contributions dual GPL/MPL) | `contentOnly` editing + Block Deprecation API: a decade of production evidence for bounded editing *and* forward-migrating stored content. |
+| 4 | **ProseMirror/prosemirror-model** | MIT | Declarative content grammar makes invalid documents unconstructible; Steps make change a first-class object. |
+| 5 | **sanity-io/sanity** | MIT (OSS studio only) | Closed *mutation* vocabulary — bounds the operations, where Puck bounds the fields. |
+| 6 | **storybookjs/storybook** | MIT | The most widely deployed bounded-edit surface in existence (args/argTypes); named stories are the census's closest brush with intent. |
+| 7 | **onlook-dev/onlook** | Apache-2.0 | Best-maintained open implementation of visual editing over real code — i.e. the clearest evidence for the posture Actionist is rejecting. |
+| 8 | **jnsahaj/tweakcn** | Apache-2.0 | Token-vocabulary editing that buys bounded edits and upgrade-safety from one indirection. |
+| 9 | **TypeCellOS/BlockNote** | **MPL-2.0 core + GPL-3.0 on `packages/xl-*` + paid commercial** | Typed block `propSchema`; included equally as the sharpest licence lesson in the census. |
+| 10 | **tinacms/tinacms** | Apache-2.0 (TinaCloud is commercial) | Git-backed edits give durable, attributable, revertible provenance for free. |
+
+### Licence findings that the badge would have got wrong
+
+Four cases where reading the body changed the answer, and one where it prevented a false alarm:
+
+- **BlockNote** — badge says `NOASSERTION`, body says MPL-2.0 core *except* "The XL packages
+  (source code in the `packages/xl-*` directories and published in NPM as `@blocknote/xl-*`)
+  are licensed under the GNU General Public License Version 3 (GPL-3.0). Additionally, a
+  commercial license is available." Depending on an `xl-*` package means GPL-3.0 or money.
+- **Budibase** — badge `NOASSERTION`, body: "You can consider Budibase to be GPLv3 licensed
+  overall," with the rule "Is this a paid feature? If **yes**, license the package under
+  **BSL**." GPLv3 + Business Source License in one repo.
+- **dyad** — badge `NOASSERTION`, body: everything under `src/pro/` is separately licensed,
+  the rest is Apache-2.0. The third instance of this carve-out pattern in one census.
+- **TinyMCE** — badge `NOASSERTION`, body: GPL-2.0-or-later. Despite TinyMCE's ubiquity in
+  commercial products, the OSS licence is copyleft.
+- **GrapesJS and Yjs** — both badge `NOASSERTION`, but reading the body shows verbatim
+  BSD-3-Clause and verbatim MIT respectively. Here the scary badge was a detection artefact,
+  and treating `NOASSERTION` as "assume the worst" would have wrongly disqualified two
+  healthy permissive projects.
+
+**Plasmic** deserves a specific note against the brief's expectation: its root LICENSE is
+genuinely, verbatim MIT ("Copyright (c) 2021 Plasmic") with no carve-out preamble. The
+commercial split is product-level (Plasmic Studio is hosted and paid), not a licence trap
+at the repo root. I did not enumerate per-package licences under `packages/`, so the root
+MIT should be read as covering root-level code only.
+
+## Which projects make out-of-bounds edits unrepresentable, and how
+
+29 of 64. They cluster into five distinct mechanisms, which is the useful structure — the
+mechanisms, not the count, are what transfers.
+
+**1. Closed field/prop union (the edit has no slot).** Puck's `Field` is a discriminated
+union of `text | number | textarea | select | radio | richtext | array | object | external |
+custom`, and props are typed to each component's declared `FieldProps`; an undeclared prop
+has nowhere to live in `ComponentData.props`. Storybook's args and Payload's field configs
+work the same way. This bounds *what can be edited*.
+
+**2. Closed operation vocabulary (the edit cannot be expressed).** Sanity's HTTP patch API
+admits exactly `set`, `setIfMissing`, `unset`, `insert`, `inc`, `dec`, `diffMatchPatch` —
+"The valid patch types when using the direct HTTP mutations api". RFC 6902 JSON Patch fixes
+six ops. This bounds *how* an edit may be stated, and it is orthogonal to (1): Actionist
+needs both.
+
+**3. Runtime schema validation at the persistence boundary.** Webstudio parses its instance
+graph with Zod (`instanceChild = z.union([idChild, textChild, expressionChild])`), so a
+malformed tree fails to load or save. This is stronger than TypeScript types, which vanish
+at runtime and protect only the developer.
+
+**4. Declarative content grammar.** ProseMirror compiles content expressions (`"block+"`,
+`"paragraph (bullet_list|ordered_list)*"`) into a `ContentMatch` state machine;
+`createChecked()` calls `checkContent()` and **throws** on violation. Milkdown and TOAST UI
+inherit this, with markdown round-tripping adding a second independent narrowing.
+
+**5. Value indirection through a named vocabulary.** tweakcn, Style Dictionary, Theme UI,
+Tokens Studio and the DTCG spec all restrict edits to *values of named tokens*. You may
+change what `--primary` is; you cannot invent a new structural affordance. Panda CSS goes
+furthest by generating TypeScript types from the token config, making an off-scale value a
+compile error.
+
+**Instructive counterexamples.** Slate deliberately removed its declarative schema in favour
+of `normalizeNode`, an imperative repair that runs *after* an invalid state exists — invalid
+states are representable and transiently real, then corrected. Plate, Yoopta and wangEditor
+inherit that posture. TinyMCE's `valid_elements` whitelist strips on serialize rather than
+rejecting on construct. And the CRDT substrates (Yjs, Automerge, Loro) guarantee
+*convergence*, not *validity*: two individually-legal concurrent edits can merge into a
+jointly-illegal document, so a CRDT alone can never be the boundary.
+
+## Open Design / Octopus (one sentence, as scoped)
+
+The Octopus format spec remains a coherent, Apache-2.0-licensed reference worth *reading* as
+prior art on normalising design documents into a converter-fed interchange model, but with
+both `opendesigndev/octopus` (last push 2024-07-16) and `opendesigndev/open-design-engine`
+(2023-07-13) sitting at 8 stars each, it is dormant and near-unadopted, so it should inform
+thinking and never become a dependency.
+
+## Five clearest architecture lessons for bounded editing
+
+**1. Put the permission in the document, not in the editor.** Puck's `BaseData.readOnly` is
+a per-prop map that travels *with* each persisted node, and `permissions` sits on the
+component config. Because the lock serializes, it binds every future consumer of that
+document rather than one editor session. Almost every other project in the census puts its
+boundary in UI chrome, where the next client to read the data knows nothing about it. This
+is the single most transferable mechanism found.
+
+**2. Bound the fields and the operations separately — they are different problems.** Puck
+answers "which properties may change"; Sanity answers "what kinds of change may be
+expressed". A system with only the first can still receive a wholesale document replacement;
+a system with only the second can still set a field nobody should touch. Actionist's change
+plans need a closed op vocabulary *and* a closed field vocabulary.
+
+**3. Capture intent at the moment of the edit, because a diff cannot reconstruct it.** The
+census's sharpest contrast is ProseMirror Steps and Sanity patches (captured *as* the user
+acts — "insert this after that", "increment this") versus jsondiffpatch (*derived* later from
+before/after states). By the time you diff, the intent is gone and a reader must guess.
+Confirming the wave-1 finding: **no project in this census records *why* an edit was made.**
+The nearest approaches are Automerge's optional free-text change message on an addressable,
+queryable change object, Tina/Decap's git commits, and DTCG's `$description` on tokens.
+Automerge's change graph is the best-shaped *slot* for the thing Actionist needs to invent —
+the mechanism exists, the semantics do not.
+
+**4. Indirection through names is what actually preserves upgradeability.** Every project
+that survives component evolution does the same thing: content references capabilities by
+*name* (Puck's `{type, props}`, Webstudio's component strings, Storybook's arg keys, token
+aliases), so implementations can be replaced underneath. The projects that write edits into
+source — Onlook, NetEase/tango, blocks, and every AI builder here — make the visual edit and
+the hand-written change indistinguishable afterwards, which destroys the governed layer
+Actionist depends on. shadcn/ui's copy-and-own registry is the same trade made deliberately
+and stated as a goal. This is a real fork in the road, not a detail.
+
+**5. Design the escape hatch as a bounded slot, not a hole.** Appsmith confines free-form
+power to `{{ }}` expression slots inside declared properties; Gutenberg's `contentOnly` hides
+design tools while keeping content editable. Puck shows the failure mode: its `custom` field
+type can render arbitrary React and silently reinstates unbounded editing inside an otherwise
+closed system. An escape hatch should be a typed, enumerable, auditable slot — so a
+governance layer can *find* every use of it.
+
+A sixth, more practical lesson: **sandboxing is not bounding.** E2B Fragments bounds
+execution blast radius; that is orthogonal to bounding the edit vocabulary, and Actionist
+needs both mechanisms rather than mistaking one for the other.
+
+## Unknowns and limitations
+
+- **`easyblocks/easyblocks` returned HTTP 404** on 2026-08-27. Renamed, deleted, or a
+  different org path — not established, and not assumed to be abandonment.
+- **7 of 64 repos have `out_of_bounds_representable: "unknown"`**, including Plasmic,
+  BlockSuite, Builder.io and Instatic. Each would need source reading to resolve; none were
+  guessed.
+- **28 of 64 are `evidence_class: secondary`** — classified from documented models rather
+  than by reading the validating code. Treat their architecture claims as one tier softer.
+- **Sanity's optimistic locking is UNVERIFIED.** The patches page does not mention
+  `ifRevisionID` or any revision guard; it recommends patches over whole-document writes for
+  merge-friendliness, which is conflict *avoidance*, not locking. Resolving this needs the
+  Mutations API reference, and it matters because concurrency control is load-bearing for a
+  change-plan design.
+- **Builder.io's `styleStrictMode` is not in its OSS repo.** GitHub code search for
+  `styleStrictMode repo:BuilderIO/builder` returned `total_count: 0`. The wave-1 exemplar of
+  graduated permission is proprietary and cannot be studied in source — the MIT badge covers
+  SDKs to a paid hosted editor.
+- **ProseMirror's GitHub archive flag is misleading.** The repos are archived with READMEs
+  pointing to `code.haverbeke.berlin`, where version 1.25.11 was tagged 2026-07-11 across 861
+  commits. Reading the flag as death would have been a factual error, and it is the kind that
+  a metadata-only sweep produces.
+- **Per-package licences were not enumerated** for the monorepos (Plasmic, Payload, Sanity,
+  Appsmith). Plate's LICENSE explicitly warns that its root MIT does not cover package
+  directories with their own LICENSE file, so any adoption decision needs per-package
+  diligence at that time.
+- **Star counts are a lagging indicator**, repeatedly: TOAST UI (18k stars, 2 years idle),
+  wangEditor (18k, ~2 years idle), bolt.diy (19.8k, 6.5 months idle), Craft.js (8.7k, ~18
+  months idle). Maintenance state was taken from `pushed_at`, not popularity.

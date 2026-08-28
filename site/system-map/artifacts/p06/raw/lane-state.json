@@ -1,0 +1,129 @@
+{
+  "schema": "actionist.lane-state.v1",
+  "part": "P06",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "lane": "S1-L3",
+  "agent": "ACTIONIST-S1-L3-EXPERIENCE",
+  "authored_by": "opus_subagent_s1l3-p06 (denominators, report, first-principles, decision-ledger v2, registers); lane_owner (v1 placeholder packet, preserved and superseded)",
+  "model_policy": "opus_only_subagents",
+  "parent_model_at_write": "opus-5-1m",
+  "counts": {
+    "source_register": 26,
+    "top_companies": 113,
+    "top_companies_ranked": 10,
+    "top_repos": 119,
+    "top_repos_ranked": 10,
+    "innovation_register": 110,
+    "innovation_ranked": 10,
+    "decisions": 10
+  },
+  "evidence_quality": {
+    "source_register": {
+      "observed": 25,
+      "inferred": 1,
+      "hypothesis": 0
+    },
+    "top_companies": {
+      "observed": 13,
+      "inferred": 33,
+      "hypothesis": 57,
+      "note": "counts exclude the 10 ranked rows, which duplicate their parent record"
+    },
+    "top_repos": {
+      "observed": 108,
+      "inferred": 0,
+      "hypothesis": 1,
+      "note": "counts exclude the 10 ranked rows, which duplicate their parent record"
+    },
+    "innovation_register": {
+      "observed": 42,
+      "inferred": 31,
+      "hypothesis": 27,
+      "note": "counts exclude the 10 ranked rows, which duplicate their parent record"
+    }
+  },
+  "denominator_targets": {
+    "commercial": 100,
+    "oss_literature": 100,
+    "innovations": 100
+  },
+  "denominator_actual": {
+    "commercial": 103,
+    "oss_literature": 109,
+    "innovations": 100
+  },
+  "depth_contract": "MET ON COUNT; UNEVEN ON VERIFICATION. OSS/literature is strong: 109 base rows, 108 observed — repos verified via authenticated gh api with LICENCE BODIES read rather than badges, papers via arXiv/Crossref with several full-text PDF extractions. Commercial is the weak leg: 103 surfaces enumerated but only 13 observed, because consumer style quizzes are client-side JS behind bot protection and are not fetchable.",
+  "resolved_questions": {
+    "comparison_format": "4-up gallery with explicit outside option as PRIMARY; 4-way best-worst pre-registered as A/B arm B. This DIVERGES from the lane owner's v1 ledger, which chose best-worst; the disagreement is recorded in decision-ledger.json P06-D01 and is resolvable by Gate 4.",
+    "how_many_choices": "8-12 rounds, hard floor 5, hard ceiling 15. Derived from a channel-capacity argument (36,000 packs = 15.14 bits; +/-1-level tolerance leaves 4.04 bits to acquire; ~0.91 effective bits per screen at p=0.15) and independently corroborated by five empirical sources all landing in the 5-15 band. 'Is it 7 or 14' is not well-posed as asked; 7 is approximately right by coincidence, 14 has no derivation.",
+    "stopping_rule": "Three conditions, any of: per-knob posterior within +/-1 level AND expected information gain < ~0.25 bits; ceiling of 15 rounds; user presses an always-available 'this is right'. Floor of 5. Confidence reported PER KNOB, never as one scalar.",
+    "taste_profile_to_tokens": "Continuous preference vector learned in knob space; closed pre-authored gate-passing pack selected by nearest neighbour. Never interpolate tokens — an interpolated pack has passed none of gates A-J, and WCAG luminance is non-linear so the midpoint of two AA-passing palettes can fail AA. Closed-pack snapping IS the anti-overfitting mechanism.",
+    "screens_vs_fragments": "Whole screens re-rendered from our own spec, with only the targeted knobs varied and content held constant within a round. Fragments reserved for a targeted disambiguation phase only (falsifier F4)."
+  },
+  "checkpoints": [
+    "prior-evidence audit (4 local priors read in full)",
+    "live demo inspected — resolves v1 shortfall SF04",
+    "dispatch of 2 Opus research workers",
+    "OSS/literature denominator returned and verified (119 rows)",
+    "commercial worker hit a credit limit at ~8 surfaces; lane re-ran the sweep directly",
+    "information-theoretic derivation + sensitivity analysis",
+    "packet authored; v1 owner packet preserved and explicitly superseded"
+  ],
+  "blockers": [
+    "COMMERCIAL DENOMINATOR THINLY VERIFIED — 13 of 103 observed. Consumer style quizzes are client-side JS behind bot protection (403 from Stitch Fix, Warby Parker, Looka, Behr, Hinge; JS shell from Function of Beauty; 404 from 1000minds, Conjointly). Needs a real browser session, not more fetching.",
+    "NO SUFFICIENCY GUARANTEE EXISTS for our setting. The 8-12 recommendation is a derivation plus five converging empirical sources, not a theorem. Gate 3 (simulate-to-size) must convert it into a measured number before it is quoted to the client as anything firmer.",
+    "DUAL-AUDIENCE PROBLEM UNSOLVED — for the 6 of 17 industries where `portal` is the secondary archetype, the person choosing (operator) is not the person using (end customer). No prior art found anywhere in the denominator. This is a design gap, not a research gap.",
+    "KNOB INDEPENDENCE ASSUMED, NOT MEASURED (Gate 1). The whole few-rounds argument rests on effective dimensionality being below 7.",
+    "1000minds PAPRIKA UNVERIFIED (404 on both attempted paths). Its transitivity-based pair elimination is potentially directly applicable and should be verified before the format decision is frozen.",
+    "FORMAT DIVERGENCE from the lane owner's v1 ledger is live and unresolved by argument (P06-D01)."
+  ],
+  "falsifiers": [
+    {
+      "id": "F1",
+      "claim": "+/-1-level tolerance is acceptable",
+      "gate": "Gate 0",
+      "priority": "run first — most load-bearing and cheapest"
+    },
+    {
+      "id": "F2",
+      "claim": "8-12 rounds suffice",
+      "gate": "Gate 3"
+    },
+    {
+      "id": "F3",
+      "claim": "knobs are correlated so effective d < 7",
+      "gate": "Gate 1"
+    },
+    {
+      "id": "F4",
+      "claim": "whole-screen controlled stimuli beat fragments",
+      "gate": "deferred"
+    },
+    {
+      "id": "F5",
+      "claim": "closed-pack nearest-neighbour output is right",
+      "gate": "Gate 5"
+    },
+    {
+      "id": "F6",
+      "claim": "4-up + outside option beats best-worst",
+      "gate": "Gate 4"
+    },
+    {
+      "id": "F7",
+      "claim": "preference is stable enough to be worth learning",
+      "gate": "Gate 2",
+      "priority": "would kill the part rather than adjust it"
+    }
+  ],
+  "smoke": "pending",
+  "boundaries": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "promotion_status": "unpromoted"
+  },
+  "note_on_supersession": "The lane owner authored a placeholder packet at ~16:35 while the first delegated worker had produced no output, then corrected lane-state to match files on disk. This run's packet supersedes research-report.md, first-principles.md, decision-ledger.json, top-repos.jsonl, top-companies.jsonl and innovation-register.jsonl. The owner's source-register.jsonl rows (SR-001..SR-014) are PRESERVED with SR-012/013/014 updated in place; SR-015..SR-026 are new. The owner's D01 best-worst choice is preserved as a recorded divergence rather than overwritten."
+}

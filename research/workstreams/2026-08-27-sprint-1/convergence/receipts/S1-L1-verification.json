@@ -1,0 +1,76 @@
+{
+  "schema_version": "actionist.s1-lane-verification.v1",
+  "lane": "S1-L1",
+  "parts": ["P01", "P02"],
+  "verdict": "VERIFIED_WITH_HOLDS",
+  "promotion": false,
+  "sprint_1_complete": false,
+  "counts": {
+    "p01_source_records": 115,
+    "p01_external": 105,
+    "p01_fetch_verified": 30,
+    "p02_source_records": 121,
+    "p02_external": 111,
+    "p02_fetch_verified": 36,
+    "external_total": 216,
+    "fetch_verified_total": 66,
+    "top_ten_files": 4,
+    "top_ten_rows": 40,
+    "innovation_records": 100,
+    "industry_priors": 17,
+    "decisions": 22,
+    "rejected_decisions": 9
+  },
+  "accepted_scoped_claims": [
+    "Discovery risk requires independent access-persistence and content-sensitivity scores.",
+    "Server-owned declarative question state with model-owned phrasing is a candidate architecture for synthesis.",
+    "Spec-kit and OpenSpec combine clarification and scenario conventions, but an enforcing engine is not established.",
+    "Zero of the 51 surveyed commercial P02 surfaces met both lane criteria; this is a survey-scoped result.",
+    "The proposed EARS/Gherkin/coverage/marker/provenance/Accept-Revise specification is an unvalidated hypothesis."
+  ],
+  "holds": [
+    "H-S1L1-01-150-external-rows-not-fetch-verified",
+    "H-S1L1-02-independent-adversary-pending",
+    "H-S1L1-03-primary-proving-harness-unrun",
+    "H-S1L1-04-p12-contract-dependency",
+    "H-S1L1-05-actionist-data-auth-unknown",
+    "H-S1L1-06-unconfirmed-vendor-and-primary-source-claims"
+  ],
+  "correction_closed": {
+    "claim": "1 of 55 has a stopping rule",
+    "corrected_or_superseded_files": [
+      "research/workstreams/p01-client-intelligence/runs/2026-08-27-sprint-1-fable/first-principles.md",
+      "research/workstreams/p01-client-intelligence/runs/2026-08-27-sprint-1-fable/decision-ledger.json",
+      "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp2-commercial-survey.md"
+    ],
+    "current_interpretation": "1/55 explicit configurable named terminal states; 13/55 termination-adjacent mechanisms",
+    "verification": "changed hashes reproduced; residual sweep passed with only qualified, superseded, or historical matches"
+  },
+  "packet_hashes_prefix16": {
+    "p01_research_report": "fb255c5059259454",
+    "p01_first_principles": "3c465e0b56176ec9",
+    "p01_decision_ledger": "a6f0820e7e8cf644",
+    "p01_source_register": "0b8ace2040838601",
+    "p01_top_companies": "d2568d3e2847fe73",
+    "p01_top_repos": "1215e62b83e4091c",
+    "p01_innovations": "ffcfb085117a0eff",
+    "p01_industry_priors": "32bd6726fdbcbee8",
+    "p02_research_report": "ffe4771d9e3bd12f",
+    "p02_first_principles": "b2578422e2eb30cf",
+    "p02_decision_ledger": "5d778cbff704297d",
+    "p02_source_register": "a6b35cda55c022e1",
+    "p02_top_companies": "a3a5b044d5a06e9f",
+    "p02_top_repos": "fedafd8c7231535c",
+    "p02_innovations": "440b19cdac880766",
+    "s1_l1_cp2_checkpoint": "c4b0e2d83b20dd74",
+    "p01_lane_state": "b5ebf623a7a2cd77"
+  },
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "validated_demand": "UNKNOWN",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "sprint_2_unlocked": false
+  }
+}

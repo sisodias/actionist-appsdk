@@ -1,0 +1,213 @@
+{
+  "part": "P05",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "observed": "2026-08-27",
+  "boundaries": "research-only; no cloning, no execution of candidate source, no build/deploy, no admission claims, no authenticated vendor access",
+  "note": "Decisions are research conclusions with named falsifiers, not admissions or authorizations. The rights question (D-04) is a recorded counsel gate this lane does not discharge.",
+  "decisions": [
+    {
+      "id": "D-01",
+      "question": "What is the canonical component taxonomy? (parts.json P05 open question 1)",
+      "options_considered": [
+        "Adopt the existing 75-tag flat vocabulary as the canonical taxonomy",
+        "Design a curated hierarchy (e.g. Ant Design's General/Layout/Navigation/Data Entry/Data Display/Feedback)",
+        "Canonical component entities with alias sets, plus the 75 tags retained as a retrieval index",
+        "Both: hierarchy for browsing, flat tags for search, with no canonical entity layer"
+      ],
+      "chosen": "Canonical component entities with alias sets, plus the 75 tags retained as a retrieval index (option 3)",
+      "evidence": [
+        "S-006: the 75-tag vocabulary averages 2.09 tags/component with 52.6% single-tagged — it already behaves as a single-label category scheme, not the facet grid it is described as.",
+        "S-023: Component Gallery's 60 canonical components with explicit alias lists is the only verified production system solving cross-source naming, and its data actively falsifies flat naming — Banner is an alias of both Alert and Hero, Stepper is both an alias of Progress indicator and its own canonical, Label is an alias of Badge and standalone.",
+        "S-005: tag semantics are already tier-dependent (sidebar = 47 page-tier vs 143 all-tier), so the vocabulary cannot be presented as a single flat truth.",
+        "S-033: Design Systems Repo ships zero taxonomy at ~55 items — evidence flat browsing does not survive to 7,949."
+      ],
+      "confidence": "medium-high",
+      "falsifier": "Two independent raters assigning a 200-component sample to a ~60-name canonical set achieve under 80% agreement, which would mean the canonical layer is not stable enough to be authoritative and faceted tags should win.",
+      "status": "resolved_pending_falsifier_test"
+    },
+    {
+      "id": "D-02",
+      "question": "How are near-duplicates clustered visually and structurally? (open question 2)",
+      "options_considered": [
+        "Keep the name-collision proxy (2,058 surplus) as the working dedupe signal",
+        "Perceptual hashing (pHash/dHash/wHash) only",
+        "CLIP/semantic embeddings only",
+        "Two-stage: cheap exact/pixel pass, then perceptual hash, then CLIP for semantic near-duplicates",
+        "Structural clustering over bundle DOM/CSS instead of images"
+      ],
+      "chosen": "Two-stage measure-first: run perceptual hash AND CLIP over the 7,678 previews to establish the real rate before committing to a clustering strategy (option 4, gated on measurement)",
+      "evidence": [
+        "S-008: NEW — exact byte-identical previews are only 102 surplus of 7,678 (1.3%), while the name-collision proxy is 2,058 (25.9%). The truth lies between and the gap is far too wide to design against.",
+        "S-034: the visual near-duplicate rate is explicitly UNMEASURED; the prior audit proposed perceptual hashing and never ran it.",
+        "R-002 idealo/imagededup (Apache-2.0) bundles pHash/dHash/wHash/CNN plus an evaluation harness, so the measurement is cheap.",
+        "R-006 openai/CLIP: cross-framework ports (shadcn-vue 10,498 stars, shadcn-svelte 9,061) guarantee semantically identical, pixel-different components that hashing alone will miss."
+      ],
+      "confidence": "high_on_method_low_on_outcome",
+      "falsifier": "If pHash at a standard threshold collapses the 2,058 name-collision surplus into under ~200 clusters, cheap hashing is sufficient and the CLIP stage is unnecessary spend.",
+      "status": "method_resolved_quantity_unresolved"
+    },
+    {
+      "id": "D-03",
+      "question": "Which base UI structures must Actionist OWN rather than harvest? (open question 3)",
+      "options_considered": [
+        "Own nothing; harvest and re-theme everything",
+        "Own everything; use the corpus only as visual reference",
+        "Own the archetype shell plus the ~20 app primitives; harvest decorative and marketing surfaces",
+        "Decide per-archetype with no general rule"
+      ],
+      "chosen": "Own the archetype shell and the ~20 AutoSaaS app primitives; harvest decorative/marketing surfaces (option 3)",
+      "evidence": [
+        "S-007: supply is NOT the constraint — every one of the 20 AutoSaaS-required primitives has ground-truth page-tier supply, from 32 (onboarding) to 164 (spinner). The argument for ownership therefore cannot be scarcity.",
+        "S-016: harvested bundles carry NO component source (demo.tsx median 346 B is an import wrapper to a path absent from the corpus), hence no props, no states, no accessibility contract — exactly the metadata AutoSaaS requires per component (S-018).",
+        "S-018: AutoSaaS's contract demands name, use case, props, states, accessibility notes, responsive behavior, source path, examples and tests. A compiled bundle can satisfy none of these.",
+        "S-020: archetype demand concentrates — case_workflow is primary for 6 of 17 industries and portal secondary for 6 of 17 — so a small owned set covers most demand.",
+        "Universal-necessity argument: navigation encodes route topology and permission state from P10; forms encode validation and submission contracts; tables encode sorting/pagination/selection behaviour; feedback must be coherent app-wide. These are contract surfaces, not visual choices."
+      ],
+      "confidence": "high",
+      "falsifier": "If five sampled harvested components (a table, a form, a nav, an empty state, a modal) can each be wired to the P09 data plane and pass accessibility checks in under a day apiece, then owning them is wasted effort and harvest-plus-adapt wins.",
+      "status": "resolved"
+    },
+    {
+      "id": "D-04",
+      "question": "How are new 21st.dev releases discovered and re-indexed, given the terms-of-service finding? (open question 4)",
+      "options_considered": [
+        "Continue the existing scrape-and-harvest mechanism",
+        "Poll licensed registry.json endpoints from vendors who publish them by design",
+        "Use the vendor MCP/API under a paid key within its metering",
+        "Design the mechanism now, gate execution on counsel, and build against a source-agnostic index"
+      ],
+      "chosen": "Design the mechanism and build a source-agnostic index; execute refresh ONLY against licensed registry.json endpoints and/or a paid metered API. The existing scrape path stays designed-but-gated (option 4 + 2)",
+      "evidence": [
+        "S-017: 21st.dev terms (fetched 2026-07-20) prohibit scraping/bots, prohibit using marketplace content to train AI/ML without consent, and prohibit republishing structured metadata such as titles, descriptions and tags. Both local stores were built by that prohibited mechanism.",
+        "S-017: rights coverage is 2 license fields across 11,549 third-party records (0.017%), and SISO harvest rule 6 makes both stores summarize-only where licence is unclear.",
+        "S-010: NEW — the mechanism itself is already trivially available: urls-union holds 8,225 discovered URLs vs 7,949 harvested, so the diff (276) IS the refresh queue. The blocker is legal, not technical.",
+        "S-009: NEW — no meta.json carries a timestamp and all mtimes fall in one 67-minute window on 2026-08-18, so today the corpus is a dated snapshot with uncomputable staleness. A timestamp field is a precondition for any 'living' claim.",
+        "S-027: nine vendors serve machine-readable registry.json BY DESIGN (ReactBits 672, Tailark 469, Aceternity 278, Magic UI 247, and others) — a licensed refresh path that needs no scraping.",
+        "S-026: registry.directory demonstrates cross-registry freshness telemetry in production."
+      ],
+      "confidence": "high_on_mechanism_blocked_on_rights",
+      "falsifier": "If counsel clears the existing harvest mechanism, the licensed-endpoint constraint is unnecessary and the cheaper scrape path should be restored. Conversely, if the per-vendor registry licences also prohibit redistribution, the licensed path is illusory too and refresh must rest entirely on first-party components.",
+      "status": "mechanism_resolved_execution_gated"
+    },
+    {
+      "id": "D-05",
+      "question": "What metadata helps a client visually choose without understanding component names? (open question 5)",
+      "options_considered": [
+        "Name and category search only",
+        "Visual grid with style/colour/density facets and no names required",
+        "Guided pick-1-of-10 per category under the client's own token pack",
+        "Natural-language job description matched against use_cases"
+      ],
+      "chosen": "Guided pick-1-of-10 per category, presented as a visual grid pre-rendered in the client's token pack, with style/density facets and a plain-language job-description fallback (options 2+3+4 combined)",
+      "evidence": [
+        "S-012: the legacy store already carries the needed axes populated — visual_style across 24 values (minimalist 1739, flat 1315, gradient 768), complexity (composite 2201, atomic 1261), and 16,241 use_case strings across 3,507 components (mean 4.63).",
+        "S-031: Awwwards ships hex colour-swatch and font-name filtering — the best verified precedent for choosing without vocabulary.",
+        "S-030: UIverse (4,456 elements) proves strong visual browse with style tag facets works for non-technical users.",
+        "S-025: Mobbin's Text-in-Screenshots dimension lets users retrieve by words printed on a screen, needing no taxonomy at all.",
+        "S-007: supply per category (32-164 ground truth) means the task is choosing 10, not finding any — curation, not search, is the binding constraint.",
+        "S-016: previews are a sufficient primary visual surface (median 11,410 B vs 337,515 B median bundle)."
+      ],
+      "confidence": "medium-high",
+      "falsifier": "If usability testing shows clients select faster and report higher satisfaction from a named-category list than from a visual grid, the visual-first premise is wrong and the picker should lead with names.",
+      "status": "resolved_pending_usability_test"
+    },
+    {
+      "id": "D-06",
+      "question": "Should the industry axis be part of the component layer, given the 17-industry denominator?",
+      "options_considered": [
+        "Build the J-4 36->17 crosswalk and expose industry as a client-facing facet",
+        "Build the crosswalk but use industry only as a weak ranking prior",
+        "Drop industry from the component layer entirely and let P12 composition carry industry variance",
+        "Re-classify the corpus directly against the 17 industries"
+      ],
+      "chosen": "Drop industry as a component-layer facet; carry industry variance at the archetype/composition layer instead. Optionally re-classify a sample to test recoverability (option 3, with option 4 as the falsifier test)",
+      "evidence": [
+        "S-013: NEW — best_for_industries does not discriminate. Mean 3.93 industries per component; 171 components claim all 10 of the dominant set; 89.6% (3,143/3,507) claim saas; the top exact industry-set repeats wholesale (180 components share creator-tools+e-commerce+media+saas).",
+        "S-014: NEW — only 2 of the 17 target industries (real_estate, saas) have a direct legacy analogue, and 5 of 17 (construction, logistics_freight, insurance_agencies, mortgage_brokers, property_management) have ZERO reachable supply under a best-effort crosswalk. Reachable counts are wildly unbalanced: saas 3,153 vs law_firms 2 vs recruiting_staffing 1.",
+        "S-020: the b2b shelf lane already places industry variance at the archetype level (variant_delta per industry), where entities, states and compliance regimes differ — not at the button level.",
+        "This CONTRADICTS the inherited framing of J-4 as a '36->17 crosswalk' merge task: the axis is not merely mis-bucketed, it is near-uniform and materially absent for 5 industries."
+      ],
+      "confidence": "high",
+      "falsifier": "Re-classifying a 200-component sample directly against the 17 industries yields a balanced, discriminating distribution — which would mean the axis is recoverable by reclassification rather than genuinely absent.",
+      "status": "resolved_contradicts_inherited_plan"
+    },
+    {
+      "id": "D-07",
+      "question": "What must a canonical joined index record carry? (lane task 3)",
+      "options_considered": [
+        "Join on raw canonical URL string equality as proposed in J-1",
+        "Join on normalised author+slug with the URL retained as a display field",
+        "Treat the two stores as separate indexes and never join"
+      ],
+      "chosen": "Join on case-insensitive normalised author+slug; retain both raw URLs; carry artifact availability, tag tier, theme eligibility and rights per record (option 2)",
+      "evidence": [
+        "S-003: NEW — raw URL equality does NOT work. The stores encode the same identity differently: meta.json.url is https://21st.dev/@author/components/slug while _provenance.fetchedFrom is https://21st.dev/r/Author/slug. Normalised joining yields intersection 2,945, union 8,483 (vs the inherited 2,942/8,515); 28 legacy records have no parseable provenance URL.",
+        "S-002: source availability is the highest-value field — only 3,506 records are source-bearing, so the 7,949 headline overstates usable supply by roughly 2.3x.",
+        "S-011: NEW — the legacy registry-item.json yields a real 237-package dependency surface, closing the prior audit's UNMEASURED item 5 (which saw only 18 packages from import wrappers).",
+        "S-005: tag tier must be a field, since page/api/local materially changes reported supply.",
+        "S-016: theme eligibility must be a per-component fact, not a corpus-wide assumption.",
+        "S-017: rights_status must default to gated/reference_only per harvest rule 6."
+      ],
+      "confidence": "high",
+      "falsifier": "Upstream author renames break the normalised key and silently split identities; if observed rename frequency is material, the record must carry a stable upstream numeric id instead.",
+      "status": "resolved"
+    },
+    {
+      "id": "D-08",
+      "question": "What is the agent-facing query interface for the component layer?",
+      "options_considered": [
+        "Bespoke REST API designed for Actionist",
+        "MCP server only",
+        "Adopt the shadcn Dynamic Search registry contract, optionally fronted by MCP",
+        "Static llms.txt plus a downloadable index"
+      ],
+      "chosen": "Adopt the shadcn Dynamic Search registry contract as the wire format, optionally fronted by an MCP server (option 3)",
+      "evidence": [
+        "S-022: VERIFIED BY THIS LANE from the shadcn repo — the contract already specifies GET /r/registry.json?q&type&limit&offset with a `pagination` object as the opt-in server-side-search signal, explicitly designed for 'large registries with thousands of items' and backwards compatible with static registries.",
+        "S-028: shadcn's MCP is registry-agnostic and works against any shadcn-compatible registry, so adopting the format makes Actionist queryable by existing agents with zero bespoke client work.",
+        "S-027: nine registries already serve this format, making it the de-facto interchange standard.",
+        "S-025: Mobbin's MCP demonstrates the image-context cost constraint (3-8 images per call recommended, 20-screen default cap), arguing for structured metadata over images by default."
+      ],
+      "confidence": "high",
+      "falsifier": "If the contract cannot express P05's required facets (theme eligibility, visual similarity, archetype role) even as ignorable extensions, a bespoke API is required after all.",
+      "status": "resolved"
+    },
+    {
+      "id": "D-09",
+      "question": "Is this corpus a 'living' layer today?",
+      "options_considered": [
+        "Yes — it is a maintained corpus",
+        "No — it is a dated snapshot",
+        "Partially — living for metadata, snapshot for artifacts"
+      ],
+      "chosen": "No. It is a dated snapshot and cannot currently support a living claim",
+      "evidence": [
+        "S-009: NEW — no meta.json across 7,949 directories carries a harvest timestamp, and directory mtimes across a 400-dir sample span a single 67-minute window (2026-08-18T20:03Z to 21:10Z). Staleness is uncomputable from the data.",
+        "S-010: NEW — a 276-component discovery backlog already exists and has never been closed.",
+        "S-004: classification.json's `generated` field literally reads 'run classify.mjs to refresh' rather than a date, and its stats block is stale.",
+        "This is a precondition finding: P05's own thesis says 'continuously refreshed', and no refresh telemetry exists to support it."
+      ],
+      "confidence": "high",
+      "falsifier": "A per-component updated_at is discoverable from the upstream API at query time, making a local timestamp unnecessary.",
+      "status": "resolved"
+    },
+    {
+      "id": "D-10",
+      "question": "Should we build fresh or extend the existing board.html picker?",
+      "options_considered": [
+        "Extend board.html",
+        "Build fresh and reuse serve.mjs/find.mjs/CSS",
+        "Buy or adopt an existing gallery product"
+      ],
+      "chosen": "Build fresh; reuse serve.mjs unchanged, find.mjs's ranker, and board.html's CSS and interaction model",
+      "evidence": [
+        "S-016: board.html is a static snapshot of 832 of 7,949 components (10.5%), 885,238 B pre-rendered, pointing at a different preview store (previews/, 832 files) than the corpus (harvest/*/preview.webp, 7,678 files), and carrying a hand-written 16-chip taxonomy rather than the 75-tag vocabulary.",
+        "S-016: serve.mjs already serves harvest/ correctly and implements the POST /api/picks manifest contract end to end; find.mjs already implements a defensible ranker and a --json agent surface.",
+        "This confirms rather than revises the prior audit's BUILD FRESH verdict."
+      ],
+      "confidence": "high",
+      "falsifier": "The CSS proves entangled with the pre-rendered markup and cannot be lifted cleanly, making a from-scratch stylesheet cheaper.",
+      "status": "resolved_confirms_prior"
+    }
+  ]
+}

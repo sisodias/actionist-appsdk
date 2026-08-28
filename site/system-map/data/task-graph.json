@@ -1,6 +1,6 @@
 {
   "schema_version": "actionist.task-graph.v2",
-  "status": "sprint_1_running",
+  "status": "sprint_2_converged_with_holds",
   "sprints": [
     {
       "id": "S1",
@@ -244,7 +244,7 @@
     "id": "S1-GATE",
     "title": "Sprint 1 evidence convergence",
     "owner": "CENA coordinator",
-    "status": "waiting_for_five_lane_callbacks",
+    "status": "converged_with_holds_sprint_2_unlocked",
     "purpose": "Turn five independent lane returns into one verified architectural handoff. Research owners supply evidence; the coordinator reconciles it; an independent verifier attacks it; Shaan decides consequential trade-offs.",
     "waits_for": [
       "S1-L1",
@@ -404,7 +404,77 @@
         "result": "Formal runtime, qualification, release, rollback and learning contracts"
       }
     ],
-    "promotion_gate": "All five lane callbacks exist, twelve part packets pass structural and claim verification, four convergence artifacts exist, contradictions are classified, and operator-required decisions are reviewed. Until then Sprint 2 remains blocked."
+    "promotion_gate": "Sprint 1 has converged with explicit holds and all four handoff artifacts. Sprint 2 research is running; no implementation or Sprint 3 pilot is promoted until its five framework lanes reconcile."
+  },
+  "decision_timeline": {
+    "updated": "2026-08-28",
+    "page": "task-graph/timeline/",
+    "pilot_priority_group": [
+      "saas",
+      "ecommerce",
+      "marketing_social_media_agencies"
+    ],
+    "adjacent_candidate": "course_creators",
+    "locked": false
+  },
+  "block_hub": {
+    "blocks": 80,
+    "recipes": 5,
+    "surface_blocks": 12,
+    "product_blocks": 38,
+    "capability_blocks": 15,
+    "engine_blocks": 10,
+    "platform_blocks": 5,
+    "seeded_candidate_supply": 66,
+    "thin_or_gap": 14,
+    "source_edges": 233,
+    "targeted_gap_candidates": 14,
+    "page": "task-graph/block-hub/",
+    "status": "requirements_mapped_sources_unqualified"
+  },
+  "base_portfolio": {
+    "families": 68,
+    "horizontal_products": 38,
+    "shared_capabilities": 15,
+    "vertical_operating_systems": 15,
+    "repository_seeds": 144,
+    "thin_families": 8,
+    "prior_deep_bench": 100,
+    "page": "task-graph/base-portfolio/"
+  },
+  "capability_source_registry": {
+    "total_sources": 191,
+    "expanded_universe_seeds": 144,
+    "p03_deeper_evidence": 100,
+    "historical_operator_nominations": 30,
+    "client_runtime_precedents": 7,
+    "bykonz_pass_or_hold": 7,
+    "admitted_sources": 0,
+    "page": "task-graph/capability-sources/",
+    "process_page": "task-graph/capability-sources/foundry-process/"
+  },
+  "framework_registry": {
+    "frameworks": 24,
+    "maturity": {
+      "idea": 0,
+      "specified": 9,
+      "machine_readable": 14,
+      "dry_run": 1,
+      "measured": 0,
+      "operational": 0
+    },
+    "categories": {
+      "demand_product": 2,
+      "supply_discovery": 2,
+      "selection_valuation": 2,
+      "conversion_contracts": 4,
+      "composition_experience": 7,
+      "runtime_release": 5,
+      "learning_governance": 2
+    },
+    "gaps": 10,
+    "page": "task-graph/frameworks/",
+    "status": "research_only"
   },
   "common_reads": [
     "AGENTS.md and CURRENT_STATE.md",

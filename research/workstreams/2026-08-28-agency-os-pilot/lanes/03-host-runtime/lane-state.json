@@ -1,0 +1,99 @@
+{
+  "schema_version": "actionist.block-host.lane-state.v1",
+  "lane_id": "03-host-runtime",
+  "task": "C",
+  "status": "done",
+  "mode": "research_blueprint_only",
+  "scope": "general_block_host_runtime",
+  "scope_correction": {
+    "recorded_at": "2026-08-28",
+    "original_wording": "Agency OS host and runtime",
+    "corrected_outcome": "General Block Host/Runtime Contract for heterogeneous blocks across all four recipe overlays, with resource-budget and data-ownership gates before any product pilot.",
+    "product_target_selected": false,
+    "agency_composition_included": false
+  },
+  "ownership": {
+    "owned_directory": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime",
+    "write_targets": [
+      "host-runtime-blueprint.md",
+      "resource-budget.schema.json",
+      "worked-compositions.json",
+      "lane-state.json"
+    ],
+    "supporting_write_targets": [
+      "verify-host-runtime.py"
+    ],
+    "outside_scope_writes": false
+  },
+  "artifacts": [
+    "host-runtime-blueprint.md",
+    "resource-budget.schema.json",
+    "worked-compositions.json",
+    "lane-state.json"
+  ],
+  "evidence_counts": {
+    "recipe_records": 5,
+    "shared_foundation_blocks": 31,
+    "overlay_records": 4,
+    "unique_block_register": 80,
+    "representative_traces": 3,
+    "runtime_profiles": 5,
+    "stateful_resources_in_gate_fixture": 14,
+    "data_ownership_gates": 8,
+    "value_matrix_factors": 10,
+    "refusal_conditions_per_trace": 11,
+    "required_artifacts": 4,
+    "candidate_clones": 0,
+    "source_executions": 0,
+    "benchmarks": 0,
+    "deployments": 0
+  },
+  "evidence_status": {
+    "measured_precedents": [
+      "five recipe records and 80-block hub denominator",
+      "five runtime-profile vocabulary",
+      "signed host/module handoff protocol shape",
+      "Teable same-database namespace, migration and queue precedent",
+      "OpenConnector catalogue/OAuth/action execution and global-store tenancy failure",
+      "host integration route/launcher and runtime baseline records"
+    ],
+    "inferences": [
+      "conditional same-cluster/schema placement",
+      "pooled worker and scheduler grouping",
+      "typed event-fed read-model contract",
+      "normalized Value Matrix burden factors and refusal policy",
+      "multi-object upgrade and rollback contract"
+    ],
+    "unknowns": [
+      "production process/RAM/CPU/connection distribution for future blocks",
+      "managed dependency plan limits and cost",
+      "general donor adapter coverage",
+      "event envelope version carrying explicit tenant/client scope",
+      "selected-donor Postgres extension/collation/dynamic-DDL compatibility",
+      "provider rate limits and irreversible side-effect recovery",
+      "legal treatment and reimplementation cost of any future source"
+    ]
+  },
+  "verification": {
+    "status": "pass",
+    "required_checks": [
+      "JSON parse for all JSON artifacts",
+      "resource-budget schema validation for all three trace budgets",
+      "recipe/trace scope correction invariants",
+      "one-writer and one-migration-owner data gates",
+      "resource arithmetic fixtures and capacity inequalities",
+      "Value Matrix factor/refusal/UI disclosure invariants",
+      "owned-path boundary"
+    ],
+    "command": "python3 research/workstreams/2026-08-28-agency-os-pilot/lanes/03-host-runtime/verify-host-runtime.py",
+    "exit_code": 0,
+    "receipt": "PASS json=4 schema=1 traces=3 profiles=5 resources=14 gates=8 arithmetic=3 value_factors=10 refusal_rows=33 ownership_boundary=1"
+  },
+  "stopped_before": [
+    "candidate cloning or source execution",
+    "implementation or build",
+    "deployment or admission",
+    "benchmarking or production capacity claims",
+    "client-private data access"
+  ]
+}

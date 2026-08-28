@@ -1,0 +1,53 @@
+{
+  "$id": "actionist/affine-workspace@0.1.0#PackagingProfile",
+  "record_type": "PackagingProfile",
+  "record_version": "1.0.0",
+  "owner_domain": "D07",
+  "capability_id": "actionist/affine-workspace@0.1.0",
+  "mutability_rule": "A reuse-shape change restarts qualification; donor pin changes append a new qualification dossier.",
+  "reuse_shape": "intact_service",
+  "rights_exposure": "none_network_only",
+  "source_identity": {
+    "purl": "pkg:github/toeverything/AFFiNE",
+    "immutable_revision": "v0.27.3",
+    "source_digest": "sha256:bdeaa87ae8f200d63c738dfcdc3a8435fd8386e82cb28ef8b1ac5cc975207264",
+    "identity_status": "NOT_CAPTURED",
+    "identity_note": "The official release artifact is digest-pinned, but the existing receipt does not resolve the v0.27.3 tag to a source commit. The block therefore does not claim complete source identity."
+  },
+  "rights_state": "declared",
+  "dependency_closure_state": "not_applicable",
+  "normalization_applied": [
+    "NS-IDENT-01",
+    "NS-SETTINGS-02",
+    "NS-NAV-01",
+    "NS-NAV-02",
+    "NS-EVENT-01",
+    "NS-ROLLBACK-02"
+  ],
+  "upstream_sync_model": "downstream_service",
+  "mount_profile": "preserved_identity_erased",
+  "mount_topology": "iframe_cross_origin",
+  "binding_class": "B5",
+  "coherence_ceiling": "bounded",
+  "ownership": {
+    "source": "donor",
+    "runtime": "donor",
+    "host_adapter": "actionist",
+    "host_data_and_migrations": "host does not own donor resources"
+  },
+  "source_boundary": {
+    "repository_copied": false,
+    "runtime_image_embedded": false,
+    "network_coordinate_only": true,
+    "official_artifact_reference": true
+  },
+  "links": {
+    "manifest": "../actionist-block.json",
+    "capability": "01-capability.json",
+    "host_requirements": "03-host-requirements.json",
+    "binding_plan": "04-binding-plan.json",
+    "qualification": "05-qualification.json",
+    "registry": "06-registry.json",
+    "release": "07-release.json"
+  }
+}

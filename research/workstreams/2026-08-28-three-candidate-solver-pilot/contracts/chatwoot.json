@@ -1,0 +1,308 @@
+{
+  "schema_version": "actionist.three-candidate.contract-projection.v1",
+  "projection_id": "projection.chatwoot-inbox.v1",
+  "candidate_id": "actionist/chatwoot-inbox@0.1.0",
+  "source_id": "SRC-0001",
+  "display_name": "Chatwoot",
+  "projection_status": "reconstructed_from_exact_receipts_without_donor_execution",
+  "projection_basis": {
+    "source_records_unchanged": true,
+    "source_record_paths": [
+      "knowledge/capability-shelf/source-registry.jsonl",
+      "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/browser-inbox-acceptance.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/direct-sso-probe.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/w1-handoff-probe.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-communications/communications-module.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/receipt.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/chatwoot-sso-patch.json",
+      "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/runtime-manifest.json",
+      "../../apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+      "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+    ],
+    "normalization_note": "No Chatwoot seven-record package exists in the current shelf. These records reconstruct only declared facts from the exact local receipts; missing source, tenant, dependency, token, idempotency, observability and rollback fields stay explicit."
+  },
+  "records": {
+    "CapabilityContract": {
+      "record_type": "CapabilityContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "capability_kind": "surface",
+      "outcome_statement": "A host-authorized operator can inspect an inbox and its conversation history through an intact support-service surface without a second host login.",
+      "supported_atoms": ["follow_up_chase"],
+      "provides": [
+        { "port_id": "inbox.ui", "port_kind": "ui", "schema_ref": "actionist://ports/chatwoot-inbox-frame.v1", "external_effect": "none" },
+        { "port_id": "inbox.session", "port_kind": "input", "schema_ref": "actionist://ports/host-session-assertion.v1", "external_effect": "none" },
+        { "port_id": "inbox.conversation.query", "port_kind": "query", "schema_ref": "actionist://ports/conversation-query.v1", "external_effect": "read_external" },
+        { "port_id": "inbox.message.send", "port_kind": "action", "schema_ref": "actionist://ports/conversation-message.v1", "external_effect": "write_external", "idempotency_key_source": null },
+        { "port_id": "inbox.lifecycle", "port_kind": "event", "schema_ref": "actionist://events/capability-envelope.v1", "external_effect": "none" }
+      ],
+      "requires_host": ["identity", "tenant", "settings", "navigation", "data", "files", "events", "secrets", "jobs", "audit"],
+      "requires_capabilities": [],
+      "state_semantics": {
+        "state_classes": ["donor_owned_intact", "files_objects", "events", "cache_ephemeral_local"],
+        "authoritative_owner": "donor",
+        "tenant_model": "account_id",
+        "tenant_key": "account_id",
+        "tenant_bridge": null,
+        "resource_names": ["chatwoot.accounts", "chatwoot.conversations", "chatwoot.messages", "chatwoot.attachments"]
+      },
+      "authority_class": "external_effecting"
+    },
+    "PackagingProfile": {
+      "record_type": "PackagingProfile",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "reuse_shape": "intact_service",
+      "runtime_profile": "sidecar_service",
+      "rights_exposure": "none_network_only",
+      "source_identity": {
+        "purl": "pkg:github/chatwoot/chatwoot@v4.16.2",
+        "immutable_revision": "70e284a044f00326725f65f703162745371075ec",
+        "source_digest": null,
+        "identity_status": "NOT_CAPTURED",
+        "identity_note": "The exact local receipts pin a release and commit and list changed-file hashes, but no complete source/archive digest is present in the linked candidate evidence."
+      },
+      "rights_state": "declared",
+      "rights_note": "Local receipt declares MIT for the community surface and retains the enterprise boundary; a complete source/license/SBOM receipt is not captured in this candidate set.",
+      "dependency_closure_state": "unresolved",
+      "normalization_applied": ["NS-IDENT-01", "NS-SETTINGS-02", "NS-NAV-01", "NS-NAV-02", "NS-EVENT-01", "NS-RUNTIME-01", "NS-RUNTIME-02", "NS-UPGRADE-01", "NS-ROLLBACK-01"],
+      "upstream_sync_model": "downstream_service",
+      "source_changes": [
+        { "path": "runtime/chatwoot/config/initializers/cors.rb", "purpose": "exact-origin credentialed preflight" },
+        { "path": "runtime/chatwoot/app/controllers/sso/exchange_controller.rb", "purpose": "host shell grant compatibility" },
+        { "path": "start-chatwoot-inner.sh", "purpose": "disable development profiler failure" }
+      ],
+      "source_change_count": 3
+    },
+    "HostContract": {
+      "record_type": "HostContract",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "source_host_contract_version": "bykonz-local-operator-bundle-communications.v1",
+      "identity": {
+        "identity_source": "host_verified_context",
+        "token_model": "two_token",
+        "assertion_lifetime_seconds": 60,
+        "audience_bound": true,
+        "single_use": true,
+        "query_parameter_identity": "forbidden",
+        "donor_login_route": "forbidden",
+        "long_lived_credential_client_side": false,
+        "exchange_path": "/sso/exchange",
+        "delivery": "origin_cookie"
+      },
+      "tenancy": {
+        "tenant_key": "tenant_id",
+        "resource_key": "account_id",
+        "selection_authority": "host",
+        "explicit_bridge": null,
+        "client_supplied_headers_trusted": false
+      },
+      "settings": {
+        "combination_rule": "REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS",
+        "scopes": ["global", "tenant", "application", "capability", "user"],
+        "donor_settings_policy": "donor_rendered_behind_host_nav"
+      },
+      "navigation": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "permission_and_entitlement_separate": true,
+        "cascading_emptiness": true
+      },
+      "data": {
+        "data_mode": "read_only_external",
+        "cross_owner_reads": "event_fed_read_model",
+        "cross_owner_writes": "forbidden",
+        "migration_owners": { "chatwoot": "donor", "chatwoot_attachments": "donor" }
+      },
+      "files": {
+        "owner": "donor",
+        "namespace": "account/{accountId}",
+        "host_authorization_before_access": null
+      },
+      "events": {
+        "envelope": "actionist.capability-event.v1",
+        "capability_id": "actionist/chatwoot-inbox@0.1.0",
+        "tenant_field": "tenant_id"
+      },
+      "observability": {
+        "capability_identifier": "actionist/chatwoot-inbox@0.1.0",
+        "per_capability_release_correlation": null,
+        "trace_propagation": null,
+        "failure_cause_group_id": true
+      },
+      "url_authority": "host_owns_url_space_guest_owns_internal_router"
+    },
+    "BindingPlan": {
+      "record_type": "BindingPlan",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "binding_id": "binding.chatwoot-inbox.marketing-social-agency",
+      "application_id": "pilot.marketing-social-agency",
+      "host_contract_version": "actionist.three-candidate-host.v0.1",
+      "lifecycle_state": "planned",
+      "port_wiring": [
+        { "from_port": "host.identity", "to_port": "inbox.session", "schema_compatibility": "adapter_required" },
+        { "from_port": "host.tenant.account", "to_port": "inbox.ui", "schema_compatibility": "adapter_required" },
+        { "from_port": "inbox.lifecycle", "to_port": "host.events.capability_envelope", "schema_compatibility": "adapter_required" }
+      ],
+      "data_binding": {
+        "resources": [
+          { "resource": "chatwoot.accounts", "owner": "donor", "migration_owner": "donor", "tenant_key": "account_id" },
+          { "resource": "chatwoot.conversations", "owner": "donor", "migration_owner": "donor", "tenant_key": "account_id" },
+          { "resource": "chatwoot.messages", "owner": "donor", "migration_owner": "donor", "tenant_key": "account_id" },
+          { "resource": "chatwoot.attachments", "owner": "donor", "migration_owner": "donor", "tenant_key": "account_id" }
+        ],
+        "migration_authority": "donor",
+        "cross_owner_reads": "event_fed_read_model",
+        "cross_owner_mutations": "forbidden"
+      },
+      "identity_binding": {
+        "host_is_single_issuer": true,
+        "assertion_transport": "server_side_exchange_to_origin_cookie",
+        "assertion_query_parameter": false,
+        "audience_bound": true,
+        "single_use": true,
+        "maximum_lifetime_seconds": 60,
+        "donor_login_route": "forbidden",
+        "implementation_status": "donor_exchange_proven; W1 host handoff configuration blocked"
+      },
+      "tenant_binding": {
+        "tenant_model": "account_id",
+        "tenant_key": "account_id",
+        "base_key": null,
+        "cross_tenant_policy": "deny_by_default",
+        "isolation_proof": "not_run",
+        "host_bridge": null
+      },
+      "navigation_binding": {
+        "contribution_model": "deploy_time_manifest",
+        "host_owns_url_space": true,
+        "route_guard": "role_and_tenant_entitlement",
+        "visibility_predicate": "role_and_tenant_entitlement",
+        "entitlement_and_permission_separate": true,
+        "deep_link_rewrite": true,
+        "mount_topology": "same_origin_reverse_proxy_full_page_route"
+      },
+      "token_binding": {
+        "ui_bearing": true,
+        "token_paths": [],
+        "resolver_context_id": null,
+        "cross_origin_isolated": false
+      },
+      "owned_namespaces": {
+        "routes": ["/inbox", "/app/accounts/{accountId}/conversations/{conversationId}"],
+        "tables": ["chatwoot.accounts", "chatwoot.conversations", "chatwoot.messages", "chatwoot.attachments"],
+        "migration_lineages": ["chatwoot"],
+        "environment_variables": ["CHATWOOT_SSO_SECRET_REF", "CHATWOOT_ORIGIN"],
+        "event_streams": ["actionist/chatwoot-inbox@0.1.0"],
+        "file_namespaces": ["account/{accountId}"]
+      },
+      "external_effects": [
+        { "port_id": "inbox.conversation.query", "external_effect": "read_external", "idempotency_class": "naturally_idempotent", "consent_grade": "read", "account_ref": null },
+        { "port_id": "inbox.message.send", "external_effect": "write_external", "idempotency_class": null, "consent_grade": "irreversible_or_financial", "account_ref": null, "approval_step": null }
+      ],
+      "glue_budget": {
+        "declared_max_changed_files": null,
+        "declared_max_changed_lines": null,
+        "predicted_changed_files": 3,
+        "predicted_changed_lines": null,
+        "predicted_cost_class": "boundary",
+        "exceeded_action": "escalate_human_review",
+        "source_change_basis": "Exact local receipt names three bounded donor changes; no line ceiling is present."
+      }
+    },
+    "QualificationDossier": {
+      "record_type": "QualificationDossier",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "artifact_digest": null,
+      "environment_digest": null,
+      "evidence_tier": "T0",
+      "qualification_status": "NOT_QUALIFIED",
+      "required_families": ["F1_source_identity", "F2_shape_and_rights", "F3_contract_and_ports", "F4_runtime_and_mount", "F5_workflow_and_persistence", "F6_authority_and_tenancy", "F7_security_and_egress", "F8_observability_and_operations", "F9_rollback_and_human_admission"],
+      "families_reported": {
+        "F1_source_identity": "unknown",
+        "F2_shape_and_rights": "unknown",
+        "F3_contract_and_ports": "pass",
+        "F4_runtime_and_mount": "pass",
+        "F5_workflow_and_persistence": "pass",
+        "F6_authority_and_tenancy": "not_run",
+        "F7_security_and_egress": "pass",
+        "F8_observability_and_operations": "not_run",
+        "F9_rollback_and_human_admission": "deferred"
+      },
+      "receipts": [
+        { "receipt_id": "Q-CHATWOOT-ROUTE-001", "receipt_type": "eval_fixture", "status": "pass", "source_path": "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json" },
+        { "receipt_id": "Q-CHATWOOT-SSO-001", "receipt_type": "authority_consent", "status": "pass", "source_path": "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/direct-sso-probe.json" },
+        { "receipt_id": "Q-CHATWOOT-HANDOFF-001", "receipt_type": "ports_contract", "status": "unknown", "source_path": "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/w1-handoff-probe.json" },
+        { "receipt_id": "Q-CHATWOOT-TENANCY-001", "receipt_type": "tenancy_isolation", "status": "not_run", "source_path": "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/receipt.json" },
+        { "receipt_id": "Q-CHATWOOT-ROLLBACK-001", "receipt_type": "recovery_rollback", "status": "not_run", "source_path": "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/runtime-manifest.json" }
+      ]
+    },
+    "RegistryRecord": {
+      "record_type": "RegistryRecord",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "scope_id": "bykonz-local-candidate-only",
+      "lifecycle_status": "candidate",
+      "admission_status": "NOT_ADMITTED",
+      "admission_scope": { "tenants": [], "applications": [], "environments": [] },
+      "admitted_for_host_scope": false,
+      "projection_policy": { "lossy_flagged": true, "refuse_projection_when": ["rights_state:ambiguous", "rights_state:incompatible"] },
+      "revocation_propagation": "reopen_all_composing_assemblies_to_held"
+    },
+    "ReleaseManifest": {
+      "record_type": "ReleaseManifest",
+      "record_version": "1.0.0",
+      "capability_id": "actionist/chatwoot-inbox@0.1.0",
+      "release_id": "actionist-chatwoot-inbox-candidate-v0.1.0",
+      "status": "DRAFT",
+      "release_status": "not_released",
+      "pinned_bindings": ["binding.chatwoot-inbox.marketing-social-agency"],
+      "upstream_sync_model": "downstream_service",
+      "rollback_plan": {
+        "rehearsed": false,
+        "objects": [
+          { "object_kind": "code_artifact", "restore_procedure": "Restore host adapter and donor patch artifact by retained digest.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "configuration", "restore_procedure": "Restore host proxy and origin configuration snapshot.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "secrets", "restore_procedure": "Revoke or restore the host-owned SSO secret reference.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "database_schema", "restore_procedure": "Use Chatwoot donor migration-owner procedure.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "data", "restore_procedure": "Use donor account/conversation backup and restore procedure.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "donor_revision", "restore_procedure": "Re-select the pinned Chatwoot commit and verify a complete artifact digest.", "recovery_horizon_seconds": 0, "owner": "donor" },
+          { "object_kind": "surface_route", "restore_procedure": "Restore the last validated host route or disable its entitlement.", "recovery_horizon_seconds": 0, "owner": "actionist" },
+          { "object_kind": "connector_credential_state", "restore_procedure": "Revoke or restore connector state through the host credential boundary if enabled.", "recovery_horizon_seconds": 0, "owner": "host-operator" }
+        ]
+      },
+      "recovery_horizon_seconds": 0,
+      "donor_revision_recovery_declared": false,
+      "artifact_retention": { "pinned_by_digest": false, "retained_in_actionist_storage": false },
+      "deployment_performed": false,
+      "admission_claimed": false
+    }
+  },
+  "preserved_holds": [
+    { "hold_id": "H-CHATWOOT-IDENTITY", "status": "OPEN", "statement": "W1 handler reports Communications handoff is not configured before donor launch; the donor exchange and exact-origin probe are separate evidence.", "owner": "host-and-donor-adapter" },
+    { "hold_id": "H-CHATWOOT-TENANCY", "status": "OPEN", "statement": "Tenant/account isolation is not proven by the one-user local receipts.", "owner": "experiment" },
+    { "hold_id": "H-CHATWOOT-CLOSURE", "status": "OPEN", "statement": "A complete transitive dependency closure and SBOM are not captured in the linked candidate receipts.", "owner": "experiment" },
+    { "hold_id": "H-CHATWOOT-DONOR-WARNINGS", "status": "OPEN", "statement": "Expected donor warnings remain: CMS 401 after leaving W1 origin and Community Edition enterprise limits 404; three bounded donor changes are required.", "owner": "donor-runtime-owner" },
+    { "hold_id": "H-CHATWOOT-ROLLBACK", "status": "OPEN", "statement": "Independent rollback, artifact retention and recovery horizon are not proven; the declared horizon remains 0.", "owner": "release-owner" },
+    { "hold_id": "H-CHATWOOT-ADMISSION", "status": "OPEN", "statement": "This candidate remains NOT_ADMITTED and has no host-scope admission.", "owner": "operator" }
+  ],
+  "evidence_refs": [
+    "knowledge/capability-shelf/source-registry.jsonl",
+    "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/AMENDED-RECEIPT.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/browser-inbox-acceptance.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/direct-sso-probe.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/verification/chatwoot-w1-acceptance/w1-handoff-probe.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-communications/communications-module.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/receipt.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-communications/verification/chatwoot-sso-patch.json",
+    "../../../bykonz-archive-2026-08-23/bykonz-local-operator-bundle/runtime-manifest.json",
+    "../../apps/SISOCRM/verticals/business-broker/AUTH-AND-CONTEXT-INTEGRATION-CONTRACT.md",
+    "../../apps/SISOCRM/verticals/business-broker/OWNERSHIP-AND-DATA-LAYER-DECISIONS.md"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "part": "P01",
+  "lane": "S1-L1",
+  "agent": "ACTIONIST-S1-L1-DEMAND",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "observed": "2026-08-27",
+  "status": "packet_complete_unpromoted",
+  "sprint_complete": false,
+  "promotion_status": "unpromoted",
+  "parent_goal_status": "active",
+  "model": {
+    "lane_owner": "fable-5-1m for checkpoints 1-3, continued on opus-5-1m from checkpoint 3 onward at operator direction",
+    "subagent_policy": "opus_only",
+    "subagents_dispatched": [
+      {
+        "name": "s1l1-com-a",
+        "model": "opus",
+        "scope": "P01 commercial survey",
+        "status": "complete_no_report",
+        "note": "files verified on disk; completion report requested and not returned before close"
+      },
+      {
+        "name": "s1l1-oss-b",
+        "model": "opus",
+        "scope": "P01 OSS survey",
+        "status": "complete"
+      },
+      {
+        "name": "s1l1-adversary",
+        "model": "opus",
+        "scope": "independent challenge",
+        "status": "dispatched_no_verdict_returned_before_close",
+        "note": "Independent challenge did not return before lane close. Both corrections applied to this packet (disjointness overreach; invasiveness-ladder axis conflation) came from the LANE OWNER's own audit, not from this agent. Claims 2/3/5 \u2014 no maintained permissive OSS interview engine, 1-of-55 stopping rules, evidence-attribution hygiene \u2014 are SELF-ASSESSED ONLY and have NOT been independently reviewed. Coordinator should treat them accordingly."
+      }
+    ],
+    "policy_violations": 0
+  },
+  "counts": {
+    "commercial_surfaces": 55,
+    "oss_surfaces": 50,
+    "local_sources": 10,
+    "source_register_rows": 115,
+    "external_denominator": 105,
+    "fetch_verified_external": 30,
+    "search_only_external": 75,
+    "fetch_verified_pct": 29,
+    "top_companies": 10,
+    "top_repos": 10,
+    "innovation_hypotheses": 50,
+    "industry_priors": 17,
+    "decisions": 10,
+    "rejected_decisions": 4,
+    "duplicate_ids": 0,
+    "invalid_json_rows": 0
+  },
+  "segment_breakdown": {
+    "commercial": {
+      "intake": 26,
+      "conversation-intelligence": 8,
+      "enrichment": 8,
+      "ai-discovery": 7,
+      "guided-selling": 6
+    },
+    "oss": {
+      "introspection": 12,
+      "task-mining": 9,
+      "active-learning": 8,
+      "org-graph": 8,
+      "enrichment": 7,
+      "process-mining": 6
+    }
+  },
+  "checkpoints": [
+    {
+      "id": 1,
+      "name": "prior-evidence-audit",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp1-prior-evidence-audit.md"
+    },
+    {
+      "id": 2,
+      "name": "commercial-survey",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp2-commercial-survey.md"
+    },
+    {
+      "id": 3,
+      "name": "oss-local-estate-survey",
+      "status": "complete",
+      "path": "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/checkpoints/cp3-oss-local-estate-survey.md"
+    },
+    {
+      "id": 4,
+      "name": "first-principles-synthesis-and-verification",
+      "status": "complete",
+      "note": "first-principles.md + decision-ledger.json + post-write smoke + self-falsification correction"
+    }
+  ],
+  "smoke": {
+    "verdict": "PASS",
+    "checks": [
+      "all 7 required packet files present and non-empty",
+      "all JSONL rows parse; 0 invalid",
+      "decision-ledger.json parses",
+      "0 duplicate IDs across registers",
+      "all top-N IDs resolve into source-register",
+      "top-N ranks contiguous 1..10",
+      "industry priors = 17 unique industries",
+      "writes confined to owned directories (git status verified)",
+      "post-correction revalidation: all files parse after ladder and disjointness corrections"
+    ]
+  },
+  "self_falsification": {
+    "performed": true,
+    "findings": [
+      {
+        "claim": "invasiveness ladder ordering",
+        "result": "WEAKENED \u2014 inversion found by the lane's own audit",
+        "detail": "The ladder is monotonic in ongoing access granted, not in sensitivity of data exposed. A rung-1 HAR export (no standing access) carries live cookies, bearer tokens and customer records; rung-4 attention telemetry (installed agent) carries only window titles. Conflating the axes would under-protect the cheap-looking rungs.",
+        "correction": "Escalation now governed by two independent scores (access_persistence, content_sensitivity). Corrected in first-principles.md, research-report.md and decision-ledger.json (D-P01-02).",
+        "status": "corrected_and_recorded"
+      },
+      {
+        "claim": "no maintained permissive OSS structured-interview engine (claim 2)",
+        "result": "QUALIFIED \u2014 survives only with the 'LLM-driven' qualifier",
+        "detail": "Cross-segment audit found maintained, genuinely permissive questionnaire engines with real conditional logic outside the dialog segment: SurveyKing (MIT), xiaoju-survey (Apache-2.0), Formily, FormKit, uniforms, formio.js. Absent is an engine combining declarative question machinery WITH LLM-conducted adaptive interviewing.",
+        "correction": "Build-not-adopt now scoped to the adaptive half only; deterministic question-graph half has adoptable prior art. Corrected in research-report.md, decision-ledger.json (D-P01-03) and lane-synthesis.md.",
+        "status": "corrected_and_recorded"
+      },
+      {
+        "claim": "only 1 of 55 commercial surfaces publishes a stopping rule (claim 3)",
+        "result": "WEAKENED \u2014 definition-sensitive",
+        "detail": "1/55 is correct for EXPLICIT CONFIGURABLE NAMED TERMINAL STATES (Fin for Sales). A second pass counted 13/55 rows mentioning some termination-adjacent mechanism (qualification, completion, escalation, routing, coverage). The headline is true only under the strict definition.",
+        "correction": "Both figures now stated with their definitions in research-report.md; the 1/55 figure must never be quoted without its definition.",
+        "status": "corrected_and_recorded"
+      },
+      {
+        "claim": "CENA verification defect \u2014 addendum 2 not fully reconciled on disk",
+        "result": "CONFIRMED \u2014 external finding, not self-caught",
+        "detail": "P01 first-principles.md constraints table and checkpoints/cp2-commercial-survey.md line 34 still carried the unqualified '1 of 55 stopping rule' claim after report/state/ledger/synthesis were corrected.",
+        "correction": "first-principles.md constraint row now states 1/55 explicit configurable named terminal states vs 13/55 termination-adjacent. cp2 checkpoint retained unedited as a dated receipt with an explicit SUPERSEDED notice appended, per evidence-immutability rule.",
+        "status": "corrected_and_recorded"
+      }
+    ]
+  },
+  "blockers": [
+    "Canonical ClientContext field set cannot be closed: depends on P02 minimum-spec (sufficiency) and P12 input contract (necessity), both unsettled in Sprint 1.",
+    "Rung-0 Actionist-account source blocked on the unknown Actionist data/auth contract (U in current research).",
+    "Scraping permission is a policy-owner decision, not a research finding; the lane can supply an auditable scrape log but not permission.",
+    "Per-rung, per-industry acceptance rates unmeasurable without engagements.",
+    "bupaR licence UNCONFIRMED (LICENSE file names no licence); must be read from DESCRIPTION before relied on as the permissive escape from pm4py AGPL.",
+    "Fetch-verified fraction is 29% of external rows; both commercial agents hit usage limits mid-sweep."
+  ],
+  "unexecuted_falsifiers": [
+    "Precompute elimination measurement vs question-only control",
+    "Ladder acceptance rates per rung per industry",
+    "17 cold-start question packs A/B against a generic opener",
+    "Wants-vs-pain divergence rate across engagements"
+  ],
+  "boundaries": {
+    "research_only": true,
+    "client_data_used": false,
+    "authenticated_vendor_access": false,
+    "repositories_cloned": 0,
+    "repositories_executed": 0,
+    "builds_or_deploys": 0,
+    "validated_demand_established": false,
+    "admitted_blocks": 0,
+    "implementation_authorized": false,
+    "files_written_outside_owned_dirs": 0,
+    "owned_dirs": [
+      "research/workstreams/p01-client-intelligence/runs/2026-08-27-sprint-1-fable/",
+      "research/workstreams/p02-outcome-product-spec/runs/2026-08-27-sprint-1-fable/",
+      "research/workstreams/2026-08-27-sprint-1/lanes/S1-L1/"
+    ]
+  },
+  "callback": {
+    "target": "CENA",
+    "channel": "herdr",
+    "note": "Coordinator override received mid-run: final compact callback goes to CENA, not ACTIONIST-S1-L2-SUPPLY as the dispatch file states. Dispatch re-read to confirm the original target before applying the override.",
+    "status": "staged_and_queued_to_CENA_pane_w659e02f80e5bb1-1"
+  },
+  "hashes_sha256_prefix16_final": {
+    "research-report.md": "fb255c5059259454",
+    "first-principles.md": "3c465e0b56176ec9",
+    "decision-ledger.json": "a6f0820e7e8cf644",
+    "source-register.jsonl": "0b8ace2040838601",
+    "top-companies.jsonl": "d2568d3e2847fe73",
+    "top-repos.jsonl": "1215e62b83e4091c",
+    "innovation-register.jsonl": "ffcfb085117a0eff",
+    "industry-discovery-priors.jsonl": "32bd6726fdbcbee8",
+    "hash_note": "Final hashes after all self-falsification corrections and the CENA reconciliation fix (first-principles.md constraint row)."
+  },
+  "independent_review": {
+    "status": "not_completed",
+    "verdict_received": false,
+    "self_audit_substituted": true,
+    "self_audit_findings": 4,
+    "caveat": "Depth-contract item 8 PARTIALLY met. An Opus adversary was dispatched but returned no verdict despite three requests; it sent only idle pings. The lane owner then ran the challenge itself across four headline claims and found four real defects (disjointness overreach, ladder axis conflation, claim-2 over-breadth, claim-3 definition sensitivity), all corrected. This is self-review, not independent review; the coordinator should weight it accordingly."
+  }
+}

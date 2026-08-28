@@ -1,0 +1,116 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane": "S1-L4",
+  "agent": "ACTIONIST-S1-L4-HOST",
+  "part": "P11",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "date": "2026-08-27",
+  "model": {
+    "orchestrator_at_dispatch": "fable-5-1m",
+    "orchestrator_at_consolidation": "opus-5-1m",
+    "subagent_policy": "opus_only",
+    "subagent_policy_violations": 0,
+    "note": "Both the original commercial survey agent and its backfill ran on Opus."
+  },
+  "boundaries": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0,
+    "promotion_status": "unpromoted",
+    "parent_goal_status": "active",
+    "cloned_sources": 0,
+    "client_private_data_used": false,
+    "authenticated_vendor_access": false,
+    "signup_performed": false,
+    "files_written_outside_owned_paths": 0,
+    "note": "The 27 Aug OpenConnector spike was EXECUTED_CLEANED under prior authorization. Its receipts are cited, not re-run. Nothing was executed in this run."
+  },
+  "counts": {
+    "commercial_surfaces": 32,
+    "commercial_top10": 10,
+    "commercial_first_pass": 18,
+    "commercial_backfilled": 14,
+    "oss_projects": 45,
+    "oss_top10": 10,
+    "combined_denominator": 77,
+    "licence_bodies_read_oss": 8,
+    "licence_badge_only_oss": 37,
+    "local_sources_registered": 7,
+    "innovation_candidates_generated": 38,
+    "innovation_register_rows": 21,
+    "innovation_top10": 10,
+    "invariants_proposed": 11,
+    "open_decisions": 4,
+    "must_build_items": 6
+  },
+  "carried_receipts": {
+    "openconnector_providers": 1445,
+    "openconnector_actions_generated_locally": 15156,
+    "openconnector_auth_mix": {"api_key": 1302, "oauth2": 103, "custom_credential": 75, "no_auth": 20},
+    "activepieces_pieces_live_api": 761,
+    "activepieces_auth_mix": {"secret_text": 374, "custom_auth": 205, "oauth2": 96, "none": 75, "basic_auth": 11},
+    "nango_providers": 982,
+    "nango_oauth_family": 425,
+    "nango_pure_data_providers": 895,
+    "nango_popular_scripted": "17 of 36",
+    "jentic_vendor_dirs": 4140,
+    "source": "clients/actionmodel/research/connectors-licensing-2026-08-27.md and openconnector-spike-2026-08-27.md"
+  },
+  "denominator_note": "The commercial packet stopped at 18 rows under a hard usage limit, named its 14 unreached surfaces, and was closed by a targeted Opus backfill that prioritised the single most load-bearing omission (Stripe's idempotency contract) first. Nothing was padded.",
+  "checkpoints": [
+    {"n": 1, "name": "prior-evidence-audit", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/checkpoints/cp1-prior-evidence-audit.md"},
+    {"n": 2, "name": "commercial-survey", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/checkpoints/cp2-external-survey.md"},
+    {"n": 3, "name": "oss-and-local-estate-survey", "status": "complete", "path": "../../../2026-08-27-sprint-1/lanes/S1-L4/local-estate-join.md"},
+    {"n": 4, "name": "first-principles-synthesis-and-verification", "status": "complete", "path": "first-principles.md"}
+  ],
+  "smoke": {
+    "verdict": "PASS",
+    "run_at": "2026-08-27",
+    "method": "Structural validation over every packet file: JSONL parsed line by line, required fields asserted, duplicate and mis-prefixed IDs checked, top10 re-derived from disposition, decision-ledger JSON parsed after manual edits.",
+    "results": {"jsonl_parse_failures": 0, "missing_required_fields": 0, "duplicate_ids": 0, "bad_id_prefixes": 0, "top10_exact": true, "json_valid": true}
+  },
+  "self_correction": {
+    "invariant": "INV-P11-5",
+    "original_draft": "Replay with the same key and a different payload is a hard error; non-2xx is not cached",
+    "correction": "Stripe's documented behaviour is the OPPOSITE of the second clause: it saves the status code and body of the first request regardless of whether it succeeds or fails, and returns cached 500s on replay.",
+    "origin_of_error": "The claim came from a secondary summary of the Stripe rule in the hono-idempotency README and did not survive reading Stripe's own documentation.",
+    "disposition": "Invariant amended with the correction left visible; the caching choice is now flagged as a deliberate Actionist decision rather than an inherited default."
+  },
+  "headline_claims_challenged": [
+    {"claim": "Idempotency has no production OSS supply", "challenge": "Is a 14-star top result evidence of absence or of a bad search?", "resolution": "Corroborated from two independent directions: the OSS search found a field of many single-author repos pushed within months of each other, and the commercial survey independently found no embedded-iPaaS or agent-action vendor documenting a write idempotency-key contract. Two different populations, same gap."},
+    {"claim": "Adopt OpenConnector's catalogue and OAuth engine, never its store", "challenge": "Is the store genuinely unfit or merely unfamiliar?", "resolution": "Unfit by demonstration rather than inference: the 27 Aug spike created two tenant connections and retrieved both under one admin token, and the schema read confirmed no tenant column, service-only OAuth config keying, and a hardcoded salt."},
+    {"claim": "Stripe is the contract to copy", "challenge": "Copying a payments contract into a general action runtime may import assumptions that do not hold.", "resolution": "The critical caveat was surfaced rather than smoothed: rate limiters run BEFORE Stripe's idempotency layer, so a 429 can produce a different result under the same key. This became a new invariant (INV-P11-11) about where Actionist's own layer must sit, not a blanket endorsement."}
+  ],
+  "blockers": [],
+  "unresolved": [
+    "Provider icon licensing UNVERIFIED and gating any client-facing connector picker; carried from the 27 Aug research",
+    "Whether the idempotency class can be derived at catalogue-import time for a useful fraction of 1,445 providers or is per-action human judgement",
+    "Latency cost of the egress-enforcement proxy per action",
+    "Fork the OpenConnector catalogue or track upstream; a young vendor-controlled project with a commercial hosted product behind it",
+    "OAuth callback completion and token refresh untested locally (needs an operator-owned OAuth application)",
+    "37 of 45 OSS rows are badge-level licence only, sound for filtering but not for committing",
+    "Open-core scope for Hatchet and DBOS unestablished; whether their MIT trees exclude paid-cloud features is a per-feature question",
+    "Svix server self-host terms versus its MIT SDKs unestablished"
+  ],
+  "evidence_honesty_flags": [
+    "Paragon's isolation detail rests on its own marketing blog after the docs security URL 404'd",
+    "Anon's 'never stores credentials' is marketing-site only and must NOT be repeated to the client as fact",
+    "Compliance certifications observed are logos, not inspected reports",
+    "Zapier AI Actions, source of the best primitive found, is documented as no longer developed or supported - study, do not depend",
+    "Vessel's developer docs return 404 and its app subdomain fails TLS; recorded rather than smoothed over"
+  ],
+  "licence_flags": [
+    {"project": "Vault", "finding": "BSL 1.1, licensor now IBM; bars hosted or embedded competition with paid versions. OpenBao is the MPL-2.0 Linux Foundation fork and the answer.", "verified": "body"},
+    {"project": "Inngest", "finding": "SSPL-1.0 with an Apache-2.0 future grant; section 13 forces publication of the entire service-management stack if offered as a service. Most likely to be mistaken since it markets heavily as OSS.", "verified": "body"},
+    {"project": "Restate", "finding": "BSL 1.1 with a nuance in our favour: forbids a public platform where third parties register their own service deployments, while permitting production deployments invoking services the licensee wrote. Conditional, not disqualified.", "verified": "body"},
+    {"project": "Convoy", "finding": "Elastic License 2.0 behind a click-through preamble; forbids providing the software to third parties as a hosted service. Best functional fit in its category, which is what makes it dangerous.", "verified": "body"},
+    {"project": "Infisical", "finding": "MIT with an ee/ carve-out; each adopted feature needs a path check.", "verified": "body"},
+    {"project": "MCP repos", "finding": "NOASSERTION because mid-relicence MIT to Apache-2.0; contributions without relicensing consent remain MIT, so provenance is per-file.", "verified": "body"},
+    {"project": "hookdeck-cli", "finding": "Apache-2.0 on the CLI only while the event gateway is closed SaaS - structurally the same trap as Composio.", "verified": "body"},
+    {"project": "Skyvern", "finding": "AGPL-3.0 with section 13 triggering on network use.", "verified": "body"}
+  ],
+  "feeds": ["one tenant-safe connector flow end to end", "idempotency conformance fixtures measured against the Stripe reference contract", "Loop 4 mixed-shape composition with one connector"],
+  "cross_lane": {"cited_read_only": ["P10 identity for the connect-session convergence", "P14 runtime for sandbox tiers"], "wrote_to_other_lane_files": false}
+}

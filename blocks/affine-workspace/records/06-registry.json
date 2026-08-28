@@ -1,0 +1,38 @@
+{
+  "$id": "actionist/affine-workspace@0.1.0#RegistryRecord",
+  "record_type": "RegistryRecord",
+  "record_version": "1.0.0",
+  "owner_domain": "D09",
+  "capability_id": "actionist/affine-workspace@0.1.0",
+  "scope_id": "prototype-only",
+  "mutability_rule": "Changes only through an explicit registry governance act with a named principal.",
+  "lifecycle_status": "prototype_held",
+  "admission_scope": {
+    "tenants": [],
+    "applications": [],
+    "environments": []
+  },
+  "supersedes": null,
+  "superseded_by": null,
+  "revocation_propagation": "reopen_all_composing_assemblies_to_held",
+  "projection_policy": {
+    "target": "actionist-capability-registry",
+    "lossy_flagged": true,
+    "refuse_projection_when": ["rights_state:ambiguous", "rights_state:incompatible"],
+    "prototype_rule": "NOT_ADMITTED remains NOT_ADMITTED when projected"
+  },
+  "current_verdict": "runtime_precedent_with_native_runtime_note",
+  "qualification_status": "NOT_QUALIFIED",
+  "admission_status": "NOT_ADMITTED",
+  "owner": "Actionist operator",
+  "support_boundary": "No production support promise; donor runtime and host pilot owner remain outside this prototype.",
+  "links": {
+    "manifest": "../actionist-block.json",
+    "capability": "01-capability.json",
+    "packaging": "02-packaging.json",
+    "host_requirements": "03-host-requirements.json",
+    "binding_plan": "04-binding-plan.json",
+    "qualification": "05-qualification.json",
+    "release": "07-release.json"
+  }
+}

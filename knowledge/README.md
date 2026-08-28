@@ -10,12 +10,17 @@ This folder is the canonical entry point for understanding the Actionist/Action 
 4. [03 — Evidence map](03-EVIDENCE-MAP.md) — which local research supports each domain.
 5. [04 — Open questions](04-OPEN-QUESTIONS.md) — unresolved first-principles questions and missing research.
 6. [05 — Experiment roadmap](05-EXPERIMENT-ROADMAP.md) — the smallest loops that convert research into evidence.
+7. [06 — Design grammar and preference protocol](06-DESIGN-GRAMMAR-AND-PREFERENCE-PROTOCOL.md) — joins P05/P06/P07/P08 into the valid design space, elicitation rounds, DesignDNA contract and closure experiments.
+8. [07 — Decision timeline](07-DECISION-TIMELINE.md) — chronological record of the research, framework decisions, stacking model and pilot shortlist.
+9. [Block Hub](block-hub/README.md) — business lifecycle, shared Digital Business OS, four vertical recipes, block requirements, source joins and gaps.
+10. [Capability source registry](capability-shelf/README.md) — permanent joined list of candidate source systems, operator/Foundry signals, P03 evidence and client runtime precedents.
 
 ## Machine-readable layer
 
 - `source-inventory.jsonl` accounts for every inventoried source file with path, hash, size, kind, phase and topic tags.
 - `knowledge-graph.json` links sources to domains and canonical synthesis documents.
 - `inventory-summary.json` records coverage and counts.
+- `capability-shelf/source-registry.jsonl` is the current joined source-candidate and evidence projection.
 - `scripts/build-spine.mjs` rebuilds those generated artifacts deterministically.
 
 ## Canonicality rules

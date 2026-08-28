@@ -1,0 +1,104 @@
+{
+  "schema_version": "actionist.decision-ledger.v1",
+  "part": "P10",
+  "part_title": "Identity, settings and navigation host",
+  "run_id": "2026-08-27-sprint-1-fable",
+  "lane": "S1-L4",
+  "boundary": {
+    "research_only": true,
+    "implementation_authorized": false,
+    "execution_status": "UNEXECUTED",
+    "admission_status": "NOT_ADMITTED",
+    "admitted_blocks": 0
+  },
+  "headline_finding": {
+    "statement": "No observed commercial surface renders a third party's settings inside host-owned chrome",
+    "denominator": 33,
+    "evidence_class": "observed_absence",
+    "caveat": "Absence of evidence after a deliberate sweep, not proof of impossibility",
+    "consequence": "A34 must be split into three tiers with different precedent strength rather than tracked as one unknown"
+  },
+  "decision_table_absorption_tiers": {
+    "rows": [
+      {
+        "tier": "identity",
+        "precedent_strength": "strong",
+        "commercial_forms_observed": 4,
+        "local_evidence": "Ed25519 handoff contract protocol-proven by executable spike; absorption reversal for owned-code donors",
+        "default_mechanism_intact_service": "two_token_exchange_with_donor_adapter",
+        "default_mechanism_absorbed_code": "delete_donor_auth_substitute_host_session",
+        "host_owned": true,
+        "cost_class": "bounded_patterned",
+        "confidence": "inferred_strong"
+      },
+      {
+        "tier": "navigation",
+        "precedent_strength": "partial",
+        "commercial_forms_observed": 3,
+        "variants": ["deploy_time_manifest", "runtime_component", "stored_configuration_document"],
+        "oss_precedent": "Two proven halves, neither shipped standalone: Luigi supplies the declarative node schema (~45 documented parameters; children typed array-or-function returning a Promise for runtime resolution; visibleForFeatureToggles as a visibility predicate; userSettingsGroup tying a nav node to a settings group) but has NO contribution model — nodes are authored in the host's single JS config. Backstage supplies decentralized contribution (attachTo app/nav items, auto-discovery via package.json dependencies) plus route-ref path indirection, but a nav contribution outputs an opaque React element, not a node record. Backstage auto-discovery is welded to @backstage/cli and webpack, so it is not portable.",
+        "default_mechanism": "contributed_nav_nodes_plus_route_reconciliation_handshake",
+        "host_owned": true,
+        "cost_class": "bounded_per_donor_requires_host_registry_build",
+        "confidence": "inferred"
+      },
+      {
+        "tier": "settings",
+        "precedent_strength": "none_found",
+        "commercial_forms_observed": 0,
+        "oss_precedent": "none; no OSS settings-schema library exists",
+        "default_mechanism": "UNDETERMINED",
+        "fallback_for_v1": "host_owned_settings_for_host_concerns_donor_settings_rendered_by_donor_behind_host_nav_entry",
+        "host_owned": "contested",
+        "cost_class": "unknown_highest_risk",
+        "confidence": "unknown"
+      }
+    ]
+  },
+  "decision_table_identity_lane_selection": {
+    "note": "The absorption pattern is selected by reuse shape, not platform preference. The host must maintain both lanes.",
+    "rows": [
+      {"reuse_shape": "intact_service", "identity_lane": "token_handoff", "donor_auth": "retained_but_unreachable_via_ui", "session_authority": "donor_session_created_by_adapter_from_host_assertion", "settings": "donor_rendered", "navigation": "host_nav_entry_launches_donor_route"},
+      {"reuse_shape": "embedded_module_microfrontend", "identity_lane": "token_handoff_or_shared_session", "donor_auth": "suppressed", "session_authority": "host", "settings": "contested_tier", "navigation": "contributed_nodes"},
+      {"reuse_shape": "transplanted_subsystem", "identity_lane": "auth_deletion", "donor_auth": "deleted", "session_authority": "host", "settings": "host_owned", "navigation": "host_owned"},
+      {"reuse_shape": "extracted_package", "identity_lane": "host_native", "donor_auth": "never_present", "session_authority": "host", "settings": "host_owned", "navigation": "host_owned"},
+      {"reuse_shape": "adapter_to_external_system", "identity_lane": "connector_plane", "donor_auth": "external_credential", "session_authority": "host", "settings": "host_owned", "navigation": "host_owned", "note": "delegates to P11"}
+    ]
+  },
+  "invariants": [
+    {"id": "INV-P10-1", "statement": "The host is the sole identity authority; no capability mints its own session and no donor login route remains reachable", "state": "proposed", "falsifier": "an intact-service donor with no reachable session-creation seam"},
+    {"id": "INV-P10-2", "statement": "Two tokens never one: long-lived credential stays in the host backend, short-lived audience-bound single-use token crosses the boundary, never in a query parameter", "state": "observed_locally_and_commercially", "negative_control": "Wix delivers a signed instance as a query parameter and warns about it in its own docs"},
+    {"id": "INV-P10-3", "statement": "Absorption pattern is selected by reuse shape, not platform preference", "state": "proposed", "source": "SISOCRM federation-then-absorption sequence"},
+    {"id": "INV-P10-4", "statement": "Navigation is contributed data, not shell source code", "state": "proposed"},
+    {"id": "INV-P10-5", "statement": "A nav node's visibility predicate is its route guard, evaluated once", "state": "proposed"},
+    {"id": "INV-P10-6", "statement": "Two-gate visibility: entitlement and permission are different scopes that never fold together, with cascading emptiness", "state": "observed_commercially", "source": "Frontegg states it plainly; Salesforce supplies cascading emptiness"},
+    {"id": "INV-P10-7", "statement": "Every resolved setting carries provenance: which scope supplied it and which rule won", "state": "proposed", "note": "every surveyed hierarchy has a combination rule; none exposes the resolution trace"},
+    {"id": "INV-P10-8", "statement": "Donor chrome suppression is declared in the absorption manifest and auditable, never achieved by CSS", "state": "proposed"}
+  ],
+  "universal_constraint": "The host owns the URL space, the guest owns its internal router, and the guest must reconcile them. Observed without exception across every commercial surface.",
+  "open_decisions": [
+    {"id": "P10-D-01", "question": "Does the settings tier get built as the differentiator or scoped down to the commercial baseline for v1", "status": "open", "note": "This is the lane's most consequential open decision and should not be answered by ambition"},
+    {"id": "P10-D-02", "question": "What is the real cost of maintaining two identity lanes indefinitely", "status": "open", "measured_by": "Loop 3"},
+    {"id": "P10-D-03", "question": "Adopt a shell framework for mounting plumbing or build the seam", "status": "open", "note": "All surveyed frameworks solve loading and isolation and carry no identity, permission or settings semantics; adopting one still leaves the whole semantic layer to build"},
+    {"id": "P10-D-04", "question": "Which authorization engine", "status": "open", "note": "Heavily oversupplied: OPA, SpiceDB, Cerbos, OpenFGA, Casbin all Apache-2.0 across four deployment shapes. Building custom would be indefensible. Choice is deployment shape, not capability."},
+    {"id": "P10-D-05", "question": "Settings combination rule default", "status": "open", "candidate": "Cerbos's two selectable modes as a per-node field with the parental-consent mode as the safe default"}
+  ],
+  "rejected_here": [
+    {"claim": "Build a custom authorization engine", "reason": "Five credible Apache-2.0 engines, zero source-available traps, four deployment shapes"},
+    {"claim": "The ISSO five-area shell is a constitutional constraint", "reason": "A15 unproven; P08 owns archetypes and P10 must not hard-code an IA into the mounting contract"},
+    {"claim": "One settings surface across all capabilities is an engineering estimate", "reason": "Zero commercial precedent found; it is currently a research bet and must be labelled as one"},
+    {"claim": "NocoBase is Apache-2.0", "reason": "Badge misleading; LICENSE.txt is a custom agreement barring public no-code/low-code/AI SaaS"},
+    {"claim": "SuperTokens is straightforwardly Apache-2.0", "reason": "Split licence: everything outside ee/ is Apache-2.0, but ee/LICENSE.md requires a paid Enterprise licence for the correct number of user seats for any production use and forbids copying, distributing or sublicensing. GitHub API reports NOASSERTION. Third instance of the Composio/NocoBase pattern in this project."},
+    {"claim": "Logto is permissive", "reason": "MPL-2.0 verbatim, i.e. weak file-level copyleft. Modified Logto files must be published under MPL. No network-service source-provision duty, unlike ZITADEL's AGPL, which makes it the most absorbable multi-tenant IdP surveyed — but it is not permissive."}
+  ],
+  "supply_gap_map": {
+    "authorization": "heavily_oversupplied",
+    "identity": "oversupplied_licence_stratified",
+    "session_token": "adequately_supplied",
+    "tenancy": "partial_gap_org_models_exist_inside_idps_not_host_composed_workspaces",
+    "shell_mounting": "well_supplied_semantically_empty",
+    "navigation_registry": "near_greenfield",
+    "settings_registry": "greenfield"
+  },
+  "feeds_experiments": ["Loop 3 host absorption pilot on one mature donor", "Loop 0 contract surgery for HostContract sufficiency"]
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": "actionist.lane-state.v1",
+  "lane_id": "2026-08-28-agency-os-pilot/01-demand-product",
+  "status": "done",
+  "updated": "2026-08-28",
+  "mode": "research_and_blueprint_only",
+  "owned_directory": "/Users/shaansisodia/SISO_Workspace/SISO_Agency/clients/actionmodel/research/workstreams/2026-08-28-agency-os-pilot/lanes/01-demand-product",
+  "course_correction": {
+    "from": "Define the exact first Agency OS product and treat marketing agencies as the selected pilot.",
+    "to": "Define the cross-vertical block dependency and priority map for Digital Business OS, SaaS, ecommerce, marketing agencies and course creators.",
+    "preserved_work": "The owned directory was preserved. Before correction, no product-blueprint.md or workflow-register.json had been written.",
+    "concrete_product_blueprint": false,
+    "selected_pilot_vertical": null
+  },
+  "artifacts": [
+    {
+      "path": "block-dependency-priority-map.md",
+      "kind": "human_readable_decision_packet",
+      "required": true
+    },
+    {
+      "path": "block-dependency-priority-map.json",
+      "kind": "machine_readable_dependency_map",
+      "required": true
+    },
+    {
+      "path": "lane-state.json",
+      "kind": "lane_state",
+      "required": true
+    }
+  ],
+  "superseded_not_written": [
+    "product-blueprint.md",
+    "workflow-register.json"
+  ],
+  "counts": {
+    "hub_blocks": 80,
+    "hub_recipes": 5,
+    "recipe_block_counts": {
+      "digital_business_os": 31,
+      "saas": 45,
+      "ecommerce": 50,
+      "marketing_agency": 48,
+      "course_creator": 50
+    },
+    "universal_foundation": 12,
+    "vertical_spine": 34,
+    "optional_enhancement": 26,
+    "deferred": 8,
+    "classified_total": 80,
+    "dependency_edges": 103,
+    "hard_dependency_edges": 65,
+    "soft_dependency_edges": 38,
+    "representative_foundry_blocks": 17,
+    "representative_vertical_anchors": 5,
+    "shape_probes": 3,
+    "synthetic_probes": 8,
+    "value_matrix_dimensions": 5,
+    "value_matrix_shape_profiles": 8,
+    "value_matrix_calibration_anchors": 4,
+    "global_repository_scores": 0
+  },
+  "boundary": {
+    "repository_selection": false,
+    "candidate_cloning": false,
+    "source_execution": false,
+    "implementation": false,
+    "build": false,
+    "deployment": false,
+    "admission": false,
+    "client_private_data": false,
+    "runtime_architecture": false
+  },
+  "verification": {
+    "required": [
+      "JSON parse",
+      "recipe/block/count parity",
+      "classification union and disjointness",
+      "representative set closure against hard dependencies",
+      "local markdown links",
+      "owned-path boundary"
+    ],
+    "last_run": "2026-08-28",
+    "exit_code": 0,
+    "results": {
+      "json_parse": "PASS",
+      "recipe_block_parity": "PASS",
+      "classification_union_and_disjointness": "PASS",
+      "representative_hard_dependency_closure": "PASS",
+      "value_matrix_dimensions_and_shape_profiles": "PASS",
+      "calibration_anchor_registry_ids": "PASS",
+      "global_repository_score_disabled": "PASS",
+      "local_links_checked": 17,
+      "owned_path_boundary": "PASS"
+    }
+  }
+}
