@@ -1,0 +1,73 @@
+{
+  "schema_version": "actionist.state.v1",
+  "generated_at": "2026-08-29T05:58:30.229Z",
+  "$comment": "Client disclosure projection of the shared state dataset. Same ground truth as the internal view; figures are identical by construction, not by transcription.",
+  "measurements": {
+    "sources": 3010,
+    "rated": 103,
+    "forked": 2,
+    "built": 2,
+    "admitted": 0,
+    "frameworks": 24
+  },
+  "funnel": [
+    {
+      "id": "discovered",
+      "label": "Discovered",
+      "definition": "A row exists in the capability source registry.",
+      "count": 3010
+    },
+    {
+      "id": "triaged",
+      "label": "Triaged",
+      "definition": "A human or process assigned a disposition, or moved the verdict off the default discovery_candidate.",
+      "count": 695
+    },
+    {
+      "id": "rated",
+      "label": "Rated",
+      "definition": "Carries at least one observed fact about the source itself. Stars, tags, age and README claims are explicitly NOT evidence (R3).",
+      "count": 103
+    },
+    {
+      "id": "forked",
+      "label": "Forked",
+      "definition": "We own the code: an Actionist block declares this source as its donor at a pinned revision.",
+      "count": 2
+    },
+    {
+      "id": "built",
+      "label": "Built",
+      "definition": "A block manifest exists with linked records under blocks/.",
+      "count": 2
+    },
+    {
+      "id": "qualified",
+      "label": "Qualified",
+      "definition": "Qualification status is an affirmatively qualified value. Read by allowlist: an absent or unrecognised status is never qualified.",
+      "count": 0
+    },
+    {
+      "id": "admitted",
+      "label": "Admitted",
+      "definition": "Admitted for a named host and tenant scope, read by allowlist. Never \"reusable on the internet\", and never inferred from the absence of a rejection.",
+      "count": 0
+    }
+  ],
+  "blocks": [
+    {
+      "block_id": "actionist/affine-workspace",
+      "display_name": "AFFiNE workspace",
+      "donor_repo": "toeverything/AFFiNE",
+      "reuse_shape": "intact_service",
+      "admission_status": "held_for_decision"
+    },
+    {
+      "block_id": "actionist/teable-data-grid",
+      "display_name": "Teable data grid",
+      "donor_repo": "teableio/teable",
+      "reuse_shape": "intact_service",
+      "admission_status": "held_for_decision"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "actionist.estate.v1",
+  "generated_at": "2026-08-29T05:58:30.229Z",
+  "$comment": "Client disclosure projection of the estate registry. Private entries are removed at generation time, not hidden at read time.",
+  "repos": [
+    {
+      "id": "actionist-appsdk",
+      "name": "Actionist-AppSDK",
+      "role": "client_front_door",
+      "purpose": "The front door itself. A curated index into the estate — navigation and comprehension, not content.",
+      "remote": "https://github.com/Sinamun/Actionist-AppSDK"
+    },
+    {
+      "id": "actionist-blocks",
+      "name": "actionist-blocks",
+      "role": "catalog",
+      "purpose": "The block catalog, conversion pipeline, fork pointers and rating framework.",
+      "remote": null
+    },
+    {
+      "id": "donor-forks",
+      "name": "Donor forks",
+      "role": "donor_fork_set",
+      "purpose": "Forked donor repositories, pinned at known revisions. We own these outright — that is the point.",
+      "remote": null
+    }
+  ]
+}

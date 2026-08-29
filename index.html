@@ -1,0 +1,159 @@
+<title>Actionist Builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #15161a; --muted: #5c6070; --line: #e4e6ec;
+    --panel: #f7f8fa; --accent: #2f5fd0; --ok: #1a7f4b; --hold: #9a6b00;
+    --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1114; --fg: #e9eaee; --muted: #969ba8; --line: #262a31;
+      --panel: #16191e; --accent: #7aa2f7; --ok: #4ec98a; --hold: #e0b341;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1114; --fg: #e9eaee; --muted: #969ba8; --line: #262a31;
+    --panel: #16191e; --accent: #7aa2f7; --ok: #4ec98a; --hold: #e0b341;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 96px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px; }
+  h2 { font-size: 20px; letter-spacing: -0.01em; margin: 48px 0 12px; padding-top: 24px; border-top: 1px solid var(--line); }
+  h2:first-of-type { border-top: 0; }
+  p { margin: 0 0 16px; }
+  .lede { font-size: 19px; color: var(--muted); margin-bottom: 8px; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 24px 0; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  .stat .v { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; }
+  .stat .l { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
+  .stat .s { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .tablewrap { overflow-x: auto; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; }
+  .sub { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+  .tag-ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
+  .tag-hold { background: color-mix(in srgb, var(--hold) 15%, transparent); color: var(--hold); }
+  .note { border-left: 3px solid var(--accent); background: var(--panel); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .note strong { display: block; margin-bottom: 4px; }
+  ul { margin: 0 0 16px; padding-left: 20px; }
+  li { margin-bottom: 8px; }
+  code { font-family: var(--mono); font-size: 13px; background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <h1>Actionist Builder</h1>
+  <p class="lede">A library of vetted, owned building blocks — so apps get assembled from proven parts instead of generated from scratch every time.</p>
+  <p class="meta">Status as of 2026-08-29 · every figure generated from source, not typed</p>
+
+  <h2>The idea in one paragraph</h2>
+  <p>A generator starts from zero on every build: its thousandth app is produced against the same blank context as its first. A library compounds — every build ranks the shelf for the next one. So the asset we are building is the <strong>library</strong>, and any single app is a demonstration of it. That is also what makes cheap models viable: they are not asked to invent an app, only to select, adapt and glue parts that already work.</p>
+
+  <h2>Where it stands today</h2>
+  <div class="grid">
+    <div class="stat"><div class="l">Sources registered</div><div class="v">3,010</div><div class="s">candidate repos in the registry</div></div>
+    <div class="stat"><div class="l">Evidence-rated</div><div class="v">103</div><div class="s">carry an observed fact, not a star count</div></div>
+    <div class="stat"><div class="l">Forked &amp; owned</div><div class="v">2</div><div class="s">our code, pinned revision</div></div>
+    <div class="stat"><div class="l">Blocks built</div><div class="v">2</div><div class="s">running end to end locally</div></div>
+  </div>
+
+  <div class="note">
+    <strong>0 blocks admitted to production, and the pipeline has not yet run end to end.</strong>
+    Admission is deliberately hard. A block is admitted only for a named host and tenant, and only once it has passed a nine-family qualification gate covering identity, rights, contracts, runtime, persistence, tenancy, security, operations and rollback. Both blocks are built and running; all sit at evidence tier T0 with most families still outstanding — <strong>AFFiNE workspace 1 of 9</strong> and <strong>Teable data grid 4 of 9</strong> passing. That is real remaining work, not a signature. Agreeing a first host is what <em>unblocks</em> that work, because most of the outstanding families can only be evidenced against a specific host and tenant — it is the step that starts qualification, not the one that finishes it.
+  </div>
+
+  <h2>What is actually built</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Block</th><th>Donor</th><th>Reuse shape</th><th>Status</th></tr></thead>
+      <tbody>
+      <tr>
+        <td><strong>AFFiNE workspace</strong><div class="sub">actionist/affine-workspace</div></td>
+        <td>toeverything/AFFiNE</td>
+        <td>intact service</td>
+        <td><span class="tag tag-hold">held for decision</span></td>
+      </tr>
+      <tr>
+        <td><strong>Teable data grid</strong><div class="sub">actionist/teable-data-grid</div></td>
+        <td>teableio/teable</td>
+        <td>intact service</td>
+        <td><span class="tag tag-hold">held for decision</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Both are real conversions of substantial open-source projects into blocks that run inside a host shell. The difference between them is instructive: one is mounted same-origin and inherits the host's theme correctly; the other is a cross-origin frame and cannot, which is exactly the kind of finding that decides how the rest of the library gets built.</p>
+
+  <h2>Why this approach wins</h2>
+  <ul>
+    <li><strong>It compounds.</strong> Every conversion and every qualification improves the next selection. A competitor can copy a corpus; they cannot copy an evidence graph they never accumulated.</li>
+    <li><strong>Cheap models stay in scope.</strong> Bounded edits against a known-good scaffold are a different problem from free-generating an app — which is what makes a MiniMax-class budget realistic rather than aspirational.</li>
+    <li><strong>We own the code.</strong> The default shape is to fork the donor and integrate it natively, so the code can actually be changed. Anything mounted intact is recorded as debt with a named path to absorption.</li>
+    <li><strong>Licence is read, not assumed.</strong> 24 frameworks govern selection and rating. Two examples from the work: a widely-used search dependency whose permissive badge hides an ELv2-only carve-out in the exact subdirectory containing the feature we would need; and a repo whose licence forbids removing its branding — a legal problem wearing an engineering costume. Both were caught by reading the licence body rather than the badge.</li>
+  </ul>
+
+  <h2>How a source becomes a block</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Stage</th><th>What it means</th><th>Count</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Discovered</strong></td><td>A row exists in the capability source registry.</td><td class="num">3,010</td></tr>
+        <tr><td><strong>Triaged</strong></td><td>A human or process assigned a disposition, or moved the verdict off the default discovery_candidate.</td><td class="num">695</td></tr>
+        <tr><td><strong>Rated</strong></td><td>Carries at least one observed fact about the source itself. Stars, tags, age and README claims are explicitly NOT evidence (R3).</td><td class="num">103</td></tr>
+        <tr><td><strong>Forked</strong></td><td>We own the code: an Actionist block declares this source as its donor at a pinned revision.</td><td class="num">2</td></tr>
+        <tr><td><strong>Built</strong></td><td>A block manifest exists with linked records under blocks/.</td><td class="num">2</td></tr>
+        <tr><td><strong>Qualified</strong></td><td>Qualification status is an affirmatively qualified value. Read by allowlist: an absent or unrecognised status is never qualified.</td><td class="num">0</td></tr>
+        <tr><td><strong>Admitted</strong></td><td>Admitted for a named host and tenant scope, read by allowlist. Never &quot;reusable on the internet&quot;, and never inferred from the absence of a rejection.</td><td class="num">0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The funnel is steep on purpose. Most registered sources never become blocks, and that is the point of having a shelf with a gate on it rather than a pile of repositories. Notably, stars, tags, age and README claims are explicitly <em>not</em> treated as evidence — a source with no runtime evidence cannot be rated at all.</p>
+
+  <h2>Where to look</h2>
+  <p>The system spans several repositories and will span many more as the library grows. This page is the index into it — the short version of where each part lives and what it is for.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Repository</th><th>What it is for</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Actionist-AppSDK</strong><div class="sub">github.com/Sinamun/Actionist-AppSDK</div></td>
+          <td>The front door itself. A curated index into the estate — navigation and comprehension, not content.</td>
+          <td><span class="tag tag-ok">available</span></td>
+        </tr>
+        <tr>
+          <td><strong>actionist-blocks</strong></td>
+          <td>The block catalog, conversion pipeline, fork pointers and rating framework.</td>
+          <td><span class="tag tag-hold">in progress</span></td>
+        </tr>
+        <tr>
+          <td><strong>Donor forks</strong></td>
+          <td>Forked donor repositories, pinned at known revisions. We own these outright — that is the point.</td>
+          <td><span class="tag tag-hold">in progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What is next</h2>
+  <ul>
+    <li>Agree the first host and tenant. Most outstanding qualification families can only be evidenced against a specific one, so this is what lets the remaining work start.</li>
+    <li>Work the qualification families for both existing blocks against that host — runtime, persistence, tenancy, security, operations, rollback.</li>
+    <li>Take one vertical end to end: prompt, clarify, confirm, assemble, deploy — a single working path rather than a broader shelf.</li>
+    <li>Confirm the integration contract on your side, so blocks dock into Actionist rather than sitting beside it.</li>
+  </ul>
+
+  <footer>
+    Generated from <code>state.json</code> at build time. Every number here is derived from a named source file and re-derivable from it; none is asserted by hand.
+  </footer>
+
+</div>
