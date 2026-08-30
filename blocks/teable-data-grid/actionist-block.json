@@ -1,0 +1,90 @@
+{
+  "$schema": "./schemas/actionist-block.schema.json",
+  "manifestVersion": "1.0.0",
+  "block": {
+    "id": "actionist/teable-data-grid@0.1.0",
+    "label": "Teable data grid",
+    "version": "0.1.0",
+    "status": "prototype_not_admitted",
+    "outcome": "Give a host application a tenant-scoped, high-density operational grid without copying the donor application into the host."
+  },
+  "reuse": {
+    "shape": "intact_service",
+    "runtimeProfile": "sidecar_service",
+    "rightsExposure": "none_network_only",
+    "donor": {
+      "repository": "https://github.com/sisodias/teable.git",
+      "upstreamRepository": "https://github.com/teableio/teable.git",
+      "immutableRevision": "b245a987f8bfb7411d4e2423907b9cbb0a1c9b6b",
+      "upstreamRevision": "06a4461e2bc53055182d4df0a72dffa26fd99210",
+      "sourceDigest": "sha256:e41fe62b54c1d0c077a9c5a036f1b4e04016dcd0203396f943411e89e6e09fc6",
+      "sourceDigestBasis": "git archive tar stream at immutable revision",
+      "license": "AGPL-3.0 with Teable Section 7 brand-protection terms; packages retain their own notices",
+      "runtimeReference": "SISOCRM integrations/teable-fork.json and teable-community.json"
+    },
+    "ownership": {
+      "donorRuntime": "Teable sidecar owns its HTTP, realtime, metadata and per-base data runtime",
+      "hostBinding": "Actionist host owns the verified identity context, outer URL, tenant selection, navigation, settings entry, policy and observability envelope",
+      "hostData": "Host-owned tables remain outside Teable resources and are never claimed by Teable migrations",
+      "migrationRule": "Exactly one migration owner per resource; no shared-table migration history"
+    }
+  },
+  "records": {
+    "capability": "records/capability.json",
+    "packaging": "records/packaging.json",
+    "hostRequirements": "records/host-requirements.json",
+    "bindingPlan": "records/binding-plan.json",
+    "qualification": "records/qualification.json",
+    "registry": "records/registry.json",
+    "release": "records/release.json"
+  },
+  "interfaces": {
+    "hostBinding": "interfaces/host-binding.ts",
+    "hostBindingSchema": "schemas/host-binding.schema.json"
+  },
+  "configuration": {
+    "schema": "schemas/config.schema.json",
+    "example": "config/example.config.json",
+    "requiredEnvironmentReferences": [
+      "ACTIONIST_TEABLE_BASE_URL",
+      "ACTIONIST_TEABLE_CREDENTIAL_REF",
+      "ACTIONIST_DATABASE_URL",
+      "ACTIONIST_REDIS_URL",
+      "ACTIONIST_ATTACHMENT_STORE_URL"
+    ]
+  },
+  "commands": {
+    "validate": "node tools/teable-block.mjs validate",
+    "install": "node tools/teable-block.mjs install --out <disposable-directory>",
+    "bind": "node tools/teable-block.mjs bind --config <config.json> --host <host-fixture.json> --out <disposable-directory>",
+    "smoke": "node tools/teable-block.mjs smoke"
+  },
+  "fixture": {
+    "host": "fixtures/synthetic-host.json",
+    "config": "config/example.config.json",
+    "purpose": "Synthetic manifest validation and binding generation only; it contains no client data and performs no network or donor-source action."
+  },
+  "theme": {
+    "bridge": "theme/teable-theme-bridge.css",
+    "scopeSelector": ".actionist-teable-surface",
+    "variableFormat": "hsl-triplets",
+    "globalRootWrites": false
+  },
+  "verification": {
+    "command": "node tools/teable-block.mjs smoke",
+    "requiredEvidence": [
+      "manifest_parse",
+      "record_links",
+      "config_shape",
+      "binding_generation",
+      "identity_refusal",
+      "tenant_refusal",
+      "migration_owner_refusal",
+      "theme_scope",
+      "evidence_parity",
+      "no_secrets_or_absolute_paths"
+    ],
+    "admission": "not_claimed"
+  },
+  "runbook": "RUNBOOK.md"
+}
